@@ -55,3 +55,6 @@ dkms.conf
 wolf3d
 *.json
 SDL2-2.0.12
+SDL2-2.0.12/include/SDL_config.h
+SDL2
+
