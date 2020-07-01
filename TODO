@@ -1,0 +1,42 @@
+### TODO ###
+
+->	sol, plafond hauteur réglable
+	changer fonction d'affichage suivant hauteur?
+
+->	implémenter inventaire
+	permettre objet ramassable (gérer données)
+
+->	implémenter un pistolet, munitions (gérer données)
+	afficher la balle, et un trou comme impact du pistolet (nouveaux fichiers)
+
+->	textures sol + plafond (nouveaux fichiers)
+
+->	créer type de murs partiellement transparents afin de voir les espaces à l'arrière
+	(nouveaux fichiers, gérer données)
+
+->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
+	(nouveaux fichiers, gérer données)
+
+->	luminosité différente dans une zone donnée
+
+->	courir, se baisser, se relever
+	sauter, tomber, voler : gérer gravité
+
+->	comprendre comment mettre de la musique
+	gérer changement de musique
+
+->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
+	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
+	link avec inventaire, link avec munitions, link avec pv, gérer texte
+
+->	bouton sur un mur, actionnable, créer un event qui va avec (nouveaux fichiers, gérer données)
+	porte qui s'ouvre, link avec bouton (gérer données)
+
+->	tous les éléments nécessaires doivent être dans un seul et unique fichier
+	vous devez pouvoir lancer le jeu uniquement avec le binaire + ce fichier
+
+->	skybox (pas juste une texture à la place du plafond, mais un "vrai ciel")
+
+### TO CHECK ###
+
+### DONE ###
