@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 18:14:28 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/02 17:47:09 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_fix_fisheye_distorsion(t_env *wolf)
 
 void	ft_set_ceiling_floor(t_env *wolf)
 {
-	wolf->ceiling = (double)(HEIGHT / 2) - (double)HEIGHT /
+	wolf->ceiling = (double)(wolf->h / 2) - (double)wolf->h /
 					wolf->raycast.distance_towall * WALL_SIZE;
-	wolf->floor = HEIGHT - wolf->ceiling;
+	wolf->floor = wolf->h - wolf->ceiling;
 }
 
 void	ft_draw_ceiling(t_env *wolf)
@@ -50,8 +50,8 @@ void	ft_draw_floor(t_env *wolf)
 		wolf->raycast.x_render] = ft_rgba_to_uint32(0,
 												255 *
 												((wolf->raycast.y_render -
-												HEIGHT * 0.5) /
-												HEIGHT),
+												wolf->h * 0.5) /
+												wolf->h),
 												0,
 												0);
 }

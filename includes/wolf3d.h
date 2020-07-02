@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/28 21:43:54 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/02 19:06:14 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,21 @@ typedef struct	s_camera
 	double			pos_y;
 	double			angle;
 	double			fov;
+}				t_camera;
+
+typedef struct	s_movements
+{
 	size_t			strafe_left;
 	size_t			strafe_right;
 	size_t			forward;
 	size_t			backward;
 	size_t			rotate_left;
 	size_t			rotate_right;
-}				t_camera;
+	size_t			running;
+	size_t			crouching;
+	double			movespeed;
+}				t_movements;
+
 
 typedef struct	s_raycast
 {
@@ -104,6 +112,7 @@ typedef struct	s_env
 	SDL_Event		event;
 	t_map			mapdata;
 	t_camera		cam;
+	t_movements		moves;
 	Uint32			*screen_pixels;
 	SDL_Surface		*surface_wall_north;
 	Uint32			*pixels_wall_north;
@@ -125,6 +134,7 @@ typedef struct	s_env
 	unsigned int	tmp_x;
 	unsigned int	tmp_y;
 	int				block;
+	int				h;
 }				t_env;
 
 void			ft_wolf3d(char *mapfile);

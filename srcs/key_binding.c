@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_binding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 14:02:36 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/02 19:06:11 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,19 @@ void		ft_settings(t_env *wolf)
 void		ft_movement(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_w)
-		wolf->cam.forward = TRUE;
+		wolf->moves.forward = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_a)
-		wolf->cam.strafe_left = TRUE;
+		wolf->moves.strafe_left = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_s)
-		wolf->cam.backward = TRUE;
+		wolf->moves.backward = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_d)
-		wolf->cam.strafe_right = TRUE;
+		wolf->moves.strafe_right = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_RIGHT)
-		wolf->cam.rotate_right = TRUE;
+		wolf->moves.rotate_right = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_LEFT)
-		wolf->cam.rotate_left = TRUE;
+		wolf->moves.rotate_left = TRUE;
+	else if (wolf->event.key.keysym.sym == SDLK_LSHIFT)
+		wolf->moves.running = TRUE;
+	else if (wolf->event.key.keysym.sym == SDLK_LCTRL)
+		wolf->moves.crouching = TRUE;
 }

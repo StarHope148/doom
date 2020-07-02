@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 22:45:07 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/02 19:06:12 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,24 @@
 void	ft_key_released(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_w)
-		wolf->cam.forward = FALSE;
+		wolf->moves.forward = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_a)
-		wolf->cam.strafe_left = FALSE;
+		wolf->moves.strafe_left = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_s)
-		wolf->cam.backward = FALSE;
+		wolf->moves.backward = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_d)
-		wolf->cam.strafe_right = FALSE;
+		wolf->moves.strafe_right = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_RIGHT)
-		wolf->cam.rotate_right = FALSE;
+		wolf->moves.rotate_right = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_LEFT)
-		wolf->cam.rotate_left = FALSE;
+		wolf->moves.rotate_left = FALSE;
+	else if (wolf->event.key.keysym.sym == SDLK_LSHIFT)
+		wolf->moves.running = FALSE;
+	else if (wolf->event.key.keysym.sym == SDLK_LCTRL)
+	{
+		wolf->moves.crouching = FALSE;
+		wolf->h = HEIGHT;
+	}
 }
 
 void	ft_key_pressed(t_env *wolf)
@@ -42,8 +49,6 @@ void	ft_key_hook(t_env *wolf)
 	{
 		while (SDL_PollEvent(&wolf->event))
 		{
-			if (wolf->event.type == SDL_MOUSEMOTION)
-				continue;
 			if (wolf->event.type == SDL_KEYDOWN)
 				ft_key_pressed(wolf);
 			if (wolf->event.type == SDL_KEYUP)
