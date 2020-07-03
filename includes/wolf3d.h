@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 22:38:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/03 23:01:03 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define WOLF3D_H
 
 # include "../SDL2-2.0.12/include/SDL.h"
+# include <SDL2/SDL_mixer.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
@@ -129,6 +130,7 @@ typedef struct	s_env
 	t_raycast		raycast;
 	t_calc			calc;
 	t_minimap		minimap;
+	Mix_Music		*music;
 	char			orientation;
 	double			precision;
 	char			switch_textures;

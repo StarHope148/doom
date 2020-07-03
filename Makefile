@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
+#    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/28 21:56:32 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/03 23:00:04 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(COMPILE_SDL2)
 	make -C libft/.
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm -lSDL2_mixer
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD) 
 	mkdir -p $(OBJ_PATH)

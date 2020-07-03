@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 05:08:45 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 23:05:12 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ void	ft_sdl(t_env *wolf)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_window(wolf);
 	ft_init_renderer_texture(wolf);
+	if (Mix_OpenAudio(96000,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS, 4096) < 0)
+		ft_exit(wolf, EXIT_FAILURE, "Error in Mix_OpenAudio");
+	wolf->music = Mix_LoadMUS("yaeji-raingurl.mp3");
+	if (wolf->music == NULL)
+		ft_putendl("DSD");
+	Mix_PlayMusic(wolf->music, -1);
 	ft_load_surface(wolf, "textures/risitas_wall.bmp",
 					&(wolf->surface_wall_north));
 	ft_load_surface(wolf, "textures/panda_wall.bmp",
