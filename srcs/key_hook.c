@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 19:06:12 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 22:38:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	ft_key_released(t_env *wolf)
 		wolf->moves.rotate_right = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_LEFT)
 		wolf->moves.rotate_left = FALSE;
+	else if (wolf->event.key.keysym.sym == SDLK_UP)
+		wolf->moves.rotate_up = FALSE;
+	else if (wolf->event.key.keysym.sym == SDLK_DOWN)
+		wolf->moves.rotate_down = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_LSHIFT)
 		wolf->moves.running = FALSE;
 	else if (wolf->event.key.keysym.sym == SDLK_LCTRL)

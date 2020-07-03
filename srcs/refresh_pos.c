@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 22:03:49 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 22:49:23 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void	ft_rotate_down(t_env *wolf)
+{
+	if (wolf->cam.angle_z <= 800)
+	wolf->cam.angle_z += 20;
+}
+
+void	ft_rotate_up(t_env *wolf)
+{
+	if (wolf->cam.angle_z >= -800)
+		wolf->cam.angle_z -= 20;
+}
 
 void	ft_strafe_right(t_env *wolf)
 {
@@ -101,4 +113,8 @@ void	ft_refresh_new_pos(t_env *wolf)
 		if (wolf->cam.angle <= -PI)
 			wolf->cam.angle = PI;
 	}
+	if (wolf->moves.rotate_up == TRUE)
+		ft_rotate_up(wolf);
+	if (wolf->moves.rotate_down == TRUE)
+		ft_rotate_down(wolf);
 }

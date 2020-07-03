@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 17:47:09 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 22:57:53 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ void	ft_fix_fisheye_distorsion(t_env *wolf)
 
 void	ft_set_ceiling_floor(t_env *wolf)
 {
-	wolf->ceiling = (double)(wolf->h / 2) - (double)wolf->h /
+	wolf->ceiling = (double)(HEIGHT * 0.5) - (double)HEIGHT /
 					wolf->raycast.distance_towall * WALL_SIZE;
 	wolf->floor = wolf->h - wolf->ceiling;
+	wolf->ceiling -= (wolf->map.altitude[wolf->raycast.test_y]
+			[wolf->raycast.test_x]) * 100 / wolf->raycast.distance_towall;
+	wolf->ceiling += wolf->cam.angle_z;
+	wolf->floor += wolf->cam.angle_z;
 }
 
 void	ft_draw_ceiling(t_env *wolf)
@@ -54,4 +58,6 @@ void	ft_draw_floor(t_env *wolf)
 												wolf->h),
 												0,
 												0);
+	wolf->screen_pixels[wolf->raycast.y_render * WIDTH +
+		wolf->raycast.x_render] = OLIVE;
 }

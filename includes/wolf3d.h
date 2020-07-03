@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 05:49:25 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 22:38:57 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_camera
 	double			pos_x;
 	double			pos_y;
 	double			angle;
+	int				angle_z;
 	double			fov;
 }				t_camera;
 
@@ -64,6 +65,8 @@ typedef struct	s_movements
 	size_t			backward;
 	size_t			rotate_left;
 	size_t			rotate_right;
+	size_t			rotate_up;
+	size_t			rotate_down;
 	size_t			running;
 	size_t			crouching;
 	double			movespeed;

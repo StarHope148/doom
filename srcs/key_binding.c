@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_binding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 19:06:11 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 22:39:32 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void		ft_movement(t_env *wolf)
 		wolf->moves.rotate_right = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_LEFT)
 		wolf->moves.rotate_left = TRUE;
+	else if (wolf->event.key.keysym.sym == SDLK_UP)
+		wolf->moves.rotate_up = TRUE;
+	else if (wolf->event.key.keysym.sym == SDLK_DOWN)
+		wolf->moves.rotate_down = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_LSHIFT)
 		wolf->moves.running = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_LCTRL)

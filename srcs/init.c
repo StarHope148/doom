@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 02:26:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 22:39:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_init_env(t_env *wolf)
 	ft_bzero((void *)&(wolf->map), sizeof(t_map));
 	//ft_putnbr(wolf->map.nbcol);
 	wolf->cam.angle = PI / 2;
-	wolf->cam.fov = PI / 3;
+	wolf->cam.fov = PI / 3.5;
+	//wolf->cam.angle_z = 0;
 	wolf->precision = RAY_LENGHT;
-	wolf->switch_textures = NON_TEXTURED;
+	wolf->switch_textures = SHADED;
 	wolf->block = HEIGHT * 0.01;
 	wolf->pitch = 4 * WIDTH;
 	wolf->h = HEIGHT;
