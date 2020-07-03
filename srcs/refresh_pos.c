@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 19:24:31 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/02 22:03:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_strafe_right(t_env *wolf)
 {
 	wolf->cam.pos_x -= cos(wolf->cam.angle) * wolf->moves.movespeed;
 	wolf->cam.pos_y += sin(wolf->cam.angle) * wolf->moves.movespeed;
-	if (wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
+	if (wolf->map.data[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
 	{
 		wolf->cam.pos_x += cos(wolf->cam.angle) * wolf->moves.movespeed;
 		wolf->cam.pos_y -= sin(wolf->cam.angle) * wolf->moves.movespeed;
@@ -27,7 +27,7 @@ void	ft_strafe_left(t_env *wolf)
 {
 	wolf->cam.pos_x += cos(wolf->cam.angle) * wolf->moves.movespeed;
 	wolf->cam.pos_y -= sin(wolf->cam.angle) * wolf->moves.movespeed;
-	if (wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
+	if (wolf->map.data[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
 	{
 		wolf->cam.pos_x -= cos(wolf->cam.angle) * wolf->moves.movespeed;
 		wolf->cam.pos_y += sin(wolf->cam.angle) * wolf->moves.movespeed;
@@ -38,7 +38,7 @@ void	ft_backward(t_env *wolf)
 {
 	wolf->cam.pos_x -= sin(wolf->cam.angle) * wolf->moves.movespeed;
 	wolf->cam.pos_y -= cos(wolf->cam.angle) * wolf->moves.movespeed;
-	if (wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
+	if (wolf->map.data[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
 	{
 		wolf->cam.pos_x += sin(wolf->cam.angle) * wolf->moves.movespeed;
 		wolf->cam.pos_y += cos(wolf->cam.angle) * wolf->moves.movespeed;
@@ -49,7 +49,7 @@ void	ft_forward(t_env *wolf)
 {
 	wolf->cam.pos_x += sin(wolf->cam.angle) * wolf->moves.movespeed;
 	wolf->cam.pos_y += cos(wolf->cam.angle) * wolf->moves.movespeed;
-	if (wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
+	if (wolf->map.data[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x] == WALL)
 	{
 		wolf->cam.pos_x -= sin(wolf->cam.angle) * wolf->moves.movespeed;
 		wolf->cam.pos_y -= cos(wolf->cam.angle) * wolf->moves.movespeed;

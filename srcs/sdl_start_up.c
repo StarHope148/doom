@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 17:05:51 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 05:08:45 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 {
 	ft_free_surface_image(wolf);
 	ft_destroy_texture_renderer_window(wolf);
+	ft_memdel((void **)&wolf->screen_pixels);
 	SDL_Quit();
-	if (wolf->mapdata.map != NULL)
-		ft_free_map(wolf);
+	if (wolf->map.data != NULL)
+		ft_free_map(&wolf->map);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
 	exit(exit_type);

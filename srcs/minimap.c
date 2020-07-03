@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 23:56:34 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/02 22:03:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ void	ft_set_sdl_minimap_colors(t_env *wolf)
 void	ft_draw_minimap(t_env *wolf)
 {
 	wolf->minimap.i = 0;
-	while (wolf->minimap.i < (int)wolf->mapdata.nbl)
+	while (wolf->minimap.i < (int)wolf->map.nbl)
 	{
 		wolf->minimap.j = 0;
-		while (wolf->minimap.j < (int)wolf->mapdata.nbcol)
+		while (wolf->minimap.j < (int)wolf->map.nbcol)
 		{
 			ft_set_points(wolf);
-			if (wolf->mapdata.map[wolf->minimap.i][wolf->minimap.j] == WALL)
+			if (wolf->map.data[wolf->minimap.i][wolf->minimap.j] == WALL)
 				ft_draw_minimap_wall(wolf);
-			else if (wolf->mapdata.map[wolf->minimap.i]
+			else if (wolf->map.data[wolf->minimap.i]
 						[wolf->minimap.j] == EMPTY)
 				ft_draw_minimap_empty_space(wolf);
 			wolf->minimap.j++;

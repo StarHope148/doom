@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 19:06:14 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 05:49:25 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ typedef struct	s_map
 	int				nbl;
 	int				nbcol;
 	size_t			cur_line;
-	char			**map;
+	char			**data;
+	int				**brightness;
+	int				**altitude;
 }				t_map;
 
 typedef struct	s_camera
@@ -66,7 +68,6 @@ typedef struct	s_movements
 	size_t			crouching;
 	double			movespeed;
 }				t_movements;
-
 
 typedef struct	s_raycast
 {
@@ -110,7 +111,7 @@ typedef struct	s_env
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
 	SDL_Event		event;
-	t_map			mapdata;
+	t_map			map;
 	t_camera		cam;
 	t_movements		moves;
 	Uint32			*screen_pixels;
@@ -148,9 +149,10 @@ void			ft_movement(t_env *wolf);
 void			ft_stop_movement(t_env *wolf);
 void			ft_settings(t_env *wolf);
 void			ft_refresh_new_pos(t_env *wolf);
-void			ft_error(int code, char *line);
-int				ft_check_line(char *line);
+void			ft_error(t_map *m, int code, char *line);
+int				ft_check_line(t_map *m);
 int				ft_check_borders(char *line);
+void			ft_count_lines_columns(t_map *m, char *mapfile, int fd);
 void			ft_norme(int code);
 void			ft_raycaster(t_env *wolf);
 void			ft_calc_sampling_x(t_env *wolf);
@@ -172,7 +174,7 @@ void			ft_set_sdl_minimap_colors(t_env *wolf);
 void			ft_apply_textured_wall(t_env *wolf);
 void			ft_apply_color_oriented_wall(t_env *wolf);
 void			ft_apply_shaded_wall(t_env *wolf);
-void			ft_free_map(t_env *wolf);
+void			ft_free_map(t_map *m);
 void			ft_free_surface_image(t_env *wolf);
 void			ft_destroy_texture_renderer_window(t_env *wolf);
 

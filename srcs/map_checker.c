@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/06/25 23:15:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/03 05:47:53 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int		ft_check_borders(char *line)
 	return (0);
 }
 
-int		ft_check_line(char *line)
+int		ft_check_line(t_map *m)
 {
-	int i;
+	int		i;
+	char	*line;
 
+	line = m->data[m->cur_line];
 	i = 0;
 	if (line[i++] != '#')
 		return (-2);
@@ -41,10 +43,89 @@ int		ft_check_line(char *line)
 	}
 	if (line[--i] != '#')
 		return (-2);
+	i = -1;
+	while (++i < m->nbcol)
+		if (m->brightness[m->cur_line][i] < 0
+				|| m->brightness[m->cur_line][i] > 100)
+			return (-3);
 	return (0);
 }
 
-void	ft_error(int code, char *line)
+int		precheck_one(char *line, int pos)
+{
+	int		i;
+
+	i = 0;
+	if (line[pos + i] != '#' && line[pos + i] != '.')
+		return (-1);
+	i++;
+	if (line[pos + i] != ' ')
+		return (-2);
+	i++;
+	if (!ft_isdigit(line[pos + i]) || ft_atoi(line + pos + i) < 0)
+		return (-3);
+	while (ft_isdigit(line[pos + i]))
+		i++;
+	if (line[pos + i++] != ' ')
+		return (-2);
+	if (!ft_isdigit(line[pos + i]) || ft_atoi(line + pos + i) < 0)
+		return (-3);
+	while (ft_isdigit(line[pos + i]))
+		i++;
+	if (line[pos + i] == '\0')
+		return (0);
+	else if (line[pos + i] != '\t')
+		return (-2);
+	i++;
+	return (i);
+}
+
+int		precheck_line(char *line)
+{
+	size_t	nbcol;
+	int		pos;
+	int		pos_one;
+
+	nbcol = 1;
+	pos = 0;
+	while (nbcol < 100 && (pos_one = precheck_one(line, pos)) > 0)
+	{
+		nbcol++;
+		pos += pos_one;
+	}
+	if (pos_one == 0)
+		return (nbcol);
+	return (-1);
+}
+
+void	ft_count_lines_columns(t_map *m, char *mapfile, int fd)
+{
+	char	*line;
+
+	if ((fd = open(mapfile, O_RDONLY)) < 0)
+		ft_norme(5);
+	line = NULL;
+	if ((get_next_line(fd, &line)) <= 0)
+		ft_error(m, 6, line);
+	if ((m->nbcol = precheck_line(line)) == -1)
+		ft_error(m, 3, line);
+	ft_memdel((void **)&line);
+	m->nbl++;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (m->nbcol != precheck_line(line))
+		{
+			close(fd);
+			ft_error(m, 2, line);
+		}
+		m->nbl++;
+		ft_memdel((void **)&line);
+	}
+	if (close(fd) < 0)
+		ft_error(m, 7, line);
+}
+
+void	ft_error(t_map *m, int code, char *line)
 {
 	if (code == 1)
 		ft_putendl_fd("error during malloc of map", 2);
@@ -63,6 +144,7 @@ void	ft_error(int code, char *line)
 	if (code == 8)
 		ft_putendl_fd("Map is too big", 2);
 	ft_memdel((void **)&line);
+	ft_free_map(m);
 	exit(EXIT_FAILURE);
 }
 

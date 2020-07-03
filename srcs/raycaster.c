@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 19:54:09 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/02 22:03:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_casting_ray(t_env *wolf)
 							wolf->raycast.eye_y *
 							wolf->raycast.distance_towall);
 	if (wolf->raycast.test_x < 0 ||
-			wolf->raycast.test_x >= wolf->mapdata.nbcol ||
+			wolf->raycast.test_x >= wolf->map.nbcol ||
 			wolf->raycast.test_y < 0 ||
-			wolf->raycast.test_y >= wolf->mapdata.nbl)
+			wolf->raycast.test_y >= wolf->map.nbl)
 	{
 		wolf->raycast.hit_wall = 1;
 		wolf->raycast.distance_towall = MAX_DEPTH;
 	}
-	else if (wolf->mapdata.map[wolf->raycast.test_y]
+	else if (wolf->map.data[wolf->raycast.test_y]
 								[wolf->raycast.test_x] == WALL)
 		wolf->raycast.hit_wall = 1;
 }

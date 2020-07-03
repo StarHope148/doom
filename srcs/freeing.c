@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 16:56:07 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/03 05:48:43 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,23 @@ void	ft_free_surface_image(t_env *wolf)
 	}
 }
 
-void	ft_free_map(t_env *wolf)
+void	ft_free_map(t_map *m)
 {
 	int i;
 
 	i = 0;
-	while (i < wolf->mapdata.nbl && wolf->mapdata.map[i] != NULL)
-	{
-		ft_memdel((void **)&wolf->mapdata.map[i]);
-		i++;
-	}
-	ft_memdel((void **)&wolf->mapdata.map);
+	if (m->data)
+		while (i < m->nbl && m->data[i])
+			ft_memdel((void **)&m->data[i++]);
+	i = 0;
+	if (m->brightness)
+		while (i < m->nbl && m->brightness[i])
+			ft_memdel((void **)&m->brightness[i++]);
+	i = 0;
+	if (m->altitude)
+		while (i < m->nbl && m->altitude[i])
+			ft_memdel((void **)&m->altitude[i++]);
+	ft_memdel((void **)&m->data);
+	ft_memdel((void **)&m->brightness);
+	ft_memdel((void **)&m->altitude);
 }
