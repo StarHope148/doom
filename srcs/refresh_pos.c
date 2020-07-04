@@ -6,19 +6,19 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 22:49:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/03 23:14:58 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_rotate_down(t_env *wolf)
+void	ft_rotate_up(t_env *wolf)
 {
 	if (wolf->cam.angle_z <= 800)
 	wolf->cam.angle_z += 20;
 }
 
-void	ft_rotate_up(t_env *wolf)
+void	ft_rotate_down(t_env *wolf)
 {
 	if (wolf->cam.angle_z >= -800)
 		wolf->cam.angle_z -= 20;

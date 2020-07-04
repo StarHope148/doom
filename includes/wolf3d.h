@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 23:01:03 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/04 21:13:54 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,6 @@ void			ft_apply_shaded_wall(t_env *wolf);
 void			ft_free_map(t_map *m);
 void			ft_free_surface_image(t_env *wolf);
 void			ft_destroy_texture_renderer_window(t_env *wolf);
+unsigned int	ft_darken_color(unsigned int color, double coeff);
 
 #endif
