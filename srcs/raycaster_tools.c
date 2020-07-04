@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/04 21:37:26 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/05 01:04:17 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ unsigned int	ft_darken_color(unsigned int color, double coeff)
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
+
 	// FF 00 00 00
 	// 00 FF 00 00
 	color >>= 8;
@@ -46,7 +47,7 @@ void			ft_set_ceiling_floor(t_env *wolf)
 }
 
 void	ft_draw_ceiling(t_env *wolf)
-{	
+{
 	wolf->screen_pixels[wolf->raycast.y_render *
 		WIDTH + wolf->raycast.x_render] = DODGER_BLUE;
 }
