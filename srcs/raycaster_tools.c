@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/07/04 23:59:36 by jcanteau         ###   ########.fr       */
-=======
-/*   Updated: 2020/07/05 01:04:17 by czhang           ###   ########.fr       */
->>>>>>> 822076fa4a34a33219e6bc1b69b4a51aa6e43949
+/*   Updated: 2020/07/05 01:30:44 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +18,6 @@ unsigned int	ft_darken_color(unsigned int color, double coeff)
 	unsigned char g;
 	unsigned char b;
 
-<<<<<<< HEAD
-=======
-	// FF 00 00 00
-	// 00 FF 00 00
->>>>>>> 822076fa4a34a33219e6bc1b69b4a51aa6e43949
 	color >>= 8;
 	b = (unsigned char)color * coeff;
 	color >>= 8;
