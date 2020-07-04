@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 22:39:09 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/05 01:06:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	ft_init_env(t_env *wolf)
 {
-	//wolf->map.nbcol = 200;
 	ft_bzero((void *)wolf, sizeof(t_env));
 	ft_bzero((void *)&(wolf->map), sizeof(t_map));
-	//ft_putnbr(wolf->map.nbcol);
 	wolf->cam.angle = PI / 2;
 	wolf->cam.fov = PI / 3.5;
-	//wolf->cam.angle_z = 0;
 	wolf->precision = RAY_LENGHT;
 	wolf->switch_textures = SHADED;
 	wolf->block = HEIGHT * 0.01;
 	wolf->pitch = 4 * WIDTH;
 	wolf->h = HEIGHT;
+	wolf->time_fps = clock();
+	wolf->time0 = clock();
 	wolf->moves.movespeed = MOVE_SPEED;
 	if (!(wolf->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32)
 								* HEIGHT * WIDTH)))

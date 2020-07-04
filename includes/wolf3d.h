@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/04 21:13:54 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/05 00:44:11 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "../SDL2-2.0.12/include/SDL.h"
 # include <SDL2/SDL_mixer.h>
+# include <SDL2/SDL_ttf.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <time.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "defines.h"
@@ -109,6 +111,13 @@ typedef struct	s_minimap
 	char			done;
 }				t_minimap;
 
+typedef struct	s_text
+{
+	TTF_Font		*font;
+	SDL_Surface		*surf;
+	SDL_Color		black;
+}				t_text;
+
 typedef struct	s_env
 {
 	SDL_Window		*window;
@@ -118,6 +127,7 @@ typedef struct	s_env
 	t_map			map;
 	t_camera		cam;
 	t_movements		moves;
+	t_text			txt;
 	Uint32			*screen_pixels;
 	SDL_Surface		*surface_wall_north;
 	Uint32			*pixels_wall_north;
@@ -141,11 +151,15 @@ typedef struct	s_env
 	unsigned int	tmp_y;
 	int				block;
 	int				h;
+	SDL_Surface		*fps;
+	clock_t			time_fps;
+	clock_t			time_tmp;
+	clock_t			time0;
+	unsigned int	frames;
 }				t_env;
 
 void			ft_wolf3d(char *mapfile);
 void			ft_sdl(t_env *wolf);
-void			ft_key_hook(t_env *wolf);
 void			ft_exit(t_env *wolf, int exit_type, char *message);
 void			ft_print(t_env *wolf);
 void			ft_initialize(t_env *wolf, char *mapfile);
@@ -184,4 +198,7 @@ void			ft_free_surface_image(t_env *wolf);
 void			ft_destroy_texture_renderer_window(t_env *wolf);
 unsigned int	ft_darken_color(unsigned int color, double coeff);
 
+/* KEYS */
+void			ft_key_pressed(t_env *wolf);
+void			ft_key_released(t_env *wolf);
 #endif

@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/02 22:03:49 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 00:16:16 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	ft_set_sdl_minimap_colors(t_env *wolf)
 
 void	ft_draw_minimap(t_env *wolf)
 {
-	wolf->minimap.i = 0;
-	while (wolf->minimap.i < (int)wolf->map.nbl)
+	wolf->minimap.j = 0;
+	while (wolf->minimap.j < (int)wolf->map.nbcol)
 	{
-		wolf->minimap.j = 0;
-		while (wolf->minimap.j < (int)wolf->map.nbcol)
+		wolf->minimap.i = 0;
+		while (wolf->minimap.i < (int)wolf->map.nbl)
 		{
 			ft_set_points(wolf);
 			if (wolf->map.data[wolf->minimap.i][wolf->minimap.j] == WALL)
@@ -80,8 +80,8 @@ void	ft_draw_minimap(t_env *wolf)
 			else if (wolf->map.data[wolf->minimap.i]
 						[wolf->minimap.j] == EMPTY)
 				ft_draw_minimap_empty_space(wolf);
-			wolf->minimap.j++;
+			wolf->minimap.i++;
 		}
-		wolf->minimap.i++;
+		wolf->minimap.j++;
 	}
 }

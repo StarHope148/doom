@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 05:46:44 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/04 22:58:48 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	ft_init_map(t_env *wolf, char *mapfile)
 		exit(EXIT_FAILURE);
 	}
 	ft_fill_map(&wolf->map, fd);
-	print_tab(&wolf->map);
+	//print_tab(&wolf->map);
 	if (close(fd) < 0)
 	{
 		ft_putendl_fd("Error during close() ", 2);

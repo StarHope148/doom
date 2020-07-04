@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 22:38:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/05 01:06:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,4 @@ void	ft_key_pressed(t_env *wolf)
 		ft_exit(wolf, EXIT_SUCCESS, NULL);
 	ft_movement(wolf);
 	ft_settings(wolf);
-}
-
-void	ft_key_hook(t_env *wolf)
-{
-	while (1)
-	{
-		while (SDL_PollEvent(&wolf->event))
-		{
-			if (wolf->event.type == SDL_KEYDOWN)
-				ft_key_pressed(wolf);
-			if (wolf->event.type == SDL_KEYUP)
-				ft_key_released(wolf);
-			if (wolf->event.type == SDL_QUIT)
-				ft_exit(wolf, EXIT_SUCCESS, NULL);
-		}
-		ft_refresh_new_pos(wolf);
-		ft_print(wolf);
-	}
 }

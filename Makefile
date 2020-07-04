@@ -6,7 +6,7 @@
 #    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/04 21:54:58 by czhang           ###   ########.fr        #
+#    Updated: 2020/07/04 22:46:20 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(COMPILE_SDL2)
 	make -C libft/.
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm -lSDL2_mixer
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm -lSDL2_mixer -lSDL2_ttf
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD) 
 	mkdir -p $(OBJ_PATH)
