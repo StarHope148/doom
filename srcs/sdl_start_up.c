@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 01:06:12 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 01:28:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_init_musicttf(t_env *wolf)
 	if (Mix_OpenAudio(96000, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		ft_exit(wolf, EXIT_FAILURE, "Error in Mix_OpenAudio");
 	if ((wolf->music = Mix_LoadMUS("yaeji-raingurl.mp3")) == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in Mix_LoadMUS");
+		ft_exit(wolf, EXIT_FAILURE, SDL_GetError());
 	Mix_PlayMusic(wolf->music, -1);
 	TTF_Init();
 	if ((wolf->txt.font = TTF_OpenFont("arial.ttf", 20)) == NULL)
