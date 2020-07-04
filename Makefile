@@ -6,7 +6,7 @@
 #    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/03 23:00:04 by czhang           ###   ########.fr        #
+#    Updated: 2020/07/04 21:54:58 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ fclean: clean debug_clean
 reset_SDL2:
 	$(RM) -r SDL2
 
-re: fclean reset_SDL2 all
+re: fclean all
 
 debug: $(COMPILE_SDL2)
 	make -C $(LIB_PATH)
