@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:20:08 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 10:50:43 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->h = HEIGHT;
 	wolf->fps.time_fps = clock();
 	wolf->time0 = clock();
-	wolf->music_puls = (double)60 / 116;
+	wolf->music_puls = (double)60 / 117;
 	wolf->count_puls = 1;
 	wolf->moves.movespeed = MOVE_SPEED;
 	if (!(wolf->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32)

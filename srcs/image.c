@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:31:29 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 10:48:38 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,19 @@ void	ft_funky_textures(t_env *wolf)
 	double	time;
 
 	time = get_time(wolf);
-	if (wolf->count_puls * wolf->music_puls + 6.90 < time)
-	{
-		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
-		wolf->count_puls++;
-		//wolf->count_puls < 25 &&
-	}
-	else if (time < 4.45)
+	if (time < 4.45)
 		draw_centered_text(wolf, wolf->txt.welcome1);
 	else if (5.35 < time && time < 8)
 		draw_centered_text(wolf, wolf->txt.welcome2);
- 	if (0.55 < time && time < 1.35)
+	if (wolf->count_puls < 50 &&
+		wolf->count_puls * wolf->music_puls + 6.35 < time)
+	{
+		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
+		wolf->count_puls++;
+		if (wolf->count_puls == 25)
+			wolf->wall = 3;
+	}
+ 	else if (0.55 < time && time < 1.35)
 		wolf->wall = 0;
 	else if (1.525 < time && time < 2.5)
 		wolf->wall = 2;
@@ -137,8 +139,8 @@ void	ft_print(t_env *wolf)
 	ft_raycaster(wolf);
 	ft_draw_minimap(wolf);
 	ft_draw_fps(wolf);
-	ft_update_screen(wolf);
 	ft_funky_textures(wolf);
+	ft_update_screen(wolf);
 	if ((SDL_UpdateTexture(wolf->texture, NULL,
 					wolf->screen_pixels,
 					wolf->pitch)) < 0)
