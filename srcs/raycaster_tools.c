@@ -75,6 +75,11 @@ void	ft_draw_floor(t_env *wolf)
 	//											wolf->h),
 	//											0,
 	//											0);
+	//wolf->screen_pixels[wolf->raycast.y_render * WIDTH +
+	//	wolf->raycast.x_render] = OLIVE;
+
+    Uint32 pixel;
+
 	wolf->screen_pixels[wolf->raycast.y_render * WIDTH +
-		wolf->raycast.x_render] = OLIVE;
+        wolf->raycast.x_render] = pixel;
 }

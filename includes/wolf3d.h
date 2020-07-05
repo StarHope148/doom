@@ -146,6 +146,8 @@ typedef struct	s_env
 	Uint32			*pixels_wall_east;
 	SDL_Surface		*surface_wall_west;
 	Uint32			*pixels_wall_west;
+	SDL_Surface		*surface_floor;
+	Uint32			*pixels_floor;
 	t_raycast		raycast;
 	t_calc			calc;
 	t_minimap		minimap;
