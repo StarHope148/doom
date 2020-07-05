@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 01:02:50 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 10:31:29 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ void	ft_pixel_access_bmp_images(t_env *wolf)
 	wolf->pixels_wall_east = wolf->surface_wall_east->pixels;
 }
 
-void	draw_text(t_env *wolf, int pos, SDL_Surface *text)
+void	draw_text(t_env *wolf, unsigned int pos, SDL_Surface *text)
 {
 	int			i;
 	int			j;
-	Uint32		*goodpos_screenpix;
 	Uint32		*surfpix;
 
 	if (text->h > HEIGHT || text->w > WIDTH)
@@ -39,36 +38,97 @@ void	draw_text(t_env *wolf, int pos, SDL_Surface *text)
 	if (pos + text->h * WIDTH + text->w > WIDTH * HEIGHT)
 		return ;
 	surfpix = (Uint32 *)text->pixels;
-	goodpos_screenpix = wolf->screen_pixels + pos;
 	j = -1;
 	while (++j < text->h)
 	{
 		i = -1;
 		while (++i < text->w)
-			goodpos_screenpix[j * WIDTH + i] = surfpix[j * text->w + i];
+			wolf->screen_pixels[pos + j * WIDTH + i] = surfpix[j * text->w + i];
 	}
 }
 
 void	draw_centered_text(t_env *wolf, SDL_Surface *text)
+/* to be fixed */
 {
-	draw_text(wolf, (WIDTH * (1 + HEIGHT - text->h) - text->w) / 2, text);
+	double	value;
+	static int		lol = 0;
+	if (lol == 0)
+	{
+		ft_putnbr(((double)WIDTH - text->w) / 2 + WIDTH * (double)(HEIGHT - text->h) / 2);
+		ft_putendl("");
+		ft_putnbr(WIDTH * (HEIGHT - text->h) / 2);
+		ft_putendl("");
+		ft_putnbr((double)WIDTH * (double)(HEIGHT - text->h) / (double)2);
+		ft_putendl("");
+		printf("text->h = %d, text->w = %d\n", text->h, text->w);
+	}
+	//value = (double)WIDTH * ((double)HEIGHT - (double)text->h) / (double)2 + ((double)WIDTH - (double)text->w) / (double)2;
+	value = (WIDTH - text->w) / 2 + (HEIGHT * 0.3) * WIDTH;
+	draw_text(wolf, (unsigned int)value, text);
+	lol++;
 }
 
 void	ft_draw_fps(t_env *wolf)
 {
-	wolf->time_tmp = clock();
-	wolf->frames++;
-	if ((wolf->time_tmp - wolf->time_fps) > CLOCKS_PER_SEC)
+	char	*str_frames;
+
+	wolf->fps.time_tmp = clock();
+	wolf->fps.frames++;
+	if ((wolf->fps.time_tmp - wolf->fps.time_fps) > CLOCKS_PER_SEC)
 	{
-		if ((wolf->fps = TTF_RenderText_Blended(wolf->txt.font,
-				ft_itoa((int)wolf->frames), wolf->txt.black)) == NULL)
+		if ((str_frames = ft_itoa((int)wolf->fps.frames)) == NULL)
+			ft_exit(wolf, EXIT_FAILURE, "Error malloc in itoa (ft_draw_fps)");
+		SDL_FreeSurface(wolf->fps.s);
+		if ((wolf->fps.s = TTF_RenderText_Blended(wolf->txt.font,
+				str_frames, wolf->txt.black)) == NULL)
+		{
+			ft_memdel((void **)&str_frames);
 			ft_exit(wolf, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
-		wolf->frames = 0;
-		wolf->time_fps = clock();
+		}
+		ft_memdel((void **)&str_frames);
+		wolf->fps.frames = 0;
+		wolf->fps.time_fps = clock();
 	}
-	if (wolf->fps != NULL)
+	if (wolf->fps.s != NULL)
 		draw_text(wolf,
-			(wolf->minimap.def_y + wolf->block + 1) * WIDTH, wolf->fps);
+			(wolf->minimap.def_y + wolf->block + 1) * WIDTH, wolf->fps.s);
+}
+
+double	get_time(t_env *wolf)
+{
+	double	time;
+
+	time = (clock() - wolf->time0) / (double)CLOCKS_PER_SEC;
+	return (time);
+}
+
+void	ft_funky_textures(t_env *wolf)
+{
+	double	time;
+
+	time = get_time(wolf);
+	if (wolf->count_puls * wolf->music_puls + 6.90 < time)
+	{
+		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
+		wolf->count_puls++;
+		//wolf->count_puls < 25 &&
+	}
+	else if (time < 4.45)
+		draw_centered_text(wolf, wolf->txt.welcome1);
+	else if (5.35 < time && time < 8)
+		draw_centered_text(wolf, wolf->txt.welcome2);
+ 	if (0.55 < time && time < 1.35)
+		wolf->wall = 0;
+	else if (1.525 < time && time < 2.5)
+		wolf->wall = 2;
+	else if (2.5 < time && time < 3.425)
+		wolf->wall = 1;
+	else if (3.475 < time && time < 4.45)
+		wolf->wall = 0;
+	else if (4.45 < time && time < 5.35)
+		wolf->wall = 2;
+	else if (5.35 < time && time < 6)
+		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
 }
 
 void	ft_print(t_env *wolf)
@@ -78,8 +138,7 @@ void	ft_print(t_env *wolf)
 	ft_draw_minimap(wolf);
 	ft_draw_fps(wolf);
 	ft_update_screen(wolf);
-	if (clock() - wolf->time0 < 3 * CLOCKS_PER_SEC)
-		draw_centered_text(wolf, wolf->txt.surf);
+	ft_funky_textures(wolf);
 	if ((SDL_UpdateTexture(wolf->texture, NULL,
 					wolf->screen_pixels,
 					wolf->pitch)) < 0)

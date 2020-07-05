@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_binding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 22:39:32 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/05 08:25:35 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,7 @@ void		ft_settings(t_env *wolf)
 	else if (wolf->event.key.keysym.sym == SDLK_KP_MINUS)
 		wolf->precision += RAY_LENGHT_STEP;
 	else if (wolf->event.key.keysym.sym == SDLK_SPACE)
-	{
-		if (wolf->switch_textures == NON_TEXTURED)
-			wolf->switch_textures = SHADED;
-		else if (wolf->switch_textures == SHADED)
-			wolf->switch_textures = COLOR_ORIENTED;
-		else if (wolf->switch_textures == COLOR_ORIENTED)
-			wolf->switch_textures = TEXTURED;
-		else if (wolf->switch_textures == TEXTURED)
-			wolf->switch_textures = NON_TEXTURED;
-	}
+		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
 }
 
 void		ft_movement(t_env *wolf)

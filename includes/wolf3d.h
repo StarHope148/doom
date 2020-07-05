@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 00:44:11 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 09:18:30 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,18 @@ typedef struct	s_minimap
 typedef struct	s_text
 {
 	TTF_Font		*font;
-	SDL_Surface		*surf;
+	SDL_Surface		*welcome1;
+	SDL_Surface		*welcome2;
 	SDL_Color		black;
 }				t_text;
+
+typedef struct	s_fps
+{
+	SDL_Surface		*s;
+	clock_t			time_fps;
+	clock_t			time_tmp;
+	unsigned int	frames;
+}				t_fps;
 
 typedef struct	s_env
 {
@@ -143,7 +152,7 @@ typedef struct	s_env
 	Mix_Music		*music;
 	char			orientation;
 	double			precision;
-	char			switch_textures;
+	char			wall;
 	int				pitch;
 	int				ceiling;
 	int				floor;
@@ -151,11 +160,10 @@ typedef struct	s_env
 	unsigned int	tmp_y;
 	int				block;
 	int				h;
-	SDL_Surface		*fps;
-	clock_t			time_fps;
-	clock_t			time_tmp;
+	t_fps			fps;
+	double			music_puls;
+	unsigned int	count_puls;
 	clock_t			time0;
-	unsigned int	frames;
 }				t_env;
 
 void			ft_wolf3d(char *mapfile);
@@ -201,4 +209,11 @@ unsigned int	ft_darken_color(unsigned int color, double coeff);
 /* KEYS */
 void			ft_key_pressed(t_env *wolf);
 void			ft_key_released(t_env *wolf);
+
+/* time fps etc */
+double			get_time(t_env *wolf);
+void			ft_funky_textures(t_env *wolf);
+void			ft_draw_fps(t_env *wolf);
+void			draw_text(t_env *wolf, unsigned int pos, SDL_Surface *text);
+void			draw_centered_text(t_env *wolf, SDL_Surface *text);
 #endif

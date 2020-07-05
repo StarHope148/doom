@@ -6,7 +6,7 @@
 #    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/04 22:46:20 by czhang           ###   ########.fr        #
+#    Updated: 2020/07/05 05:11:44 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
 #FRAMEWORK = -framework OpenGL -framework AppKit
 #MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
-SDL2 = -l SDL2
+SDL2 = -l SDL2 -lm -lSDL2_mixer -lSDL2_ttf
 COMPILE_SDL2 = SDL2/lib/libSDL2.a
 # `sdl2-config --cflags --libs`
 CFLAGS = -Wall -Wextra -Werror
@@ -65,7 +65,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(COMPILE_SDL2)
 	make -C libft/.
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm -lSDL2_mixer -lSDL2_ttf
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD) 
 	mkdir -p $(OBJ_PATH)

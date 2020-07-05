@@ -6,11 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/07/04 23:59:36 by jcanteau         ###   ########.fr       */
-=======
-/*   Updated: 2020/07/05 01:04:17 by czhang           ###   ########.fr       */
->>>>>>> 822076fa4a34a33219e6bc1b69b4a51aa6e43949
+/*   Updated: 2020/07/05 08:25:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +18,8 @@ unsigned int	ft_darken_color(unsigned int color, double coeff)
 	unsigned char g;
 	unsigned char b;
 
-<<<<<<< HEAD
-=======
 	// FF 00 00 00
 	// 00 FF 00 00
->>>>>>> 822076fa4a34a33219e6bc1b69b4a51aa6e43949
 	color >>= 8;
 	b = (unsigned char)color * coeff;
 	color >>= 8;
@@ -61,11 +54,11 @@ void	ft_draw_ceiling(t_env *wolf)
 
 void	ft_draw_wall(t_env *wolf)
 {
-	if (wolf->switch_textures == TEXTURED)
+	if (wolf->wall == TEXTURED)
 		ft_apply_textured_wall(wolf);
-	else if (wolf->switch_textures == COLOR_ORIENTED)
+	else if (wolf->wall == COLOR_ORIENTED)
 		ft_apply_color_oriented_wall(wolf);
-	else if (wolf->switch_textures == SHADED)
+	else if (wolf->wall == SHADED)
 		ft_apply_shaded_wall(wolf);
 	else
 		wolf->screen_pixels[wolf->raycast.y_render *
