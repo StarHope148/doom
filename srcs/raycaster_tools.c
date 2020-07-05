@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 21:02:41 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 23:59:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	ft_draw_ceiling(t_env *wolf)
 
 void	ft_draw_wall(t_env *wolf)
 {
-	if (wolf->wall == TEXTURED)
+	if (wolf->map.data[(int)wolf->calc.test_point_y]
+							[(int)wolf->calc.test_point_x] == 'D')
+		ft_apply_textured_wall(wolf);
+	else if (wolf->wall == TEXTURED)
 		ft_apply_textured_wall(wolf);
 	else if (wolf->wall == COLOR_ORIENTED)
 		ft_apply_color_oriented_wall(wolf);

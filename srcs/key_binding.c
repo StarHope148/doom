@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 21:11:30 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 23:37:52 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,6 @@ void		ft_movement(t_env *wolf)
 		wolf->moves.running = TRUE;
 	else if (wolf->event.key.keysym.sym == SDLK_LCTRL)
 		wolf->moves.crouching = TRUE;
+	else if (wolf->event.key.keysym.sym == SDLK_RETURN)
+		resolve_door(wolf);
 }
