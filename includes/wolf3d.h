@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:53:35 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 21:06:58 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct	s_env
 	double			music_puls;
 	unsigned int	count_puls;
 	clock_t			time0;
+	int				no_funky;
 }				t_env;
 
 void			ft_wolf3d(char *mapfile);

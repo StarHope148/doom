@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:48:38 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 21:08:44 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,11 @@ void	draw_text(t_env *wolf, unsigned int pos, SDL_Surface *text)
 }
 
 void	draw_centered_text(t_env *wolf, SDL_Surface *text)
-/* to be fixed */
 {
 	double	value;
-	static int		lol = 0;
-	if (lol == 0)
-	{
-		ft_putnbr(((double)WIDTH - text->w) / 2 + WIDTH * (double)(HEIGHT - text->h) / 2);
-		ft_putendl("");
-		ft_putnbr(WIDTH * (HEIGHT - text->h) / 2);
-		ft_putendl("");
-		ft_putnbr((double)WIDTH * (double)(HEIGHT - text->h) / (double)2);
-		ft_putendl("");
-		printf("text->h = %d, text->w = %d\n", text->h, text->w);
-	}
-	//value = (double)WIDTH * ((double)HEIGHT - (double)text->h) / (double)2 + ((double)WIDTH - (double)text->w) / (double)2;
+
 	value = (WIDTH - text->w) / 2 + (HEIGHT * 0.3) * WIDTH;
 	draw_text(wolf, (unsigned int)value, text);
-	lol++;
 }
 
 void	ft_draw_fps(t_env *wolf)
@@ -139,7 +126,8 @@ void	ft_print(t_env *wolf)
 	ft_raycaster(wolf);
 	ft_draw_minimap(wolf);
 	ft_draw_fps(wolf);
-	ft_funky_textures(wolf);
+	if (!wolf->no_funky)
+		ft_funky_textures(wolf);
 	ft_update_screen(wolf);
 	if ((SDL_UpdateTexture(wolf->texture, NULL,
 					wolf->screen_pixels,

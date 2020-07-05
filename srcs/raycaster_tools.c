@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:34:48 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 21:02:41 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			ft_fix_fisheye_distorsion(t_env *wolf)
 
 void			ft_set_ceiling_floor(t_env *wolf)
 {
-	wolf->ceiling = (double)(HEIGHT * 0.5) - (double)HEIGHT /
+	wolf->ceiling = (double)(wolf->h * 0.5) - (double)wolf->h /
 					wolf->raycast.distance_towall * WALL_SIZE;
 	wolf->floor = wolf->h - wolf->ceiling;
 	wolf->ceiling -= (wolf->map.altitude[wolf->raycast.test_y]

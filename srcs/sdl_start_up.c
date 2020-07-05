@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 09:46:08 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 20:44:08 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	SDL_FreeSurface(wolf->txt.welcome2);
 	SDL_FreeSurface(wolf->fps.s);
 	TTF_Quit();
+	//ft_putendl("next step is SDL_Quit()");
 	SDL_Quit();
+	//ft_putendl("SDL_Quit accomplished");
 	ft_free_map(&wolf->map);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
