@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 21:06:58 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 23:30:06 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,4 +219,7 @@ void			ft_funky_textures(t_env *wolf);
 void			ft_draw_fps(t_env *wolf);
 void			draw_text(t_env *wolf, unsigned int pos, SDL_Surface *text);
 void			draw_centered_text(t_env *wolf, SDL_Surface *text);
+
+int				wall_on_cam_pos(t_env *wolf);
+void			resolve_door(t_env *wolf);
 #endif

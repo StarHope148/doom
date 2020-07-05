@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/03 05:47:53 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 22:05:22 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ int		ft_check_borders(char *line)
 int		ft_check_line(t_map *m)
 {
 	int		i;
-	char	*line;
+	char	*l;
 
-	line = m->data[m->cur_line];
+	l = m->data[m->cur_line];
 	i = 0;
-	if (line[i++] != '#')
+	if (l[i++] != '#')
 		return (-2);
-	while (line[i])
+	while (l[i])
 	{
-		if (line[i] != '.' && line[i] != '#')
+		if (l[i] != '.' && l[i] != '#' &&
+			l[i] != 'D' && l[i] != 'O' && l[i] != 'T')
 			return (-1);
 		i++;
 	}
-	if (line[--i] != '#')
+	if (l[--i] != '#')
 		return (-2);
 	i = -1;
 	while (++i < m->nbcol)
@@ -51,30 +52,31 @@ int		ft_check_line(t_map *m)
 	return (0);
 }
 
-int		precheck_one(char *line, int pos)
+int		precheck_one(char *l, int p)
 {
 	int		i;
 
 	i = 0;
-	if (line[pos + i] != '#' && line[pos + i] != '.')
+	if (l[p + i] != '#' && l[p + i] != '.' && l[p + i] != 'D'
+			&& l[p + i] != 'T' && l[p + i] != '.' && l[p + i] != 'O')
 		return (-1);
 	i++;
-	if (line[pos + i] != ' ')
+	if (l[p + i] != ' ')
 		return (-2);
 	i++;
-	if (!ft_isdigit(line[pos + i]) || ft_atoi(line + pos + i) < 0)
+	if (!ft_isdigit(l[p + i]) || ft_atoi(l + p + i) < 0)
 		return (-3);
-	while (ft_isdigit(line[pos + i]))
+	while (ft_isdigit(l[p + i]))
 		i++;
-	if (line[pos + i++] != ' ')
+	if (l[p + i++] != ' ')
 		return (-2);
-	if (!ft_isdigit(line[pos + i]) || ft_atoi(line + pos + i) < 0)
+	if (!ft_isdigit(l[p + i]) || ft_atoi(l + p + i) < 0)
 		return (-3);
-	while (ft_isdigit(line[pos + i]))
+	while (ft_isdigit(l[p + i]))
 		i++;
-	if (line[pos + i] == '\0')
+	if (l[p + i] == '\0')
 		return (0);
-	else if (line[pos + i] != '\t')
+	else if (l[p + i] != '\t')
 		return (-2);
 	i++;
 	return (i);

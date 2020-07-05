@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 21:11:48 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/05 23:33:19 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	ft_casting_ray(t_env *wolf)
 		wolf->raycast.distance_towall = MAX_DEPTH;
 	}
 	else if (wolf->map.data[wolf->raycast.test_y]
-								[wolf->raycast.test_x] == WALL)
+								[wolf->raycast.test_x] == WALL
+		|| wolf->map.data[wolf->raycast.test_y]
+								[wolf->raycast.test_x] == DOOR
+		|| wolf->map.data[wolf->raycast.test_y]
+								[wolf->raycast.test_x] == TRANSP) // a modifier
 		wolf->raycast.hit_wall = 1;
 }
 
