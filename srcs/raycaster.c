@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:33:19 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:55:32 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	ft_apply_brightness(t_env *wolf)
 							100);
 }
 
+/* 
 void	ft_casting_ray(t_env *wolf)
 {
-	wolf->raycast.distance_towall += wolf->precision;
+	
+	wolf->raycast.distance_towall += 0.1;
 	wolf->raycast.test_x = (int)(wolf->cam.pos_x +
 							wolf->raycast.eye_x *
 							wolf->raycast.distance_towall);
@@ -50,6 +52,7 @@ void	ft_casting_ray(t_env *wolf)
 								[wolf->raycast.test_x] == TRANSP) // a modifier
 		wolf->raycast.hit_wall = 1;
 }
+*/
 
 void	ft_set_new_ray_angle(t_env *wolf)
 {
@@ -69,9 +72,10 @@ void	ft_raycaster(t_env *wolf)
 	while (wolf->raycast.x_render < WIDTH)
 	{
 		ft_set_new_ray_angle(wolf);
-		while (wolf->raycast.hit_wall == 0 &&
-				wolf->raycast.distance_towall < MAX_DEPTH)
-			ft_casting_ray(wolf);
+		//while (wolf->raycast.hit_wall == 0 &&
+		//		wolf->raycast.distance_towall < MAX_DEPTH)
+		//	ft_casting_ray(wolf);	//<----	old casting_ray function
+		ft_calc_next_intersection(wolf);
 		ft_calc_sampling_x(wolf);
 		ft_fix_fisheye_distorsion(wolf);
 		ft_set_ceiling_floor(wolf);

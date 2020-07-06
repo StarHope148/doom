@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:30:06 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:54:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_camera
 	double			angle;
 	int				angle_z;
 	double			fov;
+	double			fov_ratio;
 }				t_camera;
 
 typedef struct	s_movements
@@ -88,6 +89,17 @@ typedef struct	s_raycast
 	int				hit_wall;
 	double			shading;
 }				t_raycast;
+
+typedef	struct	s_ray
+{
+	int				stepx;
+	int				stepy;
+	int				side;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+}				t_ray;
 
 typedef struct	s_calc
 {
@@ -152,8 +164,8 @@ typedef struct	s_env
 	t_calc			calc;
 	t_minimap		minimap;
 	Mix_Music		*music;
+	t_ray			ray;
 	char			orientation;
-	double			precision;
 	char			wall;
 	int				pitch;
 	int				ceiling;
@@ -208,6 +220,8 @@ void			ft_free_map(t_map *m);
 void			ft_free_surface_image(t_env *wolf);
 void			ft_destroy_texture_renderer_window(t_env *wolf);
 unsigned int	ft_darken_color(unsigned int color, double coeff);
+void			ft_calc_next_intersection(t_env *wolf);
+
 
 /* KEYS */
 void			ft_key_pressed(t_env *wolf);

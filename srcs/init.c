@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:50:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:54:27 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_init_env(t_env *wolf)
 	ft_bzero((void *)wolf, sizeof(t_env));
 	ft_bzero((void *)&(wolf->map), sizeof(t_map));
 	wolf->cam.angle = PI / 2;
-	wolf->cam.fov = PI / 3.5;
-	wolf->precision = RAY_LENGHT;
+	wolf->cam.fov_ratio = 4;
+	wolf->cam.fov = PI / wolf->cam.fov_ratio;
 	wolf->wall = SHADED;
 	wolf->block = HEIGHT * 0.01;
 	wolf->pitch = 4 * WIDTH;

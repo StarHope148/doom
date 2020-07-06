@@ -69,6 +69,8 @@ void	ft_init_video(t_env *wolf)
 					&(wolf->surface_wall_east));
 	ft_load_surface(wolf, "textures/green_wall.bmp",
 					&(wolf->surface_wall_west));
+	ft_load_surface(wolf, "textures/floor.bmp",
+					&(wolf->surface_floor));
 }
 
 void	ft_init_musicttf(t_env *wolf)

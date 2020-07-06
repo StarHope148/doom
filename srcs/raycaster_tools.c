@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:59:33 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:53:15 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ void	ft_draw_floor(t_env *wolf)
 	//											wolf->h),
 	//											0,
 	//											0);
-	//wolf->screen_pixels[wolf->raycast.y_render * WIDTH +
-	//	wolf->raycast.x_render] = OLIVE;
-
-    Uint32 pixel;
-
 	wolf->screen_pixels[wolf->raycast.y_render * WIDTH +
-        wolf->raycast.x_render] = pixel;
+		wolf->raycast.x_render] = OLIVE;
 }

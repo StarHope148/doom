@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:33:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:23:43 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_rotate_up(t_env *wolf)
 {
 	if (wolf->cam.angle_z <= 800)
-	wolf->cam.angle_z += 20;
+	wolf->cam.angle_z += UP_DOWN_ANGLE_SPEED;
 }
 
 void	ft_rotate_down(t_env *wolf)
 {
 	if (wolf->cam.angle_z >= -800)
-		wolf->cam.angle_z -= 20;
+		wolf->cam.angle_z -= UP_DOWN_ANGLE_SPEED;
 }
 
 void	open_door(t_env *wolf, int door_y, int door_x)
