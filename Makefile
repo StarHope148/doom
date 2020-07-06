@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
+#    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/07/06 04:51:44 by czhang           ###   ########.fr        #
+=======
+#    Updated: 2020/07/06 21:55:12 by jcanteau         ###   ########.fr        #
+>>>>>>> 5df3226967c7b58aa236f06c79da74ae33c20d86
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +39,7 @@ SRC_NAME += minimap.c
 SRC_NAME += switch_textures.c
 SRC_NAME += freeing.c
 SRC_NAME += open_door.c
+SRC_NAME += ray.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

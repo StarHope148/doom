@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 04:51:08 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 23:11:58 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_rotate_up(t_env *wolf)
 {
 	if (wolf->cam.angle_z <= 800)
-	wolf->cam.angle_z += 20;
+	wolf->cam.angle_z += UP_DOWN_ANGLE_SPEED;
 }
 
 void	ft_rotate_down(t_env *wolf)
 {
 	if (wolf->cam.angle_z >= -800)
-		wolf->cam.angle_z -= 20;
+		wolf->cam.angle_z -= UP_DOWN_ANGLE_SPEED;
 }
 
 int		wall_on_cam_pos(t_env *wolf)

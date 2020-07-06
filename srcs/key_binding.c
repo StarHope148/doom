@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_binding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:37:52 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:54:38 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ void		ft_settings(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_KP_PLUS)
 	{
-		if (wolf->precision - RAY_LENGHT_STEP > 0)
-			wolf->precision -= RAY_LENGHT_STEP;
+		if (wolf->cam.fov_ratio - POV_RATIO_STEP >= 1)
+			wolf->cam.fov_ratio -= POV_RATIO_STEP;
+		wolf->cam.fov = PI / wolf->cam.fov_ratio;
 	}
 	else if (wolf->event.key.keysym.sym == SDLK_KP_MINUS)
-		wolf->precision += RAY_LENGHT_STEP;
-	else if ((wolf->count_puls > 25 || wolf->no_funky) && wolf->event.key.keysym.sym == SDLK_SPACE)
+	{
+		if (wolf->cam.fov_ratio + POV_RATIO_STEP <= 6)
+			wolf->cam.fov_ratio += POV_RATIO_STEP;
+		wolf->cam.fov = PI / wolf->cam.fov_ratio;
+	}
+	else if ((wolf->count_puls > 25 || wolf->no_funky) &&
+			wolf->event.key.keysym.sym == SDLK_SPACE)
 		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
 	else if (wolf->event.key.keysym.sym == SDLK_RSHIFT)
 	{
