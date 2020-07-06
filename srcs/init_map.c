@@ -6,13 +6,13 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/04 22:58:48 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:55:58 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		ft_malloc_tab(t_map *m)
+static int	ft_malloc_tab(t_map *m)
 {
 	int		i;
 
@@ -20,7 +20,7 @@ int		ft_malloc_tab(t_map *m)
 		return (-1);
 	if ((m->brightness = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
 		return (-1);
-	if ((m->altitude = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
+	if ((m->alt = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
 		return (-1);
 	i = -1;
 	while (++i < m->nbl)
@@ -30,13 +30,13 @@ int		ft_malloc_tab(t_map *m)
 		m->data[i][m->nbcol] = '\0';
 		if (!(m->brightness[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
 			return (-1);
-		if (!(m->altitude[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
+		if (!(m->alt[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
 			return (-1);
 	}
 	return (1);
 }
 
-void	print_tab(t_map *m)
+/* void	print_tab(t_map *m)
 {
 	int i;
 	int	j;
@@ -63,14 +63,14 @@ void	print_tab(t_map *m)
 		j = -1;
 		while (++j < m->nbcol)
 		{
-			ft_putnbr(m->altitude[i][j]);
+			ft_putnbr(m->alt[i][j]);
 			ft_putchar(' ');
 		}
 		ft_putendl("");
 	}
-}
+} */
 
-int		get_tabvalues(t_map *m, int col, char *line, int prev_pos)
+static int	get_tabvalues(t_map *m, int col, char *line, int prev_pos)
 {
 	char	*str;
 	int		pos;
@@ -83,7 +83,7 @@ int		get_tabvalues(t_map *m, int col, char *line, int prev_pos)
 	while (ft_isdigit(str[pos]))
 		pos++;
 	pos++;
-	m->altitude[m->cur_line][col] = ft_atoi(str + pos);
+	m->alt[m->cur_line][col] = ft_atoi(str + pos);
 	while (ft_isdigit(str[pos]))
 		pos++;
 	if (!str[pos])
@@ -93,7 +93,7 @@ int		get_tabvalues(t_map *m, int col, char *line, int prev_pos)
 	return (pos);
 }
 
-int		ft_retrieve_data(t_map *m, char *line)
+static int	ft_retrieve_data(t_map *m, char *line)
 {
 	int		col;
 	int		pos;
@@ -118,7 +118,7 @@ int		ft_retrieve_data(t_map *m, char *line)
 	return (0);
 }
 
-void	ft_fill_map(t_map *m, int fd)
+static void	ft_fill_map(t_map *m, int fd)
 {
 	char	*line;
 	char	ret;
@@ -138,7 +138,7 @@ void	ft_fill_map(t_map *m, int fd)
 	}
 }
 
-void	ft_init_map(t_env *wolf, char *mapfile)
+void		ft_init_map(t_env *wolf, char *mapfile)
 {
 	int fd;
 

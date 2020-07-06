@@ -6,11 +6,20 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/03 05:48:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:49:12 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void	ft_free_door(t_door *list)
+{
+	if (list == NULL)
+		return ;
+	if (list->next != NULL)
+		ft_free_door(list->next);
+	ft_memdel((void **)&list);
+}
 
 void	ft_destroy_texture_renderer_window(t_env *wolf)
 {
@@ -68,10 +77,10 @@ void	ft_free_map(t_map *m)
 		while (i < m->nbl && m->brightness[i])
 			ft_memdel((void **)&m->brightness[i++]);
 	i = 0;
-	if (m->altitude)
-		while (i < m->nbl && m->altitude[i])
-			ft_memdel((void **)&m->altitude[i++]);
+	if (m->alt)
+		while (i < m->nbl && m->alt[i])
+			ft_memdel((void **)&m->alt[i++]);
 	ft_memdel((void **)&m->data);
 	ft_memdel((void **)&m->brightness);
-	ft_memdel((void **)&m->altitude);
+	ft_memdel((void **)&m->alt);
 }

@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:30:06 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:53:44 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct	s_map
 	size_t			cur_line;
 	char			**data;
 	int				**brightness;
-	int				**altitude;
+	int				**alt;
 }				t_map;
 
 typedef struct	s_camera
@@ -127,6 +127,17 @@ typedef struct	s_fps
 	unsigned int	frames;
 }				t_fps;
 
+/* a t_door is malloc-ed when a door is opened */
+typedef struct	s_door
+{
+	int				x;
+	int				y;
+	int				start_alt;
+	double			speed;
+	double			start_time;
+	struct s_door	*next;
+}				t_door;
+
 typedef struct	s_env
 {
 	SDL_Window		*window;
@@ -137,6 +148,7 @@ typedef struct	s_env
 	t_camera		cam;
 	t_movements		moves;
 	t_text			txt;
+	t_door			*door;
 	Uint32			*screen_pixels;
 	SDL_Surface		*surface_wall_north;
 	Uint32			*pixels_wall_north;
@@ -203,6 +215,7 @@ void			ft_apply_textured_wall(t_env *wolf);
 void			ft_apply_color_oriented_wall(t_env *wolf);
 void			ft_apply_shaded_wall(t_env *wolf);
 void			ft_free_map(t_map *m);
+void			ft_free_door(t_door *list);
 void			ft_free_surface_image(t_env *wolf);
 void			ft_destroy_texture_renderer_window(t_env *wolf);
 unsigned int	ft_darken_color(unsigned int color, double coeff);
@@ -218,6 +231,7 @@ void			ft_draw_fps(t_env *wolf);
 void			draw_text(t_env *wolf, unsigned int pos, SDL_Surface *text);
 void			draw_centered_text(t_env *wolf, SDL_Surface *text);
 
-int				wall_on_cam_pos(t_env *wolf);
+/* open_door.c */
 void			resolve_door(t_env *wolf);
+void			animation_opening_door(t_env *wolf);
 #endif

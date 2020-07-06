@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:33:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 04:51:08 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,6 @@ void	ft_rotate_down(t_env *wolf)
 {
 	if (wolf->cam.angle_z >= -800)
 		wolf->cam.angle_z -= 20;
-}
-
-void	open_door(t_env *wolf, int door_y, int door_x)
-{
-	//animation door opening
-	wolf->map.data[door_y][door_x] = '.';
-}
-
-void	resolve_door(t_env *wolf)
-{
-	int		y;
-	int		x;
-	double	angle;
-	char	**d;
-
-	d = wolf->map.data;
-	y = (int)wolf->cam.pos_y;
-	x = (int)wolf->cam.pos_x;
-	angle = wolf->cam.angle;
-
-	if ((angle <= -PI * 0.25 && angle >= -PI * 0.75) && d[y][x - 1] == 'D')
-		x = x - 1;
-	else if ((angle >= PI * 0.75 || angle <= -PI * 0.75) && d[y - 1][x] == 'D')
-		y = y - 1;
-	else if ((angle >= -PI * 0.25 && angle <= PI * 0.25) && d[y + 1][x] == 'D')
-		y = y + 1;
-	else if ((angle >= PI * 0.25 && angle <= PI * 0.75) && d[y][x + 1] == 'D')
-		x = x + 1;
-	else
-		return ;
-	open_door(wolf, y, x);
 }
 
 int		wall_on_cam_pos(t_env *wolf)

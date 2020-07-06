@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 21:08:44 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:53:38 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	ft_funky_textures(t_env *wolf)
 void	ft_print(t_env *wolf)
 {
 	ft_pixel_access_bmp_images(wolf);
+	animation_opening_door(wolf);
 	ft_raycaster(wolf);
 	ft_draw_minimap(wolf);
 	ft_draw_fps(wolf);

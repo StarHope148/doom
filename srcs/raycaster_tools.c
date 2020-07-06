@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 23:59:33 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 06:45:16 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void			ft_set_ceiling_floor(t_env *wolf)
 	wolf->ceiling = (double)(wolf->h * 0.5) - (double)wolf->h /
 					wolf->raycast.distance_towall * WALL_SIZE;
 	wolf->floor = wolf->h - wolf->ceiling;
-	wolf->ceiling -= (wolf->map.altitude[wolf->raycast.test_y]
-			[wolf->raycast.test_x]) * 100 / wolf->raycast.distance_towall;
+	wolf->ceiling -= (wolf->map.alt[wolf->raycast.test_y]
+			[wolf->raycast.test_x]) / wolf->raycast.distance_towall;
 	wolf->ceiling += wolf->cam.angle_z;
 	wolf->floor += wolf->cam.angle_z;
 }
@@ -54,8 +54,8 @@ void	ft_draw_ceiling(t_env *wolf)
 
 void	ft_draw_wall(t_env *wolf)
 {
-	if (wolf->map.data[(int)wolf->calc.test_point_y]
-							[(int)wolf->calc.test_point_x] == 'D')
+	if (wolf->map.data
+				[(int)wolf->raycast.test_y][(int)wolf->raycast.test_x] == 'D')
 		ft_apply_textured_wall(wolf);
 	else if (wolf->wall == TEXTURED)
 		ft_apply_textured_wall(wolf);

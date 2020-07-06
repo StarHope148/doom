@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 00:16:16 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 21:05:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,19 @@ void	ft_set_points(t_env *wolf)
 	wolf->minimap.def_y = wolf->minimap.y;
 }
 
-void	ft_draw_minimap_wall(t_env *wolf)
+void	ft_draw_minimap_symbol(t_env *wolf)
 {
-	while (wolf->minimap.done == 0)
-	{
-		wolf->screen_pixels[wolf->minimap.y * WIDTH + wolf->minimap.x] = LIME;
-		wolf->minimap.x++;
-		if (wolf->minimap.x > wolf->minimap.def_x + wolf->block)
-		{
-			wolf->minimap.x = wolf->minimap.j * wolf->block;
-			wolf->minimap.y++;
-		}
-		if (wolf->minimap.y > wolf->minimap.def_y + wolf->block)
-			wolf->minimap.done = 1;
-	}
-}
+	Uint32	color;
 
-void	ft_draw_minimap_empty_space(t_env *wolf)
-{
+	if (wolf->map.data[wolf->minimap.i][wolf->minimap.j] == WALL)
+		color = LIME;
+	else if (wolf->map.data[wolf->minimap.i][wolf->minimap.j] == EMPTY)
+		color = GRAY;
+	else if (wolf->map.data[wolf->minimap.i][wolf->minimap.j] == DOOR)
+		color = PURPLE;
 	while (wolf->minimap.done == 0)
 	{
-		wolf->screen_pixels[wolf->minimap.y * WIDTH + wolf->minimap.x] = GRAY;
+		wolf->screen_pixels[wolf->minimap.y * WIDTH + wolf->minimap.x] = color;
 		wolf->minimap.x++;
 		if (wolf->minimap.x > wolf->minimap.def_x + wolf->block)
 		{
@@ -75,11 +67,7 @@ void	ft_draw_minimap(t_env *wolf)
 		while (wolf->minimap.i < (int)wolf->map.nbl)
 		{
 			ft_set_points(wolf);
-			if (wolf->map.data[wolf->minimap.i][wolf->minimap.j] == WALL)
-				ft_draw_minimap_wall(wolf);
-			else if (wolf->map.data[wolf->minimap.i]
-						[wolf->minimap.j] == EMPTY)
-				ft_draw_minimap_empty_space(wolf);
+			ft_draw_minimap_symbol(wolf);
 			wolf->minimap.i++;
 		}
 		wolf->minimap.j++;
