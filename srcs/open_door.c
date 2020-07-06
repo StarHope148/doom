@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/06 23:00:30 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 23:16:23 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ void		animation_opening_door(t_env *wolf)
 {
 	t_door	*door;
 	t_door	*prev;
-	t_door	*next;
 
 	door = wolf->door;
 	while (door)
 	{
-		ft_putendl("1");
 		anim_one_door(wolf, door);
 		door = door->next;
 	}
@@ -50,12 +48,11 @@ void		animation_opening_door(t_env *wolf)
 	{
 		if (wolf->map.data[door->y][door->x] == '.')
 		{
-			next = door->next;
-			ft_memdel((void **)&door);
 			if (prev == NULL)
-				wolf->door = next;
+				wolf->door = door->next;
 			else if (prev)
-				prev->next = next;
+				prev->next = door->next;
+			ft_memdel((void **)&door);
 		}
 		else
 			door = door->next;		
