@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/05 10:50:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 21:58:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,20 @@ void	ft_setspawn(t_env *wolf)
 	int x;
 	int y;
 
-	x = 1;
-	y = 1;
-	while (wolf->map.data[y][x] != EMPTY)
+	y = 0;
+	while (++y < wolf->map.nbl - 1)
 	{
-		if (y < wolf->map.nbl)
-			y++;
-		if ((y == wolf->map.nbl) && (x < wolf->map.nbcol))
-		{
-			y = 1;
-			x++;
-		}
-		if ((y == wolf->map.nbl) && (x == wolf->map.nbcol))
-		{
-			ft_putendl_fd("This is no map, just a brick wall", 2);
-			exit(EXIT_FAILURE);
-		}
+		x = 0;
+		while (++x < wolf->map.nbcol - 1)
+			if (wolf->map.data[y][x] == EMPTY)
+			{
+				wolf->cam.pos_x = x + 0.5;
+				wolf->cam.pos_y = y + 0.5;
+				return ;
+			}
 	}
-	wolf->cam.pos_x = x + .5;
-	wolf->cam.pos_y = y + .5;
+	ft_putendl_fd("This is no map, just a brick wall", 2);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_initialize(t_env *wolf, char *mapfile)

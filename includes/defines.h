@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 20:08:52 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/06 22:43:27 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define TRANSP 'T'
 # define OBJECT "O"
 
-# define DOOR_OPENING_DURATION 0.5
+# define DOOR_OPENING_DURATION 1
 # define MIN_ALTITUDE -800
 
 #endif
