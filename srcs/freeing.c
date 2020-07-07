@@ -3,20 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 20:49:54 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+void	ft_free_one_xpm(t_xpm *xpm)
+{
+	ft_memdel((void **)&xpm->name);
+	ft_memdel((void **)&xpm->pixels);
+	ft_memdel((void **)&xpm);
+}
+
+void	ft_free_xpm(t_xpm *list)
+{
+	if (list == NULL)
+		return ;
+	if (list->next)
+		ft_free_xpm(list->next);
+	ft_free_one_xpm(list);
+}
+
 void	ft_free_door(t_door *list)
 {
 	if (list == NULL)
 		return ;
-	if (list->next != NULL)
+	if (list->next)
 		ft_free_door(list->next);
 	ft_memdel((void **)&list);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xpm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 00:18:51 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/07 19:51:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 21:19:11 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static char	*example2_xpm[] =
 
 void	error(t_env *doom, char *message)
 {
+	//peut etre pas exit non plus vu que c pas trop grave de fail chargement xpm
 	ft_exit(doom, EXIT_FAILURE, message);
 }
 
@@ -87,25 +88,27 @@ int		get_hexpixel(t_xpm *xpm, char **file, int line, int i)
 	return (-1);
 }
 
-t_xpm	get_xpm(t_env *wolf, char **xpm_file)
+t_xpm	*get_xpm(t_env *doom, char **xpm_file)
 {
 	int		line;
 	int		i;
-	t_xpm	xpm;
+	t_xpm	*xpm;
 
-	init_xpm(wolf, &xpm, xpm_file[0]);
-	if (!(xpm.pixels = (int *)ft_memalloc(sizeof(int) * xpm.h * xpm.w)))
-		error(wolf, "Error malloc in get_xpm()");
+	if ((xpm = (t_xpm *)ft_memalloc(sizeof(t_xpm))) == NULL)
+		error(doom, "Error malloc in get_xpm()");
+	init_xpm(doom, xpm, xpm_file[0]);
+	if (!(xpm->pixels = (int *)ft_memalloc(sizeof(int) * xpm->h * xpm->w)))
+		error(doom, "Error malloc in  get_xpm()");
 	line = -1;
-	while (++line < xpm.h)
+	while (++line < xpm->h)
 	{
 		i = -1;
-		while (++i < xpm.w)
+		while (++i < xpm->w)
 		{
-			xpm.pixels[line * xpm.w + i] =
-									get_hexpixel(&xpm, xpm_file, line, i);
-			if (xpm.pixels[line * xpm.w + i] == -1)
-				error(wolf, "Error xpm format2");
+			xpm->pixels[line * xpm->w + i] =
+									get_hexpixel(xpm, xpm_file, line, i);
+			if (xpm->pixels[line * xpm->w + i] == -1)
+				error(doom, "Error xpm format2");
 		}
 	}
 	return (xpm);

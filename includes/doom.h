@@ -153,11 +153,13 @@ typedef struct	s_door
 
 typedef struct	s_xpm
 {
-	int	w;
-	int	h;
-	int	colormax;
-	int	nchar;
-	int	*pixels;
+	char			*name;
+	int				w;
+	int				h;
+	int				colormax;
+	int				nchar;
+	int				*pixels;
+	struct s_xpm	*next;
 }				t_xpm;
 
 typedef struct	s_env
@@ -171,6 +173,7 @@ typedef struct	s_env
 	t_movements		moves;
 	t_text			txt;
 	t_door			*door;
+	t_xpm			*xpm;
 	Uint32			*screen_pixels;
 	SDL_Surface		*surface_wall_north;
 	Uint32			*pixels_wall_north;
@@ -265,5 +268,7 @@ void			animation_opening_door(t_env *doom);
 
 void			save_in_file(t_env *doom);
 
-t_xpm			get_xpm(t_env *doom, char **xpm_file);
+t_xpm			*get_xpm(t_env *doom, char **xpm_file);
+void			ft_free_one_xpm(t_xpm *xpm);
+void			ft_free_xpm(t_xpm *list);
 #endif

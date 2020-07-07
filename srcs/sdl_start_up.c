@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:40:50 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 20:50:59 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	SDL_Quit();
 	//ft_putendl("SDL_Quit accomplished");
 	ft_free_door(doom->door);
+	ft_free_xpm(doom->xpm);
 	ft_free_map(&doom->map);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);

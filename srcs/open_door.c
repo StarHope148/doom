@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 20:53:21 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	init_door(t_env *doom, int door_y, int door_x)
 	t_door	*last;
 
 	last = doom->door;
-	while (last && last->next)
+	while (last)
 		last = last->next;
 	new_door(doom, door_y, door_x, last);
 }
