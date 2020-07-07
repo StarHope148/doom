@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:40:50 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	ft_free_map(&doom->map);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
+	printf("time : %f\n", get_time(doom) + doom->time0 / CLOCKS_PER_SEC);
 	exit(exit_type);
 }
 

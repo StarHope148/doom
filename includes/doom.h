@@ -151,6 +151,15 @@ typedef struct	s_door
 	struct s_door	*next;
 }				t_door;
 
+typedef struct	s_xpm
+{
+	int	w;
+	int	h;
+	int	colormax;
+	int	nchar;
+	int	*pixels;
+}				t_xpm;
+
 typedef struct	s_env
 {
 	SDL_Window		*window;
@@ -205,6 +214,8 @@ void			ft_stop_movement(t_env *doom);
 void			ft_settings(t_env *doom);
 void			ft_refresh_new_pos(t_env *doom);
 void			ft_error(t_map *m, int code, char *line);
+
+/* map_checker.c */
 int				ft_check_line(t_map *m);
 int				ft_check_borders(char *line);
 void			ft_count_lines_columns(t_map *m, char *mapfile, int fd);
@@ -253,4 +264,6 @@ void			resolve_door(t_env *doom);
 void			animation_opening_door(t_env *doom);
 
 void			save_in_file(t_env *doom);
+
+t_xpm			get_xpm(t_env *doom, char **xpm_file);
 #endif
