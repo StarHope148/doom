@@ -6,89 +6,89 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:52:39 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 22:18:45 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
-void	ft_setup(t_env *wolf)
+void	ft_setup(t_env *doom)
 {
-	wolf->ray.deltadistx = sqrt(1 + (wolf->raycast.eye_y *
-		wolf->raycast.eye_y) / (wolf->raycast.eye_x * wolf->raycast.eye_x));
-	wolf->ray.deltadisty = sqrt(1 + (wolf->raycast.eye_x *
-		wolf->raycast.eye_x) / (wolf->raycast.eye_y * wolf->raycast.eye_y));
-	wolf->raycast.test_x = (int)wolf->cam.pos_x;
-	wolf->raycast.test_y = (int)wolf->cam.pos_y;
+	doom->ray.deltadistx = sqrt(1 + (doom->raycast.eye_y *
+		doom->raycast.eye_y) / (doom->raycast.eye_x * doom->raycast.eye_x));
+	doom->ray.deltadisty = sqrt(1 + (doom->raycast.eye_x *
+		doom->raycast.eye_x) / (doom->raycast.eye_y * doom->raycast.eye_y));
+	doom->raycast.test_x = (int)doom->cam.pos_x;
+	doom->raycast.test_y = (int)doom->cam.pos_y;
 }
 
-void	ft_set_direction(t_env *wolf)
+void	ft_set_direction(t_env *doom)
 {
-	if (wolf->raycast.eye_x < 0)
+	if (doom->raycast.eye_x < 0)
 	{
-		wolf->ray.stepx = -1;
-		wolf->ray.sidedistx = (wolf->cam.pos_x - wolf->raycast.test_x) *
-			wolf->ray.deltadistx;
+		doom->ray.stepx = -1;
+		doom->ray.sidedistx = (doom->cam.pos_x - doom->raycast.test_x) *
+			doom->ray.deltadistx;
 	}
 	else
 	{
-		wolf->ray.stepx = 1;
-		wolf->ray.sidedistx = (wolf->raycast.test_x + 1 - wolf->cam.pos_x) *
-			wolf->ray.deltadistx;
+		doom->ray.stepx = 1;
+		doom->ray.sidedistx = (doom->raycast.test_x + 1 - doom->cam.pos_x) *
+			doom->ray.deltadistx;
 	}
-	if (wolf->raycast.eye_y < 0)
+	if (doom->raycast.eye_y < 0)
 	{
-		wolf->ray.stepy = -1;
-		wolf->ray.sidedisty = (wolf->cam.pos_y - wolf->raycast.test_y) *
-			wolf->ray.deltadisty;
+		doom->ray.stepy = -1;
+		doom->ray.sidedisty = (doom->cam.pos_y - doom->raycast.test_y) *
+			doom->ray.deltadisty;
 	}
 	else
 	{
-		wolf->ray.stepy = 1;
-		wolf->ray.sidedisty = (wolf->raycast.test_y + 1 - wolf->cam.pos_y) *
-			wolf->ray.deltadisty;
+		doom->ray.stepy = 1;
+		doom->ray.sidedisty = (doom->raycast.test_y + 1 - doom->cam.pos_y) *
+			doom->ray.deltadisty;
 	}
 }
 
-void	ft_search_collision(t_env *wolf)
+void	ft_search_collision(t_env *doom)
 {
-	while (wolf->map.data[wolf->raycast.test_y][wolf->raycast.test_x] == EMPTY)
+	while (doom->map.data[doom->raycast.test_y][doom->raycast.test_x] == EMPTY)
 	{
-		if (wolf->ray.sidedistx < wolf->ray.sidedisty)
+		if (doom->ray.sidedistx < doom->ray.sidedisty)
 		{
-			wolf->ray.sidedistx += wolf->ray.deltadistx;
-			wolf->raycast.test_x += wolf->ray.stepx;
-			wolf->ray.side = 0;
+			doom->ray.sidedistx += doom->ray.deltadistx;
+			doom->raycast.test_x += doom->ray.stepx;
+			doom->ray.side = 0;
 		}
 		else
 		{
-			wolf->ray.sidedisty += wolf->ray.deltadisty;
-			wolf->raycast.test_y += wolf->ray.stepy;
-			wolf->ray.side = 1;
+			doom->ray.sidedisty += doom->ray.deltadisty;
+			doom->raycast.test_y += doom->ray.stepy;
+			doom->ray.side = 1;
 		}
 	}
 }
 
-void	ft_calcul_distance_to_collision(t_env *wolf)
+void	ft_calcul_distance_to_collision(t_env *doom)
 {
-	if (wolf->ray.side == 0)
+	if (doom->ray.side == 0)
 	{
-		wolf->raycast.distance_towall =
-			fabs((wolf->raycast.test_x - wolf->cam.pos_x +
-				(1 - wolf->ray.stepx) / 2) / wolf->raycast.eye_x);
+		doom->raycast.distance_towall =
+			fabs((doom->raycast.test_x - doom->cam.pos_x +
+				(1 - doom->ray.stepx) / 2) / doom->raycast.eye_x);
 	}
 	else
 	{
-		wolf->raycast.distance_towall =
-			fabs((wolf->raycast.test_y - wolf->cam.pos_y +
-				(1 - wolf->ray.stepy) / 2) / wolf->raycast.eye_y);
+		doom->raycast.distance_towall =
+			fabs((doom->raycast.test_y - doom->cam.pos_y +
+				(1 - doom->ray.stepy) / 2) / doom->raycast.eye_y);
 	}
 }
 
-void	ft_calc_next_intersection(t_env *wolf)
+void	ft_calc_next_intersection(t_env *doom)
 {
-	ft_setup(wolf);
-	ft_set_direction(wolf);
-	ft_search_collision(wolf);
-	ft_calcul_distance_to_collision(wolf);
+	ft_setup(doom);
+	ft_set_direction(doom);
+	ft_search_collision(doom);
+	ft_calcul_distance_to_collision(doom);
 }

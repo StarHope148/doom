@@ -52,9 +52,9 @@ Mkfile.old
 dkms.conf
 
 .DS_Store
-wolf3d
+doom
 *.json
 SDL2-2.0.12
 SDL2-2.0.12/include/SDL_config.h
 SDL2
-
+testsave

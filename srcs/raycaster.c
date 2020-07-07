@@ -3,95 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 04:56:18 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
-void	ft_apply_brightness(t_env *wolf)
+void	ft_apply_brightness(t_env *doom)
 {
-	if (wolf->map.bright[(int)wolf->cam.pos_y]
-					[(int)wolf->cam.pos_x] != 100)
-		wolf->screen_pixels[wolf->raycast.y_render *
-		WIDTH + wolf->raycast.x_render] =
-			ft_darken_color(wolf->screen_pixels[wolf->raycast.y_render *
-				WIDTH + wolf->raycast.x_render],
-					(double)wolf->map.bright[(int)wolf->cam.pos_y]
-						[(int)wolf->cam.pos_x] /
-							100);
+	if (doom->map.bright[(int)doom->cam.pos_y]
+					[(int)doom->cam.pos_x] != 100)
+		/* doom->screen_pixels[doom->raycast.y_render *
+		WIDTH + doom->raycast.x_render] =
+			ft_darken_color(doom->screen_pixels[doom->raycast.y_render *
+				WIDTH + doom->raycast.x_render],
+					(double)doom->map.bright[(int)doom->cam.pos_y]
+						[(int)doom->cam.pos_x] /
+							100); */
+		doom->screen_pixels[doom->raycast.y_render *
+		WIDTH + doom->raycast.x_render] =
+			(doom->screen_pixels[doom->raycast.y_render *
+			WIDTH + doom->raycast.x_render] >> 1) & 0b01111111011111110111111101111111;
 }
 
 /* 
-void	ft_casting_ray(t_env *wolf)
+void	ft_casting_ray(t_env *doom)
 {
 	
-	wolf->raycast.distance_towall += 0.1;
-	wolf->raycast.test_x = (int)(wolf->cam.pos_x +
-							wolf->raycast.eye_x *
-							wolf->raycast.distance_towall);
-	wolf->raycast.test_y = (int)(wolf->cam.pos_y +
-							wolf->raycast.eye_y *
-							wolf->raycast.distance_towall);
-	if (wolf->raycast.test_x < 0 ||
-			wolf->raycast.test_x >= wolf->map.nbcol ||
-			wolf->raycast.test_y < 0 ||
-			wolf->raycast.test_y >= wolf->map.nbl)
+	doom->raycast.distance_towall += 0.1;
+	doom->raycast.test_x = (int)(doom->cam.pos_x +
+							doom->raycast.eye_x *
+							doom->raycast.distance_towall);
+	doom->raycast.test_y = (int)(doom->cam.pos_y +
+							doom->raycast.eye_y *
+							doom->raycast.distance_towall);
+	if (doom->raycast.test_x < 0 ||
+			doom->raycast.test_x >= doom->map.nbcol ||
+			doom->raycast.test_y < 0 ||
+			doom->raycast.test_y >= doom->map.nbl)
 	{
-		wolf->raycast.hit_wall = 1;
-		wolf->raycast.distance_towall = MAX_DEPTH;
+		doom->raycast.hit_wall = 1;
+		doom->raycast.distance_towall = MAX_DEPTH;
 	}
-	else if (wolf->map.data[wolf->raycast.test_y]
-								[wolf->raycast.test_x] == WALL
-		|| wolf->map.data[wolf->raycast.test_y]
-								[wolf->raycast.test_x] == DOOR
-		|| wolf->map.data[wolf->raycast.test_y]
-								[wolf->raycast.test_x] == TRANSP) // a modifier
-		wolf->raycast.hit_wall = 1;
+	else if (doom->map.data[doom->raycast.test_y]
+								[doom->raycast.test_x] == WALL
+		|| doom->map.data[doom->raycast.test_y]
+								[doom->raycast.test_x] == DOOR
+		|| doom->map.data[doom->raycast.test_y]
+								[doom->raycast.test_x] == TRANSP) // a modifier
+		doom->raycast.hit_wall = 1;
 }
 */
 
-void	ft_set_new_ray_angle(t_env *wolf)
+void	ft_set_new_ray_angle(t_env *doom)
 {
-	wolf->raycast.ray_angle = (wolf->cam.angle + wolf->cam.fov / 2.0) -
-							((double)wolf->raycast.x_render / (double)WIDTH) *
-							wolf->cam.fov;
-	wolf->raycast.distance_towall = 0;
-	wolf->raycast.hit_wall = 0;
-	wolf->raycast.shading = 1;
-	wolf->raycast.eye_x = sin(wolf->raycast.ray_angle);
-	wolf->raycast.eye_y = cos(wolf->raycast.ray_angle);
+	doom->raycast.ray_angle = (doom->cam.angle + doom->cam.fov / 2.0) -
+							((double)doom->raycast.x_render / (double)WIDTH) *
+							doom->cam.fov;
+	doom->raycast.distance_towall = 0;
+	doom->raycast.hit_wall = 0;
+	doom->raycast.shading = 1;
+	doom->raycast.eye_x = sin(doom->raycast.ray_angle);
+	doom->raycast.eye_y = cos(doom->raycast.ray_angle);
 }
 
-void	ft_raycaster(t_env *wolf)
+void	ft_raycaster(t_env *doom)
 {
-	wolf->raycast.x_render = 0;
-	while (wolf->raycast.x_render < WIDTH)
+	doom->raycast.x_render = 0;
+	while (doom->raycast.x_render < WIDTH)
 	{
-		ft_set_new_ray_angle(wolf);
-		//while (wolf->raycast.hit_wall == 0 &&
-		//		wolf->raycast.distance_towall < MAX_DEPTH)
-		//	ft_casting_ray(wolf);	//<----	old casting_ray function
-		ft_calc_next_intersection(wolf);
-		ft_calc_sampling_x(wolf);
-		ft_fix_fisheye_distorsion(wolf);
-		ft_set_ceiling_floor(wolf);
-		wolf->raycast.y_render = 0;
-		while (wolf->raycast.y_render < HEIGHT)
+		ft_set_new_ray_angle(doom);
+		//while (doom->raycast.hit_wall == 0 &&
+		//		doom->raycast.distance_towall < MAX_DEPTH)
+		//	ft_casting_ray(doom);	//<----	old casting_ray function
+		ft_calc_next_intersection(doom);
+		ft_calc_sampling_x(doom);
+		ft_fix_fisheye_distorsion(doom);
+		ft_set_ceiling_floor(doom);
+		doom->raycast.y_render = 0;
+		while (doom->raycast.y_render < HEIGHT)
 		{
-			if (wolf->raycast.y_render < wolf->ceiling)
-				ft_draw_ceiling(wolf);
-			else if (wolf->raycast.y_render >= wolf->ceiling &&
-					wolf->raycast.y_render <= wolf->floor)
-				ft_draw_wall(wolf);
+			if (doom->raycast.y_render < doom->ceiling)
+				ft_draw_ceiling(doom);
+			else if (doom->raycast.y_render >= doom->ceiling &&
+					doom->raycast.y_render <= doom->floor)
+				ft_draw_wall(doom);
 			else
-				ft_draw_floor(wolf);
-			ft_apply_brightness(wolf);
-			wolf->raycast.y_render++;
+				ft_draw_floor(doom);
+			ft_apply_brightness(doom);
+			doom->raycast.y_render++;
 		}
-		wolf->raycast.x_render++;
+		doom->raycast.x_render++;
 	}
 }

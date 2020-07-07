@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf3d.c                                           :+:      :+:    :+:   */
+/*   doom.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 05:22:32 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:22:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
-void	ft_wolf3d(char *mapfile)
+void	ft_doom(char *mapfile)
 {
-	t_env	wolf;
+	t_env	doom;
 
-	ft_initialize(&wolf, mapfile);
-	save_in_file(&wolf);
-	ft_sdl(&wolf);
+	ft_initialize(&doom, mapfile);
+	save_in_file(&doom);
+	ft_sdl(&doom);
 }

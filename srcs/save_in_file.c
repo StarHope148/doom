@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   save_in_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 00:42:18 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/07 05:30:21 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
 size_t	pseudo_log10(int n)
 {
@@ -95,21 +95,21 @@ void	fill_str(t_map *map, char *str)
 	}
 }
 
-void	save_in_file(t_env *wolf)
+void	save_in_file(t_env *doom)
 {
 	int		fd;
 	char	*str;
 	size_t	file_size;
 
 	if ((fd = open("testsave", O_RDWR | O_CREAT, 0664)) < 0)
-		ft_exit(wolf, EXIT_FAILURE, "Error open in save_in_file()");
-	file_size = get_filesize(&wolf->map);
+		ft_exit(doom, EXIT_FAILURE, "Error open in save_in_file()");
+	file_size = get_filesize(&doom->map);
 	if ((str = (char *)ft_memalloc((file_size + 1) * sizeof(char))) == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error malloc in save_in_file()");
-	fill_str(&wolf->map, str);
+		ft_exit(doom, EXIT_FAILURE, "Error malloc in save_in_file()");
+	fill_str(&doom->map, str);
 	if (write(fd, str, file_size) != (int)file_size)
-		ft_exit(wolf, EXIT_FAILURE, "Error write in save_in_file()");
+		ft_exit(doom, EXIT_FAILURE, "Error write in save_in_file()");
 	ft_memdel((void **)&str);
 	if (close(fd) < 0)
-		ft_exit(wolf, EXIT_FAILURE, "Error close in save_in_file()");
+		ft_exit(doom, EXIT_FAILURE, "Error close in save_in_file()");
 }

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 02:01:21 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
 int		ft_usage(void)
 {
-	ft_putendl_fd("usage: ./wolf3d [file.map]", 2);
+	ft_putendl_fd("usage: ./doom [file.map]", 2);
 	return (EXIT_FAILURE);
 }
 
@@ -30,7 +30,7 @@ int		main(int ac, char **av)
 		return (ft_usage());
 	if (ft_strcmp("/dev/random", av[1]) == 0)
 		return (ft_random());
-	ft_wolf3d(av[1]);
+	ft_doom(av[1]);
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int		main(int ac, char **av)
 **  	(void)ac;
 **  	(void)av;
 **  	SDL_Init(SDL_INIT_VIDEO);
-**  	test_window = SDL_CreateWindow("WOLF3D",
+**  	test_window = SDL_CreateWindow("doom",
 **  					SDL_WINDOWPOS_CENTERED,
 **  					SDL_WINDOWPOS_CENTERED,
 **  					WIDTH,

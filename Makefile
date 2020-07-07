@@ -3,21 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
+#    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/07 00:52:13 by czhang           ###   ########.fr        #
+#    Updated: 2020/07/07 19:24:08 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf3d
+NAME = doom
 
-INC_NAME += wolf3d.h
+INC_NAME += doom.h
 INC_NAME += colors.h
 INC_NAME += defines.h
 
 SRC_NAME += main.c
-SRC_NAME += wolf3d.c
+SRC_NAME += doom.c
 SRC_NAME += sdl_start_up.c
 SRC_NAME += key_hook.c
 SRC_NAME += image.c

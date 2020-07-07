@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 04:56:19 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
 void	ft_free_door(t_door *list)
 {
@@ -21,51 +21,51 @@ void	ft_free_door(t_door *list)
 	ft_memdel((void **)&list);
 }
 
-void	ft_destroy_texture_renderer_window(t_env *wolf)
+void	ft_destroy_texture_renderer_window(t_env *doom)
 {
-	if (wolf->texture != NULL)
+	if (doom->texture != NULL)
 	{
-		SDL_DestroyTexture(wolf->texture);
-		wolf->texture = NULL;
+		SDL_DestroyTexture(doom->texture);
+		doom->texture = NULL;
 	}
-	if (wolf->renderer != NULL)
+	if (doom->renderer != NULL)
 	{
-		SDL_DestroyRenderer(wolf->renderer);
-		wolf->renderer = NULL;
+		SDL_DestroyRenderer(doom->renderer);
+		doom->renderer = NULL;
 	}
-	if (wolf->window != NULL)
+	if (doom->window != NULL)
 	{
-		SDL_DestroyWindow(wolf->window);
-		wolf->window = NULL;
+		SDL_DestroyWindow(doom->window);
+		doom->window = NULL;
 	}
 }
 
-void	ft_free_surface_image(t_env *wolf)
+void	ft_free_surface_image(t_env *doom)
 {
-	if (wolf->surface_wall_north != NULL)
+	if (doom->surface_wall_north != NULL)
 	{
-		SDL_FreeSurface(wolf->surface_wall_north);
-		wolf->surface_wall_north = NULL;
+		SDL_FreeSurface(doom->surface_wall_north);
+		doom->surface_wall_north = NULL;
 	}
-	if (wolf->surface_wall_south != NULL)
+	if (doom->surface_wall_south != NULL)
 	{
-		SDL_FreeSurface(wolf->surface_wall_south);
-		wolf->surface_wall_south = NULL;
+		SDL_FreeSurface(doom->surface_wall_south);
+		doom->surface_wall_south = NULL;
 	}
-	if (wolf->surface_wall_east != NULL)
+	if (doom->surface_wall_east != NULL)
 	{
-		SDL_FreeSurface(wolf->surface_wall_east);
-		wolf->surface_wall_east = NULL;
+		SDL_FreeSurface(doom->surface_wall_east);
+		doom->surface_wall_east = NULL;
 	}
-	if (wolf->surface_wall_west != NULL)
+	if (doom->surface_wall_west != NULL)
 	{
-		SDL_FreeSurface(wolf->surface_wall_west);
-		wolf->surface_wall_west = NULL;
+		SDL_FreeSurface(doom->surface_wall_west);
+		doom->surface_wall_west = NULL;
 	}
-	if (wolf->surface_floor != NULL)
+	if (doom->surface_floor != NULL)
 	{
-		SDL_FreeSurface(wolf->surface_floor);
-		wolf->surface_floor = NULL;
+		SDL_FreeSurface(doom->surface_floor);
+		doom->surface_floor = NULL;
 	}
 }
 

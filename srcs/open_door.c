@@ -3,96 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   open_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/07 05:34:15 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
-static void	anim_one_door(t_env *wolf, t_door *door)
+static void	anim_one_door(t_env *doom, t_door *door)
 {
 	t_door	*d;
 	double	duration;
 
-	duration = get_time(wolf) - door->start_time;
+	duration = get_time(doom) - door->start_time;
 	if (duration < DOOR_OPENING_DURATION)
 	{
 		d = door;
-		wolf->map.alt[d->y][d->x] = d->start_alt + duration * d->speed;
+		doom->map.alt[d->y][d->x] = d->start_alt + duration * d->speed;
 	}
 	else if (duration >= DOOR_OPENING_DURATION)
 	{
-		wolf->map.data[door->y][door->x] = '.';
-		wolf->map.alt[door->y][door->x] = 1;
+		doom->map.data[door->y][door->x] = '.';
+		doom->map.alt[door->y][door->x] = 1;
 	}
 }
 
-void		animation_opening_door(t_env *wolf)
+void		animation_opening_door(t_env *doom)
 {
 	t_door	*door;
 
-	door = wolf->door;
+	door = doom->door;
 	while (door)
 	{
-		anim_one_door(wolf, door);
+		anim_one_door(doom, door);
 		door = door->next;
 	}
-	door = wolf->door;
+	door = doom->door;
 /* cleaning closed doors*/
 	while (door)
 	{
-		if (wolf->map.data[door->y][door->x] == '.')
+		if (doom->map.data[door->y][door->x] == '.')
 		{
-			wolf->door = door->next;
+			doom->door = door->next;
 			ft_memdel((void **)&door);
-			door = wolf->door;
+			door = doom->door;
 		}
 		else
 			door = door->next;
 	}
 }
 
-static void	new_door(t_env *wolf, int door_y, int door_x, t_door *last)
+static void	new_door(t_env *doom, int door_y, int door_x, t_door *last)
 {
 	t_door	*d;
 
 	if (!(d = (t_door *)ft_memalloc(sizeof(t_door))))
-		ft_exit(wolf, EXIT_FAILURE, "Error malloc door opening");
+		ft_exit(doom, EXIT_FAILURE, "Error malloc door opening");
 	if (last == NULL)
-		wolf->door = d;
+		doom->door = d;
 	else if (last)
 		last->next = d;
-	d->start_time = get_time(wolf);
-	d->start_alt = wolf->map.alt[door_y][door_x];
+	d->start_time = get_time(doom);
+	d->start_alt = doom->map.alt[door_y][door_x];
 	d->speed = (MIN_ALTITUDE - d->start_alt) / (double)DOOR_OPENING_DURATION;
 	d->x = door_x;
 	d->y = door_y;
 }
 
-static void	init_door(t_env *wolf, int door_y, int door_x)
+static void	init_door(t_env *doom, int door_y, int door_x)
 {
 	t_door	*last;
 
-	last = wolf->door;
+	last = doom->door;
 	while (last && last->next)
 		last = last->next;
-	new_door(wolf, door_y, door_x, last);
+	new_door(doom, door_y, door_x, last);
 }
 
-void		resolve_door(t_env *wolf)
+void		resolve_door(t_env *doom)
 {
 	int		y;
 	int		x;
 	double	angle;
 	char	**d;
 
-	d = wolf->map.data;
-	y = (int)wolf->cam.pos_y;
-	x = (int)wolf->cam.pos_x;
-	angle = wolf->cam.angle;
+	d = doom->map.data;
+	y = (int)doom->cam.pos_y;
+	x = (int)doom->cam.pos_x;
+	angle = doom->cam.angle;
 
 	if ((angle <= -PI * 0.25 && angle >= -PI * 0.75) && d[y][x - 1] == 'D')
 		x = x - 1;
@@ -104,5 +104,5 @@ void		resolve_door(t_env *wolf)
 		x = x + 1;
 	else
 		return ;
-	init_door(wolf, y, x);
+	init_door(doom, y, x);
 }

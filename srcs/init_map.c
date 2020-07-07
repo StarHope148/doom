@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 04:56:20 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
 static int	ft_malloc_tab(t_map *m)
 {
@@ -138,19 +138,19 @@ static void	ft_fill_map(t_map *m, int fd)
 	}
 }
 
-void		ft_init_map(t_env *wolf, char *mapfile)
+void		ft_init_map(t_env *doom, char *mapfile)
 {
 	int fd;
 
 	fd = 0;
-	ft_count_lines_columns(&wolf->map, mapfile, fd);
+	ft_count_lines_columns(&doom->map, mapfile, fd);
 	if ((fd = open(mapfile, O_RDONLY)) < 0)
 	{
 		ft_putendl_fd("Error during open() ", 2);
 		exit(EXIT_FAILURE);
 	}
-	ft_fill_map(&wolf->map, fd);
-	//print_tab(&wolf->map);
+	ft_fill_map(&doom->map, fd);
+	//print_tab(&doom->map);
 	if (close(fd) < 0)
 	{
 		ft_putendl_fd("Error during close() ", 2);

@@ -6,51 +6,51 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 23:15:33 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 20:09:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
-void	ft_apply_textured_wall(t_env *wolf)
+void	ft_apply_textured_wall(t_env *doom)
 {
-	wolf->calc.sample_y = ((double)wolf->raycast.y_render -
-								(double)wolf->ceiling) /
-								((double)wolf->floor - (double)wolf->ceiling);
-	wolf->calc.sample_y = fabs(wolf->calc.sample_y - (int)wolf->calc.sample_y);
-	if (wolf->orientation == NORTH)
-		ft_apply_north_texture(wolf);
-	else if (wolf->orientation == SOUTH)
-		ft_apply_south_texture(wolf);
-	else if (wolf->orientation == EAST)
-		ft_apply_east_texture(wolf);
-	else if (wolf->orientation == WEST)
-		ft_apply_west_texture(wolf);
+	doom->calc.sample_y = ((double)doom->raycast.y_render -
+								(double)doom->ceiling) /
+								((double)doom->floor - (double)doom->ceiling);
+	doom->calc.sample_y = fabs(doom->calc.sample_y - (int)doom->calc.sample_y);
+	if (doom->orientation == NORTH)
+		ft_apply_north_texture(doom);
+	else if (doom->orientation == SOUTH)
+		ft_apply_south_texture(doom);
+	else if (doom->orientation == EAST)
+		ft_apply_east_texture(doom);
+	else if (doom->orientation == WEST)
+		ft_apply_west_texture(doom);
 }
 
-void	ft_apply_color_oriented_wall(t_env *wolf)
+void	ft_apply_color_oriented_wall(t_env *doom)
 {
-	if (wolf->orientation == NORTH)
-		wolf->screen_pixels[wolf->raycast.y_render *
-			WIDTH + wolf->raycast.x_render] = BLUE;
-	else if (wolf->orientation == SOUTH)
-		wolf->screen_pixels[wolf->raycast.y_render *
-			WIDTH + wolf->raycast.x_render] = RED;
-	else if (wolf->orientation == EAST)
-		wolf->screen_pixels[wolf->raycast.y_render *
-			WIDTH + wolf->raycast.x_render] = YELLOW;
-	else if (wolf->orientation == WEST)
-		wolf->screen_pixels[wolf->raycast.y_render *
-			WIDTH + wolf->raycast.x_render] = ORANGE;
+	if (doom->orientation == NORTH)
+		doom->screen_pixels[doom->raycast.y_render *
+			WIDTH + doom->raycast.x_render] = BLUE;
+	else if (doom->orientation == SOUTH)
+		doom->screen_pixels[doom->raycast.y_render *
+			WIDTH + doom->raycast.x_render] = RED;
+	else if (doom->orientation == EAST)
+		doom->screen_pixels[doom->raycast.y_render *
+			WIDTH + doom->raycast.x_render] = YELLOW;
+	else if (doom->orientation == WEST)
+		doom->screen_pixels[doom->raycast.y_render *
+			WIDTH + doom->raycast.x_render] = ORANGE;
 }
 
-void	ft_apply_shaded_wall(t_env *wolf)
+void	ft_apply_shaded_wall(t_env *doom)
 {
-	wolf->raycast.shading = 1 - wolf->raycast.distance_towall / SHADING_DEPTH;
-	if (wolf->raycast.shading < 0.1)
-		wolf->raycast.shading = 0.1;
-	wolf->screen_pixels[wolf->raycast.y_render *
-			WIDTH + wolf->raycast.x_render] =
-				ft_rgba_to_uint32(255 * wolf->raycast.shading,
-				255 * wolf->raycast.shading, 255 * wolf->raycast.shading, 0);
+	doom->raycast.shading = 1 - doom->raycast.distance_towall / SHADING_DEPTH;
+	if (doom->raycast.shading < 0.1)
+		doom->raycast.shading = 0.1;
+	doom->screen_pixels[doom->raycast.y_render *
+			WIDTH + doom->raycast.x_render] =
+				ft_rgba_to_uint32(255 * doom->raycast.shading,
+				255 * doom->raycast.shading, 255 * doom->raycast.shading, 0);
 }
