@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 20:49:12 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 00:08:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	ft_free_surface_image(t_env *wolf)
 	{
 		SDL_FreeSurface(wolf->surface_wall_west);
 		wolf->surface_wall_west = NULL;
+	}
+	if (wolf->surface_floor != NULL)
+	{
+		SDL_FreeSurface(wolf->surface_floor);
+		wolf->surface_floor = NULL;
 	}
 }
 

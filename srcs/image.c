@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 20:53:38 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 02:07:13 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_pixel_access_bmp_images(t_env *wolf)
 	wolf->pixels_wall_south = wolf->surface_wall_south->pixels;
 	wolf->pixels_wall_west = wolf->surface_wall_west->pixels;
 	wolf->pixels_wall_east = wolf->surface_wall_east->pixels;
+	wolf->pixels_floor = wolf->surface_floor->pixels;
 }
 
 void	draw_text(t_env *wolf, unsigned int pos, SDL_Surface *text)
