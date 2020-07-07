@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:35:11 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:52:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_draw_floor(t_env *doom)
 	doom->screen_pixels[doom->raycast.y_render * WIDTH +
 		doom->raycast.x_render] = OLIVE;
 	
-	/*
+	/* 
 	// positions X et Y du texel du sol au bas du mur
 	int floorXWall;
 	int floorYWall;
@@ -136,5 +136,5 @@ void	ft_draw_floor(t_env *doom)
 		//screen.setPixel(x,h-y-1,textures[2][floorTexX][floorTexY]);// trace le plafond
 		doom->raycast.y_render++;
 	}
-	*/
+	 */
 }

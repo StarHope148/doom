@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 20:05:08 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_check_line(t_map *m)
 	i = -1;
 	while (++i < m->nbcol)
 		if (m->bright[m->cur_line][i] < 0
-				|| m->bright[m->cur_line][i] > 100)
+				|| m->bright[m->cur_line][i] > 3)
 			return (-3);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   xpm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 00:18:51 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/07 07:38:58 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:51:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "doom.h"
 
 /*
 static char	*example2_xpm[] =
@@ -26,12 +26,12 @@ static char	*example2_xpm[] =
 	"......"
 }; */
 
-void	error(t_env *wolf, char *message)
+void	error(t_env *doom, char *message)
 {
-	ft_exit(wolf, EXIT_FAILURE, message);
+	ft_exit(doom, EXIT_FAILURE, message);
 }
 
-void	init_xpm(t_env *wolf, t_xpm *xpm, char *firstline)
+void	init_xpm(t_env *doom, t_xpm *xpm, char *firstline)
 {
 	int i;
 
@@ -54,7 +54,7 @@ void	init_xpm(t_env *wolf, t_xpm *xpm, char *firstline)
 	xpm->nchar = ft_atoi(firstline + i);
 	printf("h = %d, w = %d, colors = %d, nchar = %d, \n", xpm->h, xpm->w, xpm->colormax, xpm->nchar);
 	if (xpm->h < 1 || xpm->w < 1 || xpm->colormax < 1 || xpm->nchar < 1)
-		error(wolf, "Error xpm format");
+		error(doom, "Error xpm format");
 }
 
 int		color_to_hex(char *colorline, int i)

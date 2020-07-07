@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 20:04:47 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 void	ft_apply_brightness(t_env *doom)
 {
+
+	int		shadowing;
+
+	shadowing = doom->map.bright[(int)doom->cam.pos_y]
+					[(int)doom->cam.pos_x];
 	if (doom->map.bright[(int)doom->cam.pos_y]
-					[(int)doom->cam.pos_x] != 100)
+					[(int)doom->cam.pos_x] != 3)
+	{
 		/* doom->screen_pixels[doom->raycast.y_render *
 		WIDTH + doom->raycast.x_render] =
 			ft_darken_color(doom->screen_pixels[doom->raycast.y_render *
@@ -23,10 +29,15 @@ void	ft_apply_brightness(t_env *doom)
 					(double)doom->map.bright[(int)doom->cam.pos_y]
 						[(int)doom->cam.pos_x] /
 							100); */
+		while(shadowing++ - 3)
+		{
 		doom->screen_pixels[doom->raycast.y_render *
 		WIDTH + doom->raycast.x_render] =
 			(doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] >> 1) & 0b01111111011111110111111101111111;
+			WIDTH + doom->raycast.x_render] >> 1) &
+				0b01111111011111110111111101111111;
+		}
+	}
 }
 
 /* 
