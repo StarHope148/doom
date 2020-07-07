@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 21:02:23 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,45 +41,41 @@ int		wall_on_cam_pos(t_env *doom)
 void	ft_strafe_right(t_env *doom)
 {
 	doom->cam.pos_x -= cos(doom->cam.angle) * doom->moves.movespeed;
+	if (wall_on_cam_pos(doom))
+		doom->cam.pos_x += cos(doom->cam.angle) * doom->moves.movespeed;
 	doom->cam.pos_y += sin(doom->cam.angle) * doom->moves.movespeed;
 	if (wall_on_cam_pos(doom))
-	{
-		doom->cam.pos_x += cos(doom->cam.angle) * doom->moves.movespeed;
 		doom->cam.pos_y -= sin(doom->cam.angle) * doom->moves.movespeed;
-	}
 }
 
 void	ft_strafe_left(t_env *doom)
 {
 	doom->cam.pos_x += cos(doom->cam.angle) * doom->moves.movespeed;
+	if (wall_on_cam_pos(doom))
+		doom->cam.pos_x -= cos(doom->cam.angle) * doom->moves.movespeed;
 	doom->cam.pos_y -= sin(doom->cam.angle) * doom->moves.movespeed;
 	if (wall_on_cam_pos(doom))
-	{
-		doom->cam.pos_x -= cos(doom->cam.angle) * doom->moves.movespeed;
 		doom->cam.pos_y += sin(doom->cam.angle) * doom->moves.movespeed;
-	}
 }
 
 void	ft_backward(t_env *doom)
 {
 	doom->cam.pos_x -= sin(doom->cam.angle) * doom->moves.movespeed;
+	if (wall_on_cam_pos(doom))
+		doom->cam.pos_x += sin(doom->cam.angle) * doom->moves.movespeed;
 	doom->cam.pos_y -= cos(doom->cam.angle) * doom->moves.movespeed;
 	if (wall_on_cam_pos(doom))
-	{
-		doom->cam.pos_x += sin(doom->cam.angle) * doom->moves.movespeed;
 		doom->cam.pos_y += cos(doom->cam.angle) * doom->moves.movespeed;
-	}
 }
 
 void	ft_forward(t_env *doom)
 {
 	doom->cam.pos_x += sin(doom->cam.angle) * doom->moves.movespeed;
+	if (wall_on_cam_pos(doom))
+		doom->cam.pos_x -= sin(doom->cam.angle) * doom->moves.movespeed;
 	doom->cam.pos_y += cos(doom->cam.angle) * doom->moves.movespeed;
 	if (wall_on_cam_pos(doom))
-	{
-		doom->cam.pos_x -= sin(doom->cam.angle) * doom->moves.movespeed;
 		doom->cam.pos_y -= cos(doom->cam.angle) * doom->moves.movespeed;
-	}
 }
 
 void	set_movespeed_crouch_height(t_env *doom)
