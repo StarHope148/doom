@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 05:24:29 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 07:29:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,15 @@ typedef struct	s_door
 	struct s_door	*next;
 }				t_door;
 
+typedef struct	s_xpm
+{
+	int	w;
+	int	h;
+	int	colormax;
+	int	nchar;
+	int	*pixels;
+}				t_xpm;
+
 typedef struct	s_env
 {
 	SDL_Window		*window;
@@ -205,10 +214,13 @@ void			ft_stop_movement(t_env *wolf);
 void			ft_settings(t_env *wolf);
 void			ft_refresh_new_pos(t_env *wolf);
 void			ft_error(t_map *m, int code, char *line);
+
+/* map_checker.c */
 int				ft_check_line(t_map *m);
 int				ft_check_borders(char *line);
 void			ft_count_lines_columns(t_map *m, char *mapfile, int fd);
 void			ft_norme(int code);
+
 void			ft_raycaster(t_env *wolf);
 void			ft_calc_sampling_x(t_env *wolf);
 void			ft_west_face(t_env *wolf);
@@ -229,13 +241,14 @@ void			ft_set_sdl_minimap_colors(t_env *wolf);
 void			ft_apply_textured_wall(t_env *wolf);
 void			ft_apply_color_oriented_wall(t_env *wolf);
 void			ft_apply_shaded_wall(t_env *wolf);
+unsigned int	ft_darken_color(unsigned int color, double coeff);
+void			ft_calc_next_intersection(t_env *wolf);
+
+/* FREE */
 void			ft_free_map(t_map *m);
 void			ft_free_door(t_door *list);
 void			ft_free_surface_image(t_env *wolf);
 void			ft_destroy_texture_renderer_window(t_env *wolf);
-unsigned int	ft_darken_color(unsigned int color, double coeff);
-void			ft_calc_next_intersection(t_env *wolf);
-
 
 /* KEYS */
 void			ft_key_pressed(t_env *wolf);
@@ -253,4 +266,6 @@ void			resolve_door(t_env *wolf);
 void			animation_opening_door(t_env *wolf);
 
 void			save_in_file(t_env *wolf);
+
+t_xpm			get_xpm(t_env *wolf, char **xpm_file);
 #endif
