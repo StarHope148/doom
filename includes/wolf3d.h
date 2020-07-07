@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 23:10:26 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 02:16:02 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include <time.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "../libft/libft.h"
 # include "defines.h"
 # include "colors.h"
@@ -250,4 +251,6 @@ void			draw_centered_text(t_env *wolf, SDL_Surface *text);
 /* open_door.c */
 void			resolve_door(t_env *wolf);
 void			animation_opening_door(t_env *wolf);
+
+int				save_in_file(t_map *map);
 #endif

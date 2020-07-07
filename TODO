@@ -1,6 +1,6 @@
 ### TODO ###
 
-->	sol, plafond hauteur réglable
+->	sol, plafond hauteur réglable / c'est fait mais...
 	changer fonction d'affichage suivant hauteur?
 
 ->	implémenter inventaire
@@ -17,28 +17,33 @@
 ->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
 	(nouveaux fichiers, gérer données)
 
-->	luminosité différente dans une zone donnée
-
-->	courir, se baisser, se relever
 	sauter, tomber, voler : gérer gravité
-
-->	comprendre comment mettre de la musique
-	gérer changement de musique
 
 ->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
 	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
 	link avec inventaire, link avec munitions, link avec pv, gérer texte
 
 ->	bouton sur un mur, actionnable, créer un event qui va avec (nouveaux fichiers, gérer données)
-	porte qui s'ouvre, link avec bouton (gérer données)
 
 ->	tous les éléments nécessaires doivent être dans un seul et unique fichier
 	vous devez pouvoir lancer le jeu uniquement avec le binaire + ce fichier
 
 ->	skybox (pas juste une texture à la place du plafond, mais un "vrai ciel")
 
+-> 	editeur de map :
+	du t_env vers fichier .map
+
 ### TO CHECK ###
 
--> changer angle de vue haut/bas
+->	changer angle de vue haut/bas
+
+->	luminosité différente dans une zone donnée
+
+-> 	porte qui s'ouvre
+
+->	courir, se baisser, se relever
+
+->	comprendre comment mettre de la musique
+	gérer changement de musique
 
 ### DONE ###

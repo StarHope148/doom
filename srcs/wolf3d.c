@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/21 12:05:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 02:15:09 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ void	ft_wolf3d(char *mapfile)
 	t_env	wolf;
 
 	ft_initialize(&wolf, mapfile);
+	save_in_file(&wolf.map);
 	ft_sdl(&wolf);
 }

@@ -6,7 +6,7 @@
 #    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/06 23:16:40 by czhang           ###   ########.fr        #
+#    Updated: 2020/07/07 00:52:13 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_NAME += switch_textures.c
 SRC_NAME += freeing.c
 SRC_NAME += open_door.c
 SRC_NAME += ray.c
+SRC_NAME += save_in_file.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
