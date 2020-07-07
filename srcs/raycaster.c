@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 22:55:32 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 04:56:18 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	ft_apply_brightness(t_env *wolf)
 {
-	if (wolf->map.brightness[(int)wolf->cam.pos_y]
+	if (wolf->map.bright[(int)wolf->cam.pos_y]
 					[(int)wolf->cam.pos_x] != 100)
 		wolf->screen_pixels[wolf->raycast.y_render *
 		WIDTH + wolf->raycast.x_render] =
 			ft_darken_color(wolf->screen_pixels[wolf->raycast.y_render *
 				WIDTH + wolf->raycast.x_render],
-					(double)wolf->map.brightness[(int)wolf->cam.pos_y]
+					(double)wolf->map.bright[(int)wolf->cam.pos_y]
 						[(int)wolf->cam.pos_x] /
 							100);
 }

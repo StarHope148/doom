@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 05:03:29 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 05:45:05 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_exit(t_env *wolf, int exit_type, char *message)
 {
-	printf("time : %f\n", get_time(wolf));
+	printf("time ~ from SDL_Init() : %f\n", get_time(wolf));
 	ft_free_surface_image(wolf);
 	ft_destroy_texture_renderer_window(wolf);
 	ft_memdel((void **)&wolf->screen_pixels);
@@ -99,6 +99,7 @@ void	ft_sdl(t_env *wolf)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_video(wolf);
 	ft_init_musicttf(wolf);
+	wolf->time0 = clock();
 	while (1)
 	{
 		ft_print(wolf);

@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 23:10:50 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 05:37:09 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define DOOR 'D'
 # define TRANSP 'T'
 # define OBJECT "O"
+
+# define MAX_PULS_FUNKY_TEXTURES 50
 
 # define DOOR_OPENING_DURATION 3
 # define MIN_ALTITUDE -800

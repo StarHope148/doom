@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/06 23:27:25 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 05:34:15 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		animation_opening_door(t_env *wolf)
 		{
 			wolf->door = door->next;
 			ft_memdel((void **)&door);
+			door = wolf->door;
 		}
 		else
 			door = door->next;

@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 02:16:02 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 05:24:29 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct	s_map
 	int				nbcol;
 	size_t			cur_line;
 	char			**data;
-	int				**brightness;
+	int				**bright;
 	int				**alt;
 }				t_map;
 
@@ -252,5 +252,5 @@ void			draw_centered_text(t_env *wolf, SDL_Surface *text);
 void			resolve_door(t_env *wolf);
 void			animation_opening_door(t_env *wolf);
 
-int				save_in_file(t_map *map);
+void			save_in_file(t_env *wolf);
 #endif

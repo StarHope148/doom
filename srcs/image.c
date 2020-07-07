@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 02:07:13 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 05:40:11 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,25 +99,25 @@ void	ft_funky_textures(t_env *wolf)
 		draw_centered_text(wolf, wolf->txt.welcome1);
 	else if (5.35 < time && time < 8)
 		draw_centered_text(wolf, wolf->txt.welcome2);
-	if (wolf->count_puls < 50 &&
-		wolf->count_puls * wolf->music_puls + 6.35 < time)
+	if (wolf->count_puls < MAX_PULS_FUNKY_TEXTURES &&
+		wolf->count_puls * wolf->music_puls + 6.45 < time)
 	{
 		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
 		wolf->count_puls++;
 		if (wolf->count_puls == 25)
 			wolf->wall = 3;
 	}
- 	else if (0.55 < time && time < 1.35)
+ 	else if (0.35 < time && time < 1.25)
 		wolf->wall = 0;
-	else if (1.525 < time && time < 2.5)
+	else if (1.425 < time && time < 2.4)
 		wolf->wall = 2;
-	else if (2.5 < time && time < 3.425)
+	else if (2.4 < time && time < 3.375)
 		wolf->wall = 1;
-	else if (3.475 < time && time < 4.45)
+	else if (3.375 < time && time < 4.35)
 		wolf->wall = 0;
-	else if (4.45 < time && time < 5.35)
+	else if (4.35 < time && time < 5.25)
 		wolf->wall = 2;
-	else if (5.35 < time && time < 6)
+	else if (5.25 < time && time < 5.9)
 		wolf->wall = wolf->wall == 3 ? 0 : wolf->wall + 1;
 }
 

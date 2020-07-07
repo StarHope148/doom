@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/06 20:55:58 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 04:56:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_malloc_tab(t_map *m)
 
 	if ((m->data = (char **)ft_memalloc(sizeof(char *) * m->nbl)) == NULL)
 		return (-1);
-	if ((m->brightness = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
+	if ((m->bright = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
 		return (-1);
 	if ((m->alt = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
 		return (-1);
@@ -28,7 +28,7 @@ static int	ft_malloc_tab(t_map *m)
 		if (!(m->data[i] = (char *)ft_memalloc(sizeof(char) * (m->nbcol + 1))))
 			return (-1);
 		m->data[i][m->nbcol] = '\0';
-		if (!(m->brightness[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
+		if (!(m->bright[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
 			return (-1);
 		if (!(m->alt[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
 			return (-1);
@@ -51,7 +51,7 @@ static int	ft_malloc_tab(t_map *m)
 		j = -1;
 		while (++j < m->nbcol)
 		{
-			ft_putnbr(m->brightness[i][j]);
+			ft_putnbr(m->bright[i][j]);
 			ft_putchar(' ');
 		}
 		ft_putendl("");
@@ -79,7 +79,7 @@ static int	get_tabvalues(t_map *m, int col, char *line, int prev_pos)
 	pos = 0;
 	m->data[m->cur_line][col] = str[pos];
 	pos += 2;
-	m->brightness[m->cur_line][col] = ft_atoi(str + pos);
+	m->bright[m->cur_line][col] = ft_atoi(str + pos);
 	while (ft_isdigit(str[pos]))
 		pos++;
 	pos++;

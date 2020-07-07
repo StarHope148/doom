@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/05 22:05:22 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 04:56:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int		ft_check_line(t_map *m)
 		return (-2);
 	i = -1;
 	while (++i < m->nbcol)
-		if (m->brightness[m->cur_line][i] < 0
-				|| m->brightness[m->cur_line][i] > 100)
+		if (m->bright[m->cur_line][i] < 0
+				|| m->bright[m->cur_line][i] > 100)
 			return (-3);
 	return (0);
 }
