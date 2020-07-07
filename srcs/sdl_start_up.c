@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 07:39:32 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/07 19:21:50 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_init_video(t_env *wolf)
 	if (wolf->window == NULL)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateWindow()");
 	wolf->renderer = SDL_CreateRenderer(wolf->window, -1,
-										SDL_RENDERER_ACCELERATED);
+										SDL_RENDERER_SOFTWARE);
 	if (wolf->renderer == NULL)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateRenderer()");
 	wolf->texture = SDL_CreateTexture(wolf->renderer, SDL_PIXELFORMAT_RGBA8888,
