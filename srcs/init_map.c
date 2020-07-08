@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/07 21:30:18 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,40 +35,6 @@ static int	ft_malloc_tab(t_map *m)
 	}
 	return (1);
 }
-
-/* void	print_tab(t_map *m)
-{
-	int i;
-	int	j;
-
-	i = -1;
-	while (++i < m->nbl)
-		ft_putendl(m->data[i]);
-	ft_putendl("");
-	i = -1;
-	while (++i < m->nbl)
-	{
-		j = -1;
-		while (++j < m->nbcol)
-		{
-			ft_putnbr(m->bright[i][j]);
-			ft_putchar(' ');
-		}
-		ft_putendl("");
-	}
-	ft_putendl("");
-	i = -1;
-	while (++i < m->nbl)
-	{
-		j = -1;
-		while (++j < m->nbcol)
-		{
-			ft_putnbr(m->alt[i][j]);
-			ft_putchar(' ');
-		}
-		ft_putendl("");
-	}
-} */
 
 static int	get_tabvalues(t_map *m, int col, char *line, int prev_pos)
 {
