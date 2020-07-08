@@ -56,6 +56,7 @@ typedef struct	s_camera
 {
 	double			pos_x;
 	double			pos_y;
+	double			pos_z;
 	double			angle;
 	int				angle_z;
 	double			fov;
@@ -112,6 +113,18 @@ typedef struct	s_calc
 	double			test_point_y;
 	double			test_angle;
 }				t_calc;
+
+typedef struct	s_calc_floor
+{
+	int				horizon;
+	double			rowDistance;
+	double			floorStepX;
+	double			floorStepY;
+	double			floorX;
+	double			floorY;
+	int				text_x;
+	int				text_y;
+}				t_calc_floor;
 
 typedef struct	s_minimap
 {
@@ -184,6 +197,7 @@ typedef struct	s_env
 	Uint32			*pixels_floor;
 	t_raycast		raycast;
 	t_calc			calc;
+	t_calc_floor	calc_floor;
 	t_minimap		minimap;
 	Mix_Music		*music;
 	t_ray			ray;
@@ -246,7 +260,7 @@ void			ft_free_surface_image(t_env *doom);
 void			ft_destroy_texture_renderer_window(t_env *doom);
 unsigned int	ft_darken_color(unsigned int color, double coeff);
 void			ft_calc_next_intersection(t_env *doom);
-
+void			ft_setup_view(t_env *doom);
 
 /* KEYS */
 void			ft_key_pressed(t_env *doom);
