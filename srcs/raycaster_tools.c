@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:52:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/08 03:02:09 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,71 +70,59 @@ void	ft_draw_wall(t_env *doom)
 
 void	ft_draw_floor(t_env *doom)
 {
-	//doom->screen_pixels[doom->raycast.y_render * WIDTH +
-	//	doom->raycast.x_render] = ft_rgba_to_uint32(0,
-	//											255 *
-	//											((doom->raycast.y_render -
-	//											doom->h * 0.5) /
-	//											doom->h),
-	//											0,
-	//											0);
-	doom->screen_pixels[doom->raycast.y_render * WIDTH +
-		doom->raycast.x_render] = OLIVE;
+	double floorXWall, floorYWall;
 	
-	/* 
-	// positions X et Y du texel du sol au bas du mur
-	int floorXWall;
-	int floorYWall;
-	
-	double weight;// coefficient de pondération
-	double currentFloorX;// position du pixel sur X
-	double currentFloorY;// position du pixel sur Y
-	int floorTexX;// position du texel sur X
-	int floorTexY;// position du texel sur Y
-	double distWall = doom->raycast.distance_towall;// distance du mur
-	double distPlayer = 0;// distance de la caméra
-	double currentDist = 0;// point de départ de la texture
-	
-	//Le mur peut être orienté de 4 manières
-	if (doom->ray.side == 0 && doom->raycast.eye_x > 0) {
-		// nord
+	// 4 possibili direzioni del muro
+	if (doom->ray.side == 0 && doom->raycast.eye_x > 0)
+	{
 		floorXWall = (int)doom->cam.pos_x;
-		floorYWall = (int)doom->cam.pos_y + doom->raycast.x_render;
-	} else if (doom->ray.side == 0 && doom->raycast.eye_x < 0) {
-		// sud
+		floorYWall = (int)doom->cam.pos_y + doom->calc.sample_x;
+	}
+	else if (doom->ray.side == 0 && doom->raycast.eye_x < 0)
+	{
 		floorXWall = (int)doom->cam.pos_x + 1.0;
-		floorYWall = (int)doom->cam.pos_y + doom->raycast.x_render;
-	} else if (doom->ray.side == 1 && doom->raycast.eye_y > 0) {
-		// est
-		floorXWall = (int)doom->cam.pos_x + doom->raycast.x_render;
+		floorYWall = (int)doom->cam.pos_y + doom->calc.sample_x;
+	}
+	else if (doom->ray.side == 1 && doom->raycast.eye_y > 0)
+	{
+		floorXWall = (int)doom->cam.pos_x + doom->calc.sample_x;
 		floorYWall = (int)doom->cam.pos_y;
-	} else {
-		// ouest
-		floorXWall = (int)doom->cam.pos_x + doom->raycast.x_render;
+	}
+	else
+	{
+		floorXWall = (int)doom->cam.pos_x + doom->calc.sample_x;
 		floorYWall = (int)doom->cam.pos_y + 1.0;
 	}
 	
-	//trace le sol de drawEnd au bas de l'écran
-	while (doom->raycast.y_render < HEIGHT) {
+	double distWall, distPlayer, currentDist;
+	distWall = doom->raycast.distance_towall;
+	distPlayer = 0.0;
 	
-		int divise = 2 * doom->raycast.y_render - HEIGHT;
-		if (divise == 0)
-			divise = 1;
-		currentDist = HEIGHT / divise;// distance
-		//currentDist = 1;
-		weight = (currentDist - distPlayer) / (distWall - distPlayer);// coef
-		currentFloorX = weight * floorXWall + (1.0 - weight) * doom->cam.pos_x;// position sur X
-		currentFloorY = weight * floorYWall + (1.0 - weight) * doom->cam.pos_y;// position sur Y
-		floorTexX = (int)(currentFloorX * doom->surface_floor->w) % doom->surface_floor->w;// position texel sur X
-		floorTexY = (int)(currentFloorY * doom->surface_floor->h) % doom->surface_floor->h;// position texel sur Y
-
-		//floorTexX = 10;
-		//floorTexY = 10;
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] =
-				doom->pixels_floor[floorTexY * doom->surface_floor->w + floorTexX];// trace le sol 
-		//screen.setPixel(x,h-y-1,textures[2][floorTexX][floorTexY]);// trace le plafond
+	// disegna pavimento e soffitto
+	uint32_t colh = abs((int)(HEIGHT / doom->raycast.distance_towall));
+	uint32_t c = (colh + HEIGHT) / 2;
+	
+	while (c < HEIGHT) // per ogni pixel al di sotto della colonna muro
+	{
+		// calcola la distanza
+		currentDist = HEIGHT / (2.0 * c - HEIGHT);
+		double weight = (currentDist - distPlayer) / (distWall - distPlayer);
+	
+		// calcola il punto X,Y nel blocco corrente
+		double currentFloorX = weight * floorXWall + (1.0 - weight) * doom->cam.pos_x;
+		double currentFloorY = weight * floorYWall + (1.0 - weight) * doom->cam.pos_y;
+		
+		// calcola il punto X,Y nella texture del pavimento
+		int floorTexX, floorTexY;
+		floorTexX = (int)(currentFloorX * 256) % 256;
+		floorTexY = (int)(currentFloorY * 256) % 256;
+		
+		// pixel di pavimento (relativo alla colonna column)
+		Uint32 color = doom->pixels_floor[floorTexX + floorTexY * 256];
+		if ((doom->raycast.y_render * WIDTH + doom->raycast.x_render) < WIDTH * HEIGHT)
+			doom->screen_pixels[doom->raycast.y_render * WIDTH +
+				doom->raycast.x_render] = color;
 		doom->raycast.y_render++;
+		c++;
 	}
-	 */
 }

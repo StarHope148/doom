@@ -156,8 +156,9 @@ typedef struct	s_xpm
 	char			*name;
 	int				w;
 	int				h;
-	int				colormax;
+	int				clrmax;
 	int				nchar;
+	int				fileline;
 	int				*pixels;
 	struct s_xpm	*next;
 }				t_xpm;
@@ -268,7 +269,7 @@ void			animation_opening_door(t_env *doom);
 
 void			save_in_file(t_env *doom);
 
-t_xpm			*get_xpm(t_env *doom, char **xpm_file);
+t_xpm			*get_xpm(t_env *doom, char *xpm_file);
 void			ft_free_one_xpm(t_xpm *xpm);
 void			ft_free_xpm(t_xpm *list);
 #endif
