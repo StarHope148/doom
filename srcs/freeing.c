@@ -6,26 +6,26 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 20:49:54 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/09 05:28:22 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	ft_free_one_xpm(t_xpm *xpm)
+void	ft_free_xpm(t_xpm *xpm)
 {
-	ft_memdel((void **)&xpm->name);
+	int	i;
+
+	if (xpm->color)
+	{
+		i = -1;
+		while (++i < xpm->colormax && xpm->color[i])
+			ft_memdel((void **)&xpm->color[i]);
+		ft_memdel((void **)&xpm->color);
+	}
+	ft_memdel((void **)&xpm->filename);
 	ft_memdel((void **)&xpm->pixels);
 	ft_memdel((void **)&xpm);
-}
-
-void	ft_free_xpm(t_xpm *list)
-{
-	if (list == NULL)
-		return ;
-	if (list->next)
-		ft_free_xpm(list->next);
-	ft_free_one_xpm(list);
 }
 
 void	ft_free_door(t_door *list)

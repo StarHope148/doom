@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 20:50:59 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/09 05:19:43 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	ft_init_video(t_env *doom)
 					&(doom->surface_wall_north));
 	ft_load_surface(doom, "textures/panda_wall.bmp",
 					&(doom->surface_wall_south));
-	ft_load_surface(doom, "textures/orange_wall.bmp",
-					&(doom->surface_wall_east));
+//	ft_load_surface(doom, "textures/orange_wall.bmp",
+//					&(doom->surface_wall_east));
 	ft_load_surface(doom, "textures/green_wall.bmp",
 					&(doom->surface_wall_west));
 	ft_load_surface(doom, "textures/floor.bmp",

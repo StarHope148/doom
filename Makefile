@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
+#    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/07 19:40:48 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/08 09:24:28 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,10 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< 
 
 $(COMPILE_SDL2) :
-	sudo apt-get install freeglut3-dev
+
+
+	if ! dpkg-query -W -f='$${Status}' freeglut3-dev  | grep "ok installed"; \
+	then sudo apt-get install freeglut3-dev; fi
 	(cd SDL2-2.0.12 \
 	&& ./configure --prefix=$(shell pwd)/SDL2 --enable-static --disable-shared \
 	&& make \

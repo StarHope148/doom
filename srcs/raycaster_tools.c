@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/08 03:02:09 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/08 11:10:27 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	ft_draw_floor(t_env *doom)
 	// disegna pavimento e soffitto
 	uint32_t colh = abs((int)(HEIGHT / doom->raycast.distance_towall));
 	uint32_t c = (colh + HEIGHT) / 2;
+	//if (doom->moves.forward)
+	//	printf("%d\n", c);
 	
 	while (c < HEIGHT) // per ogni pixel al di sotto della colonna muro
 	{
@@ -114,11 +116,11 @@ void	ft_draw_floor(t_env *doom)
 		
 		// calcola il punto X,Y nella texture del pavimento
 		int floorTexX, floorTexY;
-		floorTexX = (int)(currentFloorX * 256) % 256;
-		floorTexY = (int)(currentFloorY * 256) % 256;
+		floorTexX = (int)(currentFloorX * 512) % 512;
+		floorTexY = (int)(currentFloorY * 512) % 512;
 		
 		// pixel di pavimento (relativo alla colonna column)
-		Uint32 color = doom->pixels_floor[floorTexX + floorTexY * 256];
+		Uint32 color = doom->pixels_floor[floorTexX + floorTexY * 512];
 		if ((doom->raycast.y_render * WIDTH + doom->raycast.x_render) < WIDTH * HEIGHT)
 			doom->screen_pixels[doom->raycast.y_render * WIDTH +
 				doom->raycast.x_render] = color;
