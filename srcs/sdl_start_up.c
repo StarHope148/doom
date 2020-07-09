@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 05:19:43 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/09 06:03:07 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_init_musicttf(t_env *doom)
  		ft_exit(doom, EXIT_FAILURE, "Error in Mix_OpenAudio");
 	if ((doom->music = Mix_LoadMUS("yaeji-raingurl.mp3")) == NULL)
 		ft_exit(doom, EXIT_FAILURE, (char *)SDL_GetError());
-	Mix_PlayMusic(doom->music, -1);
+	//Mix_PlayMusic(doom->music, -1);
 	if (TTF_Init() < 0)
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_Init()");
 	if ((doom->txt.font = TTF_OpenFont("arial.ttf", 40)) == NULL)

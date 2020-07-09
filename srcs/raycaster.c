@@ -6,15 +6,27 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 20:04:47 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/09 01:20:43 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+void	ft_setup_view(t_env *doom)
+{
+	doom->calc_floor.horizon = (doom->raycast.y_render - HEIGHT / 2) -
+		doom->cam.angle_z;
+
+	doom->calc_floor.rowDistance = doom->cam.pos_z / doom->calc_floor.horizon;
+	doom->calc_floor.rowDistance /= cos(doom->cam.angle -
+		doom->raycast.ray_angle);
+
+	doom->calc_floor.floorStepX = doom->calc_floor.rowDistance / WIDTH;
+	doom->calc_floor.floorStepY = doom->calc_floor.rowDistance / WIDTH;
+}
+
 void	ft_apply_brightness(t_env *doom)
 {
-
 	int		shadowing;
 
 	shadowing = doom->map.bright[(int)doom->cam.pos_y]
@@ -81,6 +93,24 @@ void	ft_set_new_ray_angle(t_env *doom)
 	doom->raycast.eye_y = cos(doom->raycast.ray_angle);
 }
 
+void	ft_draw_rendering(t_env *doom)
+{
+	doom->raycast.y_render = 0;
+	while (doom->raycast.y_render < HEIGHT)
+	{
+		if (doom->raycast.y_render < doom->ceiling)
+			ft_draw_ceiling(doom);
+		else if (doom->raycast.y_render >= doom->ceiling &&
+				doom->raycast.y_render <= doom->floor)
+			ft_draw_wall(doom);
+		else
+			ft_draw_floor(doom);
+		ft_apply_brightness(doom);
+		doom->raycast.y_render++;
+	}
+	doom->raycast.x_render++;
+}
+
 void	ft_raycaster(t_env *doom)
 {
 	doom->raycast.x_render = 0;
@@ -94,19 +124,6 @@ void	ft_raycaster(t_env *doom)
 		ft_calc_sampling_x(doom);
 		ft_fix_fisheye_distorsion(doom);
 		ft_set_ceiling_floor(doom);
-		doom->raycast.y_render = 0;
-		while (doom->raycast.y_render < HEIGHT)
-		{
-			if (doom->raycast.y_render < doom->ceiling)
-				ft_draw_ceiling(doom);
-			else if (doom->raycast.y_render >= doom->ceiling &&
-					doom->raycast.y_render <= doom->floor)
-				ft_draw_wall(doom);
-			else
-				ft_draw_floor(doom);
-			ft_apply_brightness(doom);
-			doom->raycast.y_render++;
-		}
-		doom->raycast.x_render++;
+		ft_draw_rendering(doom);
 	}
 }
