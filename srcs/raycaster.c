@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 01:20:43 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:37:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_set_new_ray_angle(t_env *doom)
 	doom->raycast.eye_y = cos(doom->raycast.ray_angle);
 }
 
-void	ft_draw_rendering(t_env *doom)
+void	ft_draw_full_column(t_env *doom)
 {
 	doom->raycast.y_render = 0;
 	while (doom->raycast.y_render < HEIGHT)
@@ -113,8 +113,11 @@ void	ft_draw_rendering(t_env *doom)
 
 void	ft_raycaster(t_env *doom)
 {
-	doom->raycast.x_render = 0;
-	while (doom->raycast.x_render < WIDTH)
+	static pthread_mutex_t mutex_stock = PTHREAD_MUTEX_INITIALIZER;
+
+	pthread_mutex_lock(&mutex_stock);
+	doom->raycast.x_render = doom->thread_id * (WIDTH / NB_THREAD_MAX);
+	while (doom->raycast.x_render < (doom->thread_id + 1) * (WIDTH / NB_THREAD_MAX))
 	{
 		ft_set_new_ray_angle(doom);
 		//while (doom->raycast.hit_wall == 0 &&
@@ -124,6 +127,7 @@ void	ft_raycaster(t_env *doom)
 		ft_calc_sampling_x(doom);
 		ft_fix_fisheye_distorsion(doom);
 		ft_set_ceiling_floor(doom);
-		ft_draw_rendering(doom);
+		ft_draw_full_column(doom);
 	}
+	pthread_mutex_unlock(&mutex_stock);
 }

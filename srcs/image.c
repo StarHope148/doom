@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/09 04:18:37 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,24 @@ void	ft_funky_textures(t_env *doom)
 
 void	ft_print(t_env *doom)
 {
+	pthread_t	thread[NB_THREAD_MAX];
+
 	ft_pixel_access_bmp_images(doom);
 	animation_opening_door(doom);
-	ft_raycaster(doom);
+	doom->thread_id = 0;
+	while (doom->thread_id < NB_THREAD_MAX)
+	{
+		if ((pthread_create(&(thread[doom->thread_id]), NULL, (void*)ft_raycaster, doom)) != 0)
+			ft_exit(doom, EXIT_FAILURE, "Error un phtreahd_create()");
+		//ft_raycaster(doom);
+		doom->thread_id++;
+	}
+	doom->thread_id = 0;
+	while (doom->thread_id < NB_THREAD_MAX)
+	{
+		pthread_join(thread[doom->thread_id], NULL);
+		doom->thread_id++;
+	}
 	ft_draw_minimap(doom);
 	ft_draw_fps(doom);
 	if (!doom->no_funky)

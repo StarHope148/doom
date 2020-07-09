@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/07 19:40:48 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/09 01:58:51 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 SDL2 = -l SDL2 -lm -lSDL2_mixer -lSDL2_ttf
 COMPILE_SDL2 = SDL2/lib/libSDL2.a
 # `sdl2-config --cflags --libs`
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -lpthread -D_REENTRANT -DLinux
 NORMINETTE = ~/.norminette/norminette.rb
 
 $(CC) = clang

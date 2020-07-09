@@ -22,6 +22,7 @@
 # include <time.h>
 # include <fcntl.h>
 # include <sys/stat.h>
+# include <pthread.h>
 # include "../libft/libft.h"
 # include "defines.h"
 # include "colors.h"
@@ -219,6 +220,7 @@ typedef struct	s_env
 	unsigned int	count_puls;
 	clock_t			time0;
 	int				no_funky;
+	int				thread_id;
 }				t_env;
 
 void			ft_doom(char *mapfile);
