@@ -17,6 +17,7 @@ void	ft_doom(char *mapfile)
 	t_env	doom;
 
 	ft_initialize(&doom, mapfile);
+	doom.xpm = get_xpm("textures/doge.xpm");
 	save_in_file(&doom);
 	ft_sdl(&doom);
 }

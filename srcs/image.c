@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 04:18:37 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/09 21:59:14 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_pixel_access_bmp_images(t_env *doom)
 	doom->pixels_wall_north = doom->surface_wall_north->pixels;
 	doom->pixels_wall_south = doom->surface_wall_south->pixels;
 	doom->pixels_wall_west = doom->surface_wall_west->pixels;
-	doom->pixels_wall_east = doom->surface_wall_east->pixels;
+	doom->pixels_wall_east = doom->xpm->pixels;
 	doom->pixels_floor = doom->surface_floor->pixels;
 }
 

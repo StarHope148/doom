@@ -13,6 +13,8 @@
 #ifndef DOOM_H
 # define DOOM_H
 
+# include <stdio.h>
+
 # include "../SDL2-2.0.12/include/SDL.h"
 # include <SDL2/SDL_mixer.h>
 # include <SDL2/SDL_ttf.h>
@@ -167,14 +169,13 @@ typedef struct	s_door
 
 typedef struct	s_xpm
 {
-	char			*name;
+	char			*filename;
 	int				w;
 	int				h;
-	int				clrmax;
+	int				colormax;
 	int				nchar;
-	int				fileline;
-	int				*pixels;
-	struct s_xpm	*next;
+	Uint32			*pixels;
+	char			**color;
 }				t_xpm;
 
 typedef struct	s_env
@@ -285,7 +286,7 @@ void			animation_opening_door(t_env *doom);
 
 void			save_in_file(t_env *doom);
 
-t_xpm			*get_xpm(t_env *doom, char *xpm_file);
+t_xpm			*get_xpm(char *xpm_file);
 void			ft_free_one_xpm(t_xpm *xpm);
 void			ft_free_xpm(t_xpm *list);
 #endif

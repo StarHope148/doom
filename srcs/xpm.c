@@ -6,170 +6,163 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 00:18:51 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/08 02:50:32 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/09 05:59:12 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-/*
-static char	*example2_xpm[] =
+void	*xpm_error(t_xpm *xpm, char *message)
 {
-	"3 5 3 2",
-	"  	c None",
-	"..	c #3A32E4",
-	".+	c #FFFFFF",
-	"      ",
-	"......",
-	".+..  ",
-	"    .+",
-	"......"
-}; */
-
-void	error(t_env *doom, char *message)
-{
-	//peut etre pas exit non plus vu que c pas trop grave de fail chargement xpm
-	if (doom)
-		ft_exit(doom, EXIT_FAILURE, message);
-	ft_putendl("error or warning xpm");
-}
-
-/* int		color_to_hex(char *colorline, int i)
-{
-	while (colorline[i] == ' ' || colorline[i] == '\t')
-		i++;
-	while (colorline[i] && colorline[i] != ' ' && colorline[i] != '\t')
-		i++;
-	while (colorline[i] == ' ' || colorline[i] == '\t')
-		i++;
-	if (colorline[i] == '#')
-		i++;
-	return (strtol(colorline + i, NULL, 16));
-}
-
-int		get_hexpixel(t_xpm *xpm, char **file, int line, int i)
-{
-	int		color;
-	char	**data;
-
-	// l'image est stockee juste apres la derniere ligne des couleurs
-	data = file + xpm->clrmax + 1;
-	color = -1;
-	while (++color < xpm->clrmax)
+	if (message)
 	{
-		if (0 == ft_strncmp(file[color + 1],
-							data[line] + i * xpm->nchar, xpm->nchar))
-			return (color_to_hex(file[color + 1], xpm->nchar));
+		if (xpm->filename)
+		{
+			ft_putstr_fd(message, 2);
+			ft_putstr_fd(" for ", 2);
+			ft_putendl_fd(xpm->filename, 2);
+		}
+		else
+			ft_putendl_fd(message, 2);
 	}
-	return (-1);
-} */
+	ft_free_xpm(xpm);
+	return (NULL);
+}
 
-void	init_check(t_xpm *xpm, char *l)
+
+int		check_init(t_xpm *xpm, char *line, int num)
 {
-	if (xpm->fileline == 0 && ft_strncmp("/* XPM */", l, 9) != 0)
-		ft_putendl_fd("Warning : xpm file may have a wrong format", 2);
-	else if (xpm->fileline == 1 && ft_strlen(l + 19) == 0)
-		ft_putendl_fd("Warning : xpm file may have no name", 2);
-	else if (xpm->fileline == 2 && l[0] != '/')
-		ft_putendl_fd("Warning : xpm file may have a wrong format", 2);
-	else if (xpm->fileline == 3 && ft_strlen(l) < 7)
-		ft_putendl_fd("Warning : xpm file may have a wrong format", 2);
-	else if (xpm->fileline == 4 && (xpm->nchar = ft_strlen(l) - 10) < 1)
-		ft_putendl_fd("Warning : xpm file may have a wrong format", 2);
-	else if (l[0] != '/' && (int)ft_strlen(l) - 10 == xpm->nchar)
-		xpm->clrmax++;
-	else if (ft_strncmp("/* pixels */", l, 12) != 0)
-		ft_putendl_fd("Warning : xpm file may have a wrong format", 2);
-	else if (xpm->fileline == xpm->clrmax + 5
-					&& (xpm->w = (ft_strlen(l) - 2) / xpm->nchar) < 1)
-		ft_putendl_fd("Warning : xpm file may have a wrong format", 2);
-	else if (xpm->w == ((int)ft_strlen(l) - 2) / xpm->nchar && l[0] != '}')
+	if (num == 4 && (xpm->nchar = ft_strlen(line) - 13) < 1)
+		return (-1);
+	else if (num == xpm->colormax + 4 && *line != '/')
+	{
+		if (xpm->nchar != (int)ft_strlen(line) - 13)
+			return (-1);
+		xpm->colormax++;
+	}
+	else if (num == xpm->colormax + 5
+						&& (xpm->w = (ft_strlen(line) - 2) / xpm->nchar) < 1)
+		return (-1);
+	else if (num == xpm->colormax + xpm->h + 5 && *line != '/' && *line != '}')
+	{
+		if (xpm->w != ((int)ft_strlen(line) - 2) / xpm->nchar)
+			return (-1);
 		xpm->h++;
-}
-
-int		iter_line(t_xpm *xpm, int fd, char *l, void (*f)(t_xpm *x, char *l))
-{
-	int	ret_gnl;
-
-	if ((ret_gnl = get_next_line(fd, &l)) < 0)
-		return (ret_gnl);
-	f(xpm, l);
-	ft_memdel((void **)&l);
-	return (ret_gnl);
-}
-
-void	each_line(t_xpm *xpm, char *xpmfile, void (*f)(t_xpm *x, char *l))
-{
-	char	*line;
-	int		fd;
-
-	xpm->fileline = 0;
-	if (f == init_check)
-	{
-		xpm->clrmax = 1;
-		xpm->h = 1;
 	}
-	if ((fd = open(xpmfile, O_RDONLY)) < 0)
-		error(0, 0);
-	line = NULL;
-	while (iter_line(xpm, fd, line, f) > 0)
-		xpm->fileline++;
-	if (close(fd) < 0)
-		error(0, 0);
+	return (0);
 }
 
-void	init_xpm(t_env *doom, t_xpm *xpm, char *firstline)
+int		cmp_file_info(t_xpm *xpm, char *info)
 {
 	int i;
 
-	i = 1;
-	xpm->w = ft_atoi(firstline);
-	while (firstline[i] && firstline[i] != ' ')
+	if(ft_atoi(info + 1) != xpm->w)
+		return (-1);
+	i = 2;
+	while (info[i] && info[i] != ' ')
 		i++;
-	while (firstline[i] == ' ')
+	while (info[i] == ' ')
 		i++;
-	xpm->h = ft_atoi(firstline + i);
-	while (firstline[i] && firstline[i] != ' ')
+	if (ft_atoi(info + i) != xpm->h)
+		return (-1);
+	while (info[i] && info[i] != ' ')
 		i++;
-	while (firstline[i] == ' ')
+	while (info[i] == ' ')
 		i++;
-	xpm->clrmax = ft_atoi(firstline + i);
-	while (firstline[i] && firstline[i] != ' ')
+	if (ft_atoi(info + i) != xpm->colormax)
+		return (-1);
+	while (info[i] && info[i] != ' ')
 		i++;
-	while (firstline[i] == ' ')
+	while (info[i] == ' ')
 		i++;
-	xpm->nchar = ft_atoi(firstline + i);
-	printf("h = %d, w = %d, colors = %d, nchar = %d, \n", xpm->h, xpm->w, xpm->clrmax, xpm->nchar);
-	if (xpm->h < 1 || xpm->w < 1 || xpm->clrmax < 1 || xpm->nchar < 1)
-		error(doom, "Error xpm format");
+	if (ft_atoi(info + i) != xpm->nchar)
+		return (-1);
+	return (0);
 }
 
-t_xpm	*get_xpm(t_env *doom, char *xpmfile)
+int		xpm_fill(t_xpm *xpm, char *line, int num)
 {
-	t_xpm	*xpm;
+	int	i;
+	int	color;
 
-	if ((xpm = (t_xpm *)ft_memalloc(sizeof(t_xpm))) == NULL)
-		error(doom, "Error malloc in get_xpm()");
-	each_line(xpm, xpmfile, init_check);
-	//init_xpm(doom, xpm, );
-/* 	if (!(xpm->pixels = (int *)ft_memalloc(sizeof(int) * xpm->h * xpm->w)))
-		error(doom, "Error malloc in  get_xpm()");
-	line = -1;
-	while (++line < xpm->h)
+	if (num == 3)
+		return (cmp_file_info(xpm, line));
+	else if (3 < num && num < xpm->colormax + 4)
+	{
+		i = -1;
+		while (++i < xpm->nchar + 1)
+			xpm->color[xpm->colormax + 3 - num][i] = line[1 + i];
+		i--;
+		while (++i < xpm->nchar + 8)
+			xpm->color[xpm->colormax + 3 - num][i] = line[i + 3];
+	}
+	else if (xpm->colormax + 4 < num && num < xpm->colormax + 5 + xpm->h)
 	{
 		i = -1;
 		while (++i < xpm->w)
 		{
-			xpm->pixels[line * xpm->w + i] =
-									get_hexpixel(xpm, xpmfile, line, i);
-			if (xpm->pixels[line * xpm->w + i] == -1)
-				error(doom, "Error xpm format2");
+			color = -1;
+			while (++color < xpm->colormax)
+			{
+				if (!ft_strncmp(1 + line + xpm->nchar * i, xpm->color[color], xpm->nchar))
+				{
+					xpm->pixels[(num - xpm->colormax - 5) * xpm->w + i] =
+							(Uint32)strtoul(xpm->color[color] + 2 + xpm->nchar, NULL, 16);
+					xpm->pixels[(num - xpm->colormax - 5) * xpm->w + i] <<= 8;
+					break;
+				}
+				else if (color == xpm->colormax - 1)
+					return (-1);
+			}
 		}
 	}
- */	return (xpm);
+	//printf("fileline = %d, h = %d, w = %d, colors = %d, nchar = %d, \n", num, xpm->h, xpm->w, xpm->colormax, xpm->nchar);
+	return (0);
 }
 
-/* void	print_pixeltab(t_xpm *xpm)
+int		each_line(t_xpm *xpm, int fd, int (*f)(t_xpm *x, char *l, int n))
+{
+	char	*line;
+	int		num_line;
+	int		error_in_function;
+
+	lseek(fd, 0, SEEK_SET);
+	error_in_function = 0;
+	num_line = 0;
+	line = NULL;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (f(xpm, line, num_line++) < 0)
+			error_in_function++;
+		ft_memdel((void **)&line);
+	}
+	//ft_putnbr(error_in_function);
+	//ft_putendl("");
+	if (error_in_function)
+		return (-1);	
+	return (0);
+}
+int		init_malloc(t_xpm *xpm)
+{
+	int	i;
+
+	if (!(xpm->color = (char **)ft_memalloc(sizeof(char *) * xpm->colormax + 1)))
+		return (-1);
+	i = -1;
+	while (++i < xpm->colormax)
+	{
+		if (!(xpm->color[i] = (char *)ft_memalloc(sizeof(char) * (9 + xpm->nchar))))
+			return (-1);
+		xpm->color[i][xpm->nchar + 8] = '\0';
+	}
+	if (!(xpm->pixels = (Uint32 *)ft_memalloc(sizeof(int) * xpm->h * xpm->w)))
+		return (-1);
+	if (xpm->h < 1 || xpm->w < 1 || xpm->colormax < 1 || xpm->nchar < 1)
+		return (-1);
+	return (0);
+}
+
+void	print_tab(t_xpm *xpm)
 {
 	int		i;
 
@@ -181,4 +174,28 @@ t_xpm	*get_xpm(t_env *doom, char *xpmfile)
 		if ((i + 1) % xpm->w == 0)
 			ft_putchar('\n');
 	}
-} */
+}
+
+t_xpm	*get_xpm(char *filename)
+{
+	t_xpm	*xpm;
+	int		fd;
+
+	if ((fd = open(filename, O_RDONLY)) < 0)
+		return (xpm_error(0, "Error open xpm"));
+	if ((xpm = (t_xpm *)ft_memalloc(sizeof(t_xpm))) == NULL)
+		return (xpm_error(xpm, "Error malloc in get_xpm()"));
+	xpm->colormax = 1;
+	xpm->w = 1;
+	xpm->h = 1;
+	xpm->filename = ft_strdup(filename);
+	if (each_line(xpm, fd, check_init) < 0 || init_malloc(xpm) < 0
+			|| each_line(xpm, fd, xpm_fill) < 0 || close(fd) < 0)
+		return (xpm_error(xpm, "Please only use XPM3 format"));
+	//print_tab(xpm);
+	fd = -1;
+	while (++fd < xpm->colormax && xpm->color[fd])
+		ft_memdel((void **)&xpm->color[fd]);
+	ft_memdel((void **)&xpm->color);
+	return (xpm);
+}
