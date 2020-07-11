@@ -1,15 +1,12 @@
 ### TODO ###
 
-->	sol, plafond hauteur réglable / c'est fait mais...
-	changer fonction d'affichage suivant hauteur?
+->	implémenter multithreading (probleme d'acces concurrent)
 
 ->	implémenter inventaire
 	permettre objet ramassable (gérer données)
 
 ->	implémenter un pistolet, munitions (gérer données)
 	afficher la balle, et un trou comme impact du pistolet (nouveaux fichiers)
-
-->	textures sol + plafond (nouveaux fichiers)
 
 ->	créer type de murs partiellement transparents afin de voir les espaces à l'arrière
 	(nouveaux fichiers, gérer données)
@@ -39,11 +36,16 @@
 
 ->	luminosité différente dans une zone donnée
 
--> 	porte qui s'ouvre
+-> 	porte qui s'ouvre (animation à upgrade)
 
 ->	courir, se baisser, se relever
 
 ->	comprendre comment mettre de la musique
 	gérer changement de musique
+
+->	sol, plafond hauteur réglable / c'est fait mais...
+	changer fonction d'affichage suivant hauteur?
+
+->	textures sol + plafond (nouveaux fichiers)
 
 ### DONE ###
