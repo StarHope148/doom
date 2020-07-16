@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 23:27:33 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/16 14:39:05 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/16 14:54:19 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	init_pthread(t_env *doom)
 	int				i;
 	t_multithread	*multi;
 
-	multi = &doom->multi;
+	multi = &doom->multithread;
 	multi->max = sysconf(_SC_NPROCESSORS_CONF);
 	if (multi->max > MAX_PROCESSOR)
 		multi->max = MAX_PROCESSOR;
