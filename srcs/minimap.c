@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:08:36 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_draw_minimap_symbol(t_env *doom)
 		color = PURPLE;
 	while (doom->minimap.done == 0)
 	{
-		doom->screen_pixels[doom->minimap.y * WIDTH + doom->minimap.x] = color;
+		doom->screen_pixels[doom->minimap.y * W + doom->minimap.x] = color;
 		doom->minimap.x++;
 		if (doom->minimap.x > doom->minimap.def_x + doom->block)
 		{

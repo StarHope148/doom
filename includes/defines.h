@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 21:51:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:10:11 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # define PI 3.14159
 
-# define WIDTH 1000
-# define HEIGHT 800
+# define W 1000
+# define H 800
 
 # define MAX_DEPTH 20
 # define POV_RATIO 4
@@ -29,7 +29,7 @@
 # define WALL_SIZE 0.5
 
 # define MOVE_SPEED 0.035
-# define ROTATE_SPEED 0.075
+# define ROTATE_SPEED 0.05
 # define UP_DOWN_ANGLE_SPEED 30
 
 # define WALL '#'
@@ -43,6 +43,7 @@
 # define DOOR_OPENING_DURATION 3
 # define MIN_ALTITUDE -800
 
-# define NB_THREAD_MAX 8
+# define MAX_PROCESSOR 32
+# define FPS_TEST 0
 
 #endif

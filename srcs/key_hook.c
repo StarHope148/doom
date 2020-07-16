@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:10:19 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_key_released(t_env *doom)
 	else if (doom->event.key.keysym.sym == SDLK_LCTRL)
 	{
 		doom->moves.crouching = FALSE;
-		doom->h = HEIGHT;
+		doom->h = H;
 	}
 }
 

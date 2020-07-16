@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_binding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/15 08:36:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void		ft_settings(t_env *doom)
 		doom->wall = doom->wall == 3 ? 0 : doom->wall + 1;
 	else if (doom->event.key.keysym.sym == SDLK_RSHIFT)
 	{
-		doom->no_funky = 1;
-		doom->wall = 3;
+		doom->no_funky = 0;
+		doom->wall = TEXTURED;
 	}
 }
 

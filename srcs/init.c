@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 00:06:08 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:10:14 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,22 @@ void	ft_init_env(t_env *doom)
 	ft_bzero((void *)doom, sizeof(t_env));
 	ft_bzero((void *)&(doom->map), sizeof(t_map));
 	doom->cam.angle = PI / 2;
-	doom->cam.pos_z = 0.5 * HEIGHT;
+	doom->cam.pos_z = 0.5 * H;
 	doom->cam.fov_ratio = 4;
+	doom->no_funky = 1;
 	doom->cam.fov = PI / doom->cam.fov_ratio;
-	doom->wall = SHADED;
-	doom->block = HEIGHT * 0.01;
-	doom->pitch = 4 * WIDTH;
-	doom->h = HEIGHT;
-	doom->fps.time_fps = clock();
+	doom->wall = TEXTURED;
+	doom->block = H * 0.01;
+	doom->pitch = 4 * W;
+	doom->h = H;
 	doom->music_puls = (double)60 / 116;
 	doom->count_puls = 1;
 	doom->moves.movespeed = MOVE_SPEED;
 	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32)
-								* HEIGHT * WIDTH)))
+								* H * W)))
 		ft_exit(doom, EXIT_FAILURE,
 			"Error mallocing screen_pixels in ft_init_env");
+	init_pthread(doom);
 }
 
 void	ft_setspawn(t_env *doom)

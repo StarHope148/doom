@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/08 05:47:03 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/16 14:10:12 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int		main(int ac, char **av)
 **  	test_window = SDL_CreateWindow("doom",
 **  					SDL_WINDOWPOS_CENTERED,
 **  					SDL_WINDOWPOS_CENTERED,
-**  					WIDTH,
-**  					HEIGHT,
+**  					W,
+**  					H,
 **  					0);
 **  	if (test_window == NULL)
 **  		exit(EXIT_FAILURE);
@@ -60,8 +60,8 @@ int		main(int ac, char **av)
 **  	test_texture = SDL_CreateTexture(test_renderer,
 **  									SDL_PIXELFORMAT_RGBA8888,
 **  									SDL_TEXTUREACCESS_STREAMING,
-**  									WIDTH,
-**  									HEIGHT);
+**  									W,
+**  									H);
 **  	if (test_texture == NULL)
 **  		exit(EXIT_FAILURE);
 ** 	SDL_RenderCopy(test_renderer, test_texture, NULL, NULL);

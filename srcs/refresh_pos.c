@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 21:02:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:46:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_rotate_up(t_env *doom)
 {
 	if (doom->cam.angle_z <= 800)
-	doom->cam.angle_z += UP_DOWN_ANGLE_SPEED;
+		doom->cam.angle_z += UP_DOWN_ANGLE_SPEED;
 }
 
 void	ft_rotate_down(t_env *doom)
@@ -82,12 +82,12 @@ void	set_movespeed_crouch_height(t_env *doom)
 {
 	if (doom->moves.crouching)
 	{
-		doom->h = HEIGHT - HEIGHT / 4;
+		doom->h = H - H / 4;
 		doom->moves.movespeed = MOVE_SPEED / 3;
 	}
 	if (!doom->moves.crouching)
 	{
-		doom->h = HEIGHT;
+		doom->h = H;
 		if (doom->moves.running && !doom->moves.backward)
 		{
 			if (doom->moves.forward)

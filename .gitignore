@@ -59,3 +59,4 @@ SDL2-2.0.12/include/SDL_config.h
 SDL2
 testsave
 wolf3d
+srcs/test.c
