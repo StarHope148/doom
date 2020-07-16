@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 00:06:08 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/14 03:23:08 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_init_env(t_env *doom)
 	ft_bzero((void *)doom, sizeof(t_env));
 	ft_bzero((void *)&(doom->map), sizeof(t_map));
 	doom->cam.angle = PI / 2;
-	doom->cam.pos_z = 0.5 * HEIGHT;
+	doom->cam.pos_z = 1;
 	doom->cam.fov_ratio = 4;
 	doom->cam.fov = PI / doom->cam.fov_ratio;
 	doom->wall = SHADED;

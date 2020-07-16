@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 21:51:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 19:15:14 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,15 @@
 # define WALL_SIZE 0.5
 
 # define MOVE_SPEED 0.035
+# define RUN_RATIO 3
 # define ROTATE_SPEED 0.075
 # define UP_DOWN_ANGLE_SPEED 30
+# define MAX_ANGLE_Z 800
+
+# define INC_POS_Z 0.1
+# define MAX_POS_Z 2
+# define DEFAULT_POS_Z 1
+# define MIN_POS_Z 0.5
 
 # define WALL '#'
 # define EMPTY '.'
@@ -43,6 +50,6 @@
 # define DOOR_OPENING_DURATION 3
 # define MIN_ALTITUDE -800
 
-# define NB_THREAD_MAX 8
+# define NB_THREAD_MAX 1
 
 #endif

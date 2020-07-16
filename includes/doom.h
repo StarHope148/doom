@@ -37,6 +37,17 @@ typedef enum	e_cardinal_point
 	EAST
 }				t_cardinal_point;
 
+typedef enum	e_motion
+{
+	CROUCHING,
+	RAISING,
+	JUMPING,
+	FALLING,
+	UP,
+	DOWN,
+	FLYING
+}				t_motion;
+
 typedef enum	e_switch_texture_mod
 {
 	NON_TEXTURED,
@@ -68,16 +79,22 @@ typedef struct	s_camera
 
 typedef struct	s_movements
 {
-	size_t			strafe_left;
-	size_t			strafe_right;
-	size_t			forward;
-	size_t			backward;
-	size_t			rotate_left;
-	size_t			rotate_right;
-	size_t			rotate_up;
-	size_t			rotate_down;
-	size_t			running;
-	size_t			crouching;
+	char			strafe_left;
+	char			strafe_right;
+	char			forward;
+	char			backward;
+	char			rotate_left;
+	char			rotate_right;
+	char			rotate_up;
+	char			rotate_down;
+	char			running;
+	char			crouching;
+	char			raising;
+	char			jumping;
+	char			falling;
+	char			up;
+	char			down;
+	char			flying;
 	double			movespeed;
 }				t_movements;
 

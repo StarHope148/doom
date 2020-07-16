@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/15 01:47:31 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	ft_key_released(t_env *doom)
 	else if (doom->event.key.keysym.sym == SDLK_LSHIFT)
 		doom->moves.running = FALSE;
 	else if (doom->event.key.keysym.sym == SDLK_LCTRL)
-	{
 		doom->moves.crouching = FALSE;
-		doom->h = HEIGHT;
-	}
+	else if (doom->event.key.keysym.sym == SDLK_e)
+		doom->moves.up = FALSE;
+	else if (doom->event.key.keysym.sym == SDLK_q)
+		doom->moves.down = FALSE;
 }
 
 void	ft_key_pressed(t_env *doom)

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 20:37:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 19:08:40 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_setup_view(t_env *doom)
 	doom->calc_floor.horizon = (doom->raycast.y_render - HEIGHT / 2) -
 		doom->cam.angle_z;
 
-	doom->calc_floor.rowDistance = doom->cam.pos_z / doom->calc_floor.horizon;
+	doom->calc_floor.rowDistance = (doom->cam.pos_z * HEIGHT) /
+		doom->calc_floor.horizon;
 	doom->calc_floor.rowDistance /= cos(doom->cam.angle -
 		doom->raycast.ray_angle);
 

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/15 01:47:46 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void		ft_settings(t_env *doom)
 		doom->cam.fov = PI / doom->cam.fov_ratio;
 	}
 	else if ((doom->count_puls > MAX_PULS_FUNKY_TEXTURES / 2 || doom->no_funky)
-					&& doom->event.key.keysym.sym == SDLK_SPACE)
-		doom->wall = doom->wall == 3 ? 0 : doom->wall + 1;
+					&& doom->event.key.keysym.sym == SDLK_t)
+		doom->wall = doom->wall == TEXTURED ? NON_TEXTURED : doom->wall + 1;
 	else if (doom->event.key.keysym.sym == SDLK_RSHIFT)
 	{
 		doom->no_funky = 1;
-		doom->wall = 3;
+		doom->wall = TEXTURED;
 	}
 }
 
@@ -58,6 +58,12 @@ void		ft_movement(t_env *doom)
 		doom->moves.running = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_LCTRL)
 		doom->moves.crouching = TRUE;
+	else if (doom->event.key.keysym.sym == SDLK_e)
+		doom->moves.up = TRUE;
+	else if (doom->event.key.keysym.sym == SDLK_q)
+		doom->moves.down = TRUE;
+	else if (doom->event.key.keysym.sym == SDLK_SPACE)
+		doom->moves.jumping = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_RETURN)
 		resolve_door(doom);
 }
