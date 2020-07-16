@@ -1,7 +1,8 @@
 ### TODO ###
 
-->	sol, plafond hauteur réglable / c'est fait mais...
-	changer fonction d'affichage suivant hauteur?
+->	ajouter reticule
+
+->	implémenter multithreading (probleme d'acces concurrent)
 
 ->	implémenter inventaire
 	permettre objet ramassable (gérer données)
@@ -9,15 +10,13 @@
 ->	implémenter un pistolet, munitions (gérer données)
 	afficher la balle, et un trou comme impact du pistolet (nouveaux fichiers)
 
-->	textures sol + plafond (nouveaux fichiers)
-
 ->	créer type de murs partiellement transparents afin de voir les espaces à l'arrière
 	(nouveaux fichiers, gérer données)
 
 ->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
 	(nouveaux fichiers, gérer données)
 
-	sauter, tomber, voler : gérer gravité
+->	sauter, tomber, voler : gérer gravité
 
 ->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
 	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
@@ -39,11 +38,16 @@
 
 ->	luminosité différente dans une zone donnée
 
--> 	porte qui s'ouvre
+-> 	porte qui s'ouvre (animation à upgrade)
 
 ->	courir, se baisser, se relever
 
 ->	comprendre comment mettre de la musique
 	gérer changement de musique
+
+->	sol, plafond hauteur réglable / c'est fait mais...
+	changer fonction d'affichage suivant hauteur?
+
+->	textures sol + plafond (nouveaux fichiers)
 
 ### DONE ###
