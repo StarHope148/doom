@@ -1,8 +1,10 @@
 ### TODO ###
 
+-> faire un niveau avec debut, fin de level, histoire, objectif
+
 ->	ajouter reticule
 
-->	implémenter multithreading (probleme d'acces concurrent)
+->	implémenter multithreading (probleme synchro à l'affichage, voir avec pthread_join)
 
 ->	implémenter inventaire
 	permettre objet ramassable (gérer données)
@@ -15,7 +17,6 @@
 
 ->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
 	(nouveaux fichiers, gérer données)
-
 
 ->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
 	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
