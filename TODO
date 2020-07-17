@@ -16,7 +16,6 @@
 ->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
 	(nouveaux fichiers, gérer données)
 
-->	sauter, tomber, voler : gérer gravité
 
 ->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
 	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
@@ -49,5 +48,7 @@
 	changer fonction d'affichage suivant hauteur?
 
 ->	textures sol + plafond (nouveaux fichiers)
+
+->	sauter, tomber, voler : gérer gravité
 
 ### DONE ###
