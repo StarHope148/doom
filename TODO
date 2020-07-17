@@ -1,10 +1,8 @@
 ### TODO ###
 
--> faire un niveau avec debut, fin de level, histoire, objectif
+->	faire un niveau (une map) avec debut, fin de level, histoire, objectif(s)
 
 ->	ajouter reticule
-
-->	implémenter multithreading (probleme synchro à l'affichage, voir avec pthread_join)
 
 ->	implémenter inventaire
 	permettre objet ramassable (gérer données)
@@ -18,8 +16,7 @@
 ->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
 	(nouveaux fichiers, gérer données)
 
-->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
-	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
+->	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
 	link avec inventaire, link avec munitions, link avec pv, gérer texte
 
 ->	bouton sur un mur, actionnable, créer un event qui va avec (nouveaux fichiers, gérer données)
@@ -29,27 +26,34 @@
 
 ->	skybox (pas juste une texture à la place du plafond, mais un "vrai ciel")
 
+->	comprendre comment mettre de la musique (retirer SDL_mixer et remplacer par FMOD ou autre lib de son)
+	gérer changement de musique
+
+### IN PROGRESS ###
+
+->	courir, se baisser, se relever
+
+-> 	porte qui s'ouvre (animation à upgrade)
+
+->	sauter, tomber, voler : gérer gravité
+
+->	sol, plafond hauteur réglable (ne fonctionne actuellement que sur un mur)
+	changer fonction d'affichage suivant hauteur?
+
 -> 	editeur de map :
 	du t_env vers fichier .map
 
+->	implémenter multithreading (probleme synchro à l'affichage, voir avec pthread_join)
+
 ### TO CHECK ###
+
+->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
 
 ->	changer angle de vue haut/bas
 
 ->	luminosité différente dans une zone donnée
 
--> 	porte qui s'ouvre (animation à upgrade)
+->	textures sol (nouveaux fichiers)
 
-->	courir, se baisser, se relever
-
-->	comprendre comment mettre de la musique
-	gérer changement de musique
-
-->	sol, plafond hauteur réglable / c'est fait mais...
-	changer fonction d'affichage suivant hauteur?
-
-->	textures sol + plafond (nouveaux fichiers)
-
-->	sauter, tomber, voler : gérer gravité
 
 ### DONE ###
