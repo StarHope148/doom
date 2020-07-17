@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/14 21:19:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/17 10:41:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_exit(t_env *doom, int exit_type, char *message)
 {
-	printf("time ~ from SDL_Init() : %f\n", get_time(doom));
-	ft_free_surface_image(doom);
+	struct timespec start;
+
+	doom->multithread.stop = 1;
 	ft_destroy_texture_renderer_window(doom);
 	ft_memdel((void **)&doom->screen_pixels);
 	Mix_FreeMusic(doom->music);
@@ -28,11 +29,13 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	SDL_Quit();
 	ft_putendl("SDL_Quit accomplished");
 	ft_free_door(doom->door);
-	ft_free_xpm(doom->xpm);
+	free_xpm(doom);
 	ft_free_map(&doom->map);
+	free_thread_env(doom);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
-	printf("time : %f\n", get_time(doom) + doom->time0 / CLOCKS_PER_SEC);
+	clock_gettime(_POSIX_MONOTONIC_CLOCK, &start);
+	printf("time ~ from SDL_Init() : %f\n", get_time(doom));
 	exit(exit_type);
 }
 
@@ -53,7 +56,7 @@ void	ft_load_surface(t_env *doom, char *image_file, SDL_Surface **dest)
 void	ft_init_video(t_env *doom)
 {
 	doom->window = SDL_CreateWindow("doom", SDL_WINDOWPOS_CENTERED,
-					SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
+					SDL_WINDOWPOS_CENTERED, W, H, 0);
 	if (doom->window == NULL)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateWindow()");
 	doom->renderer = SDL_CreateRenderer(doom->window, -1,
@@ -61,28 +64,24 @@ void	ft_init_video(t_env *doom)
 	if (doom->renderer == NULL)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateRenderer()");
 	doom->texture = SDL_CreateTexture(doom->renderer, SDL_PIXELFORMAT_RGBA8888,
-						SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
+						SDL_TEXTUREACCESS_STREAMING, W, H);
 	if (doom->texture == NULL)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateTexture()");
-	ft_load_surface(doom, "textures/risitas_wall.bmp",
-					&(doom->surface_wall_north));
-	ft_load_surface(doom, "textures/panda_wall.bmp",
-					&(doom->surface_wall_south));
-//	ft_load_surface(doom, "textures/orange_wall.bmp",
-//					&(doom->surface_wall_east));
-	ft_load_surface(doom, "textures/green_wall.bmp",
-					&(doom->surface_wall_west));
-	ft_load_surface(doom, "textures/floor.bmp",
-					&(doom->surface_floor));
+	get_xpm("textures/risitas_wall.xpm", &doom->xpm[NORTH]);
+	get_xpm("textures/po.xpm", &doom->xpm[SOUTH]);
+	get_xpm("textures/doge.xpm", &doom->xpm[EAST]);
+	get_xpm("textures/green_wall.xpm", &doom->xpm[WEST]);
+	get_xpm("textures/floor.xpm", &doom->xpm[FLOOR]);
 }
 
 void	ft_init_musicttf(t_env *doom)
 {
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) < 0)
- 		ft_exit(doom, EXIT_FAILURE, "Error in Mix_OpenAudio");
+		ft_exit(doom, EXIT_FAILURE, "Error in Mix_OpenAudio");
 	if ((doom->music = Mix_LoadMUS("yaeji-raingurl.mp3")) == NULL)
 		ft_exit(doom, EXIT_FAILURE, (char *)SDL_GetError());
-	//Mix_PlayMusic(doom->music, -1);
+	Mix_PlayMusic(doom->music, -1);
+	Mix_VolumeMusic(0);
 	if (TTF_Init() < 0)
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_Init()");
 	if ((doom->txt.font = TTF_OpenFont("arial.ttf", 40)) == NULL)
@@ -101,7 +100,7 @@ void	ft_sdl(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_video(doom);
 	ft_init_musicttf(doom);
-	doom->time0 = clock();
+	clock_gettime(_POSIX_MONOTONIC_CLOCK, &doom->time0);
 	while (1)
 	{
 		ft_print(doom);
@@ -115,6 +114,11 @@ void	ft_sdl(t_env *doom)
 				ft_exit(doom, EXIT_SUCCESS, NULL);
 		}
 		ft_refresh_new_pos(doom);
+		if (FPS_TEST && get_time(doom) > 5)
+		{
+			printf("moyenne fps en 5sec : %f\n", doom->fps.count_fps / 5.0);
+			ft_exit(doom, 0, 0);
+		}
 	}
 	ft_exit(doom, EXIT_SUCCESS, NULL);
 }

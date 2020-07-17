@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/15 01:47:46 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/17 10:51:18 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void		ft_settings(t_env *doom)
 			doom->cam.fov_ratio += POV_RATIO_STEP;
 		doom->cam.fov = PI / doom->cam.fov_ratio;
 	}
-	else if ((doom->count_puls > MAX_PULS_FUNKY_TEXTURES / 2 || doom->no_funky)
-					&& doom->event.key.keysym.sym == SDLK_t)
+	else if (doom->event.key.keysym.sym == SDLK_t)
 		doom->wall = doom->wall == TEXTURED ? NON_TEXTURED : doom->wall + 1;
 	else if (doom->event.key.keysym.sym == SDLK_RSHIFT)
 	{

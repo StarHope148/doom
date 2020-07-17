@@ -6,26 +6,43 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/09 05:28:22 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/16 12:58:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	ft_free_xpm(t_xpm *xpm)
+void	free_thread_env(t_env *doom)
 {
 	int	i;
 
+	i = -1;
+	while (++i < doom->multithread.max)
+		ft_memdel((void**)&doom->multithread.tab[i].screen_pixels);
+	ft_memdel((void**)&doom->multithread.tab);
+}
+
+void	free_xpm(t_env *doom)
+{
+	int	xpm_id;
+
+	xpm_id = -1;
+	while (++xpm_id < 5)
+		free_one_xpm(&doom->xpm[xpm_id]);
+}
+
+void	free_one_xpm(t_xpm *xpm)
+{
+	int	i_color;
+
 	if (xpm->color)
 	{
-		i = -1;
-		while (++i < xpm->colormax && xpm->color[i])
-			ft_memdel((void **)&xpm->color[i]);
+		i_color = -1;
+		while (++i_color < xpm->colormax && xpm->color[i_color])
+			ft_memdel((void **)&xpm->color[i_color]);
 		ft_memdel((void **)&xpm->color);
 	}
-	ft_memdel((void **)&xpm->filename);
 	ft_memdel((void **)&xpm->pixels);
-	ft_memdel((void **)&xpm);
 }
 
 void	ft_free_door(t_door *list)
@@ -53,35 +70,6 @@ void	ft_destroy_texture_renderer_window(t_env *doom)
 	{
 		SDL_DestroyWindow(doom->window);
 		doom->window = NULL;
-	}
-}
-
-void	ft_free_surface_image(t_env *doom)
-{
-	if (doom->surface_wall_north != NULL)
-	{
-		SDL_FreeSurface(doom->surface_wall_north);
-		doom->surface_wall_north = NULL;
-	}
-	if (doom->surface_wall_south != NULL)
-	{
-		SDL_FreeSurface(doom->surface_wall_south);
-		doom->surface_wall_south = NULL;
-	}
-	if (doom->surface_wall_east != NULL)
-	{
-		SDL_FreeSurface(doom->surface_wall_east);
-		doom->surface_wall_east = NULL;
-	}
-	if (doom->surface_wall_west != NULL)
-	{
-		SDL_FreeSurface(doom->surface_wall_west);
-		doom->surface_wall_west = NULL;
-	}
-	if (doom->surface_floor != NULL)
-	{
-		SDL_FreeSurface(doom->surface_floor);
-		doom->surface_floor = NULL;
 	}
 }
 

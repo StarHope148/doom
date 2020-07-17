@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doom.h                                           :+:      :+:    :+:   */
+/*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:23:06 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/17 10:30:15 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@
 # include "defines.h"
 # include "colors.h"
 
-typedef enum	e_cardinal_point
+typedef enum		e_cardinal_point
 {
 	NORTH,
 	SOUTH,
 	WEST,
-	EAST
-}				t_cardinal_point;
+	EAST,
+	FLOOR
+}					t_cardinal_point;
 
 typedef enum	e_motion
 {
@@ -54,9 +55,9 @@ typedef enum	e_switch_texture_mod
 	SHADED,
 	COLOR_ORIENTED,
 	TEXTURED
-}				t_switch_texture_mod;
+}					t_switch_texture_mod;
 
-typedef struct	s_map
+typedef struct		s_map
 {
 	int				nbl;
 	int				nbcol;
@@ -64,9 +65,9 @@ typedef struct	s_map
 	char			**data;
 	int				**bright;
 	int				**alt;
-}				t_map;
+}					t_map;
 
-typedef struct	s_camera
+typedef struct		s_camera
 {
 	double			pos_x;
 	double			pos_y;
@@ -75,9 +76,9 @@ typedef struct	s_camera
 	int				angle_z;
 	double			fov;
 	double			fov_ratio;
-}				t_camera;
+}					t_camera;
 
-typedef struct	s_movements
+typedef struct		s_movements
 {
 	char			strafe_left;
 	char			strafe_right;
@@ -96,57 +97,82 @@ typedef struct	s_movements
 	char			down;
 	char			flying;
 	double			movespeed;
-}				t_movements;
+}					t_movements;
 
-typedef struct	s_raycast
+typedef struct		s_raycast
 {
-	int				x_render;
-	int				y_render;
+	int				x_;
+	int				y_;
+	double			deltadistx;
+	double			deltadisty;
+	double			sidedistx;
+	double			sidedisty;
+	char			side;
 	double			eye_x;
 	double			eye_y;
 	int				test_x;
 	int				test_y;
 	double			ray_angle;
 	double			distance_towall;
-	int				hit_wall;
-	double			shading;
-}				t_raycast;
-
-typedef	struct	s_ray
-{
 	int				stepx;
 	int				stepy;
-	int				side;
-	double			sidedistx;
-	double			sidedisty;
-	double			deltadistx;
-	double			deltadisty;
-}				t_ray;
-
-typedef struct	s_calc
-{
 	double			sample_x;
 	double			sample_y;
-	double			block_mid_x;
-	double			block_mid_y;
 	double			test_point_x;
 	double			test_point_y;
 	double			test_angle;
-}				t_calc;
-
-typedef struct	s_calc_floor
-{
 	int				horizon;
-	double			rowDistance;
-	double			floorStepX;
-	double			floorStepY;
-	double			floorX;
-	double			floorY;
+	double			rowdistance;
+	double			floorstepx;
+	double			floorstepy;
+	double			floorx;
+	double			floory;
 	int				text_x;
 	int				text_y;
-}				t_calc_floor;
+	int				orientation;
+	int				ceiling;
+	int				floor;
+	unsigned int	tmp_x;
+	unsigned int	tmp_y;
+}					t_raycast;
 
-typedef struct	s_minimap
+typedef struct		s_xpm
+{
+	int				w;
+	int				h;
+	int				colormax;
+	int				nchar;
+	Uint32			*pixels;
+	char			**color;
+}					t_xpm;
+
+typedef struct		s_thread_env
+{
+	pthread_t		thread;
+	t_raycast		rc;
+	t_map			map;
+	t_camera		cam;
+	t_xpm			*xpm;
+	int				x_start;
+	int				x_end;
+	char			wall;
+	char			work_done;
+	Uint32			*screen_pixels;
+	void			*doom;
+	void			*multithread;
+	pthread_mutex_t	*mutex;
+}					t_thread_env;
+
+typedef struct		s_multithread
+{
+	t_thread_env	*tab;
+	pthread_mutex_t	mutex;
+	pthread_cond_t	cond;
+	int				max;
+	char			stop;
+}					t_multithread;
+
+typedef struct		s_minimap
 {
 	int				i;
 	int				j;
@@ -155,26 +181,27 @@ typedef struct	s_minimap
 	int				def_x;
 	int				def_y;
 	char			done;
-}				t_minimap;
+}					t_minimap;
 
-typedef struct	s_text
+typedef struct		s_text
 {
 	TTF_Font		*font;
 	SDL_Surface		*welcome1;
 	SDL_Surface		*welcome2;
 	SDL_Color		black;
-}				t_text;
+}					t_text;
 
-typedef struct	s_fps
+typedef struct		s_fps
 {
 	SDL_Surface		*s;
-	clock_t			time_fps;
-	clock_t			time_tmp;
+	double			time_fps;
+	double			time_tmp;
 	unsigned int	frames;
-}				t_fps;
+	unsigned int	count_fps;
+	char			test;
+}					t_fps;
 
-/* a t_door is malloc-ed when a door is opened */
-typedef struct	s_door
+typedef struct		s_door
 {
 	int				x;
 	int				y;
@@ -182,20 +209,9 @@ typedef struct	s_door
 	double			speed;
 	double			start_time;
 	struct s_door	*next;
-}				t_door;
+}					t_door;
 
-typedef struct	s_xpm
-{
-	char			*filename;
-	int				w;
-	int				h;
-	int				colormax;
-	int				nchar;
-	Uint32			*pixels;
-	char			**color;
-}				t_xpm;
-
-typedef struct	s_env
+typedef struct		s_env
 {
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
@@ -206,104 +222,81 @@ typedef struct	s_env
 	t_movements		moves;
 	t_text			txt;
 	t_door			*door;
-	t_xpm			*xpm;
+	t_xpm			xpm[5];
 	Uint32			*screen_pixels;
-	SDL_Surface		*surface_wall_north;
-	Uint32			*pixels_wall_north;
-	SDL_Surface		*surface_wall_south;
-	Uint32			*pixels_wall_south;
-	SDL_Surface		*surface_wall_east;
-	Uint32			*pixels_wall_east;
-	SDL_Surface		*surface_wall_west;
-	Uint32			*pixels_wall_west;
-	SDL_Surface		*surface_floor;
-	Uint32			*pixels_floor;
 	t_raycast		raycast;
-	t_calc			calc;
-	t_calc_floor	calc_floor;
 	t_minimap		minimap;
 	Mix_Music		*music;
-	t_ray			ray;
-	char			orientation;
 	char			wall;
 	int				pitch;
-	int				ceiling;
-	int				floor;
-	unsigned int	tmp_x;
-	unsigned int	tmp_y;
 	int				block;
 	int				h;
 	t_fps			fps;
 	double			music_puls;
 	unsigned int	count_puls;
-	clock_t			time0;
+	struct timespec	time0;
 	int				no_funky;
-	int				thread_id;
-}				t_env;
+	t_multithread	multithread;
+	char			new_values;
+}					t_env;
 
-void			ft_doom(char *mapfile);
-void			ft_sdl(t_env *doom);
-void			ft_exit(t_env *doom, int exit_type, char *message);
-void			ft_print(t_env *doom);
-void			ft_initialize(t_env *doom, char *mapfile);
-void			ft_init_map(t_env *doom, char *mapfile);
-void			ft_movement(t_env *doom);
-void			ft_stop_movement(t_env *doom);
-void			ft_settings(t_env *doom);
-void			ft_refresh_new_pos(t_env *doom);
-void			ft_error(t_map *m, int code, char *line);
+void				ft_doom(char *mapfile);
+void				ft_sdl(t_env *doom);
+void				ft_exit(t_env *doom, int exit_type, char *message);
+void				ft_print(t_env *doom);
+void				ft_initialize(t_env *doom, char *mapfile);
+void				ft_init_map(t_env *doom, char *mapfile);
+void				ft_movement(t_env *doom);
+void				ft_stop_movement(t_env *doom);
+void				ft_settings(t_env *doom);
+void				ft_refresh_new_pos(t_env *doom);
+void				ft_error(t_map *m, int code, char *line);
 
-/* map_checker.c */
-int				ft_check_line(t_map *m);
-int				ft_check_borders(char *line);
-void			ft_count_lines_columns(t_map *m, char *mapfile, int fd);
-void			ft_norme(int code);
-void			ft_raycaster(t_env *doom);
-void			ft_calc_sampling_x(t_env *doom);
-void			ft_west_face(t_env *doom);
-void			ft_north_face(t_env *doom);
-void			ft_south_face(t_env *doom);
-void			ft_east_face(t_env *doom);
-void			ft_fix_fisheye_distorsion(t_env *doom);
-void			ft_set_ceiling_floor(t_env *doom);
-void			ft_draw_ceiling(t_env *doom);
-void			ft_draw_wall(t_env *doom);
-void			ft_apply_north_texture(t_env *doom);
-void			ft_apply_south_texture(t_env *doom);
-void			ft_apply_east_texture(t_env *doom);
-void			ft_apply_west_texture(t_env *doom);
-void			ft_draw_floor(t_env *doom);
-void			ft_draw_minimap(t_env *doom);
-void			ft_set_sdl_minimap_colors(t_env *doom);
-void			ft_apply_textured_wall(t_env *doom);
-void			ft_apply_color_oriented_wall(t_env *doom);
-void			ft_apply_shaded_wall(t_env *doom);
-void			ft_free_map(t_map *m);
-void			ft_free_door(t_door *list);
-void			ft_free_surface_image(t_env *doom);
-void			ft_destroy_texture_renderer_window(t_env *doom);
-unsigned int	ft_darken_color(unsigned int color, double coeff);
-void			ft_calc_next_intersection(t_env *doom);
-void			ft_setup_view(t_env *doom);
+int					ft_check_line(t_map *m);
+int					ft_check_borders(char *line);
+void				ft_count_lines_columns(t_map *m, char *mapfile, int fd);
+void				ft_norme(int code);
 
-/* KEYS */
-void			ft_key_pressed(t_env *doom);
-void			ft_key_released(t_env *doom);
+void				ft_calc_sampling_x(t_thread_env *e);
 
-/* time fps etc */
-double			get_time(t_env *doom);
-void			ft_funky_textures(t_env *doom);
-void			ft_draw_fps(t_env *doom);
-void			draw_text(t_env *doom, unsigned int pos, SDL_Surface *text);
-void			draw_centered_text(t_env *doom, SDL_Surface *text);
+void				ft_fix_fisheye_distorsion(t_thread_env *e);
+void				ft_set_ceiling_floor(t_thread_env *e);
+void				ft_draw_ceiling(t_thread_env *e);
+void				ft_draw_wall(t_thread_env *e);
+void				ft_draw_floor(t_thread_env *e);
+void				ft_draw_minimap(t_env *doom);
+void				ft_set_sdl_minimap_colors(t_env *doom);
+void				ft_apply_textured_wall(t_thread_env *e);
+void				ft_apply_color_oriented_wall(t_thread_env *e);
+void				ft_apply_shaded_wall(t_thread_env *e);
+void				ft_free_map(t_map *m);
+void				ft_free_door(t_door *list);
+void				ft_destroy_texture_renderer_window(t_env *doom);
+void				ft_calc_next_intersection(t_thread_env *e);
+void				ft_setup_view(t_thread_env *e);
 
-/* open_door.c */
-void			resolve_door(t_env *doom);
-void			animation_opening_door(t_env *doom);
+void				ft_key_pressed(t_env *doom);
+void				ft_key_released(t_env *doom);
 
-void			save_in_file(t_env *doom);
+double				get_time(t_env *doom);
+void				ft_funky_textures(t_env *doom);
+void				ft_draw_fps(t_env *doom);
+void				draw_text(t_env *doom, unsigned int pos, SDL_Surface *text);
+void				draw_centered_text(t_env *doom, SDL_Surface *text);
 
-t_xpm			*get_xpm(char *xpm_file);
-void			ft_free_one_xpm(t_xpm *xpm);
-void			ft_free_xpm(t_xpm *list);
+void				resolve_door(t_env *doom);
+void				animation_opening_door(t_env *doom);
+
+void				save_in_file(t_env *doom);
+
+int					get_xpm(char *xpm_file, t_xpm *xpm);
+int					xpm_fill(t_xpm *xpm, char *line, int num);
+void				free_one_xpm(t_xpm *xpm);
+void				free_xpm(t_env *doom);
+
+void				init_pthread(t_env *doom);
+void				ft_raycaster(t_thread_env *e);
+void				import_screenpixels(t_env *doom);
+void				free_thread_env(t_env *doom);
+
 #endif

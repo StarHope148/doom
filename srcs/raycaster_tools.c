@@ -6,97 +6,107 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/16 19:04:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/17 10:43:05 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-unsigned int	ft_darken_color(unsigned int color, double coeff)
-{
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-
-	// FF 00 00 00
-	// 00 FF 00 00
-	color >>= 8;
-	b = (unsigned char)color * coeff;
-	color >>= 8;
-	g = (unsigned char)color * coeff;
-	color >>= 8;
-	r = (unsigned char)color * coeff;
-	return (ft_rgba_to_uint32(r, g, b, 0));
-}
-
-void			ft_fix_fisheye_distorsion(t_env *doom)
-{
-	doom->raycast.distance_towall *= cos(doom->cam.angle -
-											doom->raycast.ray_angle);
-}
-
-void			ft_set_ceiling_floor(t_env *doom)
+void			ft_set_ceiling_floor(t_thread_env *e)
 {
 	int		middle;
 
-	middle = HEIGHT / 2;
-	doom->ceiling = middle -
-		(HEIGHT / doom->raycast.distance_towall) /
-			(doom->cam.pos_z * (1)) +
-				doom->cam.angle_z;
-	doom->floor = middle +
-		(HEIGHT / doom->raycast.distance_towall) *
-			(doom->cam.pos_z * (1)) +
-				doom->cam.angle_z;
+	middle = H / 2;
+	e->rc.ceiling = middle -
+		(H / e->rc.distance_towall) / (e->cam.pos_z * (1)) +
+			e->cam.angle_z;
+	e->rc.floor = middle +
+		(H / e->rc.distance_towall) * (e->cam.pos_z * (1)) +
+			e->cam.angle_z;
+	//e->rc.ceiling -= (e->map.alt[e->rc.test_y]
+	//		[e->rc.test_x]) / e->rc.distance_towall;
+	//e->rc.ceiling += e->cam.angle_z;
+	//e->rc.floor += e->cam.angle_z;
+
+
+
+
+//	int		middle;
+//
+//	middle = HEIGHT / 2;
+//	doom->ceiling = middle -
+//		(HEIGHT / doom->raycast.distance_towall) /
+//			(doom->cam.pos_z * (1)) +
+//				doom->cam.angle_z;
+//	doom->floor = middle +
+//		(HEIGHT / doom->raycast.distance_towall) *
+//			(doom->cam.pos_z * (1)) +
+//				doom->cam.angle_z;
+
+
+
+
+//		doom->calc_floor.horizon = (doom->raycast.y_render - HEIGHT / 2) -
+//		doom->cam.angle_z;
+//
+//	doom->calc_floor.rowDistance = (doom->cam.pos_z * HEIGHT) /
+//		doom->calc_floor.horizon;
+//	doom->calc_floor.rowDistance /= cos(doom->cam.angle -
+//		doom->raycast.ray_angle);
+//
+//	doom->calc_floor.floorStepX = doom->calc_floor.rowDistance / WIDTH;
+//	doom->calc_floor.floorStepY = doom->calc_floor.rowDistance / WIDTH;
 }
 
-void	ft_draw_ceiling(t_env *doom)
+void			ft_draw_ceiling(t_thread_env *e)
 {
-	doom->screen_pixels[doom->raycast.y_render *
-		WIDTH + doom->raycast.x_render] = DODGER_BLUE;
+	e->screen_pixels[e->rc.y_ *
+		W + e->rc.x_] = DODGER_BLUE;
 }
 
-void	ft_draw_wall(t_env *doom)
+void			ft_draw_wall(t_thread_env *e)
 {
-	if (doom->map.data
-				[(int)doom->raycast.test_y][(int)doom->raycast.test_x] == 'D')
-		ft_apply_textured_wall(doom);
-	else if (doom->wall == TEXTURED)
-		ft_apply_textured_wall(doom);
-	else if (doom->wall == COLOR_ORIENTED)
-		ft_apply_color_oriented_wall(doom);
-	else if (doom->wall == SHADED)
-		ft_apply_shaded_wall(doom);
+	if (e->map.data[e->rc.test_y][e->rc.test_x] == 'D' || e->wall == TEXTURED)
+		ft_apply_textured_wall(e);
+	else if (e->wall == COLOR_ORIENTED)
+		ft_apply_color_oriented_wall(e);
+	else if (e->wall == SHADED)
+		ft_apply_shaded_wall(e);
 	else
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] = WHITE;
+		e->screen_pixels[e->rc.y_ *
+			W + e->rc.x_] = WHITE;
 }
 
-void	ft_draw_floor(t_env *doom)
+void			ft_setup_view(t_thread_env *e)
 {
-	if (doom->wall == NON_TEXTURED || doom->wall == SHADED)
-		doom->screen_pixels[doom->raycast.y_render * WIDTH +
-			doom->raycast.x_render] = OLIVE;
-	else
+	e->rc.horizon = (e->rc.y_ - H / 2) - e->cam.angle_z;
+	e->rc.rowdistance = (e->cam.pos_z * H) / e->rc.horizon;
+	e->rc.rowdistance /= cos(e->cam.angle -
+		e->rc.ray_angle);
+	e->rc.floorstepx = e->rc.rowdistance / W;
+	e->rc.floorstepy = e->rc.rowdistance / W;
+}
+
+void			ft_draw_floor(t_thread_env *e)
+{
+	if (e->wall == NON_TEXTURED || e->wall == SHADED)
 	{
-		ft_setup_view(doom);
-		doom->calc_floor.floorX = doom->cam.pos_x +
-			doom->calc_floor.rowDistance *
-				doom->raycast.eye_x;
-		doom->calc_floor.floorY = doom->cam.pos_y +
-			doom->calc_floor.rowDistance *
-				doom->raycast.eye_y;
-		doom->calc_floor.text_x = (int)(doom->surface_floor->w *
-			(doom->calc_floor.floorX -
-				(int)(doom->calc_floor.floorX))) &(doom->surface_floor->w - 1);
-		doom->calc_floor.text_y = (int)(doom->surface_floor->h *
-			(doom->calc_floor.floorY -
-				(int)(doom->calc_floor.floorY))) & (doom->surface_floor->h - 1);
-		doom->calc_floor.floorX += doom->calc_floor.floorStepX;
-		doom->calc_floor.floorY += doom->calc_floor.floorStepY;
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] =
-				doom->pixels_floor[doom->surface_floor->w *
-					doom->calc_floor.text_y + doom->calc_floor.text_x];
+		e->screen_pixels[e->rc.y_ * W + e->rc.x_] = OLIVE;
+		return ;
 	}
+	ft_setup_view(e);
+	e->rc.floorx = e->cam.pos_x + e->rc.rowdistance *
+		e->rc.eye_x;
+	e->rc.floory = e->cam.pos_y + e->rc.rowdistance *
+		e->rc.eye_y;
+	e->rc.text_x = (int)(e->xpm[FLOOR].w *
+		(e->rc.floorx -
+			(int)(e->rc.floorx))) & (e->xpm[FLOOR].w - 1);
+	e->rc.text_y = (int)(e->xpm[FLOOR].h *
+		(e->rc.floory -
+			(int)(e->rc.floory))) & (e->xpm[FLOOR].h - 1);
+	e->rc.floorx += e->rc.floorstepx;
+	e->rc.floory += e->rc.floorstepy;
+	e->screen_pixels[e->rc.y_ * W + e->rc.x_] =
+		e->xpm[FLOOR].pixels[e->xpm[FLOOR].w * e->rc.text_y + e->rc.text_x];
 }

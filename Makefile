@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/09 21:59:31 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/17 10:41:27 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ SRC_NAME += map_checker.c
 SRC_NAME += raycaster.c
 SRC_NAME += raycaster_tools.c
 SRC_NAME += sampling.c
-SRC_NAME += sampling_tools.c
-SRC_NAME += draw_textures.c
 SRC_NAME += minimap.c
 SRC_NAME += switch_textures.c
 SRC_NAME += freeing.c
@@ -38,6 +36,9 @@ SRC_NAME += open_door.c
 SRC_NAME += ray.c
 SRC_NAME += save_in_file.c
 SRC_NAME += xpm.c
+SRC_NAME += xpm2.c
+SRC_NAME += init_pthread.c
+SRC_NAME += fps_text_time.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -58,7 +59,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 SDL2 = -l SDL2 -lm -lSDL2_mixer -lSDL2_ttf
 COMPILE_SDL2 = SDL2/lib/libSDL2.a
 # `sdl2-config --cflags --libs`
-CFLAGS = -Wall -Wextra -Werror -lpthread -D_REENTRANT -DLinux
+CFLAGS = -g -Wall -Wextra -Werror -lpthread -D_REENTRANT -DLinux
 NORMINETTE = ~/.norminette/norminette.rb
 
 $(CC) = clang

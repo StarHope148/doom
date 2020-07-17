@@ -3,54 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   switch_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 23:15:33 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 19:25:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:46:01 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	ft_apply_textured_wall(t_env *doom)
+void	ft_apply_textured_wall(t_thread_env *e)
 {
-	doom->calc.sample_y = ((double)doom->raycast.y_render -
-								(double)doom->ceiling) /
-								((double)doom->floor - (double)doom->ceiling);
-	doom->calc.sample_y = fabs(doom->calc.sample_y - (int)doom->calc.sample_y);
-	if (doom->orientation == NORTH)
-		ft_apply_north_texture(doom);
-	else if (doom->orientation == SOUTH)
-		ft_apply_south_texture(doom);
-	else if (doom->orientation == EAST)
-		ft_apply_east_texture(doom);
-	else if (doom->orientation == WEST)
-		ft_apply_west_texture(doom);
+	int	xpm_id;
+
+	e->rc.sample_y = (double)(e->rc.y_ - e->rc.ceiling) /
+												(e->rc.floor - e->rc.ceiling);
+	e->rc.sample_y = fabs(e->rc.sample_y - (int)e->rc.sample_y);
+	xpm_id = e->rc.orientation;
+	if (e->xpm[xpm_id].pixels == NULL)
+	{
+		ft_apply_shaded_wall(e);
+		return ;
+	}
+	e->rc.tmp_x = e->rc.sample_x * e->xpm[xpm_id].h;
+	e->rc.tmp_y = e->rc.sample_y * e->xpm[xpm_id].w;
+	e->screen_pixels[e->rc.y_ * W + e->rc.x_] =
+		e->xpm[xpm_id].pixels[e->rc.tmp_y * e->xpm[xpm_id].w + e->rc.tmp_x];
 }
 
-void	ft_apply_color_oriented_wall(t_env *doom)
+void	ft_apply_color_oriented_wall(t_thread_env *e)
 {
-	if (doom->orientation == NORTH)
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] = BLUE;
-	else if (doom->orientation == SOUTH)
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] = RED;
-	else if (doom->orientation == EAST)
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] = YELLOW;
-	else if (doom->orientation == WEST)
-		doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] = ORANGE;
+	if (e->rc.orientation == NORTH)
+		e->screen_pixels[e->rc.y_ *
+			W + e->rc.x_] = BLUE;
+	else if (e->rc.orientation == SOUTH)
+		e->screen_pixels[e->rc.y_ *
+			W + e->rc.x_] = RED;
+	else if (e->rc.orientation == EAST)
+		e->screen_pixels[e->rc.y_ *
+			W + e->rc.x_] = YELLOW;
+	else if (e->rc.orientation == WEST)
+		e->screen_pixels[e->rc.y_ *
+			W + e->rc.x_] = ORANGE;
 }
 
-void	ft_apply_shaded_wall(t_env *doom)
+void	ft_apply_shaded_wall(t_thread_env *e)
 {
-	doom->raycast.shading = 1 - doom->raycast.distance_towall / SHADING_DEPTH;
-	if (doom->raycast.shading < 0.1)
-		doom->raycast.shading = 0.1;
-	doom->screen_pixels[doom->raycast.y_render *
-			WIDTH + doom->raycast.x_render] =
-				ft_rgba_to_uint32(255 * doom->raycast.shading,
-				255 * doom->raycast.shading, 255 * doom->raycast.shading, 0);
+	double	shading;
+
+	shading = 1 - e->rc.distance_towall / SHADING_DEPTH;
+	if (shading < 0.1)
+		shading = 0.1;
+	e->screen_pixels[e->rc.y_ * W + e->rc.x_] =
+			ft_rgba_to_uint32(255 * shading, 255 * shading, 255 * shading, 0);
 }

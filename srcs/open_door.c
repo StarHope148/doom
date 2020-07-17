@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/07 20:53:21 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/16 14:41:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		animation_opening_door(t_env *doom)
 		door = door->next;
 	}
 	door = doom->door;
-/* cleaning closed doors*/
 	while (door)
 	{
 		if (doom->map.data[door->y][door->x] == '.')
@@ -61,6 +60,8 @@ static void	new_door(t_env *doom, int door_y, int door_x, t_door *last)
 
 	if (!(d = (t_door *)ft_memalloc(sizeof(t_door))))
 		ft_exit(doom, EXIT_FAILURE, "Error malloc door opening");
+	if (!last)
+		printf("ya r\n");
 	if (last == NULL)
 		doom->door = d;
 	else if (last)
@@ -77,7 +78,7 @@ static void	init_door(t_env *doom, int door_y, int door_x)
 	t_door	*last;
 
 	last = doom->door;
-	while (last)
+	while (last && last->next)
 		last = last->next;
 	new_door(doom, door_y, door_x, last);
 }
@@ -93,7 +94,6 @@ void		resolve_door(t_env *doom)
 	y = (int)doom->cam.pos_y;
 	x = (int)doom->cam.pos_x;
 	angle = doom->cam.angle;
-
 	if ((angle <= -PI * 0.25 && angle >= -PI * 0.75) && d[y][x - 1] == 'D')
 		x = x - 1;
 	else if ((angle >= PI * 0.75 || angle <= -PI * 0.75) && d[y - 1][x] == 'D')
