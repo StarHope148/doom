@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:43:05 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/17 11:08:23 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,6 @@ void			ft_set_ceiling_floor(t_thread_env *e)
 	e->rc.floor = middle +
 		(H / e->rc.distance_towall) * (e->cam.pos_z * (1)) +
 			e->cam.angle_z;
-	//e->rc.ceiling -= (e->map.alt[e->rc.test_y]
-	//		[e->rc.test_x]) / e->rc.distance_towall;
-	//e->rc.ceiling += e->cam.angle_z;
-	//e->rc.floor += e->cam.angle_z;
-
-
-
-
-//	int		middle;
-//
-//	middle = HEIGHT / 2;
-//	doom->ceiling = middle -
-//		(HEIGHT / doom->raycast.distance_towall) /
-//			(doom->cam.pos_z * (1)) +
-//				doom->cam.angle_z;
-//	doom->floor = middle +
-//		(HEIGHT / doom->raycast.distance_towall) *
-//			(doom->cam.pos_z * (1)) +
-//				doom->cam.angle_z;
-
-
-
-
-//		doom->calc_floor.horizon = (doom->raycast.y_render - HEIGHT / 2) -
-//		doom->cam.angle_z;
-//
-//	doom->calc_floor.rowDistance = (doom->cam.pos_z * HEIGHT) /
-//		doom->calc_floor.horizon;
-//	doom->calc_floor.rowDistance /= cos(doom->cam.angle -
-//		doom->raycast.ray_angle);
-//
-//	doom->calc_floor.floorStepX = doom->calc_floor.rowDistance / WIDTH;
-//	doom->calc_floor.floorStepY = doom->calc_floor.rowDistance / WIDTH;
 }
 
 void			ft_draw_ceiling(t_thread_env *e)
