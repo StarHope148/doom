@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 03:12:03 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 04:59:37 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void			ft_set_ceiling_floor(t_thread_env *e)
 	e->rc.ceiling = middle -
 		(H / e->rc.distance_towall) / (e->cam.pos_z * (1)) +
 			e->cam.angle_z;
+	e->rc.ceiling -= (e->map.alt[e->rc.test_y]
+			[e->rc.test_x]) / e->rc.distance_towall * 100;
 	e->rc.floor = middle +
 		(H / e->rc.distance_towall) * (e->cam.pos_z * (1)) +
 			e->cam.angle_z;
