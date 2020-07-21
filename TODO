@@ -10,9 +10,6 @@
 ->	implémenter un pistolet, munitions (gérer données)
 	afficher la balle, et un trou comme impact du pistolet (nouveaux fichiers)
 
-->	créer type de murs partiellement transparents afin de voir les espaces à l'arrière
-	(nouveaux fichiers, gérer données)
-
 ->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
 	(nouveaux fichiers, gérer données)
 
@@ -31,11 +28,7 @@
 
 ### IN PROGRESS ###
 
-->	courir, se baisser, se relever
-
 -> 	porte qui s'ouvre (animation à upgrade)
-
-->	sauter, tomber, voler : gérer gravité
 
 ->	sol, plafond hauteur réglable (ne fonctionne actuellement que sur un mur)
 	changer fonction d'affichage suivant hauteur?
@@ -55,5 +48,11 @@
 
 ->	textures sol (nouveaux fichiers)
 
+->	créer type de murs partiellement transparents afin de voir les espaces à l'arrière
+	(nouveaux fichiers, gérer données)
+
+->	sauter, tomber, voler : gérer gravité
+
+->	courir, se baisser, se relever
 
 ### DONE ###
