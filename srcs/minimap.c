@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/16 14:08:36 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/20 18:44:38 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_draw_minimap_symbol(t_env *doom)
 		color = GRAY;
 	else if (doom->map.data[doom->minimap.i][doom->minimap.j] == DOOR)
 		color = PURPLE;
+	else if (doom->map.data[doom->minimap.i][doom->minimap.j] == GRID)
+		color = ORANGE;
 	while (doom->minimap.done == 0)
 	{
 		doom->screen_pixels[doom->minimap.y * W + doom->minimap.x] = color;

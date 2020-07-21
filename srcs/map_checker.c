@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/07 20:05:08 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/19 18:58:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int		ft_check_line(t_map *m)
 		return (-2);
 	while (l[i])
 	{
-		if (l[i] != '.' && l[i] != '#' &&
-			l[i] != 'D' && l[i] != 'O' && l[i] != 'T')
+		if (l[i] != '.' && l[i] != '#' && l[i] != 'D' && l[i] != 'O' &&
+			l[i] != 'T' && l[i] != 'G')
 			return (-1);
 		i++;
 	}
@@ -58,7 +58,7 @@ int		precheck_one(char *l, int p)
 
 	i = 0;
 	if (l[p + i] != '#' && l[p + i] != '.' && l[p + i] != 'D'
-			&& l[p + i] != 'T' && l[p + i] != '.' && l[p + i] != 'O')
+			&& l[p + i] != 'T' && l[p + i] != 'O' && l[p + i] != 'G')
 		return (-1);
 	i++;
 	if (l[p + i] != ' ')

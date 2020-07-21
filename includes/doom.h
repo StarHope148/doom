@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:30:15 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:56:18 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum		e_cardinal_point
 	SOUTH,
 	WEST,
 	EAST,
-	FLOOR
+	FLOOR,
+	GRID_XPM
 }					t_cardinal_point;
 
 typedef enum	e_motion
@@ -161,6 +162,7 @@ typedef struct		s_thread_env
 	void			*doom;
 	void			*multithread;
 	pthread_mutex_t	*mutex;
+	char			transparent_found;
 }					t_thread_env;
 
 typedef struct		s_multithread
@@ -222,7 +224,7 @@ typedef struct		s_env
 	t_movements		moves;
 	t_text			txt;
 	t_door			*door;
-	t_xpm			xpm[5];
+	t_xpm			xpm[NB_XPM];
 	Uint32			*screen_pixels;
 	t_raycast		raycast;
 	t_minimap		minimap;
@@ -272,7 +274,7 @@ void				ft_apply_shaded_wall(t_thread_env *e);
 void				ft_free_map(t_map *m);
 void				ft_free_door(t_door *list);
 void				ft_destroy_texture_renderer_window(t_env *doom);
-void				ft_calc_next_intersection(t_thread_env *e);
+void				ft_calc_next_intersection(t_thread_env *e, char wall_type);
 void				ft_setup_view(t_thread_env *e);
 
 void				ft_key_pressed(t_env *doom);

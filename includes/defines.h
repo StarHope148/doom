@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:40:37 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:48:20 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # define MOVE_SPEED 0.035
 # define RUN_RATIO 3
-# define ROTATE_SPEED 0.075
+# define ROTATE_SPEED 0.05
 # define UP_DOWN_ANGLE_SPEED 30
 # define MAX_ANGLE_Z 800
 
@@ -43,14 +43,17 @@
 # define EMPTY '.'
 # define DOOR 'D'
 # define TRANSP 'T'
-# define OBJECT "O"
+# define OBJECT 'O'
+# define GRID 'G'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
 # define DOOR_OPENING_DURATION 3
 # define MIN_ALTITUDE -800
 
-# define MAX_PROCESSOR 32
+# define MAX_PROCESSOR 2
 # define FPS_TEST 0
+
+# define NB_XPM 6
 
 #endif

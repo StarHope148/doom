@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:34:03 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/19 18:49:05 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		wall_on_cam_pos(t_env *doom)
 	else if (map_symbol == DOOR)
 		return (2);
 	else if (map_symbol == TRANSP)
+		return (3);
+	else if (map_symbol == GRID)
 		return (3);
 	return (0);
 }

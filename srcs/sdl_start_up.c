@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:41:09 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 03:17:35 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ void	ft_init_video(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateTexture()");
 	get_xpm("textures/risitas_wall.xpm", &doom->xpm[NORTH]);
 	get_xpm("textures/po.xpm", &doom->xpm[SOUTH]);
-	get_xpm("textures/doge.xpm", &doom->xpm[EAST]);
 	get_xpm("textures/green_wall.xpm", &doom->xpm[WEST]);
+	get_xpm("textures/doge.xpm", &doom->xpm[EAST]);
 	get_xpm("textures/floor.xpm", &doom->xpm[FLOOR]);
+	get_xpm("textures/grid2.xpm", &doom->xpm[GRID_XPM]);
 }
 
 void	ft_init_musicttf(t_env *doom)

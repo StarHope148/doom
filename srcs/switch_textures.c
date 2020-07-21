@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   switch_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 23:15:33 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/16 14:46:01 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/21 03:12:44 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	ft_apply_textured_wall(t_thread_env *e)
 	}
 	e->rc.tmp_x = e->rc.sample_x * e->xpm[xpm_id].h;
 	e->rc.tmp_y = e->rc.sample_y * e->xpm[xpm_id].w;
+	if (e->xpm[xpm_id].pixels[e->rc.tmp_y * e->xpm[xpm_id].w + e->rc.tmp_x] == MAGENTA &&
+			xpm_id == GRID_XPM)
+		return ;
 	e->screen_pixels[e->rc.y_ * W + e->rc.x_] =
 		e->xpm[xpm_id].pixels[e->rc.tmp_y * e->xpm[xpm_id].w + e->rc.tmp_x];
 }
@@ -45,6 +48,8 @@ void	ft_apply_color_oriented_wall(t_thread_env *e)
 	else if (e->rc.orientation == WEST)
 		e->screen_pixels[e->rc.y_ *
 			W + e->rc.x_] = ORANGE;
+	else if (e->rc.orientation == GRID_XPM)
+		ft_apply_textured_wall(e);
 }
 
 void	ft_apply_shaded_wall(t_thread_env *e)

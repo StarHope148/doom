@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/16 12:58:49 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/20 03:18:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ void	free_xpm(t_env *doom)
 {
 	int	xpm_id;
 
-	xpm_id = -1;
-	while (++xpm_id < 5)
+	xpm_id = 0;
+	while (xpm_id < NB_XPM)
+	{
 		free_one_xpm(&doom->xpm[xpm_id]);
+	xpm_id++;
+	}
 }
 
 void	free_one_xpm(t_xpm *xpm)

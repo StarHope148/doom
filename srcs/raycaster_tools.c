@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 11:08:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 03:12:03 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			ft_draw_ceiling(t_thread_env *e)
 
 void			ft_draw_wall(t_thread_env *e)
 {
-	if (e->map.data[e->rc.test_y][e->rc.test_x] == 'D' || e->wall == TEXTURED)
+	if (e->map.data[e->rc.test_y][e->rc.test_x] == DOOR || e->wall == TEXTURED)
 		ft_apply_textured_wall(e);
 	else if (e->wall == COLOR_ORIENTED)
 		ft_apply_color_oriented_wall(e);
