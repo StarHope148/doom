@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 01:48:20 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 03:47:05 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@
 # define MAX_PROCESSOR 2
 # define FPS_TEST 0
 
-# define NB_XPM 6
+# define NB_XPM 7
 
 #endif

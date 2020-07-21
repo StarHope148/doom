@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 03:17:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 03:46:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_init_video(t_env *doom)
 	get_xpm("textures/doge.xpm", &doom->xpm[EAST]);
 	get_xpm("textures/floor.xpm", &doom->xpm[FLOOR]);
 	get_xpm("textures/grid2.xpm", &doom->xpm[GRID_XPM]);
+	get_xpm("textures/crosshair.xpm", &doom->xpm[CROSSHAIR]);
 }
 
 void	ft_init_musicttf(t_env *doom)

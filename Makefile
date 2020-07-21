@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/17 10:41:27 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/21 03:51:32 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_NAME += xpm.c
 SRC_NAME += xpm2.c
 SRC_NAME += init_pthread.c
 SRC_NAME += fps_text_time.c
+SRC_NAME += crosshair.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

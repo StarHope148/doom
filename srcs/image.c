@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/16 14:04:37 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/21 04:03:40 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_print(t_env *doom)
 	import_screenpixels(doom);
 	ft_draw_minimap(doom);
 	ft_draw_fps(doom);
+	ft_draw_crosshair(doom);
 	if (!doom->no_funky)
 		ft_funky_textures(doom);
 	ft_update_screen(doom);

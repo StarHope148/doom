@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 01:56:18 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/21 03:51:55 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum		e_cardinal_point
 	WEST,
 	EAST,
 	FLOOR,
-	GRID_XPM
+	GRID_XPM,
+	CROSSHAIR
 }					t_cardinal_point;
 
 typedef enum	e_motion
@@ -300,5 +301,7 @@ void				init_pthread(t_env *doom);
 void				ft_raycaster(t_thread_env *e);
 void				import_screenpixels(t_env *doom);
 void				free_thread_env(t_env *doom);
+
+void				ft_draw_crosshair(t_env *doom);
 
 #endif

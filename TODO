@@ -2,8 +2,6 @@
 
 ->	faire un niveau (une map) avec debut, fin de level, histoire, objectif(s)
 
-->	ajouter reticule
-
 ->	implémenter inventaire
 	permettre objet ramassable (gérer données)
 
@@ -54,5 +52,7 @@
 ->	sauter, tomber, voler : gérer gravité
 
 ->	courir, se baisser, se relever
+
+->	ajouter reticule
 
 ### DONE ###
