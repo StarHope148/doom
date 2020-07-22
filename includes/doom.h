@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 03:51:55 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/22 02:18:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum		e_cardinal_point
 	WEST,
 	EAST,
 	FLOOR,
+	SKY,
 	GRID_XPM,
 	CROSSHAIR
 }					t_cardinal_point;
@@ -276,7 +277,6 @@ void				ft_free_map(t_map *m);
 void				ft_free_door(t_door *list);
 void				ft_destroy_texture_renderer_window(t_env *doom);
 void				ft_calc_next_intersection(t_thread_env *e, char wall_type);
-void				ft_setup_view(t_thread_env *e);
 
 void				ft_key_pressed(t_env *doom);
 void				ft_key_released(t_env *doom);

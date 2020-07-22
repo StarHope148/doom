@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/19 18:49:05 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/22 04:18:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_forward(t_env *doom)
 void	set_movespeed(t_env *doom)
 {
 	if (doom->moves.running == TRUE &&
-			doom->moves.backward == FALSE && doom->moves.crouching == FALSE)
+			doom->moves.crouching == FALSE)
 		doom->moves.movespeed = RUN_RATIO * MOVE_SPEED;
 	else if (doom->moves.running == FALSE)
 		doom->moves.movespeed = MOVE_SPEED;
