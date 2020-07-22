@@ -19,8 +19,6 @@
 ->	tous les éléments nécessaires doivent être dans un seul et unique fichier
 	vous devez pouvoir lancer le jeu uniquement avec le binaire + ce fichier
 
-->	skybox (pas juste une texture à la place du plafond, mais un "vrai ciel")
-
 ->	comprendre comment mettre de la musique (retirer SDL_mixer et remplacer par FMOD ou autre lib de son)
 	gérer changement de musique
 
@@ -54,5 +52,7 @@
 ->	courir, se baisser, se relever
 
 ->	ajouter reticule
+
+->	skybox (pas juste une texture à la place du plafond, mais un "vrai ciel")
 
 ### DONE ###
