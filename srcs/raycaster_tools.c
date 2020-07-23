@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/22 04:11:21 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 06:42:52 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void			ft_setup_view_sky(t_thread_env *e)
 
 void			ft_draw_ceiling(t_thread_env *e)
 {
-	if (e->wall == NON_TEXTURED || e->wall == SHADED)
+	if (e->wall == NON_TEXTURED || e->wall == SHADED ||
+			e->xpm[SKY].pixels == NULL)
 	{
 		e->screen_pixels[e->rc.y_ * W + e->rc.x_] = DODGER_BLUE;
 		return ;
