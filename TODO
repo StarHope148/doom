@@ -61,4 +61,6 @@
 
 ### KNOWN BUG ###
 
-->	crash sometimes when FOV is maxed and skybox is activated
+->	crash parfois quand le FOV est à fond et que la skybox est activé
+
+->	segfault parfois en quittant le programme, après SDL_Quit(), reste à déterminer quand et pourquoi
