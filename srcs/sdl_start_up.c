@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 06:01:31 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:03:30 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	ft_exit(t_env *doom, int exit_type, char *message)
 {
-	struct timespec start;
-
-	doom->multithread.stop = 1;
+	pthread_mutex_lock(&doom->shared_data.mutex);
+	doom->shared_data.stop = 1;
+	pthread_cond_signal(&doom->shared_data.cond);
+	pthread_mutex_unlock(&doom->shared_data.mutex);
 	ft_destroy_texture_renderer_window(doom);
 	ft_memdel((void **)&doom->screen_pixels);
 	ft_free_fmod(doom);
@@ -31,10 +32,9 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	ft_free_door(doom->door);
 	free_xpm(doom);
 	ft_free_map(&doom->map);
-	free_thread_env(doom);
+	free_thread_env(&doom->shared_data);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
-	clock_gettime(_POSIX_MONOTONIC_CLOCK, &start);
 	printf("time ~ from SDL_Init() : %f\n", get_time(doom));
 	exit(exit_type);
 }
@@ -75,6 +75,7 @@ void	ft_init_video(t_env *doom)
 	get_xpm("textures/sky2.xpm", &doom->xpm[SKY]);
 	get_xpm("textures/grid2.xpm", &doom->xpm[GRID_XPM]);
 	get_xpm("textures/crosshair.xpm", &doom->xpm[CROSSHAIR]);
+	init_pthread(doom);
 }
 
 void	ft_init_musicttf(t_env *doom)

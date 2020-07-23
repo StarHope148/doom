@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 02:38:24 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:20:26 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_apply_brightness(t_thread_env *e)
 {
 	int		shadowing;
 
-	if (e->map.bright[(int)e->cam.pos_y][(int)e->cam.pos_x] != 3)
+	if (e->map.bright[(int)e->cam.pos_y * e ->map.nbcol + (int)e->cam.pos_x] != 3)
 	{
-		shadowing = e->map.bright[(int)e->cam.pos_y][(int)e->cam.pos_x];
+		shadowing = e->map.bright[(int)e->cam.pos_y * e->map.nbcol + (int)e->cam.pos_x];
 		while (shadowing++ - 3)
 		{
 			e->screen_pixels[e->rc.y_ * W + e->rc.x_] >>= 1;

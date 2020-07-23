@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:30:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:12:31 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ void	ft_init_env(t_env *doom)
 	doom->music_puls = (double)60 / 116;
 	doom->count_puls = 1;
 	doom->moves.movespeed = MOVE_SPEED;
+	pthread_mutex_init(&doom->shared_data.mutex, 0);
+	pthread_cond_init(&doom->shared_data.cond, 0);
 	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32)
 								* H * W)))
 		ft_exit(doom, EXIT_FAILURE,
 			"Error mallocing screen_pixels in ft_init_env");
-	init_pthread(doom);
 }
 
 void	ft_setspawn(t_env *doom)
@@ -45,7 +46,7 @@ void	ft_setspawn(t_env *doom)
 	{
 		x = 0;
 		while (++x < doom->map.nbcol - 1)
-			if (doom->map.data[y][x] == EMPTY)
+			if (doom->map.data[y * doom->map.nbcol + x] == EMPTY)
 			{
 				doom->cam.pos_x = x + 0.5;
 				doom->cam.pos_y = y + 0.5;

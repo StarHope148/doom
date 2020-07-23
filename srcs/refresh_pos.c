@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/22 04:18:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 14:58:30 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		wall_on_cam_pos(t_env *doom)
 {
 	char	map_symbol;
 
-	map_symbol = doom->map.data[(int)doom->cam.pos_y][(int)doom->cam.pos_x];
+	map_symbol = doom->map.data[(int)doom->cam.pos_y * doom->map.nbcol + (int)doom->cam.pos_x];
 	if (map_symbol == WALL)
 		return (1);
 	else if (map_symbol == DOOR)

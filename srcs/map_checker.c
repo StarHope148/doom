@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/19 18:58:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:22:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-int		ft_check_borders(char *line)
+int		ft_check_borders(t_map *map)
 {
-	int i;
+	int		i;
+	char	*line;
 
+	line = map->data + map->cur_line * map->nbcol;
 	i = 0;
-	while (line[i])
+	while (i < map->nbcol)
 	{
 		if (line[i] != '#')
 			return (-1);
@@ -31,11 +33,11 @@ int		ft_check_line(t_map *m)
 	int		i;
 	char	*l;
 
-	l = m->data[m->cur_line];
+	l = m->data + m->cur_line * m->nbcol;
 	i = 0;
 	if (l[i++] != '#')
 		return (-2);
-	while (l[i])
+	while (i < m->nbcol)
 	{
 		if (l[i] != '.' && l[i] != '#' && l[i] != 'D' && l[i] != 'O' &&
 			l[i] != 'T' && l[i] != 'G')
@@ -46,8 +48,8 @@ int		ft_check_line(t_map *m)
 		return (-2);
 	i = -1;
 	while (++i < m->nbcol)
-		if (m->bright[m->cur_line][i] < 0
-				|| m->bright[m->cur_line][i] > 3)
+		if (m->bright[m->cur_line * m->nbcol + i] < 0
+				|| m->bright[m->cur_line * m->nbcol + i] > 3)
 			return (-3);
 	return (0);
 }

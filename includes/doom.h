@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 06:03:40 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 16:55:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include "../libft/libft.h"
 # include "defines.h"
 # include "colors.h"
-# include <fmod/inc/fmod.h>
+# include "../fmod/inc/fmod.h"
 
 typedef enum		e_cardinal_point
 {
@@ -66,9 +66,9 @@ typedef struct		s_map
 	int				nbl;
 	int				nbcol;
 	size_t			cur_line;
-	char			**data;
-	int				**bright;
-	int				**alt;
+	char			*data;
+	int				*bright;
+	int				*alt;
 }					t_map;
 
 typedef struct		s_camera
@@ -153,29 +153,31 @@ typedef struct		s_xpm
 typedef struct		s_thread_env
 {
 	pthread_t		thread;
+	char			work_done;
 	t_raycast		rc;
 	t_map			map;
 	t_camera		cam;
+	char			wall;
 	t_xpm			*xpm;
 	int				x_start;
 	int				x_end;
-	char			wall;
-	char			work_done;
 	Uint32			*screen_pixels;
 	void			*doom;
-	void			*multithread;
-	pthread_mutex_t	*mutex;
+	void			*shared_data;
 	char			transparent_found;
 }					t_thread_env;
 
-typedef struct		s_multithread
+typedef struct		s_shared_data
 {
-	t_thread_env	*tab;
+	t_thread_env	*tab_thread_env;
 	pthread_mutex_t	mutex;
 	pthread_cond_t	cond;
-	int				max;
+	pthread_cond_t	cond_main;
+	int				max_thread;
+	int				all_work_done;
+	int				copied;
 	char			stop;
-}					t_multithread;
+}					t_shared_data;
 
 typedef struct		s_minimap
 {
@@ -250,7 +252,7 @@ typedef struct		s_env
 	unsigned int	count_puls;
 	struct timespec	time0;
 	int				no_funky;
-	t_multithread	multithread;
+	t_shared_data	shared_data;
 	char			new_values;
 }					t_env;
 
@@ -267,7 +269,7 @@ void				ft_refresh_new_pos(t_env *doom);
 void				ft_error(t_map *m, int code, char *line);
 
 int					ft_check_line(t_map *m);
-int					ft_check_borders(char *line);
+int					ft_check_borders(t_map *m);
 void				ft_count_lines_columns(t_map *m, char *mapfile, int fd);
 void				ft_norme(int code);
 
@@ -310,7 +312,10 @@ void				free_xpm(t_env *doom);
 void				init_pthread(t_env *doom);
 void				ft_raycaster(t_thread_env *e);
 void				import_screenpixels(t_env *doom);
-void				free_thread_env(t_env *doom);
+void				free_thread_env(t_shared_data *shared_data);
+int			ft_malloc_tab(t_map *m);
+void	update_thread_env(t_thread_env *thread_env);
+void	import_screen_pixels(t_env *doom);
 
 void				ft_draw_crosshair(t_env *doom);
 

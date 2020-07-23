@@ -6,33 +6,21 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/07 21:30:18 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:37:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static int	ft_malloc_tab(t_map *m)
+int			ft_malloc_tab(t_map *m)
 {
-	int		i;
-
-	if ((m->data = (char **)ft_memalloc(sizeof(char *) * m->nbl)) == NULL)
+	if (!(m->data = (char*)ft_memalloc(sizeof(char) * (m->nbl * m->nbcol + 1))))
 		return (-1);
-	if ((m->bright = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
+	m->data[m->nbl * m->nbcol] = '\0';
+	if (!(m->bright = (int *)ft_memalloc(sizeof(int) * m->nbl * m->nbcol)))
 		return (-1);
-	if ((m->alt = (int **)ft_memalloc(sizeof(int *) * m->nbl)) == NULL)
+	if (!(m->alt = (int *)ft_memalloc(sizeof(int) * m->nbl * m->nbcol)))
 		return (-1);
-	i = -1;
-	while (++i < m->nbl)
-	{
-		if (!(m->data[i] = (char *)ft_memalloc(sizeof(char) * (m->nbcol + 1))))
-			return (-1);
-		m->data[i][m->nbcol] = '\0';
-		if (!(m->bright[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
-			return (-1);
-		if (!(m->alt[i] = (int *)ft_memalloc(sizeof(int) * m->nbcol)))
-			return (-1);
-	}
 	return (1);
 }
 
@@ -43,13 +31,13 @@ static int	get_tabvalues(t_map *m, int col, char *line, int prev_pos)
 
 	str = line + prev_pos;
 	pos = 0;
-	m->data[m->cur_line][col] = str[pos];
+	m->data[m->cur_line * m->nbcol + col] = str[pos];
 	pos += 2;
-	m->bright[m->cur_line][col] = ft_atoi(str + pos);
+	m->bright[m->cur_line * m->nbcol + col] = ft_atoi(str + pos);
 	while (ft_isdigit(str[pos]))
 		pos++;
 	pos++;
-	m->alt[m->cur_line][col] = ft_atoi(str + pos);
+	m->alt[m->cur_line * m->nbcol + col] = ft_atoi(str + pos);
 	while (ft_isdigit(str[pos]))
 		pos++;
 	if (!str[pos])
@@ -76,7 +64,7 @@ static int	ft_retrieve_data(t_map *m, char *line)
 		pos += pos_val;
 	}
 	if (m->cur_line == 0 && m->cur_line == (size_t)m->nbl)
-		if (ft_check_borders(m->data[m->cur_line]) == -1)
+		if (ft_check_borders(m) == -1)
 			return (-1);
 	if (ft_check_line(m) < 0)
 		return (-1);

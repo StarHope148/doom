@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:52:39 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 03:18:31 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 14:58:16 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_search_last_transparent(t_thread_env *e)
 	i = 0;
 	while (i < e->transparent_found)
 	{
-		if (e->map.data[e->rc.test_y][e->rc.test_x] == GRID)
+		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID)
 			i++;
 		if (i >= e->transparent_found)
 			return ;
@@ -78,10 +78,10 @@ void	ft_search_last_transparent(t_thread_env *e)
 
 void	ft_search_collision(t_thread_env *e)
 {
-	while (e->map.data[e->rc.test_y][e->rc.test_x] != WALL &&
-			e->map.data[e->rc.test_y][e->rc.test_x] != DOOR)
+	while (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] != WALL &&
+			e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] != DOOR)
 	{
-		if (e->map.data[e->rc.test_y][e->rc.test_x] == GRID)
+		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID)
 			e->transparent_found++;
 		if (e->rc.sidedistx < e->rc.sidedisty)
 		{

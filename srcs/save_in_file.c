@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 00:42:18 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/16 14:42:27 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:23:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ size_t	get_filesize(t_map *map)
 		x = -1;
 		while (++x < map->nbcol)
 		{
-			n += pseudo_log10(map->bright[y][x]);
-			n += pseudo_log10(map->alt[y][x]);
+			n += pseudo_log10(map->bright[y * map->nbcol + x]);
+			n += pseudo_log10(map->alt[y * map->nbcol + x]);
 		}
 	}
 	return (n);
@@ -77,11 +77,11 @@ void	fill_str(t_map *map, char *str)
 		x = -1;
 		while (++x < map->nbcol)
 		{
-			str[i++] = map->data[y][x];
+			str[i++] = map->data[y * map->nbcol + x];
 			str[i++] = ' ';
-			pseudo_itoa(str, map->bright[y][x], &i);
+			pseudo_itoa(str, map->bright[y * map->nbcol + x], &i);
 			str[i++] = ' ';
-			pseudo_itoa(str, map->alt[y][x], &i);
+			pseudo_itoa(str, map->alt[y * map->nbcol + x], &i);
 			if (x < map->nbcol - 1)
 				str[i++] = '\t';
 			else if (x == map->nbcol - 1)

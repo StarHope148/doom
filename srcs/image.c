@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/21 04:03:40 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:17:01 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,48 @@ void	ft_update_screen(t_env *doom)
 	SDL_RenderPresent(doom->renderer);
 }
 
+void	import_screen_pixels(t_env *doom)
+{
+	int				thread_id;
+	int				x;
+	int				y;
+	t_shared_data	*shared_data;
+
+	shared_data = (t_shared_data*)&doom->shared_data;
+	thread_id = -1;
+	while (++thread_id < shared_data->max_thread)
+	{
+		x = shared_data->tab_thread_env[thread_id].x_start - 1;
+		while (++x < shared_data->tab_thread_env[thread_id].x_end)
+		{
+			y = -1;
+			while (++y < H)
+				doom->screen_pixels[y * W + x] = shared_data->tab_thread_env[thread_id].screen_pixels[y * W + x];
+		}
+	}
+}
+
+void	threadsetc(t_env *doom)
+{
+	int	thread_id;
+
+	pthread_mutex_lock(&doom->shared_data.mutex);
+	while (!doom->shared_data.all_work_done)
+		pthread_cond_wait(&doom->shared_data.cond_main, &doom->shared_data.mutex);
+	doom->shared_data.all_work_done = 0;
+	import_screen_pixels(doom);
+	thread_id = -1;
+	while (++thread_id < doom->shared_data.max_thread)
+		update_thread_env(&doom->shared_data.tab_thread_env[thread_id]);
+	pthread_cond_signal(&doom->shared_data.cond_main);
+	pthread_mutex_unlock(&doom->shared_data.mutex);
+}
+
 void	ft_print(t_env *doom)
 {
-	doom->new_values++;
-	pthread_cond_signal(&doom->multithread.cond);
 	animation_opening_door(doom);
+	threadsetc(doom);
 	//ft_raycaster(doom);
-	import_screenpixels(doom);
 	ft_draw_minimap(doom);
 	ft_draw_fps(doom);
 	ft_draw_crosshair(doom);

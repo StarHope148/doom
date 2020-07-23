@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/20 03:18:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:44:22 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	free_thread_env(t_env *doom)
+void	free_thread_env(t_shared_data *shared_data)
 {
 	int	i;
 
 	i = -1;
-	while (++i < doom->multithread.max)
-		ft_memdel((void**)&doom->multithread.tab[i].screen_pixels);
-	ft_memdel((void**)&doom->multithread.tab);
+	while (++i < shared_data->max_thread)
+	{
+		ft_memdel((void**)&shared_data->tab_thread_env[i].screen_pixels);
+		ft_free_map(&shared_data->tab_thread_env[i].map);
+	}
+	ft_memdel((void**)&shared_data->tab_thread_env);
 }
 
 void	free_xpm(t_env *doom)
@@ -78,20 +81,6 @@ void	ft_destroy_texture_renderer_window(t_env *doom)
 
 void	ft_free_map(t_map *m)
 {
-	int i;
-
-	i = 0;
-	if (m->data)
-		while (i < m->nbl && m->data[i])
-			ft_memdel((void **)&m->data[i++]);
-	i = 0;
-	if (m->bright)
-		while (i < m->nbl && m->bright[i])
-			ft_memdel((void **)&m->bright[i++]);
-	i = 0;
-	if (m->alt)
-		while (i < m->nbl && m->alt[i])
-			ft_memdel((void **)&m->alt[i++]);
 	ft_memdel((void **)&m->data);
 	ft_memdel((void **)&m->bright);
 	ft_memdel((void **)&m->alt);
