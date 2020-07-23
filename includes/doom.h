@@ -28,7 +28,7 @@
 # include "../libft/libft.h"
 # include "defines.h"
 # include "colors.h"
-# include <fmod/inc/fmod.h>
+# include "../fmod/inc/fmod.h"
 
 typedef enum		e_cardinal_point
 {
