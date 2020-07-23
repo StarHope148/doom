@@ -19,9 +19,6 @@
 ->	tous les éléments nécessaires doivent être dans un seul et unique fichier
 	vous devez pouvoir lancer le jeu uniquement avec le binaire + ce fichier
 
-->	comprendre comment mettre de la musique (retirer SDL_mixer et remplacer par FMOD ou autre lib de son)
-	gérer changement de musique
-
 ### IN PROGRESS ###
 
 -> 	porte qui s'ouvre (animation à upgrade)
@@ -55,4 +52,13 @@
 
 ->	skybox (pas juste une texture à la place du plafond, mais un "vrai ciel")
 
+->	comprendre comment mettre de la musique (retirer SDL_mixer et remplacer par FMOD ou autre lib de son)
+	gérer changement de musique
+
 ### DONE ###
+
+
+
+### KNOWN BUG ###
+
+->	crash sometimes when FOV is maxed and skybox is activated

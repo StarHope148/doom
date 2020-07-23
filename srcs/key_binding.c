@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/17 10:51:18 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 06:06:20 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,30 @@ void		ft_movement(t_env *doom)
 	else if (doom->event.key.keysym.sym == SDLK_q)
 		doom->moves.down = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_SPACE)
+	{
 		doom->moves.jumping = TRUE;
+		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.jump,
+				NULL, 0, NULL)) != FMOD_OK)
+			perror("Error in FMOD_System_PlaySound for jump ");
+	}
+	else if (doom->event.key.keysym.sym == SDLK_p)
+	{
+		if ((FMOD_Channel_GetPaused(doom->sound.channel_music,
+				&doom->sound.state)) != FMOD_OK)
+			perror("Error in FMOD_Channel_GetPaused for music ");
+		if (doom->sound.state == FALSE)
+		{
+			if ((FMOD_Channel_SetPaused(doom->sound.channel_music, TRUE)) !=
+					FMOD_OK)
+				perror("Error in FMOD_Channel_SetPaused for music ");
+		}
+		else
+		{
+			if ((FMOD_Channel_SetPaused(doom->sound.channel_music, FALSE)) !=
+					FMOD_OK)
+				perror("Error in FMOD_Channel_SetPaused for music ");
+		}
+	}
 	else if (doom->event.key.keysym.sym == SDLK_RETURN)
 		resolve_door(doom);
 }

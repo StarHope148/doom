@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/22 02:18:09 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 06:03:40 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "../libft/libft.h"
 # include "defines.h"
 # include "colors.h"
+# include <fmod/inc/fmod.h>
 
 typedef enum		e_cardinal_point
 {
@@ -215,6 +216,15 @@ typedef struct		s_door
 	struct s_door	*next;
 }					t_door;
 
+typedef struct		s_sound
+{
+	FMOD_SYSTEM		*system;
+	FMOD_SOUND		*music;
+	FMOD_SOUND		*jump;
+	FMOD_CHANNEL	*channel_music;
+	int				state;
+}					t_sound;
+
 typedef struct		s_env
 {
 	SDL_Window		*window;
@@ -230,7 +240,7 @@ typedef struct		s_env
 	Uint32			*screen_pixels;
 	t_raycast		raycast;
 	t_minimap		minimap;
-	Mix_Music		*music;
+	t_sound			sound;
 	char			wall;
 	int				pitch;
 	int				block;
@@ -303,5 +313,8 @@ void				import_screenpixels(t_env *doom);
 void				free_thread_env(t_env *doom);
 
 void				ft_draw_crosshair(t_env *doom);
+
+void				ft_fmod(t_env *doom);
+void				ft_free_fmod(t_env *doom);
 
 #endif

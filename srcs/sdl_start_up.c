@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/22 04:17:56 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/23 06:01:31 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	doom->multithread.stop = 1;
 	ft_destroy_texture_renderer_window(doom);
 	ft_memdel((void **)&doom->screen_pixels);
-	Mix_FreeMusic(doom->music);
+	ft_free_fmod(doom);
 	TTF_CloseFont(doom->txt.font);
 	SDL_FreeSurface(doom->txt.welcome1);
 	SDL_FreeSurface(doom->txt.welcome2);
@@ -79,12 +79,7 @@ void	ft_init_video(t_env *doom)
 
 void	ft_init_musicttf(t_env *doom)
 {
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) < 0)
-		ft_exit(doom, EXIT_FAILURE, "Error in Mix_OpenAudio");
-	if ((doom->music = Mix_LoadMUS("yaeji-raingurl.mp3")) == NULL)
-		ft_exit(doom, EXIT_FAILURE, (char *)SDL_GetError());
-	Mix_PlayMusic(doom->music, -1);
-	Mix_VolumeMusic(0);
+	ft_fmod(doom);
 	if (TTF_Init() < 0)
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_Init()");
 	if ((doom->txt.font = TTF_OpenFont("arial.ttf", 40)) == NULL)
@@ -103,6 +98,9 @@ void	ft_sdl(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_video(doom);
 	ft_init_musicttf(doom);
+	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.music, NULL, 0,
+			&doom->sound.channel_music)) != FMOD_OK)
+		perror("Error in FMOD_System_PlaySound for music ");
 	clock_gettime(_POSIX_MONOTONIC_CLOCK, &doom->time0);
 	while (1)
 	{

@@ -60,3 +60,4 @@ SDL2
 testsave
 wolf3d
 srcs/test.c
+fmod/done
