@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:34:43 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/16 14:38:21 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/26 14:06:24 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,23 @@ int		cmp_file_info(t_xpm *xpm, char *info)
 	return (0);
 }
 
+Uint32	hex2int(char *hex)
+{
+    Uint32	val;
+	Uint8	byte;
+
+	val = 0;
+    while (*hex)
+	{
+        byte = *hex++; 
+        if (byte >= '0' && byte <= '9') byte = byte - '0';
+        else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
+        else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;    
+        val = (val << 4) | (byte & 0xF);
+    }
+    return val;
+}
+
 int		apply_color(t_xpm *x, char *line, int num, int i)
 {
 	int	color;
@@ -49,8 +66,7 @@ int		apply_color(t_xpm *x, char *line, int num, int i)
 	{
 		if (!ft_strncmp(1 + line + x->nchar * i, x->color[color], x->nchar))
 		{
-			x->pixels[(num - x->colormax - 5) * x->w + i] =
-					(Uint32)strtoul(x->color[color] + 2 + x->nchar, NULL, 16);
+			x->pixels[(num - x->colormax - 5) * x->w + i] = hex2int(x->color[color] + 2 + x->nchar);
 			x->pixels[(num - x->colormax - 5) * x->w + i] <<= 8;
 			break ;
 		}
