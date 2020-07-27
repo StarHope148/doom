@@ -29,8 +29,6 @@
 -> 	editeur de map :
 	du t_env vers fichier .map
 
-->	implémenter multithreading (probleme synchro à l'affichage, voir avec pthread_join)
-
 ### TO CHECK ###
 
 ->	comprendre comment faire texte à l'écran (sdl ttf) (nouveaux fichiers, gérer données)
@@ -54,6 +52,8 @@
 
 ->	comprendre comment mettre de la musique (retirer SDL_mixer et remplacer par FMOD ou autre lib de son)
 	gérer changement de musique
+
+>	implémenter multithreading (probleme synchro à l'affichage)
 
 ### DONE ###
 
