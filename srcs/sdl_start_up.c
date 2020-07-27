@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 17:03:30 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/27 17:20:38 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,15 @@ void	ft_init_video(t_env *doom)
 						SDL_TEXTUREACCESS_STREAMING, W, H);
 	if (doom->texture == NULL)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateTexture()");
-	get_xpm("textures/risitas_wall.xpm", &doom->xpm[NORTH]);
-	get_xpm("textures/po.xpm", &doom->xpm[SOUTH]);
-	get_xpm("textures/green_wall.xpm", &doom->xpm[WEST]);
-	get_xpm("textures/doge.xpm", &doom->xpm[EAST]);
-	get_xpm("textures/floor.xpm", &doom->xpm[FLOOR]);
-	get_xpm("textures/sky2.xpm", &doom->xpm[SKY]);
+	get_xpm("textures/wall_skull.xpm", &doom->xpm[NORTH]);
+	get_xpm("textures/wall_skull.xpm", &doom->xpm[SOUTH]);
+	get_xpm("textures/wall_skull.xpm", &doom->xpm[WEST]);
+	get_xpm("textures/wall_skull.xpm", &doom->xpm[EAST]);
+	get_xpm("textures/floor_metal.xpm", &doom->xpm[FLOOR]);
+	get_xpm("textures/sky_red.xpm", &doom->xpm[SKY]);
 	get_xpm("textures/grid2.xpm", &doom->xpm[GRID_XPM]);
 	get_xpm("textures/crosshair.xpm", &doom->xpm[CROSSHAIR]);
+	get_xpm("textures/barrel.xpm", &doom->xpm[BARREL_XPM]);
 	init_pthread(doom);
 }
 

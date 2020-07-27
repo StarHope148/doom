@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/23 15:22:33 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/24 01:24:34 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		ft_check_line(t_map *m)
 		return (-2);
 	while (i < m->nbcol)
 	{
-		if (l[i] != '.' && l[i] != '#' && l[i] != 'D' && l[i] != 'O' &&
-			l[i] != 'T' && l[i] != 'G')
+		if (l[i] != EMPTY && l[i] != WALL && l[i] != DOOR && l[i] != OBJECT &&
+			l[i] != TRANSP && l[i] != GRID && l[i] != BARREL)
 			return (-1);
 		i++;
 	}
@@ -59,8 +59,9 @@ int		precheck_one(char *l, int p)
 	int		i;
 
 	i = 0;
-	if (l[p + i] != '#' && l[p + i] != '.' && l[p + i] != 'D'
-			&& l[p + i] != 'T' && l[p + i] != 'O' && l[p + i] != 'G')
+	if (l[p + i] != WALL && l[p + i] != EMPTY && l[p + i] != DOOR &&
+			l[p + i] != TRANSP && l[p + i] != OBJECT && l[p + i] != GRID &&
+				l[p + i] != BARREL)
 		return (-1);
 	i++;
 	if (l[p + i] != ' ')

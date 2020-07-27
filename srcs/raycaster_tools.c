@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 15:25:20 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/23 20:52:06 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void			ft_draw_ceiling(t_thread_env *e)
 	}
 	ft_setup_view_sky(e);
 	e->rc.floorx = 1.5 - (e->rc.rowdistance) *
-		e->rc.eye_x + e->cam.pos_x * 0.0002;
+		e->rc.eye_x + e->cam.pos_x * 0.0005;
 	e->rc.floory = 1.5 - (e->rc.rowdistance) *
-		e->rc.eye_y + e->cam.pos_y * 0.0002;
+		e->rc.eye_y + e->cam.pos_y * 0.0005;
 	e->rc.text_x = abs((int)(e->xpm[SKY].w * e->rc.floorx) % (e->xpm[SKY].w));
 	e->rc.text_y = abs((int)(e->xpm[SKY].h * e->rc.floory) % (e->xpm[SKY].h));
 	e->screen_pixels[e->rc.y_ * W + e->rc.x_] =

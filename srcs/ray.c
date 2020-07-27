@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:52:39 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 14:58:16 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/27 02:19:51 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,17 @@ void	ft_search_collision(t_thread_env *e)
 	{
 		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID)
 			e->transparent_found++;
+		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == BARREL)
+		{
+			if (e->obj.type == 0)
+			{
+				e->object_found++;
+				e->obj.pos.x = e->rc.test_x + 0.5;
+				e->obj.pos.y = e->rc.test_y + 0.5;
+				e->obj.angle = e->rc.ray_angle;
+				e->obj.type = BARREL;
+			}
+		}
 		if (e->rc.sidedistx < e->rc.sidedisty)
 		{
 			e->rc.sidedistx += e->rc.deltadistx;

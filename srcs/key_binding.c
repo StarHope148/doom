@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 06:06:20 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:59:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void		ft_settings(t_env *doom)
 {
 	if (doom->event.key.keysym.sym == SDLK_KP_PLUS)
 	{
-		if (doom->cam.fov_ratio - POV_RATIO_STEP >= 1)
-			doom->cam.fov_ratio -= POV_RATIO_STEP;
+		if (doom->cam.fov_ratio - FOV_RATIO_STEP >= 2)
+			doom->cam.fov_ratio -= FOV_RATIO_STEP;
 		doom->cam.fov = PI / doom->cam.fov_ratio;
 	}
 	else if (doom->event.key.keysym.sym == SDLK_KP_MINUS)
 	{
-		if (doom->cam.fov_ratio + POV_RATIO_STEP <= 6)
-			doom->cam.fov_ratio += POV_RATIO_STEP;
+		if (doom->cam.fov_ratio + FOV_RATIO_STEP <= 6)
+			doom->cam.fov_ratio += FOV_RATIO_STEP;
 		doom->cam.fov = PI / doom->cam.fov_ratio;
 	}
 	else if (doom->event.key.keysym.sym == SDLK_t)
@@ -32,6 +32,25 @@ void		ft_settings(t_env *doom)
 	{
 		doom->no_funky = 1;
 		doom->wall = TEXTURED;
+	}
+}
+
+void		ft_pause_music(t_env *doom)
+{
+	if ((FMOD_Channel_GetPaused(doom->sound.channel_music,
+			&doom->sound.state)) != FMOD_OK)
+		perror("Error in FMOD_Channel_GetPaused for music ");
+	if (doom->sound.state == FALSE)
+	{
+		if ((FMOD_Channel_SetPaused(doom->sound.channel_music, TRUE)) !=
+				FMOD_OK)
+			perror("Error in FMOD_Channel_SetPaused for music ");
+	}
+	else
+	{
+		if ((FMOD_Channel_SetPaused(doom->sound.channel_music, FALSE)) !=
+				FMOD_OK)
+			perror("Error in FMOD_Channel_SetPaused for music ");
 	}
 }
 
@@ -69,23 +88,7 @@ void		ft_movement(t_env *doom)
 			perror("Error in FMOD_System_PlaySound for jump ");
 	}
 	else if (doom->event.key.keysym.sym == SDLK_p)
-	{
-		if ((FMOD_Channel_GetPaused(doom->sound.channel_music,
-				&doom->sound.state)) != FMOD_OK)
-			perror("Error in FMOD_Channel_GetPaused for music ");
-		if (doom->sound.state == FALSE)
-		{
-			if ((FMOD_Channel_SetPaused(doom->sound.channel_music, TRUE)) !=
-					FMOD_OK)
-				perror("Error in FMOD_Channel_SetPaused for music ");
-		}
-		else
-		{
-			if ((FMOD_Channel_SetPaused(doom->sound.channel_music, FALSE)) !=
-					FMOD_OK)
-				perror("Error in FMOD_Channel_SetPaused for music ");
-		}
-	}
+		ft_pause_music(doom);
 	else if (doom->event.key.keysym.sym == SDLK_RETURN)
 		resolve_door(doom);
 }

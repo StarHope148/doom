@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 17:14:04 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/27 18:26:23 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define H 800
 
 # define MAX_DEPTH 20
-# define POV_RATIO 4
-# define POV_RATIO_STEP 1
+# define FOV_RATIO 4
+# define FOV_RATIO_STEP 1
 # define SHADING_DEPTH 10
 # define WALL_SIZE 0.5
 # define SKY_ZOOM 2
@@ -46,15 +46,16 @@
 # define TRANSP 'T'
 # define OBJECT 'O'
 # define GRID 'G'
+# define BARREL 'B'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
 # define DOOR_OPENING_DURATION 3
 # define MIN_ALTITUDE -800
 
-# define MAX_PROCESSOR 32
+# define MAX_PROCESSOR 8
 # define FPS_TEST 0
 
-# define NB_XPM 8
+# define NB_XPM 9
 
 #endif
