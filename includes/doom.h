@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 02:17:53 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 15:44:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,29 @@ typedef struct		s_point
 	int				y;
 }					t_point;
 
+typedef struct		s_pointd
+{
+	double			x;
+	double			y;
+}					t_pointd;
+
 typedef struct		s_object
 {
-	t_point			pos;
+	t_pointd		pos;
 	t_point			screen;
 //	t_point			text;
 	t_point			cursor;
+	double			vect_x;
+	double			vect_y;
+	double			h_;
+	double			w_;
+	int				x_;
+	int				y_;
+	int				delta_x_start;
+	int				delta_x_end;
 	char			type;
-	double			dist_object;
+	double			dist;
 	double			angle;
-	
 }					t_object;
 
 typedef struct		s_thread_env
@@ -261,7 +274,6 @@ typedef struct		s_env
 	t_door			*door;
 	t_xpm			xpm[NB_XPM];
 	Uint32			*screen_pixels;
-	t_raycast		raycast;
 	t_minimap		minimap;
 	t_sound			sound;
 	char			wall;
@@ -332,11 +344,9 @@ void				free_xpm(t_env *doom);
 
 void				init_pthread(t_env *doom);
 void				ft_raycaster(t_thread_env *e);
-void				import_screenpixels(t_env *doom);
 void				free_thread_env(t_shared_data *shared_data);
 int					ft_malloc_tab(t_map *m);
 void				update_thread_env(t_thread_env *thread_env);
-void				import_screen_pixels(t_env *doom);
 
 void				ft_draw_crosshair(t_env *doom);
 
@@ -344,5 +354,7 @@ void				ft_fmod(t_env *doom);
 void				ft_free_fmod(t_env *doom);
 //void				ft_draw_image(t_thread_env *e);
 //void				ft_draw_objects(t_thread_env *e);
+
+void	ft_draw_objects(t_thread_env *e);
 
 #endif

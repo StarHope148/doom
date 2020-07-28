@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 23:20:57 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 15:23:06 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_init_video(t_env *doom)
 	get_xpm("textures/wall_skull.xpm", &doom->xpm[WEST]);
 	get_xpm("textures/wall_skull.xpm", &doom->xpm[EAST]);
 	get_xpm("textures/floor_metal.xpm", &doom->xpm[FLOOR]);
-	get_xpm("textures/sky_red.xpm", &doom->xpm[SKY]);
+	//get_xpm("textures/sky_red.xpm", &doom->xpm[SKY]);
 	get_xpm("textures/grid2.xpm", &doom->xpm[GRID_XPM]);
 	get_xpm("textures/crosshair.xpm", &doom->xpm[CROSSHAIR]);
 	get_xpm("textures/barrel.xpm", &doom->xpm[BARREL_XPM]);

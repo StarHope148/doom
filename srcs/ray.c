@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:52:39 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 02:19:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 05:59:06 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	ft_search_collision(t_thread_env *e)
 				e->object_found++;
 				e->obj.pos.x = e->rc.test_x + 0.5;
 				e->obj.pos.y = e->rc.test_y + 0.5;
-				e->obj.angle = e->rc.ray_angle;
 				e->obj.type = BARREL;
 			}
 		}

@@ -61,3 +61,4 @@ testsave
 wolf3d
 srcs/test.c
 fmod/done
+srcs/pthreadtest.c

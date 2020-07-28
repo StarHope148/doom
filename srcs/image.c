@@ -3,65 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 02:16:50 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 15:43:54 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	ft_update_screen(t_env *doom)
+static void	ft_update_screen(t_env *doom)
 {
 	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
 	ft_set_sdl_minimap_colors(doom);
 	SDL_RenderPresent(doom->renderer);
 }
 
-void	import_screen_pixels(t_env *doom)
+static void	import_screen_pixels(t_env *doom)
 {
 	int				thread_id;
-	int				x;
-	int				y;
+	t_point			pix;
 	t_shared_data	*shared_data;
 
 	shared_data = (t_shared_data*)&doom->shared_data;
 	thread_id = -1;
 	while (++thread_id < shared_data->max_thread)
 	{
-		x = shared_data->tab_thread_env[thread_id].x_start - 1;
-		while (++x < shared_data->tab_thread_env[thread_id].x_end)
+		pix.x = shared_data->tab_thread_env[thread_id].x_start - 1;
+		while (++pix.x < shared_data->tab_thread_env[thread_id].x_end)
 		{
-			y = -1;
-			while (++y < H)
-				doom->screen_pixels[y * W + x] = shared_data->tab_thread_env[thread_id].screen_pixels[y * W + x];
+			pix.y = -1;
+			while (++pix.y < H)
+				doom->screen_pixels[pix.y * W + pix.x] = shared_data->
+					tab_thread_env[thread_id].screen_pixels[pix.y * W + pix.x];
 		}
 	}
 }
 
-void	threadsetc(t_env *doom)
+static void	set_raycast_threads(t_env *doom)
 {
-	int	thread_id;
+	int				thread_id;
+	t_shared_data	*shared_data;
 
-	pthread_mutex_lock(&doom->shared_data.mutex);
-	while (!doom->shared_data.all_work_done)
-		pthread_cond_wait(&doom->shared_data.cond_main, &doom->shared_data.mutex);
-	doom->shared_data.all_work_done = 0;
+	shared_data = &doom->shared_data;
+	pthread_mutex_lock(&shared_data->mutex);
+	while (!shared_data->all_work_done)
+		pthread_cond_wait(&shared_data->cond_main, &shared_data->mutex);
+	shared_data->all_work_done = 0;
 	import_screen_pixels(doom);
 	thread_id = -1;
-	while (++thread_id < doom->shared_data.max_thread)
-		update_thread_env(&doom->shared_data.tab_thread_env[thread_id]);
-	pthread_cond_signal(&doom->shared_data.cond_main);
-	pthread_mutex_unlock(&doom->shared_data.mutex);
+	while (++thread_id < shared_data->max_thread)
+		update_thread_env(&shared_data->tab_thread_env[thread_id]);
+	pthread_cond_signal(&shared_data->cond_main);
+	pthread_mutex_unlock(&shared_data->mutex);
 }
 
-void	ft_print(t_env *doom)
+void		ft_print(t_env *doom)
 {
 	animation_opening_door(doom);
-	threadsetc(doom);
-	//ft_raycaster(doom);
-	//ft_draw_objects(doom);
+	set_raycast_threads(doom);
 	ft_draw_minimap(doom);
 	ft_draw_fps(doom);
 	ft_draw_crosshair(doom);
