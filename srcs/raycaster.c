@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 18:27:19 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 19:16:59 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_raycaster(t_thread_env *e)
 		ft_draw_full_column(e);
 		ft_draw_transparent_textures(e);
 	}
-	//ft_draw_objects(e);
+	ft_draw_objects(e);
 	//printf("object found = %d\n", e->object_found);
 	//printf("eye_y = %f\teye_x = %f\tpos_y = %f\tpos_x = %f\n", e->rc.eye_y, e->rc.eye_x, e->cam.pos_y, e->cam.pos_x);
 }
