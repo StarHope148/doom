@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 15:43:54 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 17:53:07 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ static void	set_raycast_threads(t_env *doom)
 	pthread_mutex_unlock(&shared_data->mutex);
 }
 
+static void	draw_welcome_text(t_env *doom)
+{
+	double	time;
+
+	//if ((time = get_time(doom)) < 4.45)
+	if ((time = get_time(doom)) < 8)
+		draw_centered_text(doom, doom->txt.welcome1);
+	/* else if (5.35 < time && time < 8)
+		draw_centered_text(doom, doom->txt.welcome2); */
+}
+
 void		ft_print(t_env *doom)
 {
 	animation_opening_door(doom);
@@ -65,6 +76,7 @@ void		ft_print(t_env *doom)
 	ft_draw_minimap(doom);
 	ft_draw_fps(doom);
 	ft_draw_crosshair(doom);
+	draw_welcome_text(doom);
 	if (!doom->no_funky)
 		ft_funky_textures(doom);
 	ft_update_screen(doom);

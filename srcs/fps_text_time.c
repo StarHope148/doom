@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 13:34:25 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/16 14:10:13 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 17:50:44 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,7 @@ void	ft_funky_textures(t_env *doom)
 {
 	double	time;
 
-	if ((time = get_time(doom)) < 4.45)
-		draw_centered_text(doom, doom->txt.welcome1);
-	else if (5.35 < time && time < 8)
-		draw_centered_text(doom, doom->txt.welcome2);
+	time = get_time(doom);
 	if (doom->count_puls < MAX_PULS_FUNKY_TEXTURES &&
 		doom->count_puls * doom->music_puls + 6.45 < time)
 	{

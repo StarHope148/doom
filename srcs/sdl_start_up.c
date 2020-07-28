@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 16:24:10 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 17:54:02 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ void	ft_init_musicttf(t_env *doom)
 	if ((doom->txt.font = TTF_OpenFont("arial.ttf", 40)) == NULL)
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_OpenFont()");
 	if (!(doom->txt.welcome1 = TTF_RenderText_Blended(doom->txt.font,
-				" Hello stranger ! Welcome to... ", doom->txt.black)))
+				" Welcome to Doom Nukem ! ", doom->txt.black)))
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
-	if (!(doom->txt.welcome2 = TTF_RenderText_Blended(doom->txt.font,
+/* 	if (!(doom->txt.welcome2 = TTF_RenderText_Blended(doom->txt.font,
 				" The funkiest Doom Nukem ! ", doom->txt.black)))
-		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
+		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()"); */
 }
 
 void	ft_sdl(t_env *doom)
