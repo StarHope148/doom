@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 18:59:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 01:25:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ void		ft_movement(t_env *doom)
 	else if (doom->event.key.keysym.sym == SDLK_p)
 		ft_pause_music(doom);
 	else if (doom->event.key.keysym.sym == SDLK_RETURN)
+	{
 		resolve_door(doom);
+		ft_switch_button(doom);
+	}
 }

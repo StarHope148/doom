@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/24 01:24:34 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 04:26:45 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int		ft_check_line(t_map *m)
 	while (i < m->nbcol)
 	{
 		if (l[i] != EMPTY && l[i] != WALL && l[i] != DOOR && l[i] != OBJECT &&
-			l[i] != TRANSP && l[i] != GRID && l[i] != BARREL)
+				l[i] != TRANSP && l[i] != GRID && l[i] != BARREL &&
+				l[i] != BUTTON_OFF && l[i] != BUTTON_ON && l[i] != DOOR_OPENED)
 			return (-1);
 		i++;
 	}
@@ -61,7 +62,8 @@ int		precheck_one(char *l, int p)
 	i = 0;
 	if (l[p + i] != WALL && l[p + i] != EMPTY && l[p + i] != DOOR &&
 			l[p + i] != TRANSP && l[p + i] != OBJECT && l[p + i] != GRID &&
-				l[p + i] != BARREL)
+			l[p + i] != BARREL && l[p + i] != BUTTON_OFF &&
+			l[p + i] != BUTTON_ON && l[p + i] != DOOR_OPENED)
 		return (-1);
 	i++;
 	if (l[p + i] != ' ')

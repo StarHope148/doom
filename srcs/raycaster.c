@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 22:00:55 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 05:48:04 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_draw_transparent_textures(t_thread_env *e)
 	while (e->transparent_found > 0)
 	{
 		e->transparent_found = 1;
-		ft_calc_next_intersection(e, GRID);
+		ft_calc_next_intersection_transparent(e);
 		ft_calc_sampling_x(e);
 		ft_fix_fisheye_distorsion(e);
 		ft_set_ceiling_floor(e);
@@ -182,14 +182,14 @@ void	ft_raycaster(t_thread_env *e)
 	while (++e->rc.x_ < e->x_end)
 	{
 		ft_set_new_ray_angle(e);
-		ft_calc_next_intersection(e, WALL);
+		ft_calc_next_intersection(e);
 		ft_calc_sampling_x(e);
 		ft_fix_fisheye_distorsion(e);
 		ft_set_ceiling_floor(e);
 		ft_draw_full_column(e);
 		ft_draw_transparent_textures(e);
 	}
-	ft_draw_objects(e);
+	//ft_draw_objects(e);
 	//printf("object found = %d\n", e->object_found);
-	//printf("eye_y = %f\teye_x = %f\n", e->rc.eye_y, e->rc.eye_x);
+	//printf("eye_y = %f\teye_x = %f\tpos_y = %f\tpos_x = %f\n", e->rc.eye_y, e->rc.eye_x, e->cam.pos_y, e->cam.pos_x);
 }

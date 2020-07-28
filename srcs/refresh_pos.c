@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 14:58:30 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 01:20:00 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int		wall_on_cam_pos(t_env *doom)
 	else if (map_symbol == TRANSP)
 		return (3);
 	else if (map_symbol == GRID)
+		return (3);
+	else if (map_symbol == BUTTON_OFF)
+		return (3);
+	else if (map_symbol == BUTTON_ON)
 		return (3);
 	return (0);
 }

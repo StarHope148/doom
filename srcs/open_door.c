@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/23 16:10:45 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 17:40:52 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	anim_one_door(t_env *doom, t_door *door)
 	}
 	else if (duration >= DOOR_OPENING_DURATION)
 	{
-		doom->map.data[door->y * doom->map.nbcol + door->x] = '.';
+		doom->map.data[door->y * doom->map.nbcol + door->x] = DOOR_OPENED;
 		doom->map.alt[door->y * doom->map.nbcol + door->x] = 1;
 	}
 }
@@ -43,7 +43,7 @@ void		animation_opening_door(t_env *doom)
 	door = doom->door;
 	while (door)
 	{
-		if (doom->map.data[door->y * doom->map.nbcol + door->x] == '.')
+		if (doom->map.data[door->y * doom->map.nbcol + door->x] == DOOR_OPENED)
 		{
 			doom->door = door->next;
 			ft_memdel((void **)&door);
@@ -71,10 +71,13 @@ static void	new_door(t_env *doom, int door_y, int door_x, t_door *last)
 	d->y = door_y;
 }
 
-static void	init_door(t_env *doom, int door_y, int door_x)
+void		init_door(t_env *doom, int door_y, int door_x)
 {
 	t_door	*last;
 
+	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.door_opening,
+			NULL, 0, NULL)) != FMOD_OK)
+		perror("Error in FMOD_System_PlaySound for door_opening ");
 	last = doom->door;
 	while (last && last->next)
 		last = last->next;
@@ -85,22 +88,9 @@ void		resolve_door(t_env *doom)
 {
 	int		y;
 	int		x;
-	double	angle;
-	char	*d;
 
-	d = doom->map.data;
-	y = (int)doom->cam.pos_y;
-	x = (int)doom->cam.pos_x;
-	angle = doom->cam.angle;
-	if ((angle <= -PI * 0.25 && angle >= -PI * 0.75) && d[y * doom->map.nbcol + x - 1] == 'D')
-		x = x - 1;
-	else if ((angle >= PI * 0.75 || angle <= -PI * 0.75) && d[(y - 1) * doom->map.nbcol + x] == 'D')
-		y = y - 1;
-	else if ((angle >= -PI * 0.25 && angle <= PI * 0.25) && d[(y + 1) * doom->map.nbcol + x] == 'D')
-		y = y + 1;
-	else if ((angle >= PI * 0.25 && angle <= PI * 0.75) && d[y * doom->map.nbcol +x + 1] == 'D')
-		x = x + 1;
-	else
-		return ;
-	init_door(doom, y, x);
+	y = doom->cam.pos_y + cos(doom->cam.angle);
+	x = doom->cam.pos_x + sin(doom->cam.angle);
+	if (doom->map.data[y * doom->map.nbcol + x] == DOOR)
+		init_door(doom, y, x);
 }

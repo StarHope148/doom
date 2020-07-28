@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 17:03:06 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 05:58:34 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,31 @@ void	ft_set_points(t_env *doom)
 	doom->minimap.def_y = doom->minimap.y;
 }
 
+void	ft_set_tile_color(t_env *doom, Uint32 *color)
+{
+	if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == WALL)
+		*color = LIME;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == EMPTY)
+		*color = GRAY;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR ||
+			doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR_OPENED)
+		*color = PURPLE;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == GRID)
+		*color = ORANGE;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BUTTON_OFF ||
+			doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BUTTON_ON)
+		*color = RED;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == OBJECT)
+		*color = CYAN;
+	else
+		*color = BLACK;
+}
+
 void	ft_draw_minimap_symbol(t_env *doom)
 {
 	Uint32	color;
 
-	if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == WALL)
-		color = LIME;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == EMPTY)
-		color = GRAY;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR)
-		color = PURPLE;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == GRID)
-		color = ORANGE;
+	ft_set_tile_color(doom, &color);
 	while (doom->minimap.done == 0)
 	{
 		doom->screen_pixels[doom->minimap.y * W + doom->minimap.x] = color;
