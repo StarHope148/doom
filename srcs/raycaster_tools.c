@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 20:52:06 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 16:02:37 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void			ft_set_ceiling_floor(t_thread_env *e)
 	e->rc.floor = middle +
 		(H / e->rc.distance_towall) * (e->cam.pos_z * (1)) +
 			e->cam.angle_z;
+	//e->rc.floor -= (e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x])
+	//		/ e->rc.distance_towall * 100;		// permit cell to "sink" instead of being "crushed" while opening
 }
 
 void			ft_setup_view_sky(t_thread_env *e)
@@ -57,7 +59,7 @@ void			ft_draw_ceiling(t_thread_env *e)
 
 void			ft_draw_wall(t_thread_env *e)
 {
-	if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == DOOR || e->wall == TEXTURED)
+	if (e->wall == TEXTURED)
 		ft_apply_textured_wall(e);
 	else if (e->wall == COLOR_ORIENTED)
 		ft_apply_color_oriented_wall(e);

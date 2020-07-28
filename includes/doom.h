@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 15:44:20 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 18:31:40 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef enum		e_cardinal_point
 	SKY,
 	GRID_XPM,
 	CROSSHAIR,
-	BARREL_XPM
+	BARREL_XPM,
+	BUTTON_OFF_XPM,
+	BUTTON_ON_XPM,
+	DOOR_METAL_XPM
 }					t_cardinal_point;
 
 typedef enum	e_motion
@@ -257,6 +260,10 @@ typedef struct		s_sound
 	FMOD_SYSTEM		*system;
 	FMOD_SOUND		*music;
 	FMOD_SOUND		*jump;
+	FMOD_SOUND		*switch_on;
+	FMOD_SOUND		*switch_off;
+	FMOD_SOUND		*door_opening;
+	FMOD_SOUND		*door_closing;
 	FMOD_CHANNEL	*channel_music;
 	int				state;
 }					t_sound;
@@ -321,7 +328,8 @@ void				ft_apply_shaded_wall(t_thread_env *e);
 void				ft_free_map(t_map *m);
 void				ft_free_door(t_door *list);
 void				ft_destroy_texture_renderer_window(t_env *doom);
-void				ft_calc_next_intersection(t_thread_env *e, char wall_type);
+void				ft_calc_next_intersection(t_thread_env *e);
+void				ft_calc_next_intersection_transparent(t_thread_env *e);
 
 void				ft_key_pressed(t_env *doom);
 void				ft_key_released(t_env *doom);
@@ -352,9 +360,10 @@ void				ft_draw_crosshair(t_env *doom);
 
 void				ft_fmod(t_env *doom);
 void				ft_free_fmod(t_env *doom);
-//void				ft_draw_image(t_thread_env *e);
-//void				ft_draw_objects(t_thread_env *e);
+void				ft_switch_button(t_env *doom);
 
-void	ft_draw_objects(t_thread_env *e);
+void				init_door(t_env *doom, int door_y, int door_x);
+
+void				ft_draw_objects(t_thread_env *e);
 
 #endif

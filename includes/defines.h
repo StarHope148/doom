@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/27 18:26:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/28 05:31:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,20 @@
 # define OBJECT 'O'
 # define GRID 'G'
 # define BARREL 'B'
+# define BUTTON_OFF 'Y'
+# define BUTTON_ON 'H'
+# define DOOR_OPENED 'R'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
-# define DOOR_OPENING_DURATION 3
-# define MIN_ALTITUDE -800
+# define BUTTON_RANGE 2
+
+# define DOOR_OPENING_DURATION 2
+# define MIN_ALTITUDE -17
 
 # define MAX_PROCESSOR 8
 # define FPS_TEST 0
 
-# define NB_XPM 9
+# define NB_XPM 12
 
 #endif

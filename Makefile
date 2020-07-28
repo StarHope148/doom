@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/26 22:50:27 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/28 01:29:32 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC_NAME += fps_text_time.c
 SRC_NAME += crosshair.c
 SRC_NAME += fmod_start_up.c
 SRC_NAME += object_sprites.c
+SRC_NAME += button.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

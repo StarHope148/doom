@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:52:39 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 05:59:06 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 18:28:48 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	ft_search_last_transparent(t_thread_env *e)
 	i = 0;
 	while (i < e->transparent_found)
 	{
-		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID)
+		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID ||
+				e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == DOOR)
 			i++;
 		if (i >= e->transparent_found)
 			return ;
@@ -76,13 +77,22 @@ void	ft_search_last_transparent(t_thread_env *e)
 	}
 }
 
+void	ft_transparent_found(t_thread_env *e)
+{
+	if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID ||
+			e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == DOOR)
+		e->transparent_found++;
+}
+
 void	ft_search_collision(t_thread_env *e)
 {
 	while (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] != WALL &&
-			e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] != DOOR)
+			e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] !=
+			BUTTON_OFF &&
+			e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] !=
+			BUTTON_ON)
 	{
-		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == GRID)
-			e->transparent_found++;
+		ft_transparent_found(e);
 		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == BARREL)
 		{
 			if (e->obj.type == 0)
@@ -90,7 +100,8 @@ void	ft_search_collision(t_thread_env *e)
 				e->object_found++;
 				e->obj.pos.x = e->rc.test_x + 0.5;
 				e->obj.pos.y = e->rc.test_y + 0.5;
-				e->obj.type = BARREL;
+				e->obj.angle = e->rc.ray_angle;
+				e->obj.type = e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x];
 			}
 		}
 		if (e->rc.sidedistx < e->rc.sidedisty)
@@ -124,13 +135,18 @@ void	ft_calcul_distance_to_collision(t_thread_env *e)
 	}
 }
 
-void	ft_calc_next_intersection(t_thread_env *e, char wall_type)
+void	ft_calc_next_intersection_transparent(t_thread_env *e)
 {
 	ft_setup(e);
 	ft_set_direction(e);
-	if (wall_type == WALL)
-		ft_search_collision(e);
-	else if (wall_type == GRID)
-		ft_search_last_transparent(e);
+	ft_search_last_transparent(e);
+	ft_calcul_distance_to_collision(e);
+}
+
+void	ft_calc_next_intersection(t_thread_env *e)
+{
+	ft_setup(e);
+	ft_set_direction(e);
+	ft_search_collision(e);
 	ft_calcul_distance_to_collision(e);
 }
