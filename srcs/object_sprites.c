@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 15:15:03 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/28 17:37:55 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ static void		init_draw_objects(t_thread_env *e)
 									- atan2(e->obj.vect_y, e->obj.vect_x);
 	e->obj.angle += e->obj.angle < -PI ? 2 * PI : 0;
 	e->obj.angle -= e->obj.angle > PI ? 2 * PI : 0;
-	e->obj.y_ = H / 2 - H / e->obj.dist;
-	e->obj.h_ = 2 * H / (e->obj.dist);
-	e->obj.w_ = e->obj.h_ * e->xpm[BARREL_XPM].w / e->xpm[BARREL_XPM].h;
-	e->obj.x_ = W - W * e->obj.angle / e->cam.fov - e->obj.w_ / 2;
+	e->obj.h_ = 2 * H / (e->obj.dist); //hauteur de l'objet a l'ecran
+	e->obj.w_ = e->obj.h_ * e->xpm[BARREL_XPM].w / e->xpm[BARREL_XPM].h; // idem width
+	e->obj.y_ = H / 2 - H / e->obj.dist; //pos depart a l'ecran
+	e->obj.x_ = W - W * e->obj.angle / e->cam.fov - e->obj.w_ / 2; //pos depart a l'ecran
 	e->obj.delta_x_end = e->obj.w_ + e->obj.x_ > e->x_end ?
 										e->x_end - e->obj.x_ : e->obj.w_;
 	e->obj.delta_x_start = e->obj.x_ < e->x_start ? e->x_start - e->obj.x_ : 0;
+	//e->obj.delta_x_end = e->obj.w_;
+	//e->obj.delta_x_start = 0;
 }
 
 static void		modify_screen_pixels(t_thread_env *e)
