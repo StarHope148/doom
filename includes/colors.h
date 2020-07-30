@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:51:56 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/12/03 17:54:40 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 11:46:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@
 # define NAVY 0x00008000
 # define BROWN 0x66330000
 # define SAND 0xF2D16B00
+# define BURLYWOOD 0xDFB98800
+# define GOLD 0xFFD70000
 
 #endif

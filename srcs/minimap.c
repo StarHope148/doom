@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 02:54:18 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 11:44:10 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	ft_set_tile_color(t_env *doom, Uint32 *color)
 	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j]==
 			HEALTH_POTION)
 		*color = WHITE;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j]==
+			KEY)
+		*color = YELLOW;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j]==
+			TORCH)
+		*color = BURLYWOOD;
 	else
 		*color = BLACK;
 }
