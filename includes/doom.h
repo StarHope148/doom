@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:02:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 10:48:01 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -362,6 +362,7 @@ void				draw_centered_text(t_env *doom, SDL_Surface *text);
 void				resolve_door(t_env *doom);
 void				animation_opening_door(t_env *doom);
 
+void				editor(char *mapfile);
 void				save_in_file(t_env *doom);
 
 int					get_xpm(char *xpm_file, t_xpm *xpm);

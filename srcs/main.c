@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/16 14:10:12 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/26 22:05:06 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ int		ft_random(void)
 
 int		main(int ac, char **av)
 {
-	if (ac != 2)
+	if (ac != 2 && ac != 3)
 		return (ft_usage());
 	if (ft_strcmp("/dev/random", av[1]) == 0)
 		return (ft_random());
-	ft_doom(av[1]);
+	if (ac == 2)
+		ft_doom(av[1]);
+	else if (ac == 3)
+		editor(av[1]);
 	return (0);
 }
 
