@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:33:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 10:02:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,15 @@ typedef enum		e_texture_id
 	BUTTON_ON_XPM,
 	DOOR_METAL_XPM,
 	HEALTH_POTION_XPM,
-	KEY_XPM
+	KEY_XPM,
+	TORCH_1_XPM,
+	TORCH_2_XPM,
+	TORCH_3_XPM,
+	TORCH_4_XPM,
+	TORCH_5_XPM,
+	TORCH_6_XPM,
+	TORCH_7_XPM,
+	TORCH_8_XPM
 }					t_texture_id;
 
 typedef enum	e_motion
@@ -383,6 +391,7 @@ int					ft_choose_and_init_sprite(t_env *e, t_object *tmp);
 void				init_draw_barrel(t_env *e, t_object *tmp);
 void				init_draw_health_potion(t_env *e, t_object *tmp);
 void				init_draw_key(t_env *e, t_object *tmp);
+void				init_draw_torch(t_env *e, t_object *tmp);
 
 void				ft_load_textures(t_env *doom);
 

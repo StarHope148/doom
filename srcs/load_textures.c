@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 01:42:21 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:15:50 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 10:07:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,31 @@ void		ft_load_floor_sky_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for sky_red.xpm");
 }
 
+void		ft_load_torch_textures(t_env *doom)
+{
+	if ((get_xpm("textures/torch/torch_1.xpm", &doom->xpm[TORCH_1_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_1.xpm");
+	if ((get_xpm("textures/torch/torch_2.xpm", &doom->xpm[TORCH_2_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_2.xpm");
+	if ((get_xpm("textures/torch/torch_3.xpm", &doom->xpm[TORCH_3_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_3.xpm");
+	if ((get_xpm("textures/torch/torch_4.xpm", &doom->xpm[TORCH_4_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_4.xpm");
+	if ((get_xpm("textures/torch/torch_5.xpm", &doom->xpm[TORCH_5_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_5.xpm");
+	if ((get_xpm("textures/torch/torch_6.xpm", &doom->xpm[TORCH_6_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_6.xpm");
+	if ((get_xpm("textures/torch/torch_7.xpm", &doom->xpm[TORCH_7_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_7.xpm");
+	if ((get_xpm("textures/torch/torch_8.xpm", &doom->xpm[TORCH_8_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_8.xpm");
+}
+
 void		ft_load_textures(t_env *doom)
 {
 	ft_load_wall_textures(doom);
 	ft_load_floor_sky_textures(doom);
+	ft_load_torch_textures(doom);
 	if ((get_xpm("textures/chain.xpm", &doom->xpm[GRID_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for chain.xpm");
 	if ((get_xpm("textures/crosshair.xpm", &doom->xpm[CROSSHAIR])) != 0)

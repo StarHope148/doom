@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 07:21:26 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 10:12:35 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ void		modify_screen_pixels(t_env *e, t_object *tmp)
 			sample.x = delta.x * e->xpm[xpm_id].w / tmp->data.w_;
 			e->screen_y = tmp->data.y_ + delta.y;
 			e->screen_x = tmp->data.x_ + delta.x;
-			if (e->xpm[xpm_id].pixels[sample.y *
-					e->xpm[xpm_id].w + sample.x] != MAGENTA)
-			{
-				if (e->screen_y * W + e->screen_x < W * H && e->screen_y > 0 &&
-						e->screen_x > 0 && e->screen_x < W &&
-						tmp->data.dist < e->shared_data.depth_buf[e->screen_x])
-					e->screen_pixels[e->screen_y * W + e->screen_x] = e->xpm
-						[xpm_id].pixels[sample.y * e->xpm[xpm_id].w + sample.x];
-			}
+			if (e->xpm[xpm_id].pixels != NULL && e->xpm[xpm_id].pixels[sample.y
+					* e->xpm[xpm_id].w + sample.x] != MAGENTA &&
+					e->screen_y * W + e->screen_x < W * H &&
+					e->screen_y > 0 && e->screen_x > 0 && e->screen_x < W &&
+					tmp->data.dist < e->shared_data.depth_buf[e->screen_x])
+				e->screen_pixels[e->screen_y * W + e->screen_x] = e->xpm
+					[xpm_id].pixels[sample.y * e->xpm[xpm_id].w + sample.x];
 		}
 	}
 }

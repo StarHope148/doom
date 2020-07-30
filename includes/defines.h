@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:42:11 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 09:42:34 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define WALL '#'
 # define EMPTY '.'
 # define DOOR 'D'
-# define TRANSP 'T'
 # define OBJECT 'O'
 # define GRID 'G'
 # define BARREL 'B'
@@ -59,6 +58,7 @@
 # define DOOR_OPENED 'R'
 # define HEALTH_POTION 'P'
 # define KEY 'K'
+# define TORCH 'T'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
@@ -70,6 +70,6 @@
 # define MAX_PROCESSOR 16
 # define FPS_TEST 0
 
-# define NB_XPM 14
+# define NB_XPM 22
 
 #endif

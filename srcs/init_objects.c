@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 21:25:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:22:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 09:50:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			ft_count_objects(t_env *doom)
 		{
 			cell_type = doom->map.data[pos.y * doom->map.nbcol + pos.x];
 			if (cell_type == BARREL || cell_type == HEALTH_POTION ||
-					cell_type == KEY)
+					cell_type == KEY || cell_type == TORCH)
 				ft_add_object(doom, pos);
 			pos.x++;
 		}
