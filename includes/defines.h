@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:15:09 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 08:42:11 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PROJ_DIST 18
 # define PROJ_DIST_STEP 0.75
 # define MAX_PROJ_DIST 64
-# define MIN_PROJ_DIST 12
+# define MIN_PROJ_DIST 2
 
 # define MOVE_SPEED 0.035
 # define RUN_RATIO 3

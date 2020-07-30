@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:19:20 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 08:33:00 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct		s_camera
 	int				angle_z;
 	double			fov;
 	double			fov_ratio;
-	int				proj_dist;
+	double			proj_dist;
 }					t_camera;
 
 typedef struct		s_movements
