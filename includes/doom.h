@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 18:31:40 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 02:07:11 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "colors.h"
 # include "../fmod/inc/fmod.h"
 
-typedef enum		e_cardinal_point
+typedef enum		e_texture_id
 {
 	NORTH,
 	SOUTH,
@@ -43,8 +43,9 @@ typedef enum		e_cardinal_point
 	BARREL_XPM,
 	BUTTON_OFF_XPM,
 	BUTTON_ON_XPM,
-	DOOR_METAL_XPM
-}					t_cardinal_point;
+	DOOR_METAL_XPM,
+	HEALTH_POTION_XPM
+}					t_texture_id;
 
 typedef enum	e_motion
 {
@@ -166,11 +167,10 @@ typedef struct		s_pointd
 	double			y;
 }					t_pointd;
 
-typedef struct		s_object
+typedef struct		s_object_data
 {
 	t_pointd		pos;
 	t_point			screen;
-//	t_point			text;
 	t_point			cursor;
 	double			vect_x;
 	double			vect_y;
@@ -180,9 +180,16 @@ typedef struct		s_object
 	int				y_;
 	int				delta_x_start;
 	int				delta_x_end;
-	char			type;
+	int				type;
 	double			dist;
 	double			angle;
+	int				in_fov;
+}					t_object_data;
+
+typedef struct		s_object
+{
+	t_object_data	data;
+	struct s_object	*next;
 }					t_object;
 
 typedef struct		s_thread_env
@@ -200,8 +207,6 @@ typedef struct		s_thread_env
 	void			*doom;
 	void			*shared_data;
 	char			transparent_found;
-	char			object_found;
-	t_object		obj;
 }					t_thread_env;
 
 typedef struct		s_shared_data
@@ -214,6 +219,7 @@ typedef struct		s_shared_data
 	int				all_work_done;
 	int				copied;
 	char			stop;
+	double			depth_buf[W];
 }					t_shared_data;
 
 typedef struct		s_minimap
@@ -294,6 +300,9 @@ typedef struct		s_env
 	int				no_funky;
 	t_shared_data	shared_data;
 	char			new_values;
+	t_object		obj;
+	int				screen_x;
+	int				screen_y;
 }					t_env;
 
 void				ft_doom(char *mapfile);
@@ -349,6 +358,7 @@ int					get_xpm(char *xpm_file, t_xpm *xpm);
 int					xpm_fill(t_xpm *xpm, char *line, int num);
 void				free_one_xpm(t_xpm *xpm);
 void				free_xpm(t_env *doom);
+void				ft_free_obj(t_object **obj);
 
 void				init_pthread(t_env *doom);
 void				ft_raycaster(t_thread_env *e);
@@ -364,6 +374,13 @@ void				ft_switch_button(t_env *doom);
 
 void				init_door(t_env *doom, int door_y, int door_x);
 
-void				ft_draw_objects(t_thread_env *e);
+void				ft_draw_objects(t_env *e);
+void				ft_count_objects(t_env *doom);
+int					ft_choose_sprite(t_env *e, t_object *tmp);
+
+void				init_draw_barrel(t_env *e, t_object *tmp);
+void				init_draw_health_potion(t_env *e, t_object *tmp);
+
+void				ft_load_textures(t_env *doom);
 
 #endif

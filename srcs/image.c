@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 17:53:07 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/30 00:39:07 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		ft_print(t_env *doom)
 {
 	animation_opening_door(doom);
 	set_raycast_threads(doom);
+	ft_draw_objects(doom);
 	ft_draw_minimap(doom);
 	ft_draw_fps(doom);
 	ft_draw_crosshair(doom);

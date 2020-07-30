@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:52:39 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 18:28:48 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 02:30:16 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,6 @@ void	ft_search_collision(t_thread_env *e)
 			BUTTON_ON)
 	{
 		ft_transparent_found(e);
-		if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == BARREL)
-		{
-			if (e->obj.type == 0)
-			{
-				e->object_found++;
-				e->obj.pos.x = e->rc.test_x + 0.5;
-				e->obj.pos.y = e->rc.test_y + 0.5;
-				e->obj.angle = e->rc.ray_angle;
-				e->obj.type = e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x];
-			}
-		}
 		if (e->rc.sidedistx < e->rc.sidedisty)
 		{
 			e->rc.sidedistx += e->rc.deltadistx;

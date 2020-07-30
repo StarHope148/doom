@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/28 01:29:32 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/30 02:08:30 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,10 @@ SRC_NAME += crosshair.c
 SRC_NAME += fmod_start_up.c
 SRC_NAME += object_sprites.c
 SRC_NAME += button.c
+SRC_NAME += init_objects.c
+SRC_NAME += init_object_type.c
+SRC_NAME += load_textures.c
+SRC_NAME += object_sprites_tools.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -114,7 +118,7 @@ re: fclean all
 
 debug: $(COMPILE_SDL2)
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm $(FMOD)
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) $(FMOD)
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM

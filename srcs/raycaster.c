@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 19:16:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 02:30:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ void	ft_draw_transparent_textures(t_thread_env *e)
 
 void	ft_raycaster(t_thread_env *e)
 {
+	t_shared_data *tmp;
+
+	tmp = (t_shared_data *)e->shared_data;
 	e->rc.x_ = e->x_start - 1;
 	while (++e->rc.x_ < e->x_end)
 	{
@@ -97,8 +100,8 @@ void	ft_raycaster(t_thread_env *e)
 		ft_set_ceiling_floor(e);
 		ft_draw_full_column(e);
 		ft_draw_transparent_textures(e);
+		tmp->depth_buf[e->rc.x_] = e->rc.distance_towall + 0.5;
 	}
-	ft_draw_objects(e);
 	//printf("object found = %d\n", e->object_found);
 	//printf("eye_y = %f\teye_x = %f\tpos_y = %f\tpos_x = %f\n", e->rc.eye_y, e->rc.eye_x, e->cam.pos_y, e->cam.pos_x);
 }

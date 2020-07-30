@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 01:20:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 02:22:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		wall_on_cam_pos(t_env *doom)
 	else if (map_symbol == BUTTON_OFF)
 		return (3);
 	else if (map_symbol == BUTTON_ON)
+		return (3);
+	else if (map_symbol == BARREL)
 		return (3);
 	return (0);
 }

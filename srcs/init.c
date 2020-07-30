@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/23 15:12:31 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/30 00:30:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,13 @@ void	ft_initialize(t_env *doom, char *mapfile)
 	ft_init_env(doom);
 	ft_init_map(doom, mapfile);
 	ft_setspawn(doom);
+	ft_count_objects(doom);
+
+	//debug display object list with type and [y][x]
+	//t_object *tmp = &doom->obj;
+	//while (tmp != NULL)
+	//{
+	//	printf("%c at [%d][%d]\n", tmp->data.type, (int)tmp->data.pos.y, (int)tmp->data.pos.x);
+	//	tmp = tmp->next;
+	//}
 }
