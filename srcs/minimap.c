@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 05:58:34 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 02:54:18 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ void	ft_set_tile_color(t_env *doom, Uint32 *color)
 		*color = GRAY;
 	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR ||
 			doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR_OPENED)
-		*color = PURPLE;
+		*color = BLUE;
 	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == GRID)
 		*color = ORANGE;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BUTTON_OFF ||
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol +
+			doom->minimap.j] == BUTTON_OFF ||
 			doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BUTTON_ON)
 		*color = RED;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == OBJECT)
-		*color = CYAN;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BARREL)
+		*color = BROWN;
+	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j]==
+			HEALTH_POTION)
+		*color = WHITE;
 	else
 		*color = BLACK;
 }

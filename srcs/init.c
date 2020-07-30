@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 00:30:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:26:47 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	ft_init_env(t_env *doom)
 {
 	ft_bzero((void *)doom, sizeof(t_env));
 	ft_bzero((void *)&(doom->map), sizeof(t_map));
+	doom->cam.proj_dist = PROJ_DIST;
 	doom->cam.angle = PI / 2;
-	doom->cam.pos_z = 1;
-	doom->cam.fov_ratio = 4;
-	doom->no_funky = 1;
+	doom->cam.pos_z = DEFAULT_POS_Z;
+	doom->cam.angle_z = H / 2;
+	doom->cam.fov_ratio = FOV_RATIO;
 	doom->cam.fov = PI / doom->cam.fov_ratio;
+	doom->no_funky = 1;
 	doom->wall = TEXTURED;
 	doom->block = H * 0.01;
 	doom->pitch = 4 * W;
@@ -30,8 +32,7 @@ void	ft_init_env(t_env *doom)
 	doom->moves.movespeed = MOVE_SPEED;
 	pthread_mutex_init(&doom->shared_data.mutex, 0);
 	pthread_cond_init(&doom->shared_data.cond, 0);
-	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32)
-								* H * W)))
+	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32) * H * W)))
 		ft_exit(doom, EXIT_FAILURE,
 			"Error mallocing screen_pixels in ft_init_env");
 }

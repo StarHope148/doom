@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 01:33:15 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:46:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@
 
 # define MAX_DEPTH 20
 # define FOV_RATIO 4
-# define FOV_RATIO_STEP 1
+# define FOV_RATIO_STEP 0.5
 # define SHADING_DEPTH 10
-# define WALL_SIZE 0.5
+# define WALL_SIZE 64
 # define SKY_ZOOM 2
+
+# define PROJ_DIST 18
+# define PROJ_DIST_STEP 0.75
+# define MAX_PROJ_DIST 64
+# define MIN_PROJ_DIST 12
 
 # define MOVE_SPEED 0.035
 # define RUN_RATIO 3
@@ -35,10 +40,12 @@
 # define UP_DOWN_ANGLE_SPEED 30
 # define MAX_ANGLE_Z 1200
 
-# define INC_POS_Z 0.1
-# define MAX_POS_Z 2
-# define DEFAULT_POS_Z 1
-# define MIN_POS_Z 0.5
+# define DEFAULT_POS_Z 32
+# define INC_POS_Z 4
+# define MAX_POS_Z 128
+# define MIN_POS_Z 0.1
+# define MAX_JUMP 60
+# define MIN_CROUCH 15
 
 # define WALL '#'
 # define EMPTY '.'
@@ -57,7 +64,7 @@
 # define BUTTON_RANGE 2
 
 # define DOOR_OPENING_DURATION 2
-# define MIN_ALTITUDE -17
+# define MIN_ALTITUDE -32
 
 # define MAX_PROCESSOR 16
 # define FPS_TEST 0

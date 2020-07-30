@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 02:08:10 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:21:26 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ void		modify_screen_pixels(t_env *e, t_object *tmp)
 {
 	t_point	delta;
 	t_point	sample;
-	t_point	pix;
-	Uint32	color;
 	int		xpm_id;
 
-	xpm_id = ft_choose_sprite(e, tmp);
+	xpm_id = ft_choose_and_init_sprite(e, tmp);
 	delta.y = -1;
 	while (++delta.y < tmp->data.h_)
 	{
@@ -29,20 +27,19 @@ void		modify_screen_pixels(t_env *e, t_object *tmp)
 		{
 			sample.y = delta.y * e->xpm[xpm_id].h / tmp->data.h_;
 			sample.x = delta.x * e->xpm[xpm_id].w / tmp->data.w_;
-			color = e->xpm[xpm_id].pixels
-				[sample.y * e->xpm[xpm_id].w + sample.x];
-			pix.y = tmp->data.y_ + delta.y;
-			pix.x = tmp->data.x_ + delta.x;
-			if (color != MAGENTA)
+			e->screen_y = tmp->data.y_ + delta.y;
+			e->screen_x = tmp->data.x_ + delta.x;
+			if (e->xpm[xpm_id].pixels[sample.y *
+					e->xpm[xpm_id].w + sample.x] != MAGENTA)
 			{
-				if (pix.y * W + pix.x < W * H && pix.y > 0 && pix.x > 0 &&
-						pix.x < W &&
-						tmp->data.dist < e->shared_data.depth_buf[pix.x])
-					e->screen_pixels[pix.y * W + pix.x] = color;
+				if (e->screen_y * W + e->screen_x < W * H && e->screen_y > 0 &&
+						e->screen_x > 0 && e->screen_x < W &&
+						tmp->data.dist < e->shared_data.depth_buf[e->screen_x])
+					e->screen_pixels[e->screen_y * W + e->screen_x] = e->xpm
+						[xpm_id].pixels[sample.y * e->xpm[xpm_id].w + sample.x];
 			}
 		}
 	}
-
 }
 
 void		set_obj_dist(t_env *e, t_object *tmp)
@@ -66,10 +63,10 @@ void		set_obj_angle(t_env *e, t_object *tmp)
 		tmp->data.in_fov = FALSE;
 }	
 
-void		ft_set_order_list(t_env *e, t_object *tmp)
+void		ft_sort_list(t_env *e, t_object *tmp)
 {
 	int				done;
-	t_object_data	tmp_data;;
+	t_object_data	tmp_data;
 	
 	done = FALSE;
 	while (done == FALSE)
@@ -81,10 +78,10 @@ void		ft_set_order_list(t_env *e, t_object *tmp)
 		{
 			if (tmp->data.dist < tmp->next->data.dist)
 			{
-				 tmp_data = tmp->data;
-				 tmp->data = tmp->next->data;
-				 tmp->next->data = tmp_data;
-				 done = FALSE;
+				tmp_data = tmp->data;
+				tmp->data = tmp->next->data;
+				tmp->next->data = tmp_data;
+				done = FALSE;
 			}
 			else
 				done = TRUE;
@@ -103,7 +100,7 @@ void		ft_draw_objects(t_env *e)
 		set_obj_dist(e, tmp);
 		tmp = tmp->next;
 	}
-	ft_set_order_list(e, tmp);
+	ft_sort_list(e, tmp);
 	tmp = &e->obj;
 	while (tmp != NULL)
 	{
@@ -112,10 +109,4 @@ void		ft_draw_objects(t_env *e)
 			modify_screen_pixels(e, tmp);
 		tmp = tmp->next;
 	}
-
-	
-	//display depth_buffer
-	//for (int x = 0; x < W; x++)
-	//	printf("%.1f |", e->shared_data.depth_buf[x]);
-	//printf("\n\n\n");
 }

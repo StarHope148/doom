@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 16:02:37 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 05:22:32 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 void			ft_set_ceiling_floor(t_thread_env *e)
 {
-	int		middle;
-
-	middle = H / 2;
-	e->rc.ceiling = middle -
-		(H / e->rc.distance_towall) / (e->cam.pos_z * (1)) +
-			e->cam.angle_z;
-	e->rc.ceiling -= (e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x])
-			/ e->rc.distance_towall * 100;
-	e->rc.floor = middle +
-		(H / e->rc.distance_towall) * (e->cam.pos_z * (1)) +
-			e->cam.angle_z;
-	//e->rc.floor -= (e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x])
-	//		/ e->rc.distance_towall * 100;		// permit cell to "sink" instead of being "crushed" while opening
+	double	scale;
+	
+	scale = e->cam.proj_dist * WALL_SIZE / e->rc.distance_towall;
+	e->rc.floor =(e->cam.proj_dist / e->rc.distance_towall) * (e->cam.pos_z) + e->cam.angle_z;
+	e->rc.ceiling = e->rc.floor - scale;
+	e->rc.ceiling -= ((e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x] - 1)
+			/ e->rc.distance_towall) * WALL_SIZE;
+	//e->rc.floor -= ((e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x] - 1)
+	//		/ e->rc.distance_towall) * WALL_SIZE;
 }
 
 void			ft_setup_view_sky(t_thread_env *e)
@@ -72,8 +68,8 @@ void			ft_draw_wall(t_thread_env *e)
 
 void			ft_setup_view_floor(t_thread_env *e)
 {
-	e->rc.horizon = (e->rc.y_ - H / 2) - e->cam.angle_z;
-	e->rc.rowdistance = (e->cam.pos_z * H) / e->rc.horizon;
+	e->rc.horizon = (e->rc.y_) - e->cam.angle_z;
+	e->rc.rowdistance = (e->cam.pos_z * e->cam.proj_dist) / e->rc.horizon;
 	e->rc.rowdistance /= cos(e->cam.angle -
 		e->rc.ray_angle);
 	e->rc.floorstepx = e->rc.rowdistance / W;

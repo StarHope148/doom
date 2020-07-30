@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 02:22:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 04:20:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	ft_crouch(t_env *doom)
 		if (doom->moves.crouching == TRUE)
 		{
 			doom->moves.flying = FALSE;
-			if (doom->cam.pos_z - INC_POS_Z >= MIN_POS_Z)
+			if (doom->cam.pos_z - INC_POS_Z >= MIN_CROUCH)
 				doom->cam.pos_z -= INC_POS_Z;
 		}
 		else if (doom->moves.crouching == FALSE && doom->moves.flying == FALSE)
@@ -117,7 +117,7 @@ void		ft_jump(t_env *doom)
 		if (doom->moves.jumping == TRUE)
 		{
 			doom->moves.flying = FALSE;
-			if (doom->cam.pos_z + INC_POS_Z <= MAX_POS_Z)
+			if (doom->cam.pos_z + INC_POS_Z <= MAX_JUMP)
 				doom->cam.pos_z += INC_POS_Z;
 			else if (doom->moves.jumping == TRUE)
 			{
