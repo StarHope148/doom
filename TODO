@@ -8,13 +8,8 @@
 ->	implémenter un pistolet, munitions (gérer données)
 	afficher la balle, et un trou comme impact du pistolet (nouveaux fichiers)
 
-->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
-	(nouveaux fichiers, gérer données)
-
 ->	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
 	link avec inventaire, link avec munitions, link avec pv, gérer texte
-
-->	bouton sur un mur, actionnable, créer un event qui va avec (nouveaux fichiers, gérer données)
 
 ->	tous les éléments nécessaires doivent être dans un seul et unique fichier
 	vous devez pouvoir lancer le jeu uniquement avec le binaire + ce fichier
@@ -23,13 +18,11 @@
 
 -> 	porte qui s'ouvre (animation à upgrade)
 
-->	sol, plafond hauteur réglable (ne fonctionne actuellement que sur un mur)
-	changer fonction d'affichage suivant hauteur?
-
 -> 	editeur de map :
 	du t_env vers fichier .map
 
-->	implémenter multithreading (probleme synchro à l'affichage, voir avec pthread_join)
+->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
+	(nouveaux fichiers, gérer données)
 
 ### TO CHECK ###
 
@@ -54,6 +47,13 @@
 
 ->	comprendre comment mettre de la musique (retirer SDL_mixer et remplacer par FMOD ou autre lib de son)
 	gérer changement de musique
+
+->	implémenter multithreading (probleme synchro à l'affichage, voir avec pthread_join)
+
+->	bouton sur un mur, actionnable, créer un event qui va avec (nouveaux fichiers, gérer données)
+
+->	sol, plafond hauteur réglable (ne fonctionne actuellement que sur un mur)
+	changer fonction d'affichage suivant hauteur?
 
 ### DONE ###
 
