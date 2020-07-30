@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 07:46:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 08:15:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
 # define BUTTON_ON 'H'
 # define DOOR_OPENED 'R'
 # define HEALTH_POTION 'P'
+# define KEY 'K'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
@@ -69,6 +70,6 @@
 # define MAX_PROCESSOR 16
 # define FPS_TEST 0
 
-# define NB_XPM 13
+# define NB_XPM 14
 
 #endif

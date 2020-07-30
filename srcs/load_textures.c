@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 01:42:21 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 01:52:27 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 08:15:50 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ void		ft_load_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for door_metal.xpm");
 	if ((get_xpm("textures/health_potion.xpm", &doom->xpm[HEALTH_POTION_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for health_potion.xpm");
+	if ((get_xpm("textures/key.xpm", &doom->xpm[KEY_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for key.xpm");
 }

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 05:21:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 08:19:20 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef enum		e_texture_id
 	BUTTON_OFF_XPM,
 	BUTTON_ON_XPM,
 	DOOR_METAL_XPM,
-	HEALTH_POTION_XPM
+	HEALTH_POTION_XPM,
+	KEY_XPM
 }					t_texture_id;
 
 typedef enum	e_motion
@@ -381,6 +382,7 @@ int					ft_choose_and_init_sprite(t_env *e, t_object *tmp);
 
 void				init_draw_barrel(t_env *e, t_object *tmp);
 void				init_draw_health_potion(t_env *e, t_object *tmp);
+void				init_draw_key(t_env *e, t_object *tmp);
 
 void				ft_load_textures(t_env *doom);
 
