@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 02:35:27 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 04:51:16 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef enum		e_texture_id
 	PROJECTILE_XPM
 }					t_texture_id;
 
-typedef enum	e_motion
+typedef enum		e_motion
 {
 	CROUCHING,
 	RAISING,
@@ -69,9 +69,9 @@ typedef enum	e_motion
 	UP,
 	DOWN,
 	FLYING
-}				t_motion;
+}					t_motion;
 
-typedef enum	e_switch_texture_mod
+typedef enum		e_switch_texture_mod
 {
 	NON_TEXTURED,
 	SHADED,
@@ -200,6 +200,7 @@ typedef struct		s_object_data
 	double			angle;
 	int				in_fov;
 	int				to_remove;
+	int				hp;
 }					t_object_data;
 
 typedef struct		s_object
@@ -397,6 +398,7 @@ int					ft_choose_and_init_sprite(t_env *e, t_object *tmp);
 void				ft_add_object(t_env *doom, t_point pos, char type);
 void				ft_check_remove_status_obj(t_object *obj);
 void				ft_shoot_projectile(t_env *doom);
+void				ft_update_pos_obj(t_env *e);
 
 void				init_draw_barrel(t_env *e, t_object *tmp);
 void				init_draw_health_potion(t_env *e, t_object *tmp);
@@ -406,5 +408,7 @@ void				init_draw_statue(t_env *e, t_object *tmp);
 void				init_draw_projectile(t_env *e, t_object *tmp);
 
 void				ft_load_textures(t_env *doom);
+
+void				ft_hit_barrel(t_env *doom, int obj_y, int obj_x);
 
 #endif

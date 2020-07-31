@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/30 22:43:33 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/31 05:03:54 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC_NAME += init_object_type.c
 SRC_NAME += load_textures.c
 SRC_NAME += object_sprites_tools.c
 SRC_NAME += projectile.c
+SRC_NAME += hit.c
+SRC_NAME += exit.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 03:24:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 04:51:34 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void		set_obj_angle(t_env *e, t_object *tmp)
 		tmp->data.in_fov = TRUE;
 	else
 		tmp->data.in_fov = FALSE;
-}	
+}
 
 void		ft_sort_list(t_env *e, t_object *tmp)
 {
 	int				done;
 	t_object_data	tmp_data;
-	
+
 	done = FALSE;
 	while (done == FALSE)
 	{
@@ -85,30 +85,6 @@ void		ft_sort_list(t_env *e, t_object *tmp)
 				done = TRUE;
 			tmp = tmp->next;
 		}
-	}
-}
-
-void		ft_update_pos_obj(t_env *e)
-{
-	t_object	*tmp;
-	char		cell_type;
-	
-	tmp = &e->obj;
-	while (tmp != NULL)
-	{
-		if (tmp->data.type == PROJECTILE)
-		{
-			cell_type = e->map.data[(int)tmp->data.pos.y *
-				e->map.nbcol + (int)tmp->data.pos.x];
-			if (cell_type == WALL || cell_type == GRID || cell_type == BARREL)
-				tmp->data.to_remove = TRUE;
-			else if (tmp->data.to_remove != TRUE)
-			{
-				tmp->data.pos.y += tmp->data.vel.y;
-				tmp->data.pos.x += tmp->data.vel.x;
-			}
-		}
-		tmp = tmp->next;
 	}
 }
 

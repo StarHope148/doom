@@ -6,10 +6,9 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 03:15:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 04:46:56 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef DEFINES_H
 # define DEFINES_H
@@ -66,7 +65,9 @@
 
 # define BUTTON_RANGE 2
 
+# define BARREL_HP 50
 # define RATIO_PROJECTILE_SPEED 0.2
+# define PROJECTILE_DAMAGE 10
 
 # define DOOR_OPENING_DURATION 2
 # define MIN_ALTITUDE -32
