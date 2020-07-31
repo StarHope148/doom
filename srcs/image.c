@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 09:41:33 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 13:02:29 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,8 @@ static void	set_raycast_threads(t_env *doom)
 
 static void	draw_welcome_text(t_env *doom)
 {
-	double	time;
-
-	//if ((time = get_time(doom)) < 4.45)
-	if ((time = get_time(doom)) < 8)
+	if (get_time(doom) < 8)
 		draw_centered_text(doom, doom->txt.welcome1);
-	/* else if (5.35 < time && time < 8)
-		draw_centered_text(doom, doom->txt.welcome2); */
 }
 
 void		draw_only_bar(t_env *e)
@@ -85,7 +80,8 @@ void		draw_only_bar(t_env *e)
 			sample.y = delta.y * x->h / e->hp.size.y;
 			sample.x = delta.x * x->w / e->hp.size.x;
 			if (x->pixels[sample.y * x->w + sample.x] != MAGENTA)
-				e->screen_pixels[(e->hp.y_ + delta.y)* W + delta.x] = x->pixels[sample.y * x->w + sample.x];
+				e->screen_pixels[(e->hp.y_ + delta.y) * W + delta.x] =
+									x->pixels[sample.y * x->w + sample.x];
 		}
 	}
 }
@@ -100,14 +96,43 @@ void		draw_hp(t_env *e)
 			|| e->hp.y_ + e->hp.size.y * W + e->hp.size.x >= W * H)
 		return ;
 	delta.y = e->hp.start_red.y;
-	e->hp.current_red_x = (e->hp.max_red.x - e->hp.start_red.x) * e->chr.health / 100;
+	e->hp.current_red_x = (e->hp.max_red.x - e->hp.start_red.x)
+												* e->chr.health / 100;
 	while (++delta.y < e->hp.max_red.y)
 	{
 		delta.x = -1;
 		while (++delta.x < e->hp.current_red_x)
-			e->screen_pixels[(e->hp.y_ + delta.y)* W + delta.x + e->hp.start_red.x] = RED;
+			e->screen_pixels[(e->hp.y_ + delta.y) * W
+										+ delta.x + e->hp.start_red.x] = RED;
 	}
 	draw_only_bar(e);
+}
+
+void		draw_carried_key(t_env *e)
+{
+	t_point			delta;
+	t_point			sample;
+	t_xpm			*x;
+
+	if (!e->chr.carried_key)
+		return ;
+	x = &e->xpm[KEY_XPM];
+	if (!x || !x->pixels || x->w < 1 || x->h < 1 || e->key.size.x >= W
+			|| e->key.y_ + e->key.size.y * W + e->key.size.x >= W * H)
+		return ;
+	delta.y = -1;
+	while (++delta.y < e->key.size.y)
+	{
+		delta.x = -1;
+		while (++delta.x < e->key.size.x)
+		{
+			sample.y = delta.y * x->h / e->key.size.y;
+			sample.x = delta.x * x->w / e->key.size.x;
+			if (x->pixels[sample.y * x->w + sample.x] != MAGENTA)
+				e->screen_pixels[(e->key.y_ + delta.y) * W + delta.x] =
+									x->pixels[sample.y * x->w + sample.x];
+		}
+	}
 }
 
 void		ft_print(t_env *doom)
@@ -121,6 +146,7 @@ void		ft_print(t_env *doom)
 	ft_draw_crosshair(doom);
 	draw_welcome_text(doom);
 	draw_hp(doom);
+	draw_carried_key(doom);
 	if (!doom->no_funky)
 		ft_funky_textures(doom);
 	ft_update_screen(doom);

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:43:47 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 13:01:48 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@
 # define DOOR_OPENING_DURATION 2
 # define MIN_ALTITUDE -32
 
-# define MAX_PROCESSOR 16
+# define MAX_RAYCAST_THREADS 16
 # define FPS_TEST 0
 
 # define NB_XPM 29

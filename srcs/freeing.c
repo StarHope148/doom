@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 00:31:37 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 09:12:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	free_thread_env(t_shared_data *shared_data)
 	int	i;
 
 	pthread_mutex_lock(&shared_data->mutex);
-	pthread_cond_broadcast(&shared_data->cond);
 	shared_data->stop = 1;
+	pthread_cond_broadcast(&shared_data->cond);
+	pthread_cond_broadcast(&shared_data->cond_main);
 	pthread_mutex_unlock(&shared_data->mutex);
 	i = -1;
 	while (++i < shared_data->max_thread)

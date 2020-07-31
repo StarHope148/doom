@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 11:28:28 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 13:02:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,6 +320,11 @@ typedef struct		s_gun
 	int				firing;
 	int				hidden;
 }					t_gun;
+typedef struct		s_carried_key
+{
+	t_point			size;
+	unsigned int	y_;
+}					t_carried_key;
 
 typedef struct		s_env
 {
@@ -351,6 +356,7 @@ typedef struct		s_env
 	t_character		chr;
 	t_healthbar		hp;
 	t_gun			gun;
+	t_carried_key	key;
 }					t_env;
 
 void				ft_doom(char *mapfile);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 07:25:52 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 09:34:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ void	init_bar(t_env *e)
 	e->hp.start_red.x = e->hp.size.x * 8 / 45;
 }
 
+void	init_carried_key(t_env *e)
+{
+	t_xpm	*x;
+	x = &e->xpm[KEY_XPM];
+	e->key.size.x = e->hp.size.x * 4 / 5;
+	e->key.size.y = x->h * e->key.size.x / x->w;
+	e->key.y_ = e->hp.y_ + e->hp.size.y;
+}
+
 void	ft_sdl(t_env *doom)
 {
 	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
@@ -81,6 +90,7 @@ void	ft_sdl(t_env *doom)
 	ft_init_video(doom);
 	ft_init_musicttf(doom);
 	init_bar(doom);
+	init_carried_key(doom);
 	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.music, NULL, 0,
 			&doom->sound.channel_music)) != FMOD_OK)
 		perror("Error in FMOD_System_PlaySound for music ");

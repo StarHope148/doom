@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 11:28:01 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 13:02:43 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_init_env(t_env *doom)
 	ft_init_gun(doom);
 	pthread_mutex_init(&doom->shared_data.mutex, 0);
 	pthread_cond_init(&doom->shared_data.cond, 0);
+	pthread_cond_init(&doom->shared_data.cond_main, 0);
 	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32) * H * W)))
 		ft_exit(doom, EXIT_FAILURE,
 			"Error mallocing screen_pixels in ft_init_env");

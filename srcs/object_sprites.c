@@ -6,17 +6,32 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:17:33 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 08:04:09 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "doom.h"
 
+int			check_depth_buf(t_env *e, t_object *tmp, unsigned int x_)
+{
+	t_shared_data *shared_data;
+
+	shared_data = &e->shared_data;
+	pthread_mutex_lock(&shared_data->mutex);
+	if (tmp->data.dist < shared_data->depth_buf[x_])
+	{
+		pthread_mutex_unlock(&shared_data->mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&shared_data->mutex);
+	return (0);
+}
+
 void		modify_screen_pixels(t_env *e, t_object *tmp)
 {
 	t_point			delta;
-	t_point			sample;
+	t_point			sp;
 	unsigned int	y_;
 	unsigned int	x_;
 	t_xpm			*x;
@@ -30,16 +45,13 @@ void		modify_screen_pixels(t_env *e, t_object *tmp)
 		delta.x = tmp->data.delta_x_start - 1;
 		while (++delta.x < tmp->data.w_)
 		{
-			sample.y = delta.y * x->h / tmp->data.h_;
-			sample.x = delta.x * x->w / tmp->data.w_;
+			sp.y = delta.y * x->h / tmp->data.h_;
+			sp.x = delta.x * x->w / tmp->data.w_;
 			y_ = tmp->data.y_ + delta.y;
 			x_ = tmp->data.x_ + delta.x;
-			if (sample.y * x->w + sample.x < x->w * x->h &&
-					x->pixels[sample.y * x->w + sample.x] != MAGENTA &&
-					y_ * W + x_ < W * H && x_ < W &&
-					tmp->data.dist < e->shared_data.depth_buf[x_])
-				e->screen_pixels[y_ * W + x_] =
-										x->pixels[sample.y * x->w + sample.x];
+			if (x->pixels[sp.y * x->w + sp.x] != MAGENTA &&
+				y_ * W + x_ < W * H && x_ < W && check_depth_buf(e, tmp, x_))
+				e->screen_pixels[y_ * W + x_] = x->pixels[sp.y * x->w + sp.x];
 		}
 	}
 }
