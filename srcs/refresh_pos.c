@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 07:02:08 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 07:06:30 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void	resolve_on_fire(t_env *e)
 				if (e->chr.health > FIRE_AIE)
 					e->chr.health -= FIRE_AIE;
 				else
-					printf("t mor PTDRRRRRRRRRRRRRRRRRRRRRRR\n");
+					e->chr.health = 0;
 				e->chr.on_fire++;
 			}
 		}

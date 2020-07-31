@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 06:01:16 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 07:06:52 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	ft_sdl(t_env *doom)
 				ft_exit(doom, EXIT_SUCCESS, NULL);
 		}
 		ft_refresh_new_pos(doom);
+		if (doom->chr.health == 0)
+			printf("t mor PTDRRRRRRRRRRRRRRRRRRRRRRR\n");
 		if (FPS_TEST && get_time(doom) > 5)
 		{
 			printf("moyenne fps en 5sec : %f\n", doom->fps.count_fps / 5.0);
