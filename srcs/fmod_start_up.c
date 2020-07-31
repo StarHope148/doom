@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 06:51:22 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 11:03:19 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 20:21:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void		ft_free_fmod(t_env *doom)
 
 static void	ft_fmod2(t_env *doom)
 {
+	if ((FMOD_System_CreateSound(doom->sound.system,
+                        "sounds/laser_shot.wav", FMOD_CREATESTREAM, 0,
+                                &doom->sound.laser_shot)) != FMOD_OK)
+                perror("Error in FMOD_System_CreateSound for shotgun ");
 	if ((FMOD_System_CreateSound(doom->sound.system,
 			"sounds/door_opening.wav", FMOD_CREATESTREAM, 0,
 				&doom->sound.door_opening)) != FMOD_OK)

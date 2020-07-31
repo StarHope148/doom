@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 19:26:26 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 20:43:10 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,7 +292,7 @@ typedef struct		s_sound
 	FMOD_SOUND		*door_closing;
 	FMOD_SOUND		*laser_shot;
 	FMOD_SOUND		*gun_shot;
-	FMOD_CHANNEL		*channel_music;
+	FMOD_CHANNEL	*channel_music;
 	int				state;
 }					t_sound;
 
@@ -322,6 +322,7 @@ typedef struct		s_gun
 	int				firing;
 	int				hidden;
 }					t_gun;
+
 typedef struct		s_carried_key
 {
 	t_point			size;

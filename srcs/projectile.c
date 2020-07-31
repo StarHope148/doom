@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projectile.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 22:11:50 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 10:59:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 20:44:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,13 @@ void		ft_add_object_projectile(t_env *doom)
 
 void		ft_shoot_projectile(t_env *doom)
 {
-	if (doom->cam.pos_z <= DEFAULT_POS_Z)
-		ft_add_object_projectile(doom);
+	if (doom->cam.pos_z > DEFAULT_POS_Z)
+		return ;
+	ft_add_object_projectile(doom);
+	if (!doom->gun.firing)
+		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.laser_shot,
+				NULL, 0, NULL)) != FMOD_OK)
+			perror("Error in FMOD_System_PlaySound for laser_shot ");
 	doom->gun.firing = TRUE;
 	//debug display object list with type and [y][x]
 	//t_object *tmp = &doom->obj;

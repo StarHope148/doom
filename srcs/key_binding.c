@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 19:20:52 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 20:48:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,46 +83,41 @@ void		ft_movement(t_env *doom)
 {
 	if (doom->event.key.keysym.sym == SDLK_w)
 		doom->moves.forward = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_a)
+	if (doom->event.key.keysym.sym == SDLK_a)
 		doom->moves.strafe_left = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_s)
+	if (doom->event.key.keysym.sym == SDLK_s)
 		doom->moves.backward = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_d)
+	if (doom->event.key.keysym.sym == SDLK_d)
 		doom->moves.strafe_right = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_RIGHT)
+	if (doom->event.key.keysym.sym == SDLK_RIGHT)
 		doom->moves.rotate_right = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_LEFT)
+	if (doom->event.key.keysym.sym == SDLK_LEFT)
 		doom->moves.rotate_left = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_UP)
+	if (doom->event.key.keysym.sym == SDLK_UP)
 		doom->moves.rotate_up = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_DOWN)
+	if (doom->event.key.keysym.sym == SDLK_DOWN)
 		doom->moves.rotate_down = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_LSHIFT)
+	if (doom->event.key.keysym.sym == SDLK_LSHIFT)
 		doom->moves.running = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_LCTRL)
+	if (doom->event.key.keysym.sym == SDLK_LCTRL)
 		doom->moves.crouching = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_SPACE ||
+	if (doom->event.key.keysym.sym == SDLK_SPACE ||
 			doom->event.key.keysym.sym == SDLK_KP_0)
-	{
-		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.laser_shot,
-						NULL, 0, NULL)) != FMOD_OK)
-			perror("Error in FMOD_System_PlaySound for laser_shot ");
         ft_shoot_projectile(doom);
-	}
-	else if (doom->event.key.keysym.sym == SDLK_e)
+	if (doom->event.key.keysym.sym == SDLK_e)
 		doom->moves.up = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_q)
+	if (doom->event.key.keysym.sym == SDLK_q)
 		doom->moves.down = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_LALT)
+	if (doom->event.key.keysym.sym == SDLK_LALT)
 	{
 		doom->moves.jumping = TRUE;
 		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.jump,
 				NULL, 0, NULL)) != FMOD_OK)
 			perror("Error in FMOD_System_PlaySound for jump ");
 	}
-	else if (doom->event.key.keysym.sym == SDLK_p)
+	if (doom->event.key.keysym.sym == SDLK_p)
 		ft_pause_music(doom);
-	else if (doom->event.key.keysym.sym == SDLK_RETURN)
+	if (doom->event.key.keysym.sym == SDLK_RETURN)
 	{
 		ft_use_key_on_door(doom);
 		ft_switch_button(doom);
