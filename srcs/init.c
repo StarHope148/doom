@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 07:09:58 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 08:27:45 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_init_env(t_env *doom)
 	doom->chr.health = PLAYER_MAX_HP;
 	pthread_mutex_init(&doom->shared_data.mutex, 0);
 	pthread_cond_init(&doom->shared_data.cond, 0);
+	pthread_cond_init(&doom->shared_data.cond_main, 0);
 	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32) * H * W)))
 		ft_exit(doom, EXIT_FAILURE,
 			"Error mallocing screen_pixels in ft_init_env");
