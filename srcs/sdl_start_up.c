@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:18:28 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 07:06:52 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	init_bar(t_env *e)
 	e->hp.size.y = x->h * e->hp.size.x / x->w;
 	e->hp.y_ = (e->map.nbcol - 0.5) * e->block;
 	e->hp.max_red.y = e->hp.size.y * 7 / 8;
-	e->hp.max_red.x = e->hp.size.x * 89 * e->chr.health / 9000;
+	e->hp.max_red.x = e->hp.size.x * 89 / 90;
 	e->hp.start_red.y = e->hp.size.y / 8;
 	e->hp.start_red.x = e->hp.size.x * 8 / 45;
 }
@@ -98,6 +98,8 @@ void	ft_sdl(t_env *doom)
 				ft_exit(doom, EXIT_SUCCESS, NULL);
 		}
 		ft_refresh_new_pos(doom);
+		if (doom->chr.health == 0)
+			printf("t mor PTDRRRRRRRRRRRRRRRRRRRRRRR\n");
 		if (FPS_TEST && get_time(doom) > 5)
 		{
 			printf("moyenne fps en 5sec : %f\n", doom->fps.count_fps / 5.0);

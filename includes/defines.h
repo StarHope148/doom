@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 06:40:01 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 07:09:37 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@
 # define BUTTON_RANGE 2
 
 # define BARREL_HP 50
+# define FIRE_AIE 10
 # define RATIO_PROJECTILE_SPEED 0.2
 # define PROJECTILE_DAMAGE 10
 # define PLAYER_MAX_HP 100
