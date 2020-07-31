@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:22:13 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:28:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ typedef enum		e_texture_id
 	STATUE_FRONT_XPM,
 	STATUE_RIGHT_XPM,
 	STATUE_LEFT_XPM,
-	PROJECTILE_XPM
+	PROJECTILE_XPM,
+	GUN_XPM,
+	GUN_FIRING_XPM
 }					t_texture_id;
 
 typedef enum		e_motion
@@ -309,6 +311,16 @@ typedef struct		s_healthbar
 	unsigned int	y_;
 }					t_healthbar;
 
+typedef struct		s_gun
+{
+	int				h_;
+	int				w_;
+	int				y_;
+	int				x_;
+	int				firing;
+	int				hidden;
+}					t_gun;
+
 typedef struct		s_env
 {
 	SDL_Window		*window;
@@ -338,6 +350,7 @@ typedef struct		s_env
 	t_object		obj;
 	t_character		chr;
 	t_healthbar		hp;
+	t_gun			gun;
 }					t_env;
 
 void				ft_doom(char *mapfile);
@@ -403,12 +416,14 @@ int					ft_malloc_tab(t_map *m);
 void				update_thread_env(t_thread_env *thread_env);
 
 void				ft_draw_crosshair(t_env *doom);
+void				ft_draw_gun(t_env *doom);
 
 void				ft_fmod(t_env *doom);
 void				ft_free_fmod(t_env *doom);
 void				ft_switch_button(t_env *doom);
 
 void				init_door(t_env *doom, int door_y, int door_x);
+void				ft_init_gun(t_env *doom);
 
 void				ft_draw_objects(t_env *e);
 void				ft_count_objects(t_env *doom);

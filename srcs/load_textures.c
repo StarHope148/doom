@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 01:42:21 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:16:47 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 08:56:26 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,8 @@ void		ft_load_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for healthbar.xpm");
 	if ((get_xpm("textures/projectile.xpm", &doom->xpm[PROJECTILE_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for projectile.xpm");
+	if ((get_xpm("textures/gun.xpm", &doom->xpm[GUN_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for gun.xpm");
+	if ((get_xpm("textures/gun_firing.xpm", &doom->xpm[GUN_FIRING_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for gun_firing.xpm");
 }

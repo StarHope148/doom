@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/31 06:26:45 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/31 09:05:34 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC_NAME += hit.c
 SRC_NAME += exit.c
 SRC_NAME += items.c
 SRC_NAME += player.c
+SRC_NAME += gun.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

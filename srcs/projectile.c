@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 22:11:50 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 06:45:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:59:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void		ft_add_object_projectile(t_env *doom)
 	}
 }
 
-
 void		ft_shoot_projectile(t_env *doom)
 {
 	if (doom->cam.pos_z <= DEFAULT_POS_Z)
 		ft_add_object_projectile(doom);
+	doom->gun.firing = TRUE;
 	//debug display object list with type and [y][x]
 	//t_object *tmp = &doom->obj;
 	//while (tmp != NULL)

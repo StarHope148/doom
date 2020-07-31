@@ -2,27 +2,19 @@
 
 ->	faire un niveau (une map) avec debut, fin de level, histoire, objectif(s)
 
-->	implémenter inventaire
-	permettre objet ramassable (gérer données)
-
 ->	implémenter un pistolet, munitions (gérer données)
 	afficher la balle, et un trou comme impact du pistolet (nouveaux fichiers)
-
-->	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
-	link avec inventaire, link avec munitions, link avec pv, gérer texte
 
 ->	tous les éléments nécessaires doivent être dans un seul et unique fichier
 	vous devez pouvoir lancer le jeu uniquement avec le binaire + ce fichier
 
 ### IN PROGRESS ###
 
--> 	porte qui s'ouvre (animation à upgrade)
-
 -> 	editeur de map :
 	du t_env vers fichier .map
 
-->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
-	(nouveaux fichiers, gérer données)
+->	affichage de l'HUD de 3 éléments : inventaire d'une case, munitions, barre de pv
+	link avec inventaire, link avec munitions, link avec pv, gérer texte
 
 ### TO CHECK ###
 
@@ -54,6 +46,14 @@
 
 ->	sol, plafond hauteur réglable (ne fonctionne actuellement que sur un mur)
 	changer fonction d'affichage suivant hauteur?
+
+-> 	porte qui s'ouvre (animation à upgrade)
+
+->	sprites affichés sur les murs qui font tj face au joueur, et d'autre selon l'orientation (N, S, E, O)
+	(nouveaux fichiers, gérer données)
+
+->	implémenter inventaire
+	permettre objet ramassable (gérer données)
 
 ### DONE ###
 

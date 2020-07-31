@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:02:55 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:08:59 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,21 @@ void	resolve_on_fire(t_env *e)
 	}
 }
 
+void	ft_firing_anim(t_env *doom)
+{
+	static int	duration = 0;
+	
+	if (doom->gun.firing == TRUE)
+	{
+		duration++;
+		if (duration == 5)
+		{
+			doom->gun.firing = FALSE;
+			duration = 0;
+		}
+	}
+}
+
 void	ft_refresh_new_pos(t_env *doom)
 {
 	resolve_on_fire(doom);
@@ -248,4 +263,5 @@ void	ft_refresh_new_pos(t_env *doom)
 	if (doom->moves.rotate_down == TRUE)
 		ft_rotate_down(doom);
 	ft_pick_up_items(doom);
+	ft_firing_anim(doom);
 }
