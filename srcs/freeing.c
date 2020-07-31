@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:05:08 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 09:12:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ void	free_thread_env(t_shared_data *shared_data)
 {
 	int	i;
 
-	printf("next step is mutex_lock(), cond_broadcast(), mutex_unlock()\n"); //DEBUG
 	pthread_mutex_lock(&shared_data->mutex);
-	pthread_cond_broadcast(&shared_data->cond);
 	shared_data->stop = 1;
+	pthread_cond_broadcast(&shared_data->cond);
+	pthread_cond_broadcast(&shared_data->cond_main);
 	pthread_mutex_unlock(&shared_data->mutex);
-	printf("next step is pthread_join()\n"); //DEBUG
 	i = -1;
 	while (++i < shared_data->max_thread)
 		if (pthread_join(shared_data->tab_thread_env[i].thread, 0))

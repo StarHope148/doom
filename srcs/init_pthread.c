@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 23:27:33 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/28 15:19:56 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 09:11:49 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	init_pthread(t_env *doom)
 
 	shared_data = &doom->shared_data;
 	shared_data->max_thread = sysconf(_SC_NPROCESSORS_CONF);
-	if (shared_data->max_thread > MAX_PROCESSOR)
-		shared_data->max_thread = MAX_PROCESSOR;
+	if (shared_data->max_thread > MAX_RAYCAST_THREADS)
+		shared_data->max_thread = MAX_RAYCAST_THREADS;
 	shared_data->tab_thread_env = (t_thread_env*)
 				ft_memalloc(sizeof(t_thread_env) * shared_data->max_thread);
 	if (shared_data->tab_thread_env == NULL)
