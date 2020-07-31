@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:16:30 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 06:09:39 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,7 @@ typedef struct		s_character
 {
 	unsigned char	health;
 	unsigned char	carried_key;
+	unsigned char	on_fire;
 }					t_character;
 
 typedef struct		s_healthbar
@@ -303,6 +304,7 @@ typedef struct		s_healthbar
 	t_point			size;
 	t_point			start_red;
 	t_point			max_red;
+	int				current_red_x;
 	unsigned int	y_;
 }					t_healthbar;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 21:51:02 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 05:57:05 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void	ft_up_down_test(t_env *doom)
 
 void	ft_refresh_new_pos(t_env *doom)
 {
+	//check_if_on_fire(doom);
 	set_movespeed(doom);
 	ft_crouch(doom);
 	ft_jump(doom);
