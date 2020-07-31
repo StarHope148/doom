@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 07:12:49 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 09:36:40 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,33 @@ void		draw_hp(t_env *e)
 	draw_only_bar(e);
 }
 
+void		draw_carried_key(t_env *e)
+{
+	t_point			delta;
+	t_point			sample;
+	t_xpm			*x;
+
+	if (!e->chr.carried_key)
+		return ;
+	x = &e->xpm[KEY_XPM];
+	if (!x || !x->pixels || x->w < 1 || x->h < 1 || e->key.size.x >= W
+			|| e->key.y_ + e->key.size.y * W + e->key.size.x >= W * H)
+		return ;
+	delta.y = -1;
+	while (++delta.y < e->key.size.y)
+	{
+		delta.x = -1;
+		while (++delta.x < e->key.size.x)
+		{
+			sample.y = delta.y * x->h / e->key.size.y;
+			sample.x = delta.x * x->w / e->key.size.x;
+			if (x->pixels[sample.y * x->w + sample.x] != MAGENTA)
+				e->screen_pixels[(e->key.y_ + delta.y) * W + delta.x] =
+									x->pixels[sample.y * x->w + sample.x];
+		}
+	}
+}
+
 void		ft_print(t_env *doom)
 {
 	animation_opening_door(doom);
@@ -118,6 +145,7 @@ void		ft_print(t_env *doom)
 	ft_draw_crosshair(doom);
 	draw_welcome_text(doom);
 	draw_hp(doom);
+	draw_carried_key(doom);
 	if (!doom->no_funky)
 		ft_funky_textures(doom);
 	ft_update_screen(doom);

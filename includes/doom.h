@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:22:13 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 09:27:53 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,6 +309,12 @@ typedef struct		s_healthbar
 	unsigned int	y_;
 }					t_healthbar;
 
+typedef struct		s_carried_key
+{
+	t_point			size;
+	unsigned int	y_;
+}					t_carried_key;
+
 typedef struct		s_env
 {
 	SDL_Window		*window;
@@ -338,6 +344,7 @@ typedef struct		s_env
 	t_object		obj;
 	t_character		chr;
 	t_healthbar		hp;
+	t_carried_key	key;
 }					t_env;
 
 void				ft_doom(char *mapfile);
