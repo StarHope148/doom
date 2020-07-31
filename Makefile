@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/31 05:03:54 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/07/31 06:26:45 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,8 @@ SRC_NAME += object_sprites_tools.c
 SRC_NAME += projectile.c
 SRC_NAME += hit.c
 SRC_NAME += exit.c
+SRC_NAME += items.c
+SRC_NAME += player.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

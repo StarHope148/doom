@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:15:54 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 06:40:01 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@
 # define BARREL_HP 50
 # define RATIO_PROJECTILE_SPEED 0.2
 # define PROJECTILE_DAMAGE 10
+# define PLAYER_MAX_HP 100
+# define HEALTH_POTION_AMOUNT 25
 
 # define DOOR_OPENING_DURATION 2
 # define MIN_ALTITUDE -32

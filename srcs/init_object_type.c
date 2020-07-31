@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 00:34:26 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 03:14:31 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 06:54:07 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		init_draw_projectile(t_env *e, t_object *tmp)
 	tmp->data.w_ = 0.2 * H / tmp->data.dist * e->xpm[PROJECTILE_XPM].w /
 		e->xpm[PROJECTILE_XPM].h / e->cam.fov;
 	tmp->data.y_ = (e->cam.proj_dist / tmp->data.dist) * (e->cam.pos_z) +
-		e->cam.angle_z - tmp->data.h_ * 3;
+		e->cam.angle_z - tmp->data.h_ * 4;
 	tmp->data.x_ = W - W * tmp->data.angle / e->cam.fov - tmp->data.w_ / 2;
 	tmp->data.delta_x_end = tmp->data.w_;
 	tmp->data.delta_x_start = 0;

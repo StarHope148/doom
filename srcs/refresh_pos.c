@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 21:51:02 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 06:14:51 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,5 @@ void	ft_refresh_new_pos(t_env *doom)
 		ft_rotate_up(doom);
 	if (doom->moves.rotate_down == TRUE)
 		ft_rotate_down(doom);
+	ft_pick_up_items(doom);
 }

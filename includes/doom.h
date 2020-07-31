@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:16:30 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 06:38:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,5 +425,10 @@ void				init_draw_projectile(t_env *e, t_object *tmp);
 void				ft_load_textures(t_env *doom);
 
 void				ft_hit_barrel(t_env *doom, int obj_y, int obj_x);
+
+void				ft_pick_up_items(t_env *doom);
+
+void				ft_taking_damage(t_env *doom, int amount);
+int					ft_restore_health(t_env *doom, int amount);
 
 #endif
