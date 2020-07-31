@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:12:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 03:24:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,38 @@ void		ft_sort_list(t_env *e, t_object *tmp)
 			tmp = tmp->next;
 		}
 	}
-} 
+}
+
+void		ft_update_pos_obj(t_env *e)
+{
+	t_object	*tmp;
+	char		cell_type;
+	
+	tmp = &e->obj;
+	while (tmp != NULL)
+	{
+		if (tmp->data.type == PROJECTILE)
+		{
+			cell_type = e->map.data[(int)tmp->data.pos.y *
+				e->map.nbcol + (int)tmp->data.pos.x];
+			if (cell_type == WALL || cell_type == GRID || cell_type == BARREL)
+				tmp->data.to_remove = TRUE;
+			else if (tmp->data.to_remove != TRUE)
+			{
+				tmp->data.pos.y += tmp->data.vel.y;
+				tmp->data.pos.x += tmp->data.vel.x;
+			}
+		}
+		tmp = tmp->next;
+	}
+}
 
 void		ft_draw_objects(t_env *e)
 {
 	t_object	*tmp;
 
+	ft_update_pos_obj(e);
+	ft_check_remove_status_obj(&e->obj);
 	tmp = &e->obj;
 	while (tmp != NULL)
 	{
@@ -103,7 +129,8 @@ void		ft_draw_objects(t_env *e)
 	while (tmp != NULL)
 	{
 		set_obj_angle(e, tmp);
-		if (tmp->data.dist > 0.5 && tmp->data.in_fov == TRUE)
+		if (tmp->data.dist > 0.5 && tmp->data.in_fov == TRUE &&
+				tmp->data.to_remove != TRUE)
 			modify_screen_pixels(e, tmp);
 		tmp = tmp->next;
 	}

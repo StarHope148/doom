@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 01:43:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 00:04:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	ft_free_door(doom->door);
 	free_xpm(doom);
 	ft_free_map(&doom->map);
-	ft_free_obj(&doom->obj.next);
+	ft_free_obj_list(&doom->obj.next);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
 	printf("time ~ from SDL_Init() : %f\n", get_time(doom));

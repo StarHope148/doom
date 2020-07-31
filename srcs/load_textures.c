@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 01:42:21 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:07:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 22:05:36 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,22 @@ void		ft_load_torch_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for torch_8.xpm");
 }
 
+void		ft_load_statue_textures(t_env *doom)
+{
+	if ((get_xpm("textures/statue/statue_front.xpm", &doom->xpm[STATUE_FRONT_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for statue_front.xpm");
+	if ((get_xpm("textures/statue/statue_right.xpm", &doom->xpm[STATUE_RIGHT_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for statue_right.xpm");
+	if ((get_xpm("textures/statue/statue_left.xpm", &doom->xpm[STATUE_LEFT_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for statue_left.xpm");
+}
+
 void		ft_load_textures(t_env *doom)
 {
 	ft_load_wall_textures(doom);
 	ft_load_floor_sky_textures(doom);
 	ft_load_torch_textures(doom);
+	ft_load_statue_textures(doom);
 	if ((get_xpm("textures/chain.xpm", &doom->xpm[GRID_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for chain.xpm");
 	if ((get_xpm("textures/crosshair.xpm", &doom->xpm[CROSSHAIR])) != 0)
@@ -73,4 +84,6 @@ void		ft_load_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for health_potion.xpm");
 	if ((get_xpm("textures/key.xpm", &doom->xpm[KEY_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for key.xpm");
+	if ((get_xpm("textures/projectile.xpm", &doom->xpm[PROJECTILE_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for projectile.xpm");
 }

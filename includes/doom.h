@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:48:01 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 02:35:27 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ typedef enum		e_texture_id
 	TORCH_5_XPM,
 	TORCH_6_XPM,
 	TORCH_7_XPM,
-	TORCH_8_XPM
+	TORCH_8_XPM,
+	STATUE_FRONT_XPM,
+	STATUE_RIGHT_XPM,
+	STATUE_LEFT_XPM,
+	PROJECTILE_XPM
 }					t_texture_id;
 
 typedef enum	e_motion
@@ -182,6 +186,7 @@ typedef struct		s_object_data
 	t_pointd		pos;
 	t_point			screen;
 	t_point			cursor;
+	t_pointd		vel;
 	double			vect_x;
 	double			vect_y;
 	double			h_;
@@ -194,6 +199,7 @@ typedef struct		s_object_data
 	double			dist;
 	double			angle;
 	int				in_fov;
+	int				to_remove;
 }					t_object_data;
 
 typedef struct		s_object
@@ -369,7 +375,7 @@ int					get_xpm(char *xpm_file, t_xpm *xpm);
 int					xpm_fill(t_xpm *xpm, char *line, int num);
 void				free_one_xpm(t_xpm *xpm);
 void				free_xpm(t_env *doom);
-void				ft_free_obj(t_object **obj);
+void				ft_free_obj_list(t_object **obj);
 
 void				init_pthread(t_env *doom);
 void				ft_raycaster(t_thread_env *e);
@@ -388,11 +394,16 @@ void				init_door(t_env *doom, int door_y, int door_x);
 void				ft_draw_objects(t_env *e);
 void				ft_count_objects(t_env *doom);
 int					ft_choose_and_init_sprite(t_env *e, t_object *tmp);
+void				ft_add_object(t_env *doom, t_point pos, char type);
+void				ft_check_remove_status_obj(t_object *obj);
+void				ft_shoot_projectile(t_env *doom);
 
 void				init_draw_barrel(t_env *e, t_object *tmp);
 void				init_draw_health_potion(t_env *e, t_object *tmp);
 void				init_draw_key(t_env *e, t_object *tmp);
 void				init_draw_torch(t_env *e, t_object *tmp);
+void				init_draw_statue(t_env *e, t_object *tmp);
+void				init_draw_projectile(t_env *e, t_object *tmp);
 
 void				ft_load_textures(t_env *doom);
 
