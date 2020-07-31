@@ -290,7 +290,9 @@ typedef struct		s_sound
 	FMOD_SOUND		*switch_off;
 	FMOD_SOUND		*door_opening;
 	FMOD_SOUND		*door_closing;
-	FMOD_CHANNEL	*channel_music;
+	FMOD_SOUND		*laser_shot;
+	FMOD_SOUND		*gun_shot;
+	FMOD_CHANNEL		*channel_music;
 	int				state;
 }					t_sound;
 

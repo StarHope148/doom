@@ -55,6 +55,10 @@ void	ft_fmod(t_env *doom)
 				&doom->sound.switch_off)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for switch_off ");
 	if ((FMOD_System_CreateSound(doom->sound.system,
+                        "sounds/laser_shot.wav", FMOD_CREATESTREAM, 0,
+                                &doom->sound.laser_shot)) != FMOD_OK)
+                perror("Error in FMOD_System_CreateSound for shotgun ");
+	if ((FMOD_System_CreateSound(doom->sound.system,
 			"sounds/door_opening.wav", FMOD_CREATESTREAM, 0,
 				&doom->sound.door_opening)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for door_opening ");

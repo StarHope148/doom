@@ -103,7 +103,12 @@ void		ft_movement(t_env *doom)
 		doom->moves.crouching = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_SPACE ||
 			doom->event.key.keysym.sym == SDLK_KP_0)
+	{
+		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.laser_shot,
+				NULL, 0, NULL)) != FMOD_OK)
+                        perror("Error in FMOD_System_PlaySound for laser_shot ");
 		ft_shoot_projectile(doom);
+	}
 	else if (doom->event.key.keysym.sym == SDLK_e)
 		doom->moves.up = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_q)
