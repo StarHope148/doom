@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 01:05:28 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 01:35:27 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	init_bar(t_env *e)
 	t_xpm			*x;
 
 	x = &e->xpm[HEALTHBAR_XPM];
-	e->hp.size.x = e->map.nbl * e->block;
+	e->hp.size.x = e->map.nbcol * e->block * 0.9;
 	e->hp.size.y = x->h * e->hp.size.x / x->w;
-	e->hp.y_ = (e->map.nbcol - 0.5) * e->block;
+	e->hp.y_ = (e->map.nbl + 1) * e->block;
 	e->hp.max_red.y = e->hp.size.y * 7 / 8;
 	e->hp.max_red.x = e->hp.size.x * 89 / 90;
 	e->hp.start_red.y = e->hp.size.y / 8;
