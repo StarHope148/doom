@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 11:08:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:26:56 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,61 +174,6 @@ void	ft_up_down_test(t_env *doom)
 	}
 }
 
-int		is_on_fire(t_env *e)
-{
-	t_object	*obj;
-
-	obj = &e->obj;
-	while (obj)
-	{
-		if (obj->data.type == TORCH && obj->data.dist < 0.6)
-			return (1);
-		obj = obj->next;
-	}
-	return (0);
-}
-
-void	resolve_on_fire(t_env *e)
-{
-	if (!e->chr.on_fire)
-		e->chr.on_fire = is_on_fire(e);
-	if (!e->chr.on_fire)
-		return ;
-	if (is_on_fire(e) == 0)
-	{
-		e->chr.on_fire = 0;
-		e->chr.fire_time = 0;
-	}
-	else
-	{
-		if (!e->chr.fire_time)
-			e->chr.fire_time = get_time(e);
-		else
-		{
-			if (get_time(e) - e->chr.fire_time > e->chr.on_fire)
-			{
-				ft_taking_damage(e, FIRE_AIE);
-				e->chr.on_fire++;
-			}
-		}
-	}
-}
-
-void	ft_firing_anim(t_env *doom)
-{
-	static int	duration = 0;
-	
-	if (doom->gun.firing == TRUE)
-	{
-		duration++;
-		if (duration == 5)
-		{
-			doom->gun.firing = FALSE;
-			duration = 0;
-		}
-	}
-}
-
 void	ft_refresh_new_pos(t_env *doom)
 {
 	resolve_on_fire(doom);
@@ -263,5 +208,4 @@ void	ft_refresh_new_pos(t_env *doom)
 	if (doom->moves.rotate_down == TRUE)
 		ft_rotate_down(doom);
 	ft_pick_up_items(doom);
-	ft_firing_anim(doom);
 }

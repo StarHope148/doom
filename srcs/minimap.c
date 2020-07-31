@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 21:52:46 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:13:16 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,28 @@ void	ft_set_points(t_env *doom)
 
 void	ft_set_tile_color(t_env *doom, Uint32 *color)
 {
-	if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == WALL)
+	char	symb;
+
+	symb = doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j];
+	if (symb == WALL)
 		*color = LIME;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == EMPTY)
+	else if (symb == EMPTY)
 		*color = GRAY;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR ||
-			doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == DOOR_OPENED)
+	else if (symb == DOOR || symb == DOOR_OPENED)
 		*color = BLUE;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == GRID)
+	else if (symb == GRID)
 		*color = ORANGE;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol +
-			doom->minimap.j] == BUTTON_OFF ||
-			doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BUTTON_ON)
+	else if (symb == BUTTON_OFF || symb == BUTTON_ON)
 		*color = WHITE;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] == BARREL)
+	else if (symb == BARREL)
 		*color = BROWN;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] ==
-			HEALTH_POTION)
+	else if (symb == HEALTH_POTION)
 		*color = RED;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] ==
-			KEY)
+	else if (symb == KEY)
 		*color = YELLOW;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] ==
-			TORCH)
+	else if (symb == TORCH)
 		*color = BURLYWOOD;
-	else if (doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j] ==
-			STATUE)
+	else if (symb == STATUE)
 		*color = BLACK;
 	else
 		*color = BLACK;

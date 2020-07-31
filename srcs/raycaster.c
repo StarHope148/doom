@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:15:37 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:06:25 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	ft_apply_brightness(t_thread_env *e)
 {
 	int		shadowing;
 
-	if (e->map.bright[(int)e->cam.pos_y * e ->map.nbcol + (int)e->cam.pos_x] != 3)
+	if (e->map.bright[(int)e->cam.pos_y * e->map.nbcol + (int)e->cam.pos_x]
+																	!= 3)
 	{
-		shadowing = e->map.bright[(int)e->cam.pos_y * e->map.nbcol + (int)e->cam.pos_x];
+		shadowing = e->map.bright[(int)e->cam.pos_y
+									* e->map.nbcol + (int)e->cam.pos_x];
 		while (shadowing++ - 3)
 		{
 			e->screen_pixels[e->rc.y_ * W + e->rc.x_] >>= 1;

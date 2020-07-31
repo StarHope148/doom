@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 05:22:32 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:07:46 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void			ft_set_ceiling_floor(t_thread_env *e)
 {
 	double	scale;
-	
+
 	scale = e->cam.proj_dist * WALL_SIZE / e->rc.distance_towall;
-	e->rc.floor =(e->cam.proj_dist / e->rc.distance_towall) * (e->cam.pos_z) + e->cam.angle_z;
+	e->rc.floor = (e->cam.proj_dist / e->rc.distance_towall) * (e->cam.pos_z)
+																+ e->cam.angle_z;
 	e->rc.ceiling = e->rc.floor - scale;
 	e->rc.ceiling -= ((e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x] - 1)
 			/ e->rc.distance_towall) * WALL_SIZE;

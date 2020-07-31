@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fmod_start_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 06:51:22 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 17:51:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:03:19 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	ft_free_fmod(t_env *doom)
+void		ft_free_fmod(t_env *doom)
 {
 	if ((FMOD_Sound_Release(doom->sound.jump)) != FMOD_OK)
 		perror("Error in FMOD_Sound_Release of jump");
@@ -32,7 +32,21 @@ void	ft_free_fmod(t_env *doom)
 		perror("Error in FMOD_System_Release ");
 }
 
-void	ft_fmod(t_env *doom)
+static void	ft_fmod2(t_env *doom)
+{
+	if ((FMOD_System_CreateSound(doom->sound.system,
+			"sounds/door_opening.wav", FMOD_CREATESTREAM, 0,
+				&doom->sound.door_opening)) != FMOD_OK)
+		perror("Error in FMOD_System_CreateSound for door_opening ");
+	if ((FMOD_System_CreateSound(doom->sound.system,
+			"sounds/door_closing.wav", FMOD_CREATESTREAM, 0,
+				&doom->sound.door_closing)) != FMOD_OK)
+		perror("Error in FMOD_System_CreateSound for door_closing ");
+	if ((FMOD_Sound_SetLoopCount(doom->sound.music, -1)) != FMOD_OK)
+		perror("Error in FMOD_Sound_SetLoopCount for music ");
+}
+
+void		ft_fmod(t_env *doom)
 {
 	if ((FMOD_System_Create(&doom->sound.system)) != FMOD_OK)
 		perror("Error in FMOD_System_Create ");
@@ -54,18 +68,5 @@ void	ft_fmod(t_env *doom)
 			"sounds/switch_off.wav", FMOD_CREATESTREAM, 0,
 				&doom->sound.switch_off)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for switch_off ");
-	if ((FMOD_System_CreateSound(doom->sound.system,
-                        "sounds/laser_shot.wav", FMOD_CREATESTREAM, 0,
-                                &doom->sound.laser_shot)) != FMOD_OK)
-                perror("Error in FMOD_System_CreateSound for shotgun ");
-	if ((FMOD_System_CreateSound(doom->sound.system,
-			"sounds/door_opening.wav", FMOD_CREATESTREAM, 0,
-				&doom->sound.door_opening)) != FMOD_OK)
-		perror("Error in FMOD_System_CreateSound for door_opening ");
-	if ((FMOD_System_CreateSound(doom->sound.system,
-			"sounds/door_closing.wav", FMOD_CREATESTREAM, 0,
-				&doom->sound.door_closing)) != FMOD_OK)
-		perror("Error in FMOD_System_CreateSound for door_closing ");
-	if ((FMOD_Sound_SetLoopCount(doom->sound.music, -1)) != FMOD_OK)
-		perror("Error in FMOD_Sound_SetLoopCount for music ");
+	ft_fmod2(doom);
 }

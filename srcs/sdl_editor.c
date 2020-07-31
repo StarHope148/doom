@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/27 01:34:37 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:40:17 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,6 @@ void	sdl_editor(t_env *doom)
 				ft_exit(doom, EXIT_SUCCESS, NULL);
 		}
 		ft_refresh_new_pos(doom);
-		if (FPS_TEST && get_time(doom) > 5)
-		{
-			printf("moyenne fps en 5sec : %f\n", doom->fps.count_fps / 5.0);
-			ft_exit(doom, 0, 0);
-		}
 	}
 	ft_exit(doom, EXIT_SUCCESS, NULL);
 }

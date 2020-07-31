@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 23:15:33 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:25:34 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:31:54 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int		ft_choose_texture_wall(t_thread_env *e)
 {
-	if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == BUTTON_OFF)
+	t_raycast	*rc;
+
+	rc = &e->rc;
+	if (e->map.data[rc->test_y * e->map.nbcol + rc->test_x] == BUTTON_OFF)
 		return (BUTTON_OFF_XPM);
-	else if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == BUTTON_ON)
+	else if (e->map.data[rc->test_y * e->map.nbcol + rc->test_x] == BUTTON_ON)
 		return (BUTTON_ON_XPM);
-	else if (e->map.data[e->rc.test_y * e->map.nbcol + e->rc.test_x] == DOOR)
+	else if (e->map.data[rc->test_y * e->map.nbcol + rc->test_x] == DOOR)
 		return (DOOR_METAL_XPM);
 	else
-		return (e->rc.orientation);
+		return (rc->orientation);
 }
 
 void	ft_apply_textured_wall(t_thread_env *e)
@@ -39,8 +42,8 @@ void	ft_apply_textured_wall(t_thread_env *e)
 	}
 	e->rc.tmp_x = e->rc.sample_x * e->xpm[xpm_id].h;
 	e->rc.tmp_y = e->rc.sample_y * e->xpm[xpm_id].w;
-	if (e->xpm[xpm_id].pixels[e->rc.tmp_y * e->xpm[xpm_id].w + e->rc.tmp_x] == MAGENTA &&
-			xpm_id == GRID_XPM)
+	if (e->xpm[xpm_id].pixels[e->rc.tmp_y * e->xpm[xpm_id].w + e->rc.tmp_x]
+											== MAGENTA && xpm_id == GRID_XPM)
 		return ;
 	e->screen_pixels[e->rc.y_ * W + e->rc.x_] =
 		e->xpm[xpm_id].pixels[e->rc.tmp_y * e->xpm[xpm_id].w + e->rc.tmp_x];
@@ -49,16 +52,17 @@ void	ft_apply_textured_wall(t_thread_env *e)
 void	ft_apply_color_oriented_wall(t_thread_env *e)
 {
 	if (e->rc.orientation == NORTH)
-		e->screen_pixels[e->rc.y_ *	W + e->rc.x_] = BLUE;
+		e->screen_pixels[e->rc.y_ * W + e->rc.x_] = BLUE;
 	else if (e->rc.orientation == SOUTH)
 		e->screen_pixels[e->rc.y_ * W + e->rc.x_] = RED;
 	else if (e->rc.orientation == EAST)
-		e->screen_pixels[e->rc.y_ *	W + e->rc.x_] = YELLOW;
+		e->screen_pixels[e->rc.y_ * W + e->rc.x_] = YELLOW;
 	else if (e->rc.orientation == WEST)
-		e->screen_pixels[e->rc.y_ *	W + e->rc.x_] = ORANGE;
+		e->screen_pixels[e->rc.y_ * W + e->rc.x_] = ORANGE;
 	else if (e->rc.orientation == GRID_XPM)
 		ft_apply_textured_wall(e);
-	else if (e->rc.orientation == BUTTON_ON_XPM || e->rc.orientation == BUTTON_OFF_XPM)
+	else if (e->rc.orientation == BUTTON_ON_XPM
+						|| e->rc.orientation == BUTTON_OFF_XPM)
 		ft_apply_textured_wall(e);
 	else if (e->rc.orientation == DOOR_METAL_XPM)
 		ft_apply_textured_wall(e);

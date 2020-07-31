@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/30 20:40:27 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 09:56:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int		ft_check_line(t_map *m)
 	{
 		if (l[i] != EMPTY && l[i] != WALL && l[i] != DOOR && l[i] != OBJECT &&
 				l[i] != TORCH && l[i] != GRID && l[i] != BARREL &&
-				l[i] != BUTTON_OFF && l[i] != BUTTON_ON && l[i] != DOOR_OPENED &&
-				l[i] != HEALTH_POTION && l[i] != KEY && l[i] != STATUE)
+				l[i] != BUTTON_OFF && l[i] != BUTTON_ON && l[i] != DOOR_OPENED
+				&& l[i] != HEALTH_POTION && l[i] != KEY && l[i] != STATUE)
 			return (-1);
 		i++;
 	}

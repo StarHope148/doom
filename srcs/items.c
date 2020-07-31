@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   items.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 06:15:12 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:21:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 09:55:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		ft_pick_up_key(t_env *doom, t_object *tmp)
 			tmp->data.to_remove = TRUE;
 			doom->map.data[(int)tmp->data.pos.y *
 					doom->map.nbcol + (int)tmp->data.pos.x] = EMPTY;
-			printf("just picked up a key\n");			//DEBUG
+			printf("just picked up a key\n"); //DEBUG
 		}
 	}
 }

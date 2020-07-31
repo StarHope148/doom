@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 09:12:34 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:14:59 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,6 @@ void	free_thread_env(t_shared_data *shared_data)
 		ft_putendl_fd("Error cond_destroy\n", 2);
 	if (pthread_cond_destroy(&shared_data->cond_main))
 		ft_putendl_fd("Error cond_destroy\n", 2);
-}
-
-void	free_xpm(t_env *doom)
-{
-	int	xpm_id;
-
-	xpm_id = -1;
-	while (++xpm_id < NB_XPM)
-		free_one_xpm(&doom->xpm[xpm_id]);
-}
-
-void	free_one_xpm(t_xpm *xpm)
-{
-	int	i_color;
-
-	if (xpm->color)
-	{
-		i_color = -1;
-		while (++i_color < xpm->colormax && xpm->color[i_color])
-			ft_memdel((void **)&xpm->color[i_color]);
-		ft_memdel((void **)&xpm->color);
-	}
-	ft_memdel((void **)&xpm->pixels);
 }
 
 void	ft_free_door(t_door *list)
@@ -98,7 +75,7 @@ void	ft_free_map(t_map *m)
 	ft_memdel((void **)&m->alt);
 }
 
-void				ft_free_obj_list(t_object **obj)
+void	ft_free_obj_list(t_object **obj)
 {
 	t_object	*current;
 	t_object	*next;

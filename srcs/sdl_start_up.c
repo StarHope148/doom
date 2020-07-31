@@ -6,10 +6,9 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 09:34:51 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:37:28 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "doom.h"
 
@@ -29,6 +28,8 @@ void	ft_load_surface(t_env *doom, char *image_file, SDL_Surface **dest)
 
 void	ft_init_video(t_env *doom)
 {
+	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
+		ft_exit(doom, EXIT_FAILURE, "Error in SDL_Init()");
 	doom->window = SDL_CreateWindow("doom", SDL_WINDOWPOS_CENTERED,
 					SDL_WINDOWPOS_CENTERED, W, H, 0);
 	if (doom->window == NULL)
@@ -55,9 +56,6 @@ void	ft_init_musicttf(t_env *doom)
 	if (!(doom->txt.welcome1 = TTF_RenderText_Blended(doom->txt.font,
 				" Welcome to Doom Nukem ! ", doom->txt.black)))
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
-/* 	if (!(doom->txt.welcome2 = TTF_RenderText_Blended(doom->txt.font,
-				" The funkiest Doom Nukem ! ", doom->txt.black)))
-		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()"); */
 }
 
 void	init_bar(t_env *e)
@@ -77,6 +75,7 @@ void	init_bar(t_env *e)
 void	init_carried_key(t_env *e)
 {
 	t_xpm	*x;
+
 	x = &e->xpm[KEY_XPM];
 	e->key.size.x = e->hp.size.x * 4 / 5;
 	e->key.size.y = x->h * e->key.size.x / x->w;
@@ -85,8 +84,6 @@ void	init_carried_key(t_env *e)
 
 void	ft_sdl(t_env *doom)
 {
-	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
-		ft_exit(doom, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_video(doom);
 	ft_init_musicttf(doom);
 	init_bar(doom);
@@ -108,11 +105,6 @@ void	ft_sdl(t_env *doom)
 				ft_exit(doom, EXIT_SUCCESS, NULL);
 		}
 		ft_refresh_new_pos(doom);
-		if (FPS_TEST && get_time(doom) > 5)
-		{
-			printf("moyenne fps en 5sec : %f\n", doom->fps.count_fps / 5.0);
-			ft_exit(doom, 0, 0);
-		}
 	}
 	ft_exit(doom, EXIT_SUCCESS, NULL);
 }

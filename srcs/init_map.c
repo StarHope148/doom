@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 03:44:45 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 09:54:01 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void		ft_init_map(t_env *doom, char *mapfile)
 		exit(EXIT_FAILURE);
 	}
 	ft_fill_map(&doom->map, fd);
-	//print_tab(&doom->map);
 	if (close(fd) < 0)
 	{
 		ft_putendl_fd("Error during close() ", 2);

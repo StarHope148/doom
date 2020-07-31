@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_binding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:20:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 19:20:52 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void		ft_movement(t_env *doom)
 			doom->event.key.keysym.sym == SDLK_KP_0)
 	{
 		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.laser_shot,
-				NULL, 0, NULL)) != FMOD_OK)
-                        perror("Error in FMOD_System_PlaySound for laser_shot ");
-		ft_shoot_projectile(doom);
+						NULL, 0, NULL)) != FMOD_OK)
+			perror("Error in FMOD_System_PlaySound for laser_shot ");
+        ft_shoot_projectile(doom);
 	}
 	else if (doom->event.key.keysym.sym == SDLK_e)
 		doom->moves.up = TRUE;

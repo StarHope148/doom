@@ -6,11 +6,32 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 14:34:43 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/26 14:06:24 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:19:24 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void	free_xpm(t_env *doom)
+{
+	int		xpm_id;
+	t_xpm	*xpm;
+	int		i_color;
+
+	xpm_id = -1;
+	while (++xpm_id < NB_XPM)
+	{
+		xpm = &doom->xpm[xpm_id];
+		if (xpm->color)
+		{
+			i_color = -1;
+			while (++i_color < xpm->colormax && xpm->color[i_color])
+				ft_memdel((void **)&xpm->color[i_color]);
+			ft_memdel((void **)&xpm->color);
+		}
+		ft_memdel((void **)&xpm->pixels);
+	}
+}
 
 int		cmp_file_info(t_xpm *xpm, char *info)
 {
@@ -42,19 +63,22 @@ int		cmp_file_info(t_xpm *xpm, char *info)
 
 Uint32	hex2int(char *hex)
 {
-    Uint32	val;
+	Uint32	val;
 	Uint8	byte;
 
 	val = 0;
-    while (*hex)
+	while (*hex)
 	{
-        byte = *hex++; 
-        if (byte >= '0' && byte <= '9') byte = byte - '0';
-        else if (byte >= 'a' && byte <='f') byte = byte - 'a' + 10;
-        else if (byte >= 'A' && byte <='F') byte = byte - 'A' + 10;    
-        val = (val << 4) | (byte & 0xF);
-    }
-    return val;
+		byte = *hex++;
+		if (byte >= '0' && byte <= '9')
+			byte = byte - '0';
+		else if (byte >= 'a' && byte <= 'f')
+			byte = byte - 'a' + 10;
+		else if (byte >= 'A' && byte <= 'F')
+			byte = byte - 'A' + 10;
+		val = (val << 4) | (byte & 0xF);
+	}
+	return (val);
 }
 
 int		apply_color(t_xpm *x, char *line, int num, int i)
@@ -66,7 +90,8 @@ int		apply_color(t_xpm *x, char *line, int num, int i)
 	{
 		if (!ft_strncmp(1 + line + x->nchar * i, x->color[color], x->nchar))
 		{
-			x->pixels[(num - x->colormax - 5) * x->w + i] = hex2int(x->color[color] + 2 + x->nchar);
+			x->pixels[(num - x->colormax - 5) * x->w + i] =
+							hex2int(x->color[color] + 2 + x->nchar);
 			x->pixels[(num - x->colormax - 5) * x->w + i] <<= 8;
 			break ;
 		}

@@ -6,10 +6,9 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 08:04:09 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 10:34:01 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "doom.h"
 
@@ -54,14 +53,6 @@ void		modify_screen_pixels(t_env *e, t_object *tmp)
 				e->screen_pixels[y_ * W + x_] = x->pixels[sp.y * x->w + sp.x];
 		}
 	}
-}
-
-void		set_obj_dist(t_env *e, t_object *tmp)
-{
-	tmp->data.vect_x = tmp->data.pos.x - e->cam.pos_x;
-	tmp->data.vect_y = tmp->data.pos.y - e->cam.pos_y;
-	tmp->data.dist = sqrt(tmp->data.vect_x * tmp->data.vect_x
-					+ tmp->data.vect_y * tmp->data.vect_y);
 }
 
 void		set_obj_angle(t_env *e, t_object *tmp)
@@ -113,7 +104,10 @@ void		ft_draw_objects(t_env *e)
 	tmp = &e->obj;
 	while (tmp != NULL)
 	{
-		set_obj_dist(e, tmp);
+		tmp->data.vect_x = tmp->data.pos.x - e->cam.pos_x;
+		tmp->data.vect_y = tmp->data.pos.y - e->cam.pos_y;
+		tmp->data.dist = sqrt(tmp->data.vect_x * tmp->data.vect_x
+						+ tmp->data.vect_y * tmp->data.vect_y);
 		tmp = tmp->next;
 	}
 	ft_sort_list(e, tmp);

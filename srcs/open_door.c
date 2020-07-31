@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/28 17:40:52 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:25:05 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	anim_one_door(t_env *doom, t_door *door)
 	if (duration < DOOR_OPENING_DURATION)
 	{
 		d = door;
-		doom->map.alt[d->y * doom->map.nbcol + d->x] = d->start_alt + duration * d->speed;
+		doom->map.alt[d->y * doom->map.nbcol + d->x] =
+										d->start_alt + duration * d->speed;
 	}
 	else if (duration >= DOOR_OPENING_DURATION)
 	{
