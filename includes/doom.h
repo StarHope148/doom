@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 20:43:10 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 01:00:56 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,9 +368,8 @@ void				ft_exit(t_env *doom, int exit_type, char *message);
 void				ft_print(t_env *doom);
 void				ft_initialize(t_env *doom, char *mapfile);
 void				ft_init_map(t_env *doom, char *mapfile);
-void				ft_movement(t_env *doom);
 void				ft_stop_movement(t_env *doom);
-void				ft_settings(t_env *doom);
+void				ft_settings_controls(t_env *doom);
 void				ft_refresh_new_pos(t_env *doom);
 void				ft_error(t_map *m, int code, char *line);
 
@@ -397,8 +396,7 @@ void				ft_destroy_texture_renderer_window(t_env *doom);
 void				ft_calc_next_intersection(t_thread_env *e);
 void				ft_calc_next_intersection_transparent(t_thread_env *e);
 
-void				ft_key_pressed(t_env *doom);
-void				ft_key_released(t_env *doom);
+void				ft_key_hook(t_env *doom);
 
 double				get_time(t_env *doom);
 void				ft_funky_textures(t_env *doom);
@@ -452,6 +450,7 @@ void				init_draw_projectile(t_env *e, t_object *tmp);
 void				ft_load_textures(t_env *doom);
 
 void				ft_hit_barrel(t_env *doom, int obj_y, int obj_x);
+void				ft_firing_anim(t_env *doom);
 
 void				ft_pick_up_items(t_env *doom);
 void				ft_use_key_on_door(t_env *doom);
@@ -461,5 +460,26 @@ void				draw_hp(t_env *e);
 void				resolve_on_fire(t_env *e);
 void				ft_taking_damage(t_env *doom, int amount);
 int					ft_restore_health(t_env *doom, int amount);
+
+void				ft_movement_controls_pressed(t_env *doom);
+void				ft_rotate_controls_pressed(t_env *doom);
+void				ft_jump_crouch_fly_controls_pressed(t_env *doom);
+void				ft_other_controls_pressed(t_env *doom);
+void				ft_pause_music(t_env *doom);
+
+void				ft_movement_controls_released(t_env *doom);
+void				ft_rotate_controls_released(t_env *doom);
+void				ft_jump_crouch_fly_controls_released(t_env *doom);
+
+int					wall_on_cam_pos(t_env *doom);
+
+void				set_movespeed(t_env *doom);
+void				ft_crouch(t_env *doom);
+void				ft_jump(t_env *doom);
+void				ft_reset_pos_z(t_env *doom);
+void				ft_fly(t_env *doom);
+void				ft_move(t_env *doom);
+
+void				ft_rotation(t_env *doom);
 
 #endif

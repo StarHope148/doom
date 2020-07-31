@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 10:37:28 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 01:05:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-void	ft_load_surface(t_env *doom, char *image_file, SDL_Surface **dest)
-{
-	SDL_Surface	*tmp;
-
-	tmp = NULL;
-	tmp = SDL_LoadBMP(image_file);
-	if (tmp == NULL)
-		ft_exit(doom, EXIT_FAILURE, "Error in SDL_LoadBMP()");
-	*dest = SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_RGBA8888, 1);
-	SDL_FreeSurface(tmp);
-	if (*dest == NULL)
-		ft_exit(doom, EXIT_FAILURE, "Error in SDL_ConvertSurfaceFormat()");
-}
 
 void	ft_init_video(t_env *doom)
 {
@@ -96,14 +82,7 @@ void	ft_sdl(t_env *doom)
 	{
 		ft_print(doom);
 		while (SDL_PollEvent(&doom->event))
-		{
-			if (doom->event.type == SDL_KEYDOWN)
-				ft_key_pressed(doom);
-			if (doom->event.type == SDL_KEYUP)
-				ft_key_released(doom);
-			if (doom->event.type == SDL_QUIT)
-				ft_exit(doom, EXIT_SUCCESS, NULL);
-		}
+			ft_key_hook(doom);
 		ft_refresh_new_pos(doom);
 	}
 	ft_exit(doom, EXIT_SUCCESS, NULL);

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 01:26:36 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/28 17:50:32 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 21:58:02 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_search_door(t_env *doom, int door_y, int door_x)
 					init_door(doom, y, x);
 				else if (doom->map.data[y * doom->map.nbcol + x] == DOOR_OPENED)
 					ft_closing_door(doom, y, x);
-				//printf("cell[%d][%d] = %c\n", y, x, doom->map.data[y * doom->map.nbcol + x]);
 			}
 			x++;
 		}

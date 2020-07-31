@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_editor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/31 10:40:17 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 23:58:29 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,7 @@ void	sdl_editor(t_env *doom)
 					doom->pitch)) < 0)
 			ft_exit(doom, EXIT_FAILURE, "Error in SDL_UpdateTexture()");
 		while (SDL_PollEvent(&doom->event))
-		{
-			if (doom->event.type == SDL_KEYDOWN)
-				ft_key_pressed(doom);
-			if (doom->event.type == SDL_KEYUP)
-				ft_key_released(doom);
-			if (doom->event.type == SDL_QUIT)
-				ft_exit(doom, EXIT_SUCCESS, NULL);
-		}
+			ft_key_hook(doom);
 		ft_refresh_new_pos(doom);
 	}
 	ft_exit(doom, EXIT_SUCCESS, NULL);

@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   fmod_start_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 06:51:22 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 20:21:51 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 00:21:39 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
+
+void		ft_pause_music(t_env *doom)
+{
+	if ((FMOD_Channel_GetPaused(doom->sound.channel_music,
+			&doom->sound.state)) != FMOD_OK)
+		perror("Error in FMOD_Channel_GetPaused for music ");
+	if (doom->sound.state == FALSE)
+	{
+		if ((FMOD_Channel_SetPaused(doom->sound.channel_music, TRUE)) !=
+				FMOD_OK)
+			perror("Error in FMOD_Channel_SetPaused for music ");
+	}
+	else
+	{
+		if ((FMOD_Channel_SetPaused(doom->sound.channel_music, FALSE)) !=
+				FMOD_OK)
+			perror("Error in FMOD_Channel_SetPaused for music ");
+	}
+}
 
 void		ft_free_fmod(t_env *doom)
 {
@@ -35,9 +54,9 @@ void		ft_free_fmod(t_env *doom)
 static void	ft_fmod2(t_env *doom)
 {
 	if ((FMOD_System_CreateSound(doom->sound.system,
-                        "sounds/laser_shot.wav", FMOD_CREATESTREAM, 0,
-                                &doom->sound.laser_shot)) != FMOD_OK)
-                perror("Error in FMOD_System_CreateSound for shotgun ");
+			"sounds/laser_shot.mp3", FMOD_CREATESTREAM, 0,
+				&doom->sound.laser_shot)) != FMOD_OK)
+		perror("Error in FMOD_System_CreateSound for shotgun ");
 	if ((FMOD_System_CreateSound(doom->sound.system,
 			"sounds/door_opening.wav", FMOD_CREATESTREAM, 0,
 				&doom->sound.door_opening)) != FMOD_OK)

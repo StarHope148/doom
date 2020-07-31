@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: czhang <czhang@student.42.fr>              +#+  +:+       +#+         #
+#    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/07/31 19:29:50 by czhang           ###   ########.fr        #
+#    Updated: 2020/08/01 01:02:17 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRC_NAME += key_hook.c
 SRC_NAME += image.c
 SRC_NAME += init.c
 SRC_NAME += init_map.c
-SRC_NAME += key_binding.c
-SRC_NAME += refresh_pos.c
+SRC_NAME += key_binding_pressed.c
+SRC_NAME += key_binding_released.c
 SRC_NAME += map_checker.c
 SRC_NAME += raycaster.c
 SRC_NAME += raycaster_tools.c
@@ -54,7 +54,14 @@ SRC_NAME += exit.c
 SRC_NAME += items.c
 SRC_NAME += player.c
 SRC_NAME += gun.c
+SRC_NAME += refresh_pos.c
 SRC_NAME += hp_and_carried_key.c
+SRC_NAME += init_object_type2.c
+SRC_NAME += settings_controls.c
+SRC_NAME += update_position.c
+SRC_NAME += update_crouch_jump_run_fly.c
+SRC_NAME += update_rotate.c
+SRC_NAME += collision.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
