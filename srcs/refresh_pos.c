@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 07:10:10 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 08:02:55 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,10 +207,7 @@ void	resolve_on_fire(t_env *e)
 		{
 			if (get_time(e) - e->chr.fire_time > e->chr.on_fire)
 			{
-				if (e->chr.health > FIRE_AIE)
-					e->chr.health -= FIRE_AIE;
-				else
-					e->chr.health = 0;
+				ft_taking_damage(e, FIRE_AIE);
 				e->chr.on_fire++;
 			}
 		}
