@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 06:09:39 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 06:24:41 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,7 @@ typedef struct		s_character
 	unsigned char	health;
 	unsigned char	carried_key;
 	unsigned char	on_fire;
+	double			fire_time;
 }					t_character;
 
 typedef struct		s_healthbar

@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 05:57:05 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 07:02:08 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_rotate_up(t_env *doom)
 {
 	if (doom->cam.angle_z <= MAX_ANGLE_Z)
-	doom->cam.angle_z += UP_DOWN_ANGLE_SPEED;
+		doom->cam.angle_z += UP_DOWN_ANGLE_SPEED;
 }
 
 void	ft_rotate_down(t_env *doom)
@@ -113,7 +113,7 @@ void	ft_crouch(t_env *doom)
 	}
 }
 
-void		ft_jump(t_env *doom)
+void	ft_jump(t_env *doom)
 {
 	static int		duration;
 
@@ -174,9 +174,52 @@ void	ft_up_down_test(t_env *doom)
 	}
 }
 
+int		is_on_fire(t_env *e)
+{
+	t_object	*obj;
+
+	obj = &e->obj;
+	while (obj)
+	{
+		if (obj->data.type == TORCH && obj->data.dist < 0.6)
+			return (1);
+		obj = obj->next;
+	}
+	return (0);
+}
+
+void	resolve_on_fire(t_env *e)
+{
+	if (!e->chr.on_fire)
+		e->chr.on_fire = is_on_fire(e);
+	if (!e->chr.on_fire)
+		return ;
+	if (is_on_fire(e) == 0)
+	{
+		e->chr.on_fire = 0;
+		e->chr.fire_time = 0;
+	}
+	else
+	{
+		if (!e->chr.fire_time)
+			e->chr.fire_time = get_time(e);
+		else
+		{
+			if (get_time(e) - e->chr.fire_time > e->chr.on_fire)
+			{
+				if (e->chr.health > FIRE_AIE)
+					e->chr.health -= FIRE_AIE;
+				else
+					printf("t mor PTDRRRRRRRRRRRRRRRRRRRRRRR\n");
+				e->chr.on_fire++;
+			}
+		}
+	}
+}
+
 void	ft_refresh_new_pos(t_env *doom)
 {
-	//check_if_on_fire(doom);
+	resolve_on_fire(doom);
 	set_movespeed(doom);
 	ft_crouch(doom);
 	ft_jump(doom);
