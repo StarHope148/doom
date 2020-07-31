@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:48:01 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 05:02:19 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef enum		e_texture_id
 	TORCH_5_XPM,
 	TORCH_6_XPM,
 	TORCH_7_XPM,
-	TORCH_8_XPM
+	TORCH_8_XPM,
+	HEALTHBAR_XPM
 }					t_texture_id;
 
 typedef enum	e_motion
@@ -284,6 +285,20 @@ typedef struct		s_sound
 	int				state;
 }					t_sound;
 
+typedef struct		s_character
+{
+	unsigned char	health;
+	unsigned char	carried_key;
+}					t_character;
+
+typedef struct		s_healthbar
+{
+	t_point			size;
+	t_point			start_red;
+	t_point			max_red;
+	unsigned int	y_;
+}					t_healthbar;
+
 typedef struct		s_env
 {
 	SDL_Window		*window;
@@ -311,8 +326,8 @@ typedef struct		s_env
 	t_shared_data	shared_data;
 	char			new_values;
 	t_object		obj;
-	int				screen_x;
-	int				screen_y;
+	t_character		chr;
+	t_healthbar		hp;
 }					t_env;
 
 void				ft_doom(char *mapfile);

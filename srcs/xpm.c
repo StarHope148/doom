@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 00:18:51 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/16 14:37:40 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/30 23:25:43 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		xpm_error(t_xpm *xpm, char *filename, char *message)
 		ft_putstr_fd("xpm error for ", 2);
 	ft_putendl_fd(filename, 2);
 	ft_putendl("");
-	free_one_xpm(xpm);
+	(void)xpm;
+	//free_one_xpm(xpm); //il est deja free dans ft_exit() donc double free segv
 	return (-1);
 }
 

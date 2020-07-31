@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 01:43:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 05:05:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	SDL_FreeSurface(doom->txt.welcome2);
 	SDL_FreeSurface(doom->fps.s);
 	TTF_Quit();
-	ft_putendl("next step is SDL_Quit()");
 	SDL_Quit();
 	ft_putendl("SDL_Quit accomplished");
 	ft_free_door(doom->door);
+	ft_putendl("next step is free_xpm()");
 	free_xpm(doom);
 	ft_free_map(&doom->map);
 	ft_free_obj(&doom->obj.next);
@@ -83,12 +83,27 @@ void	ft_init_musicttf(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()"); */
 }
 
+void	init_bar(t_env *e)
+{
+	t_xpm			*x;
+
+	x = &e->xpm[HEALTHBAR_XPM];
+	e->hp.size.x = e->map.nbl * e->block;
+	e->hp.size.y = x->h * e->hp.size.x / x->w;
+	e->hp.y_ = (e->map.nbcol - 0.5) * e->block;
+	e->hp.max_red.y = e->hp.size.y * 7 / 8;
+	e->hp.max_red.x = e->hp.size.x * 89 * e->chr.health / 9000;
+	e->hp.start_red.y = e->hp.size.y / 8;
+	e->hp.start_red.x = e->hp.size.x * 8 / 45;
+}
+
 void	ft_sdl(t_env *doom)
 {
 	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_video(doom);
 	ft_init_musicttf(doom);
+	init_bar(doom);
 	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.music, NULL, 0,
 			&doom->sound.channel_music)) != FMOD_OK)
 		perror("Error in FMOD_System_PlaySound for music ");

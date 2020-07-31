@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 13:34:25 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/28 17:50:44 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 02:31:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,16 @@ void	ft_draw_fps(t_env *doom)
 		if ((str_frames = ft_itoa((int)doom->fps.frames)) == NULL)
 			ft_exit(doom, EXIT_FAILURE, "Error malloc in itoa (ft_draw_fps)");
 		SDL_FreeSurface(doom->fps.s);
-		if ((doom->fps.s = TTF_RenderText_Blended(doom->txt.font,
-				str_frames, doom->txt.black)) == NULL)
-		{
-			ft_memdel((void **)&str_frames);
-			ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
-		}
+		doom->fps.s = TTF_RenderText_Blended(doom->txt.font,
+									str_frames, doom->txt.black);
 		ft_memdel((void **)&str_frames);
+		if (doom->fps.s == NULL)
+			ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
 		doom->fps.frames = 0;
 		doom->fps.time_fps = get_time(doom);
 	}
-	if (doom->fps.s != NULL)
-		draw_text(doom,
-			(doom->minimap.def_y + doom->block + 1) * W, doom->fps.s);
+	if (doom->fps.s != NULL && W > doom->fps.s->w)
+		draw_text(doom, W - doom->fps.s->w, doom->fps.s);
 }
 
 double	get_time(t_env *doom)

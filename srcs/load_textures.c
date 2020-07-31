@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 01:42:21 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:07:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 01:46:28 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		ft_load_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for crosshair.xpm");
 	if ((get_xpm("textures/barrel.xpm", &doom->xpm[BARREL_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for barrel.xpm");
-	if ((get_xpm("textures/button_off.xpm", &doom->xpm[BUTTON_OFF_XPM])) != 0)
+ 	if ((get_xpm("textures/button_off.xpm", &doom->xpm[BUTTON_OFF_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for button_off.xpm");
 	if ((get_xpm("textures/button_on.xpm", &doom->xpm[BUTTON_ON_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for button_on.xpm");
@@ -73,4 +73,6 @@ void		ft_load_textures(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for health_potion.xpm");
 	if ((get_xpm("textures/key.xpm", &doom->xpm[KEY_XPM])) != 0)
 		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for key.xpm");
+	if ((get_xpm("textures/healthbar.xpm", &doom->xpm[HEALTHBAR_XPM])) != 0)
+		ft_exit(doom, EXIT_FAILURE,"Error in get_xpm() for healthbar.xpm");
 }

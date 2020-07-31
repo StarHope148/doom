@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 10:12:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 00:24:38 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,31 @@
 
 void		modify_screen_pixels(t_env *e, t_object *tmp)
 {
-	t_point	delta;
-	t_point	sample;
-	int		xpm_id;
+	t_point			delta;
+	t_point			sample;
+	unsigned int	y_;
+	unsigned int	x_;
+	t_xpm			*x;
 
-	xpm_id = ft_choose_and_init_sprite(e, tmp);
+	x = &e->xpm[ft_choose_and_init_sprite(e, tmp)];
+	if (!x || !x->pixels || x->w < 1 || x->h < 1)
+		return ;
 	delta.y = -1;
 	while (++delta.y < tmp->data.h_)
 	{
 		delta.x = tmp->data.delta_x_start - 1;
 		while (++delta.x < tmp->data.w_)
 		{
-			sample.y = delta.y * e->xpm[xpm_id].h / tmp->data.h_;
-			sample.x = delta.x * e->xpm[xpm_id].w / tmp->data.w_;
-			e->screen_y = tmp->data.y_ + delta.y;
-			e->screen_x = tmp->data.x_ + delta.x;
-			if (e->xpm[xpm_id].pixels != NULL && e->xpm[xpm_id].pixels[sample.y
-					* e->xpm[xpm_id].w + sample.x] != MAGENTA &&
-					e->screen_y * W + e->screen_x < W * H &&
-					e->screen_y > 0 && e->screen_x > 0 && e->screen_x < W &&
-					tmp->data.dist < e->shared_data.depth_buf[e->screen_x])
-				e->screen_pixels[e->screen_y * W + e->screen_x] = e->xpm
-					[xpm_id].pixels[sample.y * e->xpm[xpm_id].w + sample.x];
+			sample.y = delta.y * x->h / tmp->data.h_;
+			sample.x = delta.x * x->w / tmp->data.w_;
+			y_ = tmp->data.y_ + delta.y;
+			x_ = tmp->data.x_ + delta.x;
+			if (sample.y * x->w + sample.x < x->w * x->h &&
+					x->pixels[sample.y * x->w + sample.x] != MAGENTA &&
+					y_ * W + x_ < W * H && x_ < W &&
+					tmp->data.dist < e->shared_data.depth_buf[x_])
+				e->screen_pixels[y_ * W + x_] =
+										x->pixels[sample.y * x->w + sample.x];
 		}
 	}
 }
@@ -59,13 +62,13 @@ void		set_obj_angle(t_env *e, t_object *tmp)
 		tmp->data.in_fov = TRUE;
 	else
 		tmp->data.in_fov = FALSE;
-}	
+}
 
 void		ft_sort_list(t_env *e, t_object *tmp)
 {
 	int				done;
 	t_object_data	tmp_data;
-	
+
 	done = FALSE;
 	while (done == FALSE)
 	{
@@ -86,7 +89,7 @@ void		ft_sort_list(t_env *e, t_object *tmp)
 			tmp = tmp->next;
 		}
 	}
-} 
+}
 
 void		ft_draw_objects(t_env *e)
 {

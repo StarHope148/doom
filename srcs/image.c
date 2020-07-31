@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 00:39:07 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 05:09:35 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,47 @@ static void	draw_welcome_text(t_env *doom)
 		draw_centered_text(doom, doom->txt.welcome2); */
 }
 
+void		draw_only_bar(t_env *e)
+{
+	t_point			delta;
+	t_point			sample;
+	t_xpm			*x;
+
+	x = &e->xpm[HEALTHBAR_XPM];
+	delta.y = -1;
+	while (++delta.y < e->hp.size.y)
+	{
+		delta.x = -1;
+		while (++delta.x < e->hp.size.x)
+		{
+			sample.y = delta.y * x->h / e->hp.size.y;
+			sample.x = delta.x * x->w / e->hp.size.x;
+			if (x->pixels[sample.y * x->w + sample.x] != MAGENTA)
+				e->screen_pixels[(e->hp.y_ + delta.y)* W + delta.x] = x->pixels[sample.y * x->w + sample.x];
+		}
+	}
+}
+
+void		draw_hp(t_env *e)
+{
+	t_xpm			*x;
+	t_point			delta;
+
+	x = &e->xpm[HEALTHBAR_XPM];
+	if (!x || !x->pixels || x->w < 1 || x->h < 1 || e->hp.size.x >= W
+			|| e->hp.y_ + e->hp.size.y * W + e->hp.size.x >= W * H)
+		return ;
+	delta.y = e->hp.start_red.y;
+	e->hp.max_red.x = e->hp.size.x * e->chr.health * 89 / 9000;
+	while (++delta.y < e->hp.max_red.y)
+	{
+		delta.x = e->hp.start_red.x;
+		while (++delta.x < e->hp.max_red.x)
+			e->screen_pixels[(e->hp.y_ + delta.y)* W + delta.x] = 0xFF000000;
+	}
+	draw_only_bar(e);
+}
+
 void		ft_print(t_env *doom)
 {
 	animation_opening_door(doom);
@@ -78,6 +119,7 @@ void		ft_print(t_env *doom)
 	ft_draw_fps(doom);
 	ft_draw_crosshair(doom);
 	draw_welcome_text(doom);
+	draw_hp(doom);
 	if (!doom->no_funky)
 		ft_funky_textures(doom);
 	ft_update_screen(doom);

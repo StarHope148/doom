@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 07:26:47 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 03:38:45 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_init_env(t_env *doom)
 	doom->music_puls = (double)60 / 116;
 	doom->count_puls = 1;
 	doom->moves.movespeed = MOVE_SPEED;
+	doom->chr.health = 100;
 	pthread_mutex_init(&doom->shared_data.mutex, 0);
 	pthread_cond_init(&doom->shared_data.cond, 0);
 	if (!(doom->screen_pixels = (Uint32 *)ft_memalloc(sizeof(Uint32) * H * W)))
