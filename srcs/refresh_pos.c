@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 09:50:39 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/30 21:51:02 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		wall_on_cam_pos(t_env *doom)
 {
 	char	map_symbol;
 
-	map_symbol = doom->map.data[(int)doom->cam.pos_y * doom->map.nbcol + (int)doom->cam.pos_x];
+	map_symbol = doom->map.data[(int)doom->cam.pos_y *
+		doom->map.nbcol + (int)doom->cam.pos_x];
 	if (map_symbol == WALL)
 		return (1);
 	else if (map_symbol == DOOR)
@@ -42,6 +43,8 @@ int		wall_on_cam_pos(t_env *doom)
 	else if (map_symbol == BUTTON_ON)
 		return (3);
 	else if (map_symbol == BARREL)
+		return (3);
+	else if (map_symbol == STATUE)
 		return (3);
 	return (0);
 }

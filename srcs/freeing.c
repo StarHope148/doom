@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:36:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 00:10:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 00:31:37 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,17 @@ void	ft_free_map(t_map *m)
 	ft_memdel((void **)&m->alt);
 }
 
-void				ft_free_obj(t_object **obj)
+void				ft_free_obj_list(t_object **obj)
 {
-	t_object	*current; 
-	t_object	*next;  
-	
-	current = *obj; 
-	while (current != NULL)  
-	{  
-		next = current->next;  
-		ft_memdel((void **)&(current));  
+	t_object	*current;
+	t_object	*next;
+
+	current = *obj;
+	while (current != NULL)
+	{
+		next = current->next;
+		ft_memdel((void **)&(current));
 		current = next;
 	}
-	*obj = NULL;  
+	*obj = NULL;
 }

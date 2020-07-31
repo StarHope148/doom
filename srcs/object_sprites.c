@@ -6,9 +6,10 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 22:49:51 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 00:24:38 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 05:17:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "doom.h"
 
@@ -95,6 +96,8 @@ void		ft_draw_objects(t_env *e)
 {
 	t_object	*tmp;
 
+	ft_update_pos_obj(e);
+	ft_check_remove_status_obj(&e->obj);
 	tmp = &e->obj;
 	while (tmp != NULL)
 	{
@@ -106,7 +109,8 @@ void		ft_draw_objects(t_env *e)
 	while (tmp != NULL)
 	{
 		set_obj_angle(e, tmp);
-		if (tmp->data.dist > 0.5 && tmp->data.in_fov == TRUE)
+		if (tmp->data.dist > 0.5 && tmp->data.in_fov == TRUE &&
+				tmp->data.to_remove != TRUE)
 			modify_screen_pixels(e, tmp);
 		tmp = tmp->next;
 	}

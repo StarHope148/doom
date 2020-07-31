@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 08:33:21 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 03:22:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,14 @@ void		ft_movement(t_env *doom)
 		doom->moves.running = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_LCTRL)
 		doom->moves.crouching = TRUE;
+	else if (doom->event.key.keysym.sym == SDLK_SPACE ||
+			doom->event.key.keysym.sym == SDLK_KP_0)
+		ft_shoot_projectile(doom);
 	else if (doom->event.key.keysym.sym == SDLK_e)
 		doom->moves.up = TRUE;
 	else if (doom->event.key.keysym.sym == SDLK_q)
 		doom->moves.down = TRUE;
-	else if (doom->event.key.keysym.sym == SDLK_SPACE)
+	else if (doom->event.key.keysym.sym == SDLK_LALT)
 	{
 		doom->moves.jumping = TRUE;
 		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.jump,

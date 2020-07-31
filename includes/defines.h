@@ -6,10 +6,9 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/30 23:22:04 by czhang           ###   ########.fr       */
+/*   Updated: 2020/07/31 05:15:54 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef DEFINES_H
 # define DEFINES_H
@@ -59,10 +58,16 @@
 # define HEALTH_POTION 'P'
 # define KEY 'K'
 # define TORCH 'T'
+# define STATUE 'S'
+# define PROJECTILE 'C'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
 # define BUTTON_RANGE 2
+
+# define BARREL_HP 50
+# define RATIO_PROJECTILE_SPEED 0.2
+# define PROJECTILE_DAMAGE 10
 
 # define DOOR_OPENING_DURATION 2
 # define MIN_ALTITUDE -32
@@ -70,6 +75,6 @@
 # define MAX_PROCESSOR 16
 # define FPS_TEST 0
 
-# define NB_XPM 23
+# define NB_XPM 27
 
 #endif
