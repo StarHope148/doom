@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 07:09:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/07/31 08:22:13 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,6 +430,7 @@ void				ft_load_textures(t_env *doom);
 void				ft_hit_barrel(t_env *doom, int obj_y, int obj_x);
 
 void				ft_pick_up_items(t_env *doom);
+void				ft_use_key_on_door(t_env *doom);
 
 void				ft_taking_damage(t_env *doom, int amount);
 int					ft_restore_health(t_env *doom, int amount);
