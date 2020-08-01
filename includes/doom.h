@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 17:38:04 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:50:48 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ typedef struct		s_text
 	SDL_Surface		*welcome1;
 	SDL_Surface		*welcome2;
 	SDL_Surface		*end_level;
+	SDL_Surface		*objectif;
 	SDL_Surface		*dead;
 	SDL_Color		black;
 }					t_text;
@@ -419,7 +420,8 @@ double				get_time(t_env *doom);
 void				ft_funky_textures(t_env *doom);
 void				ft_draw_fps(t_env *doom);
 void				draw_text(t_env *doom, unsigned int pos, SDL_Surface *text);
-void				draw_centered_text(t_env *doom, SDL_Surface *text);
+void				draw_centered_text(t_env *doom, SDL_Surface *text,
+						double height);
 
 void				resolve_door(t_env *doom);
 void				animation_opening_door(t_env *doom);

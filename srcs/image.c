@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:09:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 18:01:14 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,16 @@ static void	set_raycast_threads(t_env *doom)
 
 static void	draw_welcome_text(t_env *doom)
 {
-	if (get_time(doom) < 8)
-		draw_centered_text(doom, doom->txt.welcome1);
+	double	time;
+
+	time = get_time(doom);
+	if (time < 10)
+	{
+		if (time < 5)
+			draw_centered_text(doom, doom->txt.welcome1, 0.3);
+		else
+			draw_centered_text(doom, doom->txt.objectif, 0.3);
+	}
 }
 
 void		ft_print(t_env *doom)

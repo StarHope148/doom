@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:34:19 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:04:27 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:50:55 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check_dead(t_env *doom)
 	if (doom->chr.dead == TRUE)
 	{
 		if (duration < 500)
-			draw_centered_text(doom, doom->txt.dead);
+			draw_centered_text(doom, doom->txt.dead, 0.3);
 		duration++;
 	}
 	else
@@ -39,7 +39,7 @@ void	ft_check_end_level(t_env *doom)
 	}
 	if (end_level == TRUE)
 	{
-		draw_centered_text(doom, doom->txt.end_level);
+		draw_centered_text(doom, doom->txt.end_level, 0.3);
 		duration++;
 	}
 	if (duration == 1000)

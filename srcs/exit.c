@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 15:55:34 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:51:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		ft_free_close_ttf(t_env *doom)
 	TTF_CloseFont(doom->txt.font);
 	SDL_FreeSurface(doom->txt.welcome1);
 	SDL_FreeSurface(doom->txt.welcome2);
+	SDL_FreeSurface(doom->txt.objectif);
 	SDL_FreeSurface(doom->txt.end_level);
 	SDL_FreeSurface(doom->txt.dead);
 	SDL_FreeSurface(doom->fps.s);
