@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 10:13:16 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 02:45:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_set_tile_color(t_env *doom, Uint32 *color)
 		*color = BURLYWOOD;
 	else if (symb == STATUE)
 		*color = BLACK;
+	else if (symb == END_CASE)
+		*color = MAGENTA;
 	else
 		*color = BLACK;
 }

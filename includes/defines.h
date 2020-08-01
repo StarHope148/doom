@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 13:01:48 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 03:56:33 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define TORCH 'T'
 # define STATUE 'S'
 # define PROJECTILE 'C'
+# define END_CASE 'E'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
@@ -70,7 +71,7 @@
 # define RATIO_PROJECTILE_SPEED 0.2
 # define PROJECTILE_DAMAGE 10
 # define PLAYER_MAX_HP 100
-# define HEALTH_POTION_AMOUNT 25
+# define HEALTH_POTION_AMOUNT 30
 
 # define DOOR_OPENING_DURATION 2
 # define MIN_ALTITUDE -32

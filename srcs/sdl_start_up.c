@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_start_up.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 01:35:27 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 04:05:46 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,15 @@ void	ft_init_musicttf(t_env *doom)
 	if ((doom->txt.font = TTF_OpenFont("arial.ttf", 40)) == NULL)
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_OpenFont()");
 	if (!(doom->txt.welcome1 = TTF_RenderText_Blended(doom->txt.font,
-				" Welcome to Doom Nukem ! ", doom->txt.black)))
+			" Welcome to Doom Nukem ! ", doom->txt.black)))
+		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
+	if (!(doom->txt.end_level = TTF_RenderText_Blended(doom->txt.font,
+			" Congratulation, you finished the game ! ", doom->txt.black)))
+		ft_exit(doom, EXIT_FAILURE,
+			"Error in TTF_RenderText_Blended() for end_level");
+	if (!(doom->txt.dead = TTF_RenderText_Blended(doom->txt.font,
+			" You should be dead, but we made you immortal ! ",
+			doom->txt.black)))
 		ft_exit(doom, EXIT_FAILURE, "Error in TTF_RenderText_Blended()");
 }
 

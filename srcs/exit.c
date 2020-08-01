@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 09:51:57 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 02:52:13 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	TTF_CloseFont(doom->txt.font);
 	SDL_FreeSurface(doom->txt.welcome1);
 	SDL_FreeSurface(doom->txt.welcome2);
+	SDL_FreeSurface(doom->txt.end_level);
+	SDL_FreeSurface(doom->txt.dead);
 	SDL_FreeSurface(doom->fps.s);
 	TTF_Quit();
 	SDL_Quit();
