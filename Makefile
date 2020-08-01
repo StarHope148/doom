@@ -88,8 +88,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 #MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
 SDL2 = -lSDL2 -lSDL2_ttf
 FMOD = -I fmod/inc -L fmod/lib/x86_64 -lfmod -lfmodL
-COMPILE_SDL2 = SDL2/lib/libSDL2.a
-COMPILE_SDL2_TTF = SDL2_ttf/lib/libSDL2_ttf.a
+COMPILE_SDL2 = SDL2_done
 INSTALL_FMOD = fmod/done
 # `sdl2-config --cflags --libs`
 CFLAGS = -g -Wall -Wextra -Werror -lm -lpthread -D_REENTRANT -DLinux
@@ -101,7 +100,7 @@ $(CC) = clang
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(COMPILE_SDL2) $(COMPILE_SDL2_TTF) $(INSTALL_FMOD)
+$(NAME): $(COMPILE_SDL2) $(INSTALL_FMOD) $(OBJ)
 	make -C libft/.
 	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) $(FMOD)
 
@@ -112,20 +111,17 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 $(COMPILE_SDL2):
 	if ! dpkg-query -W -f='$${Status}' freeglut3-dev  | grep "ok installed"; \
 	then sudo apt-get install freeglut3-dev; fi
-	(cd SDL2-2.0.12 \
-	&& ./configure --prefix=$(shell pwd)/SDL2 --enable-static --disable-shared \
+	(cd SDL2-2.0.8 \
+	&& ./configure \
 	&& make \
-	&& make install)
-
-$(COMPILE_SDL2_TTF):
+	&& sudo make install)
 	if ! dpkg-query -W -f='$${Status}' libfreetype6-dev  | grep "ok installed"; \
 	then sudo apt-get install libfreetype6-dev; fi
-	if ! dpkg-query -W -f='$${Status}' autoconf  | grep "ok installed"; \
-	then sudo apt-get install autoconf; fi
 	(cd SDL2_ttf-2.0.15 \
-	&& ./configure --prefix=$(shell pwd)/SDL2_ttf --enable-static --disable-shared \
+	&& ./configure \
 	&& make \
-	&& make install)
+	&& sudo make install)
+	touch SDL2_done
 
 $(INSTALL_FMOD):
 	sudo cp fmod/lib/* /usr/lib
@@ -142,10 +138,7 @@ fclean: clean debug_clean
 reset_all_lib: reset_FMOD reset_SDL2
 
 reset_SDL2:
-	$(RM) -r SDL2
-
-reset_SDL2_ttf:
-	$(RM) -r SDL2_ttf
+	$(RM) SDL2_done
 
 reset_FMOD:
 	$(RM) fmod/done
@@ -154,7 +147,7 @@ re: fclean all
 
 debug: $(COMPILE_SDL2)
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) $(FMOD)
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(FMOD)
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM

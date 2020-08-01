@@ -14,8 +14,8 @@
 # define DOOM_H
 
 # include <stdio.h>
-# include "../SDL2-2.0.12/include/SDL.h"
-# include "../SDL2_ttf-2.0.15/SDL_ttf.h"
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_ttf.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>

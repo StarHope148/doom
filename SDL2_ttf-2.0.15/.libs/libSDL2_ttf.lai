@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname=''
+dlname='libSDL2_ttf-2.0.so.0'
 
 # Names of this library.
-library_names=''
+library_names='libSDL2_ttf-2.0.so.0.14.1 libSDL2_ttf-2.0.so.0 libSDL2_ttf.so'
 
 # The name of the static archive.
 old_library='libSDL2_ttf.a'
@@ -17,7 +17,7 @@ old_library='libSDL2_ttf.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' /usr/lib/x86_64-linux-gnu/libfreetype.la -lm -lSDL2'
+dependency_libs=' /usr/lib/x86_64-linux-gnu/libfreetype.la -L/usr/local/lib /usr/local/lib/libSDL2.la -lm -ldl -lpthread -lrt'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/user42/github/doom/SDL2_ttf/lib'
+libdir='/usr/local/lib'

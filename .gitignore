@@ -65,3 +65,4 @@ srcs/test.c
 fmod/done
 srcs/pthreadtest.c
 new.map
+SDL2_done

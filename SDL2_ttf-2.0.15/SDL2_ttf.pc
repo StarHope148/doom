@@ -1,4 +1,4 @@
-prefix=/home/user42/github/doom/SDL2_ttf
+prefix=/usr/local
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
