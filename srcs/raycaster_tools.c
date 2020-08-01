@@ -3,36 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:14:42 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 10:07:46 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 15:58:48 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
-void			ft_set_ceiling_floor(t_thread_env *e)
-{
-	double	scale;
-
-	scale = e->cam.proj_dist * WALL_SIZE / e->rc.distance_towall;
-	e->rc.floor = (e->cam.proj_dist / e->rc.distance_towall) * (e->cam.pos_z)
-																+ e->cam.angle_z;
-	e->rc.ceiling = e->rc.floor - scale;
-	e->rc.ceiling -= ((e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x] - 1)
-			/ e->rc.distance_towall) * WALL_SIZE;
-	//e->rc.floor -= ((e->map.alt[e->rc.test_y * e->map.nbcol + e->rc.test_x] - 1)
-	//		/ e->rc.distance_towall) * WALL_SIZE;
-}
 
 void			ft_setup_view_sky(t_thread_env *e)
 {
 	e->rc.horizon = (e->rc.y_ - H * 1.5) - e->cam.angle_z;
 	e->rc.rowdistance = (e->cam.pos_z * H) / e->rc.horizon /
 		SKY_ZOOM / (e->cam.pos_z);
-	//e->rc.rowdistance /= cos(e->cam.angle -
-	//	e->rc.ray_angle);
 }
 
 void			ft_draw_ceiling(t_thread_env *e)

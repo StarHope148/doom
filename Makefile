@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/08/01 07:10:26 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/08/01 16:23:20 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,10 @@ SRC_NAME += update_rotate.c
 SRC_NAME += collision.c
 SRC_NAME += load_textures_2.c
 SRC_NAME += home.c
+SRC_NAME += ray_transparent.c
+SRC_NAME += raycaster_transparent.c
+SRC_NAME += raycaster_tools_2.c
+SRC_NAME += map_checker_2.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

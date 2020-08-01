@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_sdl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 05:36:57 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 17:01:13 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,7 @@ void	editor(char *mapfile)
 {
 	t_env doom;
 
-	ft_initialize(&doom, mapfile);
-	doom.editor++;
+	ft_initialize(&doom, mapfile, TRUE);
 	if ((get_xpm("textures/cursor.xpm", &doom.xpm[CURSOR_XPM])) != 0)
 		ft_exit(&doom, EXIT_FAILURE, "Error in get_xpm() for cursor.xpm");
 	sdl_editor(&doom);

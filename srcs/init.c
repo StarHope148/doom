@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:27:46 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:00:20 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,22 @@ void	ft_setspawn(t_env *doom)
 		while (++x < doom->map.nbcol - 1)
 			if (doom->map.data[y * doom->map.nbcol + x] == SPAWN)
 			{
+				if (doom->cam.pos_x != 0 || doom->cam.pos_y != 0)
+					ft_exit(doom, EXIT_FAILURE,
+						"Please set only 1 SPAWN in map");
 				doom->cam.pos_x = x + 0.5;
 				doom->cam.pos_y = y + 0.5;
-				return ;
 			}
 	}
-	ft_putendl_fd("Please add a SPAWN in map", 2);
-	exit(EXIT_FAILURE);
+	if (doom->cam.pos_x == 0 || doom->cam.pos_y == 0)
+		ft_exit(doom, EXIT_FAILURE, "Please add a SPAWN in map");
 }
 
-void	ft_initialize(t_env *doom, char *mapfile)
+void	ft_initialize(t_env *doom, char *mapfile, unsigned char editor)
 {
 	ft_init_env(doom);
 	ft_init_map(doom, mapfile);
-	ft_setspawn(doom);
+	if (editor == FALSE)
+		ft_setspawn(doom);
 	ft_count_objects(doom);
 }

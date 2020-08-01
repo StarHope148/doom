@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 05:47:17 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 15:55:34 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
 
 void		ft_free_close_fmod(t_env *doom)
 {
@@ -41,7 +40,7 @@ void		ft_free_close_fmod(t_env *doom)
 		perror("Error in FMOD_System_Release ");
 }
 
-void	ft_free_close_ttf(t_env *doom)
+void		ft_free_close_ttf(t_env *doom)
 {
 	TTF_CloseFont(doom->txt.font);
 	SDL_FreeSurface(doom->txt.welcome1);
@@ -52,12 +51,13 @@ void	ft_free_close_ttf(t_env *doom)
 	TTF_Quit();
 }
 
-void	ft_exit(t_env *doom, int exit_type, char *message)
+void		ft_exit(t_env *doom, int exit_type, char *message)
 {
 	free_thread_env(&doom->shared_data);
 	ft_destroy_texture_renderer_window(doom);
 	ft_memdel((void **)&doom->screen_pixels);
-	ft_free_close_fmod(doom);
+	if (doom->sound.fmod_launched == TRUE)
+		ft_free_close_fmod(doom);
 	ft_free_close_ttf(doom);
 	SDL_Quit();
 	ft_free_door(doom->door);
@@ -66,6 +66,7 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	ft_free_obj_list(&doom->obj.next);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
-	printf("time ~ from SDL_Init() : %f\n", get_time(doom));
+	if (doom->home.in_menu == FALSE)
+		printf("time ~ from SDL_Init() : %f\n", get_time(doom));
 	exit(exit_type);
 }

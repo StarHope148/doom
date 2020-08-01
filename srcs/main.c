@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 01:40:20 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 17:25:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		ft_usage(void)
 {
 	ft_putendl_fd("usage: ./doom [file.map]", 2);
+	ft_putendl_fd("usage_editor: ./doom [file.map] [editor]", 2);
 	return (EXIT_FAILURE);
 }
 
@@ -27,7 +28,6 @@ int		ft_random(void)
 int		main(int ac, char **av)
 {
 	if (ac != 2 && ac != 3)
-	//if (ac != 2)
 		return (ft_usage());
 	if (ft_strcmp("/dev/random", av[1]) == 0)
 		return (ft_random());

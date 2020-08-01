@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:08:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:28:10 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ typedef struct		s_sound
 	FMOD_SOUND		*life_down;
 	FMOD_CHANNEL	*channel_music;
 	int				state;
+	int				fmod_launched;
 }					t_sound;
 
 typedef struct		s_character
@@ -380,7 +381,7 @@ void				ft_doom(char *mapfile);
 void				ft_sdl(t_env *doom);
 void				ft_exit(t_env *doom, int exit_type, char *message);
 void				ft_print(t_env *doom);
-void				ft_initialize(t_env *doom, char *mapfile);
+void				ft_initialize(t_env *doom, char *mapfile, unsigned char editor);
 void				ft_init_map(t_env *doom, char *mapfile);
 void				ft_stop_movement(t_env *doom);
 void				ft_settings_controls(t_env *doom);
@@ -505,5 +506,14 @@ void				ft_check_dead(t_env *doom);
 void				ft_init_home_screen(t_env *doom);
 void				ft_home_screen(t_env *doom);
 void				ft_update_screen(t_env *doom);
+
+void				ft_setup(t_thread_env *e);
+void				ft_set_direction(t_thread_env *e);
+void				ft_calcul_distance_to_collision(t_thread_env *e);
+void				ft_transparent_found(t_thread_env *e);
+void				ft_draw_transparent_textures(t_thread_env *e);
+
+int					precheck_one_2(char *l, int p, int i);
+int					ft_check_line_2(char *l, int i);
 
 #endif
