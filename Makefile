@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
+#    By: thparlos <thparlos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
+<<<<<<< HEAD
+#    Updated: 2020/08/01 20:15:03 by thparlos         ###   ########.fr        #
+=======
 #    Updated: 2020/08/01 19:38:33 by jcanteau         ###   ########.fr        #
+>>>>>>> 5dd0c42a1820c97f4f0f8a78cf607001da882fc1
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +24,7 @@ SRC_NAME += main.c
 SRC_NAME += doom.c
 SRC_NAME += sdl_start_up.c
 SRC_NAME += editor_sdl.c
+SRC_NAME += editor_sdl_norme.c
 SRC_NAME += editor_map.c
 SRC_NAME += key_hook.c
 SRC_NAME += image.c

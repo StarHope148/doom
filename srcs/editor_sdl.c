@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_sdl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thparlos <thparlos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 19:31:35 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 20:31:43 by thparlos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@ int		ft_new_map(t_point size, t_map *m)
 		}
 	}
 	return (0);
+}
+
+void	editor_key(t_env *doom, t_point *pos)
+{
+	SDL_KeyCode	key;
+
+	key = doom->event.key.keysym.sym;
+	editor_key_norme(doom, pos);
+	editor_key_norme2(doom, pos);
+	if (key == SDLK_RETURN)
+	{
+		ft_putendl("saved in new.map");
+		save_in_file(doom);
+	}
+	if (key == SDLK_ESCAPE)
+		ft_exit(doom, EXIT_SUCCESS, NULL);
 }
 
 void	sdl_editor(t_env *doom)
