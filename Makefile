@@ -126,8 +126,8 @@ $(COMPILE_SDL2):
 	&& ./configure \
 	&& make \
 	&& sudo make install \
-	&& sudo ldconfig \
-	&& touch SDL2_done)
+	&& sudo ldconfig)
+	touch SDL2_done
 
 $(INSTALL_FMOD):
 	sudo cp fmod/lib/* /usr/lib
@@ -153,7 +153,7 @@ re: fclean all
 
 debug: $(COMPILE_SDL2)
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(FMOD)
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(FMOD) $(CFLAGS)
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM
