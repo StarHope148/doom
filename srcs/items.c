@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 06:15:12 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 03:51:21 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:40:53 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		ft_pick_up_health_potion(t_env *doom, t_object *tmp)
 		if (ft_restore_health(doom, HEALTH_POTION_AMOUNT) == TRUE)
 		{
 			if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.life_up,
-                                        NULL, 0, NULL)) != FMOD_OK)
-                                perror("Error in FMOD_System_PlaySound for life_up ");
+					NULL, 0, NULL)) != FMOD_OK)
+				perror("Error in FMOD_System_PlaySound for life_up ");
 			tmp->data.to_remove = TRUE;
 			doom->map.data[(int)tmp->data.pos.y *
 				doom->map.nbcol + (int)tmp->data.pos.x] = EMPTY;

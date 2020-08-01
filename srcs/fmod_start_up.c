@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 06:51:22 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:26:26 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:35:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,6 @@ void		ft_pause_music(t_env *doom)
 				FMOD_OK)
 			perror("Error in FMOD_Channel_SetPaused for music ");
 	}
-}
-
-void		ft_free_fmod(t_env *doom)
-{
-	if ((FMOD_Sound_Release(doom->sound.jump)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of jump");
-	if ((FMOD_Sound_Release(doom->sound.switch_on)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of switch_on");
-	if ((FMOD_Sound_Release(doom->sound.switch_off)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of switch_off");
-	if ((FMOD_Sound_Release(doom->sound.door_opening)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of door_opening");
-	if ((FMOD_Sound_Release(doom->sound.door_closing)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of door_closing");
-
-	if ((FMOD_Sound_Release(doom->sound.laser_shot)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of laser_shot");
-	if ((FMOD_Sound_Release(doom->sound.life_down)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of life_down");
-	if ((FMOD_Sound_Release(doom->sound.life_up)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of life_up");
-
-	if ((FMOD_Sound_Release(doom->sound.music)) != FMOD_OK)
-		perror("Error in FMOD_Sound_Release of music");
-	
-	if ((FMOD_System_Close(doom->sound.system)) != FMOD_OK)
-		perror("Error in FMOD_System_Close ");
-	if ((FMOD_System_Release(doom->sound.system)) != FMOD_OK)
-		perror("Error in FMOD_System_Release ");
 }
 
 static void	ft_fmod2(t_env *doom)
