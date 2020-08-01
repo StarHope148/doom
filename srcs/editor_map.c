@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 01:51:05 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 18:28:03 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:34:18 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,8 @@ void	editor_cursor(t_env *e, t_point pos)
 	}
 }
 
-void	editor_key(t_env *doom, t_point *pos)
+void	editor_key2(t_env *doom, t_point *pos, SDL_Keycode key)
 {
-	SDL_KeyCode	key;
-
-	key = doom->event.key.keysym.sym;
-	if (key == SDLK_UP && pos->y > 1)
-		pos->y--;
-	if (key == SDLK_LEFT && pos->x > 1)
-		pos->x--;
-	if (key == SDLK_DOWN && pos->y < doom->map.nbl - 2)
-		pos->y++;
-	if (key == SDLK_RIGHT && pos->x < doom->map.nbcol - 2)
-		pos->x++;
-	if (key == SDLK_w)
-		doom->map.data[pos->y * doom->map.nbcol + pos->x] = WALL;
-	if (key == SDLK_SPACE)
-		doom->map.data[pos->y * doom->map.nbcol + pos->x] = EMPTY;
-	if (key == SDLK_d)
-		doom->map.data[pos->y * doom->map.nbcol + pos->x] = DOOR;
-	if (key == SDLK_o)
-		doom->map.data[pos->y * doom->map.nbcol + pos->x] = OBJECT;
-	if (key == SDLK_g)
-		doom->map.data[pos->y * doom->map.nbcol + pos->x] = GRID;
-	if (key == SDLK_b)
-		doom->map.data[pos->y * doom->map.nbcol + pos->x] = BARREL;
 	if (key == SDLK_y)
 		doom->map.data[pos->y * doom->map.nbcol + pos->x] = BUTTON_OFF;
 	if (key == SDLK_h)
@@ -88,6 +65,34 @@ void	editor_key(t_env *doom, t_point *pos)
 	}
 	if (key == SDLK_ESCAPE)
 		ft_exit(doom, EXIT_SUCCESS, NULL);
+}
+
+void	editor_key(t_env *doom, t_point *pos)
+{
+	SDL_KeyCode	key;
+
+	key = doom->event.key.keysym.sym;
+	if (key == SDLK_UP && pos->y > 1)
+		pos->y--;
+	if (key == SDLK_LEFT && pos->x > 1)
+		pos->x--;
+	if (key == SDLK_DOWN && pos->y < doom->map.nbl - 2)
+		pos->y++;
+	if (key == SDLK_RIGHT && pos->x < doom->map.nbcol - 2)
+		pos->x++;
+	if (key == SDLK_w)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = WALL;
+	if (key == SDLK_SPACE)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = EMPTY;
+	if (key == SDLK_d)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = DOOR;
+	if (key == SDLK_o)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = OBJECT;
+	if (key == SDLK_g)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = GRID;
+	if (key == SDLK_b)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = BARREL;
+	editor_key2(doom, pos, key);
 }
 
 void	editor_map(t_env *doom)

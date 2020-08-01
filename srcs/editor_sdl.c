@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 19:20:35 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:31:35 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,30 @@ void	editor_init_video(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateTexture()");
 }
 
-int     ft_new_map(t_point size, t_map *m)
+int		ft_new_map(t_point size, t_map *m)
 {
 	int	x;
 	int	y;
 
-    m->nbl = size.y;
-    m->nbcol = size.x;
+	m->nbl = size.y;
+	m->nbcol = size.x;
 	if (ft_malloc_tab(m) == -1)
 		return (-1);
 	y = -1;
-    while (++y < size.y) 
-    {
-        x = -1;
-        while (++x < size.x)
-        {
-            if (y == 0 || y == size.y - 1 || x == 0 || x == size.x - 1)
-                m->data[y * size.x + x] = WALL;
-            else
-                m->data[y * size.x + x] = EMPTY;
+	while (++y < size.y)
+	{
+		x = -1;
+		while (++x < size.x)
+		{
+			if (y == 0 || y == size.y - 1 || x == 0 || x == size.x - 1)
+				m->data[y * size.x + x] = WALL;
+			else
+				m->data[y * size.x + x] = EMPTY;
 			m->bright[y * size.x + x] = 1;
 			m->alt[y * size.x + x] = 3;
 		}
-    }
-    return (0);
+	}
+	return (0);
 }
 
 void	sdl_editor(t_env *doom)
@@ -62,7 +62,6 @@ void	sdl_editor(t_env *doom)
 
 	pos.x = 1;
 	pos.y = 1;
-	
 	editor_init_video(doom);
 	clock_gettime(_POSIX_MONOTONIC_CLOCK, &doom->time0);
 	while (1)
@@ -80,7 +79,6 @@ void	sdl_editor(t_env *doom)
 			if (doom->event.type == SDL_KEYDOWN)
 				editor_key(doom, &pos);
 		}
-			
 	}
 	ft_exit(doom, EXIT_SUCCESS, NULL);
 }
@@ -97,7 +95,7 @@ void	editor(char *av1, char *av2)
 	if (size.x == 0)
 		ft_init_map(&doom, av1);
 	else if (size.x < 3 || size.y < 3)
-		ft_exit(&doom, EXIT_FAILURE, "Error: you need av[1] >= 3 && av[2] >= 3");
+		ft_exit(&doom, EXIT_FAILURE, "Please use av[1] >= 3 && av[2] >= 3");
 	else if (ft_new_map(size, &doom.map))
 		ft_exit(&doom, EXIT_FAILURE, "Error in new_map()");
 	if ((get_xpm("textures/cursor.xpm", &doom.xpm[CURSOR_XPM])) != 0)
