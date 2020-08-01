@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 05:16:18 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 06:53:19 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:11:19 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void		ft_home_screen(t_env *doom)
 		ft_update_screen(doom);
 		if ((SDL_UpdateTexture(doom->texture, NULL,
 					doom->screen_pixels,
-					doom->pitch)) < 0)
+					doom->p)) < 0)
 			ft_exit(doom, EXIT_FAILURE, "Error in SDL_UpdateTexture()");
 		duration++;
 	}

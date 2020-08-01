@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 06:25:28 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:08:51 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef enum		e_texture_id
 	GUN_XPM,
 	GUN_FIRING_XPM,
 	HOME_XPM,
-	PRESS_ENTER_XPM
+	PRESS_ENTER_XPM,
+	CURSOR_XPM
 }					t_texture_id;
 
 typedef enum		e_motion
@@ -244,17 +245,6 @@ typedef struct		s_shared_data
 	double			depth_buf[W];
 }					t_shared_data;
 
-typedef struct		s_minimap
-{
-	int				i;
-	int				j;
-	int				x;
-	int				y;
-	int				def_x;
-	int				def_y;
-	char			done;
-}					t_minimap;
-
 typedef struct		s_text
 {
 	TTF_Font		*font;
@@ -365,12 +355,10 @@ typedef struct		s_env
 	t_door			*door;
 	t_xpm			xpm[NB_XPM];
 	Uint32			*screen_pixels;
-	t_minimap		minimap;
 	t_sound			sound;
 	char			wall;
-	int				pitch;
+	int				p;
 	int				block;
-	int				h;
 	t_fps			fps;
 	double			music_puls;
 	unsigned int	count_puls;
@@ -385,6 +373,7 @@ typedef struct		s_env
 	t_carried_key	key;
 	t_home			home;
 	t_enter			enter;
+	unsigned char	editor;
 }					t_env;
 
 void				ft_doom(char *mapfile);
@@ -432,7 +421,9 @@ void				draw_centered_text(t_env *doom, SDL_Surface *text);
 void				resolve_door(t_env *doom);
 void				animation_opening_door(t_env *doom);
 
+void				ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color);
 void				editor(char *mapfile);
+void				editor_map(t_env *doom);
 void				save_in_file(t_env *doom);
 
 int					get_xpm(char *xpm_file, t_xpm *xpm);

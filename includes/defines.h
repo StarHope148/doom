@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 05:43:03 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:14:00 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@
 # define MAX_RAYCAST_THREADS 16
 # define FPS_TEST 0
 
-# define NB_XPM 31
+# define NB_XPM 32
 
 #endif

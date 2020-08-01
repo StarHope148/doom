@@ -6,27 +6,17 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 06:59:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:06:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void	ft_set_points(t_env *doom)
-{
-	doom->minimap.done = 0;
-	doom->minimap.x = doom->minimap.j * doom->block;
-	doom->minimap.y = doom->minimap.i * doom->block;
-	doom->minimap.def_x = doom->minimap.x;
-	doom->minimap.def_y = doom->minimap.y;
-}
-
-void	ft_set_tile_color(t_env *doom, Uint32 *color)
+void	ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color)
 {
 	char	symb;
 
-	symb = doom->map.data[doom->minimap.i * doom->map.nbcol + doom->minimap.j];
-	if (symb == WALL)
+	if ((symb = doom->map.data[y * doom->map.nbcol + x]) == WALL)
 		*color = LIME;
 	else if (symb == EMPTY)
 		*color = GRAY;
@@ -52,25 +42,6 @@ void	ft_set_tile_color(t_env *doom, Uint32 *color)
 		*color = BLACK;
 }
 
-void	ft_draw_minimap_symbol(t_env *doom)
-{
-	Uint32	color;
-
-	ft_set_tile_color(doom, &color);
-	while (doom->minimap.done == 0)
-	{
-		doom->screen_pixels[doom->minimap.y * W + doom->minimap.x] = color;
-		doom->minimap.x++;
-		if (doom->minimap.x > doom->minimap.def_x + doom->block)
-		{
-			doom->minimap.x = doom->minimap.j * doom->block;
-			doom->minimap.y++;
-		}
-		if (doom->minimap.y > doom->minimap.def_y + doom->block)
-			doom->minimap.done = 1;
-	}
-}
-
 void	ft_set_sdl_minimap_colors(t_env *doom)
 {
 	if (SDL_SetRenderDrawColor(doom->renderer, 255, 0, 0, 255) != 0)
@@ -90,16 +61,20 @@ void	ft_set_sdl_minimap_colors(t_env *doom)
 
 void	ft_draw_minimap(t_env *doom)
 {
-	doom->minimap.j = 0;
-	while (doom->minimap.j < (int)doom->map.nbcol)
+	t_point	pix;
+	Uint32	color;
+	t_point	map_ptr;
+
+	pix.y = -1;
+	while (++pix.y < doom->map.nbl * doom->block)
 	{
-		doom->minimap.i = 0;
-		while (doom->minimap.i < (int)doom->map.nbl)
+		pix.x = -1;
+		while (++pix.x < doom->map.nbcol * doom->block)
 		{
-			ft_set_points(doom);
-			ft_draw_minimap_symbol(doom);
-			doom->minimap.i++;
+			map_ptr.y = pix.y / doom->block;
+			map_ptr.x = pix.x / doom->block;
+			ft_set_tile_color(doom, map_ptr.y, map_ptr.x, &color);
+			doom->screen_pixels[pix.y * W + pix.x] = color;
 		}
-		doom->minimap.j++;
 	}
 }

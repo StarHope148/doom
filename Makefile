@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/08/01 05:16:02 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/08/01 07:10:26 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ INC_NAME += defines.h
 SRC_NAME += main.c
 SRC_NAME += doom.c
 SRC_NAME += sdl_start_up.c
-SRC_NAME += sdl_editor.c
+SRC_NAME += editor_sdl.c
+SRC_NAME += editor_map.c
 SRC_NAME += key_hook.c
 SRC_NAME += image.c
 SRC_NAME += init.c

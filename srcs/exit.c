@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:38:11 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 05:47:17 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void		ft_free_close_fmod(t_env *doom)
 {
+	if (doom->editor)
+		return ;
 	if ((FMOD_Sound_Release(doom->sound.jump)) != FMOD_OK)
 		perror("Error in FMOD_Sound_Release of jump");
 	if ((FMOD_Sound_Release(doom->sound.switch_on)) != FMOD_OK)
