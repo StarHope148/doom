@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 06:15:12 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:40:53 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/02 00:11:19 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ void		ft_pick_up_health_potion(t_env *doom, t_object *tmp)
 			doom->map.data[(int)tmp->data.pos.y *
 				doom->map.nbcol + (int)tmp->data.pos.x] = EMPTY;
 		}
-	}
-}
-
-void		ft_use_key_on_door(t_env *doom)
-{
-	if (doom->chr.carried_key == TRUE)
-	{
-		doom->chr.carried_key = FALSE;
-		resolve_door(doom);
 	}
 }
 

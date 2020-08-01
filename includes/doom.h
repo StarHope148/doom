@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thparlos <thparlos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 20:43:10 by thparlos         ###   ########.fr       */
+/*   Updated: 2020/08/02 00:11:16 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,7 +477,6 @@ void				ft_hit_barrel(t_env *doom, int obj_y, int obj_x);
 void				ft_firing_anim(t_env *doom);
 
 void				ft_pick_up_items(t_env *doom);
-void				ft_use_key_on_door(t_env *doom);
 void				draw_carried_key(t_env *e);
 void				draw_hp(t_env *e);
 

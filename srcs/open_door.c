@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 04:49:08 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/31 10:25:05 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/02 00:11:44 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void		resolve_door(t_env *doom)
 
 	y = doom->cam.pos_y + cos(doom->cam.angle);
 	x = doom->cam.pos_x + sin(doom->cam.angle);
-	if (doom->map.data[y * doom->map.nbcol + x] == DOOR)
+	if (doom->map.data[y * doom->map.nbcol + x] == DOOR &&
+			doom->chr.carried_key == TRUE)
+	{
+		doom->chr.carried_key = FALSE;
 		init_door(doom, y, x);
+	}
 }
