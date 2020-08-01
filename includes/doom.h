@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 17:28:10 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:38:04 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,7 +381,9 @@ void				ft_doom(char *mapfile);
 void				ft_sdl(t_env *doom);
 void				ft_exit(t_env *doom, int exit_type, char *message);
 void				ft_print(t_env *doom);
-void				ft_initialize(t_env *doom, char *mapfile, unsigned char editor);
+void				ft_initialize(t_env *doom, char *mapfile,
+						unsigned char editor);
+						
 void				ft_init_map(t_env *doom, char *mapfile);
 void				ft_stop_movement(t_env *doom);
 void				ft_settings_controls(t_env *doom);
