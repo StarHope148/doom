@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/08/01 16:23:20 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/08/01 19:38:33 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 SDL2 = -lSDL2 -lSDL2_ttf
 FMOD = -I fmod/inc -L fmod/lib/x86_64 -lfmod -lfmodL
 COMPILE_SDL2 = SDL2/lib/libSDL2.a
+COMPILE_SDL2_TTF = SDL2_ttf/lib/libSDL2_ttf.a
 INSTALL_FMOD = fmod/done
 # `sdl2-config --cflags --libs`
 CFLAGS = -g -Wall -Wextra -Werror -lm -lpthread -D_REENTRANT -DLinux
@@ -100,7 +101,7 @@ $(CC) = clang
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(COMPILE_SDL2) $(INSTALL_FMOD)
+$(NAME): $(OBJ) $(COMPILE_SDL2) $(COMPILE_SDL2_TTF) $(INSTALL_FMOD)
 	make -C libft/.
 	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) $(FMOD)
 
@@ -113,6 +114,16 @@ $(COMPILE_SDL2):
 	then sudo apt-get install freeglut3-dev; fi
 	(cd SDL2-2.0.12 \
 	&& ./configure --prefix=$(shell pwd)/SDL2 --enable-static --disable-shared \
+	&& make \
+	&& make install)
+
+$(COMPILE_SDL2_TTF):
+	if ! dpkg-query -W -f='$${Status}' libfreetype6-dev  | grep "ok installed"; \
+	then sudo apt-get install libfreetype6-dev; fi
+	if ! dpkg-query -W -f='$${Status}' autoconf  | grep "ok installed"; \
+	then sudo apt-get install autoconf; fi
+	(cd SDL2_ttf-2.0.15 \
+	&& ./configure --prefix=$(shell pwd)/SDL2_ttf --enable-static --disable-shared \
 	&& make \
 	&& make install)
 
@@ -132,6 +143,9 @@ reset_all_lib: reset_FMOD reset_SDL2
 
 reset_SDL2:
 	$(RM) -r SDL2
+
+reset_SDL2_ttf:
+	$(RM) -r SDL2_ttf
 
 reset_FMOD:
 	$(RM) fmod/done

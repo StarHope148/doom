@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 18:38:34 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 19:17:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define DOOM_H
 
 # include <stdio.h>
-
 # include "../SDL2-2.0.12/include/SDL.h"
-# include <SDL2/SDL_ttf.h>
+# include "../SDL2_ttf-2.0.15/SDL_ttf.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
