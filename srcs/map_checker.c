@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/07/31 09:56:51 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 01:58:57 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ int		ft_check_borders(t_map *map)
 	return (0);
 }
 
+int		ft_check_line_2(char *l, int i)
+{
+	if (l[i] != EMPTY && l[i] != WALL && l[i] != DOOR && l[i] != OBJECT &&
+			l[i] != TORCH && l[i] != GRID && l[i] != BARREL &&
+			l[i] != BUTTON_OFF && l[i] != BUTTON_ON && l[i] != DOOR_OPENED
+			&& l[i] != HEALTH_POTION && l[i] != KEY && l[i] != STATUE &&
+			l[i] != END_CASE)
+		return (-1);
+	else
+		return (0);
+}
+
 int		ft_check_line(t_map *m)
 {
 	int		i;
@@ -39,10 +51,7 @@ int		ft_check_line(t_map *m)
 		return (-2);
 	while (i < m->nbcol)
 	{
-		if (l[i] != EMPTY && l[i] != WALL && l[i] != DOOR && l[i] != OBJECT &&
-				l[i] != TORCH && l[i] != GRID && l[i] != BARREL &&
-				l[i] != BUTTON_OFF && l[i] != BUTTON_ON && l[i] != DOOR_OPENED
-				&& l[i] != HEALTH_POTION && l[i] != KEY && l[i] != STATUE)
+		if (ft_check_line_2(l, i) == -1)
 			return (-1);
 		i++;
 	}
@@ -56,16 +65,25 @@ int		ft_check_line(t_map *m)
 	return (0);
 }
 
+int		precheck_one_2(char *l, int p, int i)
+{
+	if (l[p + i] != WALL && l[p + i] != EMPTY && l[p + i] != DOOR &&
+			l[p + i] != TORCH && l[p + i] != OBJECT && l[p + i] != GRID &&
+			l[p + i] != BARREL && l[p + i] != BUTTON_OFF &&
+			l[p + i] != BUTTON_ON && l[p + i] != DOOR_OPENED &&
+			l[p + i] != HEALTH_POTION && l[p + i] != KEY && l[p + i] != STATUE
+			&& l[p + i] != END_CASE)
+		return (-1);
+	else
+		return (0);
+}
+
 int		precheck_one(char *l, int p)
 {
 	int		i;
 
 	i = 0;
-	if (l[p + i] != WALL && l[p + i] != EMPTY && l[p + i] != DOOR &&
-			l[p + i] != TORCH && l[p + i] != OBJECT && l[p + i] != GRID &&
-			l[p + i] != BARREL && l[p + i] != BUTTON_OFF &&
-			l[p + i] != BUTTON_ON && l[p + i] != DOOR_OPENED &&
-			l[p + i] != HEALTH_POTION && l[p + i] != KEY && l[p + i] != STATUE)
+	if (precheck_one_2(l, p, i) == -1)
 		return (-1);
 	i++;
 	if (l[p + i] != ' ')

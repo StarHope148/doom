@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:37:38 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 05:41:46 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void		ft_print(t_env *doom)
 	ft_draw_fps(doom);
 	ft_draw_crosshair(doom);
 	draw_welcome_text(doom);
+	ft_check_dead(doom);
+	ft_check_end_level(doom);
 	draw_hp(doom);
 	draw_carried_key(doom);
 	if (!doom->no_funky)

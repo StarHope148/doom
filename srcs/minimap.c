@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 02:54:07 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 05:42:08 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color)
 		*color = BURLYWOOD;
 	else if (symb == STATUE)
 		*color = BLACK;
+	else if (symb == END_CASE)
+		*color = MAGENTA;
 	else
 		*color = BLACK;
 }

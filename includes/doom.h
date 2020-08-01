@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 05:33:15 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 05:40:35 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,8 @@ typedef struct		s_text
 	TTF_Font		*font;
 	SDL_Surface		*welcome1;
 	SDL_Surface		*welcome2;
+	SDL_Surface		*end_level;
+	SDL_Surface		*dead;
 	SDL_Color		black;
 }					t_text;
 
@@ -281,17 +283,19 @@ typedef struct		s_sound
 	FMOD_SOUND		*door_opening;
 	FMOD_SOUND		*door_closing;
 	FMOD_SOUND		*laser_shot;
-	FMOD_SOUND		*gun_shot;
+	FMOD_SOUND		*life_up;
+	FMOD_SOUND		*life_down;
 	FMOD_CHANNEL	*channel_music;
 	int				state;
 }					t_sound;
 
 typedef struct		s_character
 {
-	unsigned char	health;
+	int				health;
 	unsigned char	carried_key;
 	unsigned char	on_fire;
 	double			fire_time;
+	int				dead;
 }					t_character;
 
 typedef struct		s_healthbar
@@ -472,5 +476,7 @@ void				ft_fly(t_env *doom);
 void				ft_move(t_env *doom);
 
 void				ft_rotation(t_env *doom);
+void				ft_check_end_level(t_env *doom);
+void				ft_check_dead(t_env *doom);
 
 #endif

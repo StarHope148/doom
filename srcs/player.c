@@ -3,35 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 06:26:24 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 10:38:35 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 04:16:04 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-void			ft_dead(t_env *doom)
-{
-	static int	i = 0;
-
-	(void)doom;
-	if (i == 0)
-	{
-		i++;
-		printf("You are DEAD !\n"); //DEBUG
-	}
-}
-
 void			ft_taking_damage(t_env *doom, int amount)
 {
-	if (doom->chr.health >= amount)
-		doom->chr.health -= amount;
-	else if (doom->chr.health <= 0)
+
+	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.life_down,
+			NULL, 0, NULL)) != FMOD_OK)
+		perror("Error in FMOD_System_PlaySound for life_down ");
+	doom->chr.health -= amount;
+	if (doom->chr.health <= 0)
 	{
 		doom->chr.health = 0;
-		ft_dead(doom);
+		doom->chr.dead = TRUE;
 	}
 }
 
@@ -42,7 +33,8 @@ int				ft_restore_health(t_env *doom, int amount)
 	doom->chr.health += amount;
 	if (doom->chr.health > PLAYER_MAX_HP)
 		doom->chr.health = PLAYER_MAX_HP;
-	printf("just restored %d HP\n", amount); //DEBUG
+	if (doom->chr.dead == TRUE)
+		doom->chr.dead = FALSE;
 	return (TRUE);
 }
 
