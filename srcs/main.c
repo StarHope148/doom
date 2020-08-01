@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 17:25:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 19:24:18 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		ft_usage(void)
 {
 	ft_putendl_fd("usage: ./doom [file.map]", 2);
-	ft_putendl_fd("usage_editor: ./doom [file.map] [editor]", 2);
+	ft_putendl_fd("editor (charging file): ./doom [file.map] 0", 2);
+	ft_putendl_fd("editor (empty map): ./doom [size.y] [size.x]", 2);
 	return (EXIT_FAILURE);
 }
 
@@ -34,7 +35,7 @@ int		main(int ac, char **av)
 	if (ac == 2)
 		ft_doom(av[1]);
 	else if (ac == 3)
-		editor(av[1]);
+		editor(av[1], av[2]);
 	return (0);
 }
 

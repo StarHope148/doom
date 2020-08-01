@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/08/01 19:17:17 by jcanteau         ###   ########.fr       */
+=======
+/*   Updated: 2020/08/01 19:20:15 by czhang           ###   ########.fr       */
+>>>>>>> 192b5841ed6cedda157e9962d87922921db740f5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,7 +429,10 @@ void				resolve_door(t_env *doom);
 void				animation_opening_door(t_env *doom);
 
 void				ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color);
-void				editor(char *mapfile);
+void				ft_init_env(t_env *doom);
+void				editor(char *av1, char *av2);
+void				editor_cursor(t_env *e, t_point pos);
+void				editor_key(t_env *doom, t_point *pos);
 void				editor_map(t_env *doom);
 void				save_in_file(t_env *doom);
 
