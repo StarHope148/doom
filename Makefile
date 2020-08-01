@@ -126,7 +126,8 @@ $(COMPILE_SDL2):
 	&& ./configure \
 	&& make \
 	&& sudo make install \
-	&& sudo ldconfig)
+	&& sudo ldconfig \
+	&& touch SDL2_done)
 
 $(INSTALL_FMOD):
 	sudo cp fmod/lib/* /usr/lib
