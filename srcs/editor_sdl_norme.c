@@ -14,7 +14,7 @@
 
 void		editor_key_norme(t_env *doom, t_point *pos)
 {
-	SDL_KeyCode	key;
+	SDL_Keycode	key;
 
 	key = doom->event.key.keysym.sym;
 	if (key == SDLK_UP && pos->y > 1)
@@ -37,7 +37,7 @@ void		editor_key_norme(t_env *doom, t_point *pos)
 
 void		editor_key_norme2(t_env *doom, t_point *pos)
 {
-	SDL_KeyCode	key;
+	SDL_Keycode	key;
 
 	key = doom->event.key.keysym.sym;
 	if (key == SDLK_g)

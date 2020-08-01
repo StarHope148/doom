@@ -56,22 +56,6 @@ int		ft_new_map(t_point size, t_map *m)
 	return (0);
 }
 
-void	editor_key(t_env *doom, t_point *pos)
-{
-	SDL_KeyCode	key;
-
-	key = doom->event.key.keysym.sym;
-	editor_key_norme(doom, pos);
-	editor_key_norme2(doom, pos);
-	if (key == SDLK_RETURN)
-	{
-		ft_putendl("saved in new.map");
-		save_in_file(doom);
-	}
-	if (key == SDLK_ESCAPE)
-		ft_exit(doom, EXIT_SUCCESS, NULL);
-}
-
 void	sdl_editor(t_env *doom)
 {
 	t_point	pos;
