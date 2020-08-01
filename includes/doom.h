@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 03:47:54 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:25:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,6 @@ typedef struct		s_sound
 	FMOD_SOUND		*door_opening;
 	FMOD_SOUND		*door_closing;
 	FMOD_SOUND		*laser_shot;
-	FMOD_SOUND		*gun_shot;
 	FMOD_SOUND		*life_up;
 	FMOD_SOUND		*life_down;
 	FMOD_CHANNEL	*channel_music;
