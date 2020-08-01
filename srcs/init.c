@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 22:15:36 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:36:43 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	ft_init_env(t_env *doom)
 	doom->no_funky = 1;
 	doom->wall = TEXTURED;
 	doom->block = H * 0.01;
-	doom->pitch = 4 * W;
-	doom->h = H;
+	doom->p = 4 * W;
 	doom->music_puls = (double)60 / 116;
 	doom->count_puls = 1;
 	doom->moves.movespeed = MOVE_SPEED;

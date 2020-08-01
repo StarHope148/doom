@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 00:42:18 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/23 15:23:51 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 05:36:47 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	save_in_file(t_env *doom)
 	char	*str;
 	size_t	file_size;
 
-	if ((fd = open("testsave", O_RDWR | O_CREAT, 0664)) < 0)
+	if ((fd = open("new.map", O_RDWR | O_CREAT, 0664)) < 0)
 		ft_exit(doom, EXIT_FAILURE, "Error open in save_in_file()");
 	file_size = get_filesize(&doom->map);
 	if ((str = (char *)ft_memalloc((file_size + 1) * sizeof(char))) == NULL)

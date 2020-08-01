@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fmod_start_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 06:51:22 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 00:21:39 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 01:44:52 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void		ft_pause_music(t_env *doom)
 
 void		ft_free_fmod(t_env *doom)
 {
+	if (doom->editor)
+		return ;
 	if ((FMOD_Sound_Release(doom->sound.jump)) != FMOD_OK)
 		perror("Error in FMOD_Sound_Release of jump");
 	if ((FMOD_Sound_Release(doom->sound.switch_on)) != FMOD_OK)
