@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:09:04 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:27:46 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	ft_setspawn(t_env *doom)
 	{
 		x = 0;
 		while (++x < doom->map.nbcol - 1)
-			if (doom->map.data[y * doom->map.nbcol + x] == EMPTY)
+			if (doom->map.data[y * doom->map.nbcol + x] == SPAWN)
 			{
 				doom->cam.pos_x = x + 0.5;
 				doom->cam.pos_y = y + 0.5;
 				return ;
 			}
 	}
-	ft_putendl_fd("This is no map, just a brick wall", 2);
+	ft_putendl_fd("Please add a SPAWN in map", 2);
 	exit(EXIT_FAILURE);
 }
 

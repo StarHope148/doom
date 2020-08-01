@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/08/01 01:58:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:29:14 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_check_line_2(char *l, int i)
 			l[i] != TORCH && l[i] != GRID && l[i] != BARREL &&
 			l[i] != BUTTON_OFF && l[i] != BUTTON_ON && l[i] != DOOR_OPENED
 			&& l[i] != HEALTH_POTION && l[i] != KEY && l[i] != STATUE &&
-			l[i] != END_CASE)
+			l[i] != END_CASE && l[i] != SPAWN)
 		return (-1);
 	else
 		return (0);
@@ -72,7 +72,7 @@ int		precheck_one_2(char *l, int p, int i)
 			l[p + i] != BARREL && l[p + i] != BUTTON_OFF &&
 			l[p + i] != BUTTON_ON && l[p + i] != DOOR_OPENED &&
 			l[p + i] != HEALTH_POTION && l[p + i] != KEY && l[p + i] != STATUE
-			&& l[p + i] != END_CASE)
+			&& l[p + i] != END_CASE && l[p + i] != SPAWN)
 		return (-1);
 	else
 		return (0);

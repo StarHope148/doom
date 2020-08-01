@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:14:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:26:11 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 # define STATUE 'S'
 # define PROJECTILE 'C'
 # define END_CASE 'E'
+# define SPAWN 'A'
 
 # define MAX_PULS_FUNKY_TEXTURES 50
 
