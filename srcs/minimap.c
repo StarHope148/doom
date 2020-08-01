@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 02:45:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:59:42 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,19 @@ void	ft_draw_minimap_symbol(t_env *doom)
 
 void	ft_set_sdl_minimap_colors(t_env *doom)
 {
-	SDL_SetRenderDrawColor(doom->renderer, 255, 0, 0, 255);
-	SDL_RenderDrawLine(doom->renderer, doom->cam.pos_x * doom->block,
+	if (SDL_SetRenderDrawColor(doom->renderer, 255, 0, 0, 255) != 0)
+		ft_exit(doom, EXIT_FAILURE, "Error in SDL_SetRenderDrawColor()");
+	if (SDL_RenderDrawLine(doom->renderer, doom->cam.pos_x * doom->block,
 						doom->cam.pos_y * doom->block,
 						(doom->cam.pos_x + sin(doom->cam.angle)) * doom->block,
 						(doom->cam.pos_y + cos(doom->cam.angle)) *
-						doom->block);
-	SDL_SetRenderDrawColor(doom->renderer, 255, 255, 255, 255);
-	SDL_RenderDrawPoint(doom->renderer, doom->cam.pos_x * doom->block,
-						doom->cam.pos_y * doom->block);
+						doom->block) != 0)
+		ft_exit(doom, EXIT_FAILURE, "Error in SDL_RenderDrawLine()");
+	if (SDL_SetRenderDrawColor(doom->renderer, 255, 255, 255, 255) != 0)
+		ft_exit(doom, EXIT_FAILURE, "Error in SDL_SetRenderDrawColor()");
+	if (SDL_RenderDrawPoint(doom->renderer, doom->cam.pos_x * doom->block,
+						doom->cam.pos_y * doom->block) != 0)
+		ft_exit(doom, EXIT_FAILURE, "Error in SDL_RenderDrawPoint()");
 }
 
 void	ft_draw_minimap(t_env *doom)

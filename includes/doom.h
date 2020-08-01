@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:25:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:25:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ typedef enum		e_texture_id
 	STATUE_LEFT_XPM,
 	PROJECTILE_XPM,
 	GUN_XPM,
-	GUN_FIRING_XPM
+	GUN_FIRING_XPM,
+	HOME_XPM,
+	PRESS_ENTER_XPM
 }					t_texture_id;
 
 typedef enum		e_motion
@@ -333,6 +335,23 @@ typedef struct		s_carried_key
 	unsigned int	y_;
 }					t_carried_key;
 
+typedef struct		s_home
+{
+	int				in_menu;
+	int				x_;
+	int				y_;
+	int				h_;
+	int				w_;
+}					t_home;
+
+typedef struct		s_enter
+{
+	int				x_;
+	int				y_;
+	int				h_;
+	int				w_;
+}					t_enter;
+
 typedef struct		s_env
 {
 	SDL_Window		*window;
@@ -364,6 +383,8 @@ typedef struct		s_env
 	t_healthbar		hp;
 	t_gun			gun;
 	t_carried_key	key;
+	t_home			home;
+	t_enter			enter;
 }					t_env;
 
 void				ft_doom(char *mapfile);
@@ -450,8 +471,10 @@ void				init_draw_key(t_env *e, t_object *tmp);
 void				init_draw_torch(t_env *e, t_object *tmp);
 void				init_draw_statue(t_env *e, t_object *tmp);
 void				init_draw_projectile(t_env *e, t_object *tmp);
+void				ft_init_home(t_env *doom);
 
 void				ft_load_textures(t_env *doom);
+void				ft_load_textures_2(t_env *doom);
 
 void				ft_hit_barrel(t_env *doom, int obj_y, int obj_x);
 void				ft_firing_anim(t_env *doom);
@@ -487,5 +510,9 @@ void				ft_move(t_env *doom);
 void				ft_rotation(t_env *doom);
 void				ft_check_end_level(t_env *doom);
 void				ft_check_dead(t_env *doom);
+
+void				ft_init_home_screen(t_env *doom);
+void				ft_home_screen(t_env *doom);
+void				ft_update_screen(t_env *doom);
 
 #endif

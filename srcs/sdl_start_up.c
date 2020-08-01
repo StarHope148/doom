@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 04:05:46 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:24:54 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_sdl(t_env *doom)
 	ft_init_musicttf(doom);
 	init_bar(doom);
 	init_carried_key(doom);
+	ft_home_screen(doom);
 	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.music, NULL, 0,
 			&doom->sound.channel_music)) != FMOD_OK)
 		perror("Error in FMOD_System_PlaySound for music ");

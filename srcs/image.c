@@ -6,16 +6,18 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 03:52:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:56:54 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
-static void	ft_update_screen(t_env *doom)
+void		ft_update_screen(t_env *doom)
 {
-	SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL);
-	ft_set_sdl_minimap_colors(doom);
+	if (SDL_RenderCopy(doom->renderer, doom->texture, NULL, NULL) != 0)
+		ft_exit(doom, EXIT_FAILURE, "Error in SDL_RenderCopy()");
+	if (doom->home.in_menu == FALSE)
+		ft_set_sdl_minimap_colors(doom);
 	SDL_RenderPresent(doom->renderer);
 }
 

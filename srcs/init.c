@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 22:15:36 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:26:19 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_init_env(t_env *doom)
 	doom->count_puls = 1;
 	doom->moves.movespeed = MOVE_SPEED;
 	doom->chr.health = PLAYER_MAX_HP;
+	ft_init_home_screen(doom);
 	ft_init_gun(doom);
 	pthread_mutex_init(&doom->shared_data.mutex, 0);
 	pthread_cond_init(&doom->shared_data.cond, 0);

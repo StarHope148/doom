@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/08/01 01:02:17 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/08/01 05:16:02 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,8 @@ SRC_NAME += update_position.c
 SRC_NAME += update_crouch_jump_run_fly.c
 SRC_NAME += update_rotate.c
 SRC_NAME += collision.c
+SRC_NAME += load_textures_2.c
+SRC_NAME += home.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
