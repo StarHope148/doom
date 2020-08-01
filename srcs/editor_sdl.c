@@ -6,7 +6,7 @@
 /*   By: thparlos <thparlos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 20:15:51 by thparlos         ###   ########.fr       */
+/*   Updated: 2020/08/01 20:31:43 by thparlos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,30 @@ void	editor_init_video(t_env *doom)
 		ft_exit(doom, EXIT_FAILURE, "Error in SDL_CreateTexture()");
 }
 
-void	editor_cursor(t_env *e, t_point pos)
+int		ft_new_map(t_point size, t_map *m)
 {
-	t_xpm	*x;
-	t_point	start;
-	t_point	d;
-	t_point	sp;
-	Uint32	color;
+	int	x;
+	int	y;
 
-	x = &e->xpm[CURSOR_XPM];
-	start.y = pos.y * H / e->map.nbl;
-	start.x = pos.x * W / e->map.nbcol;
-	d.y = -1;
-	while (++d.y < (double)H / e->map.nbl)
+	m->nbl = size.y;
+	m->nbcol = size.x;
+	if (ft_malloc_tab(m) == -1)
+		return (-1);
+	y = -1;
+	while (++y < size.y)
 	{
-		d.x = -1;
-		while (++d.x < (double)W / e->map.nbcol)
+		x = -1;
+		while (++x < size.x)
 		{
-			sp.y = x->h * d.y * e->map.nbl / (double)H;
-			sp.x = x->w * d.x * e->map.nbcol / (double)W;
-			color = x->pixels[sp.y * x->w + sp.x];
-			if (color != MAGENTA)
-				e->screen_pixels[(start.y + d.y) * W + start.x + d.x] = color;
+			if (y == 0 || y == size.y - 1 || x == 0 || x == size.x - 1)
+				m->data[y * size.x + x] = WALL;
+			else
+				m->data[y * size.x + x] = EMPTY;
+			m->bright[y * size.x + x] = 1;
+			m->alt[y * size.x + x] = 3;
 		}
 	}
+	return (0);
 }
 
 void	editor_key(t_env *doom, t_point *pos)
@@ -99,11 +99,21 @@ void	sdl_editor(t_env *doom)
 	ft_exit(doom, EXIT_SUCCESS, NULL);
 }
 
-void	editor(char *mapfile)
+void	editor(char *av1, char *av2)
 {
-	t_env doom;
+	t_env	doom;
+	t_point	size;
 
-	ft_initialize(&doom, mapfile, TRUE);
+	ft_init_env(&doom);
+	doom.editor++;
+	size.y = ft_atoi(av1);
+	size.x = ft_atoi(av2);
+	if (size.x == 0)
+		ft_init_map(&doom, av1);
+	else if (size.x < 3 || size.y < 3)
+		ft_exit(&doom, EXIT_FAILURE, "Please use av[1] >= 3 && av[2] >= 3");
+	else if (ft_new_map(size, &doom.map))
+		ft_exit(&doom, EXIT_FAILURE, "Error in new_map()");
 	if ((get_xpm("textures/cursor.xpm", &doom.xpm[CURSOR_XPM])) != 0)
 		ft_exit(&doom, EXIT_FAILURE, "Error in get_xpm() for cursor.xpm");
 	sdl_editor(&doom);

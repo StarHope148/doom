@@ -6,7 +6,11 @@
 /*   By: thparlos <thparlos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/08/01 20:14:19 by thparlos         ###   ########.fr       */
+=======
+/*   Updated: 2020/08/01 19:45:11 by jcanteau         ###   ########.fr       */
+>>>>>>> 5dd0c42a1820c97f4f0f8a78cf607001da882fc1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +18,8 @@
 # define DOOM_H
 
 # include <stdio.h>
-
 # include "../SDL2-2.0.12/include/SDL.h"
-# include <SDL2/SDL_ttf.h>
+# include "../SDL2_ttf-2.0.15/SDL_ttf.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
@@ -426,7 +429,10 @@ void				resolve_door(t_env *doom);
 void				animation_opening_door(t_env *doom);
 
 void				ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color);
-void				editor(char *mapfile);
+void				ft_init_env(t_env *doom);
+void				editor(char *av1, char *av2);
+void				editor_cursor(t_env *e, t_point pos);
+void				editor_key(t_env *doom, t_point *pos);
 void				editor_map(t_env *doom);
 void				save_in_file(t_env *doom);
 

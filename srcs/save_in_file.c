@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 00:42:18 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 05:36:47 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:44:57 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,27 @@ void	pseudo_itoa(char *str0, int n, size_t *i)
 
 void	fill_str(t_map *map, char *str)
 {
-	int		y;
-	int		x;
+	t_point	pos;
 	size_t	i;
 
 	i = 0;
-	y = -1;
-	while (++y < map->nbl)
+	pos.y = -1;
+	while (++pos.y < map->nbl)
 	{
-		x = -1;
-		while (++x < map->nbcol)
+		pos.x = -1;
+		while (++pos.x < map->nbcol)
 		{
-			str[i++] = map->data[y * map->nbcol + x];
+			str[i++] = map->data[pos.y * map->nbcol + pos.x];
 			str[i++] = ' ';
-			pseudo_itoa(str, map->bright[y * map->nbcol + x], &i);
+			pseudo_itoa(str, map->bright[pos.y * map->nbcol + pos.x], &i);
 			str[i++] = ' ';
-			pseudo_itoa(str, map->alt[y * map->nbcol + x], &i);
-			if (x < map->nbcol - 1)
+			pseudo_itoa(str, map->alt[pos.y * map->nbcol + pos.x], &i);
+			if (pos.x < map->nbcol - 1)
 				str[i++] = '\t';
-			else if (x == map->nbcol - 1)
-			{
-				if (y < map->nbcol - 1)
-					str[i++] = '\n';
-				else if (y == map->nbcol - 1)
-					str[i] = '\0';
-			}
+			else if (pos.x == map->nbcol - 1 && pos.y == map->nbcol - 1)
+				str[i] = '\0';
+			else if (pos.x == map->nbcol - 1 && pos.y < map->nbcol - 1)
+				str[i++] = '\n';
 		}
 	}
 }

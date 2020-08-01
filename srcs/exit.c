@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 17:51:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 19:21:05 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,5 @@ void		ft_exit(t_env *doom, int exit_type, char *message)
 	ft_free_obj_list(&doom->obj.next);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
-	if (doom->home.in_menu == FALSE)
-		printf("time ~ from SDL_Init() : %f\n", get_time(doom));
 	exit(exit_type);
 }
