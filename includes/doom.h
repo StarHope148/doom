@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thparlos <thparlos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 18:38:34 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 20:14:19 by thparlos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -518,5 +518,8 @@ void				ft_draw_transparent_textures(t_thread_env *e);
 
 int					precheck_one_2(char *l, int p, int i);
 int					ft_check_line_2(char *l, int i);
+
+void    			editor_key_norme(t_env *doom, t_point *pos);
+void    			editor_key_norme2(t_env *doom, t_point *pos);
 
 #endif
