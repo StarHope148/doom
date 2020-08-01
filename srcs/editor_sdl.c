@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 01:27:01 by czhang            #+#    #+#             */
-/*   Updated: 2020/08/01 17:01:13 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:35:07 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	editor_key(t_env *doom, t_point *pos)
 		doom->map.data[pos->y * doom->map.nbcol + pos->x] = TORCH;
 	if (key == SDLK_s)
 		doom->map.data[pos->y * doom->map.nbcol + pos->x] = STATUE;
+	if (key == SDLK_e)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = END_CASE;
+	if (key == SDLK_a)
+		doom->map.data[pos->y * doom->map.nbcol + pos->x] = SPAWN;
 	if (key == SDLK_RETURN)
 	{
 		ft_putendl("saved in new.map");
