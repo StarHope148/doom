@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/07/31 10:06:25 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:19:24 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,4 @@ void	ft_raycaster(t_thread_env *e)
 		shared_data->depth_buf[e->rc.x_] = e->rc.distance_towall + 0.5;
 		pthread_mutex_unlock(&shared_data->mutex);
 	}
-	//printf("object found = %d\n", e->object_found);
-	//printf("eye_y = %f\teye_x = %f\tpos_y = %f\tpos_x = %f\n", e->rc.eye_y, e->rc.eye_x, e->cam.pos_y, e->cam.pos_x);
 }

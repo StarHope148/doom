@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 05:47:17 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:19:04 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ void	ft_exit(t_env *doom, int exit_type, char *message)
 	ft_free_obj_list(&doom->obj.next);
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
-	printf("time ~ from SDL_Init() : %f\n", get_time(doom));
 	exit(exit_type);
 }
