@@ -27,7 +27,13 @@ void			ft_dead(t_env *doom)
 void			ft_taking_damage(t_env *doom, int amount)
 {
 	if (doom->chr.health >= amount)
+	{
+		if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.life_down,
+                                        NULL, 0, NULL)) != FMOD_OK)
+                                perror("Error in FMOD_System_PlaySound for life_down ");
+
 		doom->chr.health -= amount;
+	}
 	else if (doom->chr.health <= 0)
 	{
 		doom->chr.health = 0;
