@@ -58,6 +58,9 @@ static void	ft_fmod2(t_env *doom)
 				&doom->sound.laser_shot)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for shotgun ");
 	if ((FMOD_System_CreateSound(doom->sound.system,
+			"sounds/life_down.wav", FMOD_CREATESTREAM, 0,
+				&doom->sound.life_down)) != FMOD_OK)
+	if ((FMOD_System_CreateSound(doom->sound.system,
 			"sounds/door_opening.wav", FMOD_CREATESTREAM, 0,
 				&doom->sound.door_opening)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for door_opening ");
@@ -65,6 +68,9 @@ static void	ft_fmod2(t_env *doom)
 			"sounds/door_closing.wav", FMOD_CREATESTREAM, 0,
 				&doom->sound.door_closing)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for door_closing ");
+	if ((FMOD_System_CreateSound(doom->sound.system,
+			"sounds/life_up.wav", FMOD_CREATESTREAM, 0,
+				&doom->sound.life_up)) != FMOD_OK)
 	if ((FMOD_Sound_SetLoopCount(doom->sound.music, -1)) != FMOD_OK)
 		perror("Error in FMOD_Sound_SetLoopCount for music ");
 }

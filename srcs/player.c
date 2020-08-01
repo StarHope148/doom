@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 06:26:24 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 03:51:07 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:16:04 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void			ft_taking_damage(t_env *doom, int amount)
 {
+
+	if ((FMOD_System_PlaySound(doom->sound.system, doom->sound.life_down,
+			NULL, 0, NULL)) != FMOD_OK)
+		perror("Error in FMOD_System_PlaySound for life_down ");
 	doom->chr.health -= amount;
 	if (doom->chr.health <= 0)
 	{
