@@ -112,19 +112,21 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 $(COMPILE_SDL2):
 	if ! dpkg-query -W -f='$${Status}' freeglut3-dev  | grep "ok installed"; \
 	then sudo apt-get -y install freeglut3-dev; fi
-	(cd SDL2-2.0.8 \
+	(tar xf SDL2-2.0.12.tar.gz \
+	&& cd SDL2-2.0.12 \
 	&& touch configure \
 	&& ./configure \
 	&& make \
 	&& sudo make install)
 	if ! dpkg-query -W -f='$${Status}' libfreetype6-dev  | grep "ok installed"; \
 	then sudo apt-get -y install libfreetype6-dev; fi
-	(cd SDL2_ttf-2.0.15 \
+	(tar xf SDL2_ttf-2.0.15.tar.gz \
+	&& cd SDL2_ttf-2.0.15 \
 	&& touch configure \
 	&& ./configure \
 	&& make \
-	&& sudo make install)
-	sudo ldconfig
+	&& sudo make install \
+	&& sudo ldconfig)
 	touch SDL2_done
 
 $(INSTALL_FMOD):
