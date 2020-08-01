@@ -103,7 +103,7 @@ all: $(NAME)
 
 $(NAME): $(COMPILE_SDL2) $(INSTALL_FMOD) $(OBJ)
 	make -C libft/.
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) $(FMOD)
+	$(CC) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(FMOD) $(CFLAGS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD) 
 	mkdir -p $(OBJ_PATH)
@@ -111,17 +111,20 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 
 $(COMPILE_SDL2):
 	if ! dpkg-query -W -f='$${Status}' freeglut3-dev  | grep "ok installed"; \
-	then sudo apt-get install freeglut3-dev; fi
+	then sudo apt-get -y install freeglut3-dev; fi
 	(cd SDL2-2.0.8 \
+	&& touch configure \
 	&& ./configure \
 	&& make \
 	&& sudo make install)
 	if ! dpkg-query -W -f='$${Status}' libfreetype6-dev  | grep "ok installed"; \
-	then sudo apt-get install libfreetype6-dev; fi
+	then sudo apt-get -y install libfreetype6-dev; fi
 	(cd SDL2_ttf-2.0.15 \
+	&& touch configure \
 	&& ./configure \
 	&& make \
 	&& sudo make install)
+	sudo ldconfig
 	touch SDL2_done
 
 $(INSTALL_FMOD):
