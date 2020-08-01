@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 18:54:31 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:20:15 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdio.h>
 
 # include "../SDL2-2.0.12/include/SDL.h"
-# include <SDL2/SDL_mixer.h>
 # include <SDL2/SDL_ttf.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -251,6 +250,7 @@ typedef struct		s_text
 	SDL_Surface		*welcome1;
 	SDL_Surface		*welcome2;
 	SDL_Surface		*end_level;
+	SDL_Surface		*objectif;
 	SDL_Surface		*dead;
 	SDL_Color		black;
 }					t_text;
@@ -289,6 +289,7 @@ typedef struct		s_sound
 	FMOD_SOUND		*life_down;
 	FMOD_CHANNEL	*channel_music;
 	int				state;
+	int				fmod_launched;
 }					t_sound;
 
 typedef struct		s_character
@@ -380,7 +381,9 @@ void				ft_doom(char *mapfile);
 void				ft_sdl(t_env *doom);
 void				ft_exit(t_env *doom, int exit_type, char *message);
 void				ft_print(t_env *doom);
-void				ft_initialize(t_env *doom, char *mapfile);
+void				ft_initialize(t_env *doom, char *mapfile,
+						unsigned char editor);
+						
 void				ft_init_map(t_env *doom, char *mapfile);
 void				ft_stop_movement(t_env *doom);
 void				ft_settings_controls(t_env *doom);
@@ -416,7 +419,8 @@ double				get_time(t_env *doom);
 void				ft_funky_textures(t_env *doom);
 void				ft_draw_fps(t_env *doom);
 void				draw_text(t_env *doom, unsigned int pos, SDL_Surface *text);
-void				draw_centered_text(t_env *doom, SDL_Surface *text);
+void				draw_centered_text(t_env *doom, SDL_Surface *text,
+						double height);
 
 void				resolve_door(t_env *doom);
 void				animation_opening_door(t_env *doom);
@@ -508,5 +512,14 @@ void				ft_check_dead(t_env *doom);
 void				ft_init_home_screen(t_env *doom);
 void				ft_home_screen(t_env *doom);
 void				ft_update_screen(t_env *doom);
+
+void				ft_setup(t_thread_env *e);
+void				ft_set_direction(t_thread_env *e);
+void				ft_calcul_distance_to_collision(t_thread_env *e);
+void				ft_transparent_found(t_thread_env *e);
+void				ft_draw_transparent_textures(t_thread_env *e);
+
+int					precheck_one_2(char *l, int p, int i);
+int					ft_check_line_2(char *l, int i);
 
 #endif

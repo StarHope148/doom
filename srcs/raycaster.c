@@ -6,7 +6,7 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 19:19:24 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:24:53 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,35 +56,9 @@ void	ft_draw_full_column(t_thread_env *e)
 	}
 }
 
-void	ft_draw_transparent(t_thread_env *e)
-{
-	e->rc.y_ = 0;
-	e->rc.orientation = GRID_XPM;
-	while (e->rc.y_ < H)
-	{
-		if (e->rc.y_ >= e->rc.ceiling && e->rc.y_ <= e->rc.floor)
-			ft_draw_wall(e);
-		e->rc.y_++;
-	}
-}
-
 void	ft_fix_fisheye_distorsion(t_thread_env *e)
 {
 	e->rc.distance_towall *= cos(e->cam.angle - e->rc.ray_angle);
-}
-
-void	ft_draw_transparent_textures(t_thread_env *e)
-{
-	while (e->transparent_found > 0)
-	{
-		e->transparent_found = 1;
-		ft_calc_next_intersection_transparent(e);
-		ft_calc_sampling_x(e);
-		ft_fix_fisheye_distorsion(e);
-		ft_set_ceiling_floor(e);
-		ft_draw_transparent(e);
-		e->transparent_found--;
-	}
 }
 
 void	ft_raycaster(t_thread_env *e)

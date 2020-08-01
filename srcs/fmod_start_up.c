@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 06:51:22 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:06:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 16:26:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	ft_fmod2(t_env *doom)
 
 void		ft_fmod(t_env *doom)
 {
+	doom->sound.fmod_launched = TRUE;
 	if ((FMOD_System_Create(&doom->sound.system)) != FMOD_OK)
 		perror("Error in FMOD_System_Create ");
 	if ((FMOD_System_Init(doom->sound.system, 32, FMOD_INIT_NORMAL, NULL)) !=
@@ -68,7 +69,7 @@ void		ft_fmod(t_env *doom)
 			FMOD_CREATESAMPLE, 0, &doom->sound.jump)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for jump ");
 	if ((FMOD_System_CreateSound(doom->sound.system,
-			"sounds/music/doom_music.mp3", FMOD_LOOP_NORMAL , 0,
+			"sounds/music/doom_music.mp3", FMOD_LOOP_NORMAL, 0,
 				&doom->sound.music)) != FMOD_OK)
 		perror("Error in FMOD_System_CreateSound for music ");
 	if ((FMOD_System_CreateSound(doom->sound.system,

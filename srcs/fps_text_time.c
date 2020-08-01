@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fps_text_time.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 13:34:25 by czhang            #+#    #+#             */
-/*   Updated: 2020/07/31 02:31:34 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 17:51:24 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	draw_text(t_env *doom, unsigned int pos, SDL_Surface *text)
 	}
 }
 
-void	draw_centered_text(t_env *doom, SDL_Surface *text)
+void	draw_centered_text(t_env *doom, SDL_Surface *text, double height)
 {
 	double	value;
 
-	value = (W - text->w) / 2 + (H * 0.3) * W;
+	value = (W - text->w) / 2 + (H * height) * W;
 	draw_text(doom, (unsigned int)value, text);
 }
 

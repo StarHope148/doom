@@ -6,12 +6,11 @@
 /*   By: czhang <czhang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 04:43:52 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 19:19:04 by czhang           ###   ########.fr       */
+/*   Updated: 2020/08/01 19:21:05 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
-
 
 void		ft_free_close_fmod(t_env *doom)
 {
@@ -41,23 +40,25 @@ void		ft_free_close_fmod(t_env *doom)
 		perror("Error in FMOD_System_Release ");
 }
 
-void	ft_free_close_ttf(t_env *doom)
+void		ft_free_close_ttf(t_env *doom)
 {
 	TTF_CloseFont(doom->txt.font);
 	SDL_FreeSurface(doom->txt.welcome1);
 	SDL_FreeSurface(doom->txt.welcome2);
+	SDL_FreeSurface(doom->txt.objectif);
 	SDL_FreeSurface(doom->txt.end_level);
 	SDL_FreeSurface(doom->txt.dead);
 	SDL_FreeSurface(doom->fps.s);
 	TTF_Quit();
 }
 
-void	ft_exit(t_env *doom, int exit_type, char *message)
+void		ft_exit(t_env *doom, int exit_type, char *message)
 {
 	free_thread_env(&doom->shared_data);
 	ft_destroy_texture_renderer_window(doom);
 	ft_memdel((void **)&doom->screen_pixels);
-	ft_free_close_fmod(doom);
+	if (doom->sound.fmod_launched == TRUE)
+		ft_free_close_fmod(doom);
 	ft_free_close_ttf(doom);
 	SDL_Quit();
 	ft_free_door(doom->door);

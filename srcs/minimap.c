@@ -6,17 +6,39 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 21:29:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 07:06:41 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 15:49:55 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom.h"
 
+void	ft_set_tile_color_2(t_env *doom, int y, int x, Uint32 *color)
+{
+	char	symb;
+
+	symb = doom->map.data[y * doom->map.nbcol + x];
+	if (symb == HEALTH_POTION)
+		*color = RED;
+	else if (symb == KEY)
+		*color = YELLOW;
+	else if (symb == TORCH)
+		*color = BURLYWOOD;
+	else if (symb == STATUE)
+		*color = BLACK;
+	else if (symb == END_CASE)
+		*color = MAGENTA;
+	else if (symb == SPAWN)
+		*color = CYAN;
+	else
+		*color = BLACK;
+}
+
 void	ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color)
 {
 	char	symb;
 
-	if ((symb = doom->map.data[y * doom->map.nbcol + x]) == WALL)
+	symb = doom->map.data[y * doom->map.nbcol + x];
+	if (symb == WALL)
 		*color = LIME;
 	else if (symb == EMPTY)
 		*color = GRAY;
@@ -28,18 +50,8 @@ void	ft_set_tile_color(t_env *doom, int y, int x, Uint32 *color)
 		*color = WHITE;
 	else if (symb == BARREL)
 		*color = BROWN;
-	else if (symb == HEALTH_POTION)
-		*color = RED;
-	else if (symb == KEY)
-		*color = YELLOW;
-	else if (symb == TORCH)
-		*color = BURLYWOOD;
-	else if (symb == STATUE)
-		*color = BLACK;
-	else if (symb == END_CASE)
-		*color = MAGENTA;
 	else
-		*color = BLACK;
+		ft_set_tile_color_2(doom, y, x, color);
 }
 
 void	ft_set_sdl_minimap_colors(t_env *doom)

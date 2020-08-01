@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/31 08:42:10 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/08/01 01:11:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/08/01 17:30:15 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		ft_firing_anim(t_env *doom)
 {
 	static int	duration = 0;
-	
+
 	if (doom->gun.firing == TRUE)
 	{
 		duration++;
