@@ -57,6 +57,8 @@ doom
 SDL2-2.0.12
 SDL2-2.0.12/include/SDL_config.h
 SDL2
+SDL2_ttf-2.0.15
+SDL2_ttf
 testsave
 wolf3d
 srcs/test.c
