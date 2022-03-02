@@ -22,13 +22,13 @@ void		ft_reset_view(t_env *doom)
 
 void		ft_change_fov_horizontal(t_env *doom)
 {
-	if (doom->event.key.keysym.sym == SDLK_KP_PLUS)
+	if (doom->event.key.keysym.sym == SDLK_y)
 	{
 		if (doom->cam.fov_ratio - FOV_RATIO_STEP >= 2)
 			doom->cam.fov_ratio -= FOV_RATIO_STEP;
 		doom->cam.fov = PI / doom->cam.fov_ratio;
 	}
-	else if (doom->event.key.keysym.sym == SDLK_KP_MINUS)
+	else if (doom->event.key.keysym.sym == SDLK_h)
 	{
 		if (doom->cam.fov_ratio + FOV_RATIO_STEP <= 6)
 			doom->cam.fov_ratio += FOV_RATIO_STEP;
@@ -38,12 +38,12 @@ void		ft_change_fov_horizontal(t_env *doom)
 
 void		ft_change_fov_vertical(t_env *doom)
 {
-	if (doom->event.key.keysym.sym == SDLK_KP_9)
+	if (doom->event.key.keysym.sym == SDLK_u)
 	{
 		if (doom->cam.proj_dist / PROJ_DIST_STEP <= MAX_PROJ_DIST)
 			doom->cam.proj_dist /= PROJ_DIST_STEP;
 	}
-	else if (doom->event.key.keysym.sym == SDLK_KP_6)
+	else if (doom->event.key.keysym.sym == SDLK_j)
 	{
 		if (doom->cam.proj_dist * PROJ_DIST_STEP >= MIN_PROJ_DIST)
 			doom->cam.proj_dist *= PROJ_DIST_STEP;
@@ -54,7 +54,7 @@ void		ft_settings_controls(t_env *doom)
 {
 	ft_change_fov_horizontal(doom);
 	ft_change_fov_vertical(doom);
-	if (doom->event.key.keysym.sym == SDLK_KP_5)
+	if (doom->event.key.keysym.sym == SDLK_r)
 		ft_reset_view(doom);
 	else if (doom->event.key.keysym.sym == SDLK_t)
 		doom->wall = doom->wall == TEXTURED ? NON_TEXTURED : doom->wall + 1;

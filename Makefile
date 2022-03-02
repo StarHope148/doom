@@ -88,11 +88,12 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 #FRAMEWORK = -framework OpenGL -framework AppKit
 #MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
 SDL2 = -lSDL2 -lSDL2_ttf
-FMOD = -I fmod/inc -L fmod/lib/x86_64 -lfmod -lfmodL
+FMOD = -I /usr/local/include -L /usr/local/lib -lfmod -lfmodL
+#FMOD = -I fmod/inc -L fmod/lib/x86_64 -lfmod -lfmodL
 COMPILE_SDL2 = SDL2_done
 INSTALL_FMOD = fmod/done
 # `sdl2-config --cflags --libs`
-CFLAGS = -g -Wall -Wextra -Werror -lm -lpthread -D_REENTRANT -DLinux
+CFLAGS = -Wall -Wextra -Werror -lm -lpthread -D_REENTRANT -DLinux
 NORMINETTE = ~/.norminette/norminette.rb
 
 $(CC) = clang
@@ -130,7 +131,9 @@ $(COMPILE_SDL2):
 	touch SDL2_done
 
 $(INSTALL_FMOD):
-	sudo cp fmod/lib/* /usr/lib
+	sudo cp fmod/inc/* /usr/local/include
+	sudo cp fmod/lib/* /usr/local/lib
+	sudo ldconfig
 	touch fmod/done
 
 clean:
